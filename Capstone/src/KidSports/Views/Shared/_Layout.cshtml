@@ -4,10 +4,81 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+
+    <!-- Styles/JS -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Assistant:200" rel="stylesheet">
+
 </head>
+
 <body>
-    <div>
+    <!-- Nav Bar -->
+    <div class="navbar navbar-fixed-top navbar-default" style="position: relative; background-color:#218c48;">
+        <div class="navbar-inner">
+            <div class="container">
+
+                <a class="logo" style="position:absolute; display:block; left: 50%; margin-left: -100px; float: none;" href="http://www.kidsports.org/">
+                    <img src="/Images/logo.png" style="margin-top: 13px; width:200px;" />
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Body -->
+    <div class="row-offset-md-2 col-md-8 col-xs-12">
         @RenderBody()
     </div>
+
+    <!-- Footer -->
+    <div class="container-fluid">
+        <footer id="footer" role="contentinfo" style="background-color:#081416; left:0; bottom:0; position:absolute; width: 100%;">
+            <div class="footer-inner">
+               
+                    <div class="container" style="margin-top: 25px;">
+                        <nav id="secondaryNavigation" data-content-field="navigation" style="text-align:center;">
+                            <div class="col-md-offset-2 col-md-2 col-xs-12" style="display:inline;">
+                                <a href="https://www.instagram.com/kidsports4life/" target="_blank">
+                                    <span style="color:white; font-family: 'Assistant', sans-serif;">Instagram</span>
+                                </a>
+                            </div>
+
+                            <div class="col-md-2 col-xs-12" style="display:inline;">
+                                <a href="https://www.facebook.com/www.emeraldkidsports/" target="_blank">
+                                    <span style="color:white; font-family: 'Assistant', sans-serif;">Facebook</span>
+                                </a>
+                            </div>
+
+                            <div class="col-md-2 col-xs-12" style="display:inline;">
+                                <a href="https://twitter.com/kidsports4life" target="_blank">
+                                    <span style="color:white; font-family: 'Assistant', sans-serif;">Twitter</span>
+                                </a>
+                            </div>
+
+                            <div class="col-md-2 col-xs-12" style="display:inline;">
+                                <a href="http://www.kidsports.org/blog-1" target="_blank">
+                                    <span style="color:white; font-family: 'Assistant', sans-serif;">Bev's Blog</span>
+                                </a>
+                            </div>
+                        </nav>
+                    </div>
+               
+
+                <div class="container-fluid" style="text-align:center; margin-bottom:25px;">
+                    <div class="col-md-12 col-xs-12" data-layout-label="Footer Content" id="footerBlocks">
+                        <h3 class="text-align-center" style="color:white; font-weight:bold; font-size: 16px; font-family: 'Assistant', sans-serif;">
+                            2190 POLK STREET, EUGENE, OR 97405 | PHONE 541 683 2374 | FAX 541 302 9430 | EMAIL
+                            <a target="_blank" href="mailto:info@kidsports.org" style="color:white; font-family: 'Assistant', sans-serif;">INFO@KIDSPORTS.ORG</a>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
 </body>
 </html>
