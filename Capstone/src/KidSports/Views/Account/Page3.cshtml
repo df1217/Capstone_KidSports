@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Page 3";
+}
+
+    <div class="container-fluid">
+        <h1 class="text-center">Step 3:</h1>
+        <h3 class="text-center">The coaches pledge...</h3><br />
+
+        <div>
+            <p>
+                As coaches, you determine the kind of experience our athletes have playing sports. KS is committed to the principles of
+                Positive Coaching Alliance (PCA). KS expects you to be a Double-Goal Coach, who strives to win (one goal), while
+                ursuing the more-important goal of teaching life lessons through team sports. (one goal)
+            </p>
+        </div>
+        <div>
+            <a href="~/CoachEthicContract.pdf">View terms of the coaches pledge</a>
+        </div>
+        <form>
+
+            <div class="container-fluid">
+                <h3>I plede to observe, practice, and uphold the KS/PCA Coaces Pledge.</h3>
+                <div class="form-group col-xs-offset-1 col-xs-10 col-md-6">
+                    <label asp-for="name" class="control-label">Name:</label>
+                    <input class="form-control" asp-for="name">
+                </div>
+                <div class="form-group col-xs-offset-1 col-xs-10 col-md-4">
+                    <label asp-for="gradesCoached" class="control-label">Date:</label>
+                    <select class="form-control">
+                        <option value=""></option>
+                        <option value="">4/15/2017</option>
+                        <option value="">4/16/2017</option>
+                        <option value="">4/17/2017</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-xs-offset-1 col-xs-10 col-md-6">
+                    <label asp-for="initial" class="control-label">Initial:</label>
+                    <input class="form-control" asp-for="initial">
+                </div>
+
+                <div class="form-group col-xs-offset-1 col-xs-10 col-md-10">
+
+                    <div class="pull-left">
+                        <button type="button" class="btn btn-primary btn-md-10">Save</button>
+                    </div>
+
+                </div>
+                <div class="pull-right">
+                    <div class="form-group col-xs-offset-0 col-xs-10 col-md-12">
+                        <ul class="pagination">
+                            <li><a href="~/Views/Account/Page1.cshtml">1</a></li>
+                            <li><a href="~/Views/Account/Page2.cshtml">2</a></li>
+                            <li><a href="~/Views/Account/Page3.cshtml">3</a></li>
+                            <li><a href="~/Views/Account/Page4.cshtml">4</a></li>
+                            <li><a href="~/Views/Account/Page5.cshtml">5</a></li>
+                            <li><a href="~/Views/Account/Page6.cshtml">6</a></li>
+                            <li><a href="~/Views/Account/Page7.cshtml">7</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+  </div>
+   
+
+  
