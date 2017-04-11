@@ -4,9 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KidSports.Repositories
 {
-    public class AppIdentityDbContext : IdentityDbContext<User>
+    public class AppIdentityDbContext : IdentityDbContext<IdUser>
     {
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options)
         : base(options) { }
     }
 }
+

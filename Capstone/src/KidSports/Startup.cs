@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using KidSports.Repositories;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using KidSports.Models;
 
 namespace KidSports
 {
@@ -21,8 +22,8 @@ namespace KidSports
         {
             Configuration = new ConfigurationBuilder()
             .SetBasePath(env.ContentRootPath)
-            //.AddJsonFile("appsettings.json")
-            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+            .AddJsonFile("appsettings.json")
+            //.AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
             .Build();
         }
 
@@ -34,13 +35,14 @@ namespace KidSports
             services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(
                 Configuration["Data:KidSportsIdentity:ConnectionString"]));
 
-            services.AddIdentity<IdentityUser, IdentityRole>(opts =>
+            services.AddIdentity<IdUser, IdentityRole>(opts =>
             { opts.Cookies.ApplicationCookie.LoginPath = "/Account/Login"; })
                  .AddEntityFrameworkStores<AppIdentityDbContext>();
 
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
+            services.AddTransient<IUserRepo, UserRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

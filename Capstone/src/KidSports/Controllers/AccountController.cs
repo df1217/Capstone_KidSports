@@ -4,19 +4,22 @@ using Microsoft.AspNetCore.Identity;
 using KidSports.Models;
 using KidSports.Models.ViewModels;
 using System.Threading.Tasks;
+using KidSports.Repositories;
 
 namespace KidSports.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        private UserManager<User> userManager;
-        private SignInManager<User> signInManager;
+        private UserManager<IdUser> userManager;
+        private SignInManager<IdUser> signInManager;
+        private IUserRepo userRepo;
 
-        public AccountController(UserManager<User> userMgr, SignInManager<User> signInMgr)
+        public AccountController(UserManager<IdUser> userMgr, SignInManager<IdUser> signInMgr, IUserRepo uRepo)
         {
             userManager = userMgr;
             signInManager = signInMgr;
+            userRepo = uRepo;
         }
 
         [AllowAnonymous]
@@ -27,42 +30,72 @@ namespace KidSports.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(RegisterViewModel vm)
+        public IActionResult Register(RegisterViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                User user = new User
-                {
-                    FirstName = vm.FirstName,
-                    MiddleName = vm.MiddleName,
-                    LastName = vm.LastName,
-                    Email = vm.Email,
-                    UserName = vm.Email
-                };
+                IdentityResult identityResult;
+                User user = userRepo.CreateUser(vm.FirstName, vm.MiddleName, vm.LastName, vm.Email,
+                    vm.Password, UserRole.Applicant, out identityResult);
 
-                IdentityResult result = await userManager.CreateAsync(user, vm.Password);
-
-                if (result.Succeeded)
+                if (identityResult != null)
                 {
-                    return RedirectToAction("Login", "Account");
-                }
-
-                else
-                {
-                    foreach (IdentityError error in result.Errors)
+                    if (identityResult.Succeeded)
                     {
-                        ModelState.AddModelError("", error.Description);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        foreach (IdentityError error in identityResult.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
                     }
                 }
+                else    // user already exists
+                {
+                    ModelState.AddModelError("", "This user is already registered");
+                }
+            }
+            // We get here either if the model state is invalid or if create user fails
+            return View(vm);
+        }
 
+        [AllowAnonymous]
+        public ViewResult Login(string returnUrl)
+        {
+            ViewBag.returnUrl = returnUrl;
+            return View(new LoginViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel vm, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                IdUser identityUser = userRepo.GetIdUserByEmail(vm.Email);
+                if (identityUser != null)
+                {
+                    await signInManager.SignOutAsync();
+                    Microsoft.AspNetCore.Identity.SignInResult result =
+                            await signInManager.PasswordSignInAsync(
+                                identityUser, vm.Password, false, false);
+                    if (result.Succeeded)
+                    {
+                        // return to the action that required authorization, or to home if returnUrl is null
+                        return Redirect(returnUrl ?? "/");
+                    }
+                }
+                ModelState.AddModelError(nameof(LoginViewModel.Email),
+                    "Invalid user or password");
             }
             return View(vm);
         }
 
-
-        public IActionResult Login()
+        public async Task<IActionResult> Logout()
         {
-            return View();
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account");
         }
     }
 }
