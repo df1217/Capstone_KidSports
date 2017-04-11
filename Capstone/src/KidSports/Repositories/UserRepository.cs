@@ -55,7 +55,11 @@ namespace KidSports.Repositories
                         // Create a User that points to the IdUser
                         user = new User();
                         user.IdUserID = identityUser.Id;
-                        user.UserName = identityUser.UserName;
+                        //user.UserName = identityUser.UserName;
+                        //user.FirstName = identityUser.FirstName;
+                        //user.MiddleName = identityUser.MiddleName;
+                        //user.LastName = identityUser.LastName;
+                        //user.Email = identityUser.Email;
                         context.Users.Add(user);
                         context.SaveChanges();
                     }

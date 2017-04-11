@@ -60,7 +60,7 @@ namespace KidSports
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
 
-            //SeedData.EnsurePopulated(app);
+            SeedData.EnsurePopulated(app);
         }
     }
 }
