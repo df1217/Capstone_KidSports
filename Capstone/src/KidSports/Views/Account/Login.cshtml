@@ -1,4 +1,4 @@
-﻿@*addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers*@
+﻿@model LoginViewModel 
 
 @{
     ViewBag.Title = "Login";
@@ -16,9 +16,9 @@
         <form asp-action="Login" asp-controller="Account" method="post">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-address-book"></i></span>
-                <input type="text" class="form-control" asp-for="UserName" placeholder="Email">
+                <input type="text" class="form-control" asp-for="Email" placeholder="Email">
             </div>
-            <div><span asp-validation-for="UserName" class="text-danger"></span></div>
+            <div><span asp-validation-for="Email" class="text-danger"></span></div>
 
             <br />
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
-using KidSports.ViewModels;
+using KidSports.Models.ViewModels;
 using KidSports.Models;
 
 namespace KidSports.Controllers

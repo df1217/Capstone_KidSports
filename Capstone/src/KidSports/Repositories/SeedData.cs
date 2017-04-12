@@ -66,12 +66,6 @@ namespace KidSports.Repositories
 
                 IdentityResult result;
                 user = userRepo.CreateUser(firstName, middleName, lastName, email, password, UserRole.Applicant, out result);
-
-                if (result.Succeeded)
-                {
-                    context.Users.Add(user);
-                    context.SaveChanges();
-                }
             }
         }
     }

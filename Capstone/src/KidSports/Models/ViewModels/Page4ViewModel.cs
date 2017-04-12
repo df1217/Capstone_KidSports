@@ -1,11 +1,11 @@
 ﻿using KidSports.Models;
 using Microsoft.AspNetCore.Http;
 
-namespace KidSports.ViewModels
+namespace KidSports.Models.ViewModels
 {
-    public class Page5ViewModel
+    public class Page4ViewModel
     {
-        public Application Page5 { get; set; }
+        public Application Page4 { get; set; }
         public IFormFile File { get; set; }
     }
 }
