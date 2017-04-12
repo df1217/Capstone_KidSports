@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Page4ViewModel
+@{
     ViewBag.Title = "Page 4";
 }
 
@@ -6,7 +7,7 @@
     <h1 class="text-center">Step 4:</h1>
     <h3 class="text-center">NFHS Concussion Course...</h3><br />
 
-    <form>
+    <form asp-controller="Account" asp-action="Page4" method="post" enctype="multipart/form-data">
         <div class="container-fluid">
             <p>
                 Check the box to mark completion of the NFHS Concussion Course.<Strong> A member of KidSport's staff will verify this.</Strong>
@@ -37,7 +38,7 @@
                 </div>
 
                 <div class="pull-left">
-                    <input type="file" name="filePhoto" value="" id="filePhoto"
+                    <input type="file" asp-for="File" 
                            class="required borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
 
                     <img id="previewHolder" alt="" width="920" height="400" />
