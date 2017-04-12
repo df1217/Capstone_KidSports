@@ -1,11 +1,12 @@
-﻿@{
+﻿@model Page6ViewModel
+@{
     ViewBag.Title = "Page 6";
 }
 
 <div class="container-fluid">
     <h1 class="text-center">Step 6:</h1>
     <h3 class="text-center">Driver's License</h3>
-    <form>
+    <form asp-controller="Account" asp-action="Page6" method="post" enctype="multipart/form-data">
         <div class="container-fluid">
             <p>
                 Please upload a photo of a valid ID. All new coaches must submit a valid ID.
@@ -17,7 +18,7 @@
                 </div>
 
                 <div class="pull-left">
-                    <input type="file" name="filePhoto" value="" id="filePhoto"
+                    <input type="file" asp-for="File"
                            class="required borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
 
                     <img id="previewHolder" alt="" width="920" height="400" />
