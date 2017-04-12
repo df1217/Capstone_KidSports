@@ -58,7 +58,13 @@ namespace KidSports
             app.UseStatusCodePages();
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Account}/{action=Login}");
+            });
 
             SeedData.EnsurePopulated(app);
         }

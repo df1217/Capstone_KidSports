@@ -42,7 +42,7 @@ namespace KidSports.Controllers
                 {
                     if (identityResult.Succeeded)
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Login", "Account");
                     }
                     else
                     {
@@ -83,7 +83,7 @@ namespace KidSports.Controllers
                     if (result.Succeeded)
                     {
                         // return to the action that required authorization, or to home if returnUrl is null
-                        return Redirect(returnUrl ?? "/");
+                        return RedirectToAction("Page4", "Application");
                     }
                 }
                 ModelState.AddModelError(nameof(LoginViewModel.Email),
