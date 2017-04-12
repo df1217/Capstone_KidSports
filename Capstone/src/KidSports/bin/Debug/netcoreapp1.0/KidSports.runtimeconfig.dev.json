@@ -1,7 +1,11 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
+<<<<<<< HEAD
       "C:\\Users\\Dell\\.nuget\\packages"
+=======
+      "C:\\Users\\charles\\.nuget\\packages"
+>>>>>>> 5c0b23e80c2222480b193a256a5e46295dcf32b1
     ]
   }
 }
