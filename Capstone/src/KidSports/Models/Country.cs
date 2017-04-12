@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace KidSports.Models
 {
-    public class School
+    public class Country
     {
-        public int SchoolID { get; set; }
-        public string SchoolName { get; set; }
-
+        public int CountryID { get; set; }
+        public string CountryName { get; set; }
     }
 }
