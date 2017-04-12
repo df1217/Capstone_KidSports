@@ -1,5 +1,53 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@* addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers *@
+
 @{
+    ViewBag.Title = "Register";
 }
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 text-center"><h3><a asp-action="Login" asp-controller="Account">Login</a> or Register</h3></div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div style="background-image:none;" class="text-danger" asp-validation-summary="All"></div>
+        <form asp-controller="Account" asp-action="Register" method="post">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input type="text" class="form-control" asp-for="FirstName" placeholder="Legal First Name">
+            </div>
+            <div><span asp-validation-for="FirstName" class="text-danger"></span></div>
+            <br />
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input type="text" class="form-control" asp-for="MiddleName" placeholder="Legal Middle Name">
+            </div>
+            <div><span asp-validation-for="MiddleName" class="text-danger"></span></div>
+            <br />
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input type="text" class="form-control" asp-for="LastName" placeholder="Legal Last Name">
+            </div>
+            <div><span asp-validation-for="LastName" class="text-danger"></span></div>
+            <br />
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-address-book"></i></span>
+                <input type="text" class="form-control" asp-for="Email" placeholder="Email">
+            </div>
+            <div><span asp-validation-for="Email" class="text-danger"></span></div>
+            <br />
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input type="password" class="form-control" asp-for="Password" placeholder="Password">
+            </div>
+            <div><span asp-validation-for="Password" class="text-danger"></span></div>
+            <br />
+
+            <button class="btn btn-success btn-lg btn-block" type="submit">Register</button>
+        </form>
+    </div>
+</div>

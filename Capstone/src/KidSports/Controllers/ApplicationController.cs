@@ -10,11 +10,11 @@ using KidSports.Models;
 
 namespace KidSports.Controllers
 {
-    public class Account : Controller
+    public class ApplicationController : Controller
     {
         private IHostingEnvironment _environment;
 
-        public Account(IHostingEnvironment environment)
+        public ApplicationController(IHostingEnvironment environment)
         {
             _environment = environment;
         }
