@@ -1,57 +1,59 @@
-﻿@{
+﻿@model Page7ViewModel
+@{
     ViewBag.Title = "Page 7";
 }
 
 <div class="container-fluid">
     <h1 class="text-center">Step 7:</h1>
     <h3 class="text-center">Coach ID Badge..</h3>
-    <form>
+    <form asp-controller="Account" asp-action="Page6" method="post" enctype="multipart/form-data">
         <div class="container-fluid">
-                Once you have completed the necessary requirements and have been approved by a KidSports Sports Manager-
-                you are required to obtain your KS Coach ID Badge
-                <Strong>This card is required to be worn and visible for all games.</Strong>
-           
+            Once you have completed the necessary requirements and have been approved by a KidSports Sports Manager-
+            you are required to obtain your KS Coach ID Badge
+            <Strong>This card is required to be worn and visible for all games.</Strong>
+
             <div>
                 <strong>Image Requirements:</strong>
                 <ul>
                     <li>Mininum 8 mega pixel resolution</li>
                     <li>No Hats or Sunglasses</li>
                     <li>An individual photo</li>
+                   
                 </ul>
+            </div>
+
+            <div class="container-fluid" style="margin-top:40px">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-primary btn-md-10">Upload</button>
                 </div>
 
-                    <div class="container-fluid" style="margin-top:40px">
-                        <div class="pull-right">
-                            <button type="button" class="btn btn-primary btn-md-10">Upload</button>
-                        </div>
+                <div class="pull-left">
+                    <input type="file" asp-for="File"
+                           class="required borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
 
-                        <div class="pull-left">
-                            <input type="file" name="filePhoto" value="" id="filePhoto"
-                                   class="required borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
-
-                            <img id="previewHolder" alt="" width="920" height="400" />
-                        </div>
-                    </div>
-
-                    <div class="pull-left" style="margin-top:15px">
-                        <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-                            <button type="button" class="btn btn-primary btn-md-10">Save</button>
-                        </div>
-                    </div>
-
-                    <div class="pull-right">
-                        <div class="form-group col-xs-offset-0 col-xs-10 col-md-12">
-                            <ul class="pagination">
-                                <li><a href="~/Views/Account/Page1.cshtml">1</a></li>
-                                <li><a href="~/Views/Account/Page2.cshtml">2</a></li>
-                                <li><a href="~/Views/Account/Page3.cshtml">3</a></li>
-                                <li><a href="~/Views/Account/Page4.cshtml">4</a></li>
-                                <li><a href="~/Views/Account/Page5.cshtml">5</a></li>
-                                <li><a href="~/Views/Account/Page6.cshtml">6</a></li>
-                                <li><a href="~/Views/Account/Page7.cshtml">7</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <img id="previewHolder" alt="" width="920" height="400" />
                 </div>
+            </div>
+
+            <div class="pull-left" style="margin-top:15px">
+                <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+                    <button type="button" class="btn btn-primary btn-md-10">Save</button>
+                </div>
+            </div>
+
+            <div class="pull-right">
+                <div class="form-group col-xs-offset-0 col-xs-10 col-md-12">
+                    <ul class="pagination">
+                        <li><a href="~/Views/Account/Page1.cshtml">1</a></li>
+                        <li><a href="~/Views/Account/Page2.cshtml">2</a></li>
+                        <li><a href="~/Views/Account/Page3.cshtml">3</a></li>
+                        <li><a href="~/Views/Account/Page4.cshtml">4</a></li>
+                        <li><a href="~/Views/Account/Page5.cshtml">5</a></li>
+                        <li><a href="~/Views/Account/Page6.cshtml">6</a></li>
+                        <li><a href="~/Views/Account/Page7.cshtml">7</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
