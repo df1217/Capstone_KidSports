@@ -7,7 +7,7 @@
     <h1 class="text-center">Step 4:</h1>
     <h3 class="text-center">NFHS Concussion Course...</h3><br />
 
-    <form asp-controller="Account" asp-action="Page4" method="post" enctype="multipart/form-data">
+    <form asp-controller="Application" asp-action="Page4" method="post" enctype="multipart/form-data">
         <div class="container-fluid">
             <p>
                 Check the box to mark completion of the NFHS Concussion Course.<Strong> A member of KidSport's staff will verify this.</Strong>
@@ -19,7 +19,7 @@
             </div>
 
             <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-                <label asp-for="date" class="control-label">Date:</label>
+                <label asp-for="Application.NfhsSubmissionDate" class="control-label">Date:</label>
                 <select class="form-control">
                     <option value=""></option>
                     <option value="">4/15/2017</option>
@@ -33,34 +33,32 @@
             </div>
 
             <div class="container-fluid" style="margin-top:30px">
-                <div class="pull-right">
-                    <button type="button" class="btn btn-primary btn-md-10">Upload</button>
-                </div>
+                
 
                 <div class="pull-left">
                     <input type="file" asp-for="File" 
                            class="required borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
-
-                    <img id="previewHolder" alt="" width="920" height="400" />
+                
+                    <img id="previewHolder" alt="" />
                 </div>
             </div>
 
             <div class="pull-left" style="margin-top:15px">
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-                    <button type="button" class="btn btn-primary btn-md-10">Save</button>
+                    <button type="submit" class="btn btn-primary btn-md-10">Save</button>
                 </div>
             </div>
 
             <div class="pull-right">
                 <div class="form-group col-xs-offset-0 col-xs-10 col-md-12">
                     <ul class="pagination">
-                        <li><a href="~/Views/Account/Page1.cshtml">1</a></li>
-                        <li><a href="~/Views/Account/Page2.cshtml">2</a></li>
-                        <li><a href="~/Views/Account/Page3.cshtml">3</a></li>
-                        <li><a href="~/Views/Account/Page4.cshtml">4</a></li>
-                        <li><a href="~/Views/Account/Page5.cshtml">5</a></li>
-                        <li><a href="~/Views/Account/Page6.cshtml">6</a></li>
-                        <li><a href="~/Views/Account/Page7.cshtml">7</a></li>
+                        <li><a href="~/Views/Application/Page1.cshtml">1</a></li>
+                        <li><a href="~/Views/Application/Page2.cshtml">2</a></li>
+                        <li><a href="~/Views/Application/Page3.cshtml">3</a></li>
+                        <li><a href="~/Views/Application/Page4.cshtml">4</a></li>
+                        <li><a href="~/Views/Application/Page5.cshtml">5</a></li>
+                        <li><a href="~/Views/Application/Page6.cshtml">6</a></li>
+                        <li><a href="~/Views/Application/Page7.cshtml">7</a></li>
                     </ul>
                 </div>
             </div>

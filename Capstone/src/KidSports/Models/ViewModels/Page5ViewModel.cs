@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace KidSports.ViewModels
 {
-    public class Page6ViewModel
+    public class Page5ViewModel
     {
-        public Application Page6 { get; set; }
+        public Application Application { get; set; }
         public IFormFile File { get; set; }
     }
 }
