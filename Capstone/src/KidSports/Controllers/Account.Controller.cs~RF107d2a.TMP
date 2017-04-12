@@ -5,36 +5,25 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
-using KidSports.Models.ViewModels;
+using KidSports.ViewModels;
 using KidSports.Models;
 
 namespace KidSports.Controllers
 {
-    public class ApplicationController : Controller
+    public class Account : Controller
     {
         private IHostingEnvironment _environment;
+        private Application app;
 
-        public ApplicationController(IHostingEnvironment environment)
+        public Account(IHostingEnvironment environment)
         {
             _environment = environment;
         }
 
-        [HttpGet]
-        public IActionResult Page1()
+        public IActionResult Login()
         {
             return View();
         }
-        [HttpGet]
-        public IActionResult Page2()
-        {
-            return View();
-        }
-        [HttpGet]
-        public IActionResult Page3()
-        {
-            return View();
-        }
-
         [HttpGet]
         public IActionResult Page4()
         {
@@ -42,8 +31,10 @@ namespace KidSports.Controllers
         }
 
         [HttpPost]
+
         public async Task<IActionResult> Page4(Page4ViewModel p4Vm)
         {
+            
             var uploads = Path.Combine(_environment.WebRootPath);
             if (p4Vm.File.Length > 0)
             {
@@ -51,8 +42,8 @@ namespace KidSports.Controllers
                 {
                     await p4Vm.File.CopyToAsync(fileStream);
                 }
-                //p4Vm.Application.NfhsPath = $"\\{p4Vm.File.FileName}";
-                return RedirectToAction("Page5", "Application");
+                app.NfhsPath = $"\\{p4Vm.File.FileName}";
+                return RedirectToAction("Page5", "Account");
             }
             return View(p4Vm);
         }
@@ -65,6 +56,7 @@ namespace KidSports.Controllers
         [HttpPost]
         public async Task<IActionResult> Page5(Page5ViewModel p5Vm)
         {
+           
             var uploads = Path.Combine(_environment.WebRootPath);
             if (p5Vm.File.Length > 0)
             {
@@ -72,8 +64,8 @@ namespace KidSports.Controllers
                 {
                     await p5Vm.File.CopyToAsync(fileStream);
                 }
-                //p5Vm.Application.PcaPath = $"\\{p5Vm.File.FileName}";
-                return RedirectToAction("Page6", "Application");
+                app.PcaPath = $"\\{p5Vm.File.FileName}";
+                return RedirectToAction("Page6", "Account");
             }
             return View(p5Vm);
         }
@@ -85,6 +77,7 @@ namespace KidSports.Controllers
         [HttpPost]
         public async Task<IActionResult> Page6(Page6ViewModel p6Vm)
         {
+            
             var uploads = Path.Combine(_environment.WebRootPath);
             if (p6Vm.File.Length > 0)
             {
@@ -92,8 +85,8 @@ namespace KidSports.Controllers
                 {
                     await p6Vm.File.CopyToAsync(fileStream);
                 }
-                //p6Vm.Application.DlPath = $"\\{p6Vm.File.FileName}";
-                return RedirectToAction("Page7", "Application");
+                app.DlPath = $"\\{p6Vm.File.FileName}";
+                return RedirectToAction("Page7", "Account");
             }
             return View(p6Vm);
         }
@@ -106,6 +99,7 @@ namespace KidSports.Controllers
 
         public async Task<IActionResult> Page7(Page7ViewModel p7Vm)
         {
+            
             var uploads = Path.Combine(_environment.WebRootPath);
             if (p7Vm.File.Length > 0)
             {
@@ -113,8 +107,8 @@ namespace KidSports.Controllers
                 {
                     await p7Vm.File.CopyToAsync(fileStream);
                 }
-                //p7Vm.Application.DlPath = $"\\{p7Vm.File.FileName}";
-                return RedirectToAction("Page7", "Application");
+                app.BadgePath = $"\\{p7Vm.File.FileName}";
+                return RedirectToAction("Page7", "Account");
             }
             return View(p7Vm);
         }
