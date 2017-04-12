@@ -3,7 +3,7 @@
 }
 
 
-<div class="container-fluid">
+<div class="container-fluid" style="padding-left:10px">
 
     <ul style="list-style-type:none">
         <li><strong>Name:</strong> John Doe</li>
@@ -11,10 +11,22 @@
         <li><strong>Address:</strong>123 ABC Street</li>
         <li><strong>Sport:</strong> Basketball</li>
         <li><strong>Gender:</strong> Male</li>
+        <li>
+            <div class="form-group col-xs-10 col-md-2">
+                <div class="pull-left">
+                    <strong>Application Year:</strong>
+                    <select class="form-control">
+                        <option value=""></option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                    </select>
+                </div>	
+            </div>			
+        </li>
     </ul>
-
-
-
+</div>
+<div class="container-fluid">
     <div class="table-responsive" style="padding-top:40px">
         <table class="table table-bordered">
             <tbody>
@@ -35,4 +47,3 @@
         <button type="button" class="btn btn-primary btn-md-10">Go back</button>
     </div>
 </div>
-
