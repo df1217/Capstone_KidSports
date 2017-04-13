@@ -19,22 +19,49 @@ namespace KidSports.Controllers
             _environment = environment;
         }
 
+        #region Application Step 1
         [HttpGet]
         public IActionResult Page1()
         {
             return View();
         }
+
+        //[HttpPost]
+        //public IActionResult Page1()
+        //{
+        //    return View();
+        //}
+        #endregion
+
+        #region Application Step 2
         [HttpGet]
         public IActionResult Page2()
         {
             return View();
         }
+
+        //[HttpPost]
+        //public IActionResult Page2()
+        //{
+        //    return View();
+        //}
+        #endregion
+
+        #region Application Step 3
         [HttpGet]
         public IActionResult Page3()
         {
             return View();
         }
 
+        //[HttpPost]
+        //public IActionResult Page3()
+        //{
+        //    return View();
+        //}
+        #endregion
+
+        #region Application Step 4
         [HttpGet]
         public IActionResult Page4()
         {
@@ -56,6 +83,9 @@ namespace KidSports.Controllers
             }
             return View(p4Vm);
         }
+        #endregion
+
+        #region Application Step 5
         [HttpGet]
         public IActionResult Page5()
         {
@@ -77,6 +107,9 @@ namespace KidSports.Controllers
             }
             return View(p5Vm);
         }
+        #endregion
+
+        #region Application Step 6
         [HttpGet]
         public IActionResult Page6()
         {
@@ -97,13 +130,16 @@ namespace KidSports.Controllers
             }
             return View(p6Vm);
         }
+        #endregion
+
+        #region Application Step 7
         [HttpGet]
         public IActionResult Page7()
         {
             return View();
         }
-        [HttpPost]
 
+        [HttpPost]
         public async Task<IActionResult> Page7(Page7ViewModel p7Vm)
         {
             var uploads = Path.Combine(_environment.WebRootPath);
@@ -118,8 +154,7 @@ namespace KidSports.Controllers
             }
             return View(p7Vm);
         }
-
-       
+        #endregion
 
     }
 }
