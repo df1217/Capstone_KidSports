@@ -1,58 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>Result Decision</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="mystyle.css">
-</head>
-<body>
-<div class="container-fluid" style="width:1000px">
-  <style type="text/css">
-  
-	    .btn {
-     background-color:red;
-     font:bold 14px Arial;
-     width:200;
-     height:100;
-     background-color:green;
-     vertical-align: middle;
-     }
-	 
-  </style>
-<div class="container-fluid" style="width:1000px">
-	<h3 class="text-left">Case 1:</h3>
-	<p>Jurisdiction: Idaho Department of Corrections </br>
-	Date: 02/11/1989</br>
-	Status: Probation</p>
-	<h3 class="text-left">Offense Information:</h3>
-	<p>Case Number: C-98872148-A </br>
-	Offense: Petit Larcen</br>
-	Level: Misdemeanor</br>
-	Date: 01/19/1989</br>
-	Sentence: Minimum</br>
-	Length: 1 year, 0 months, 0 days</br>
-	</br>
-	Case Number: I0888806</br>
-	Offense: Driving While Intoxicated</br>
-	Level: Felony</br>
-	Date: 08/06/1981</br>
-	Sentence: Minimum</br>
-	Length: 2 years, 0 months, 0 days</p>
-	
-		
-<br>
-<div class="btn-group-horizontal">
-  <button type="button" class="btn btn-primary">Approve</button>
-  <button type="button" class="btn btn-primary">Deny</button>
-  <!--This prompts SM to contact applicant with denial notice-->
-  <button type="button" class="btn btn-primary">Go Back</button>
-</div>
-						
-				</div>				
+﻿@{
+    ViewBag.Title = "Background Check Results";
+}
 
-</body>
-</html>
+<h3 class="text-left">Case 1:</h3>
+    <p class="col-xs-12"><strong>Jurisdiction:</strong> Idaho Department of Corrections</p>
+    <p class="col-xs-12"><strong>Date:</strong> 02/11/1989</p>
+    <p class="col-xs-12"><strong>Status:</strong> Probation</p>
+
+<h3 class="text-left">Offense Information:</h3>
+    <p class="col-xs-12"><strong>Case Number:</strong> C-98872148-A</p>
+    <p class="col-xs-12"><strong>Offense:</strong> Petit Larcen</p>
+    <p class="col-xs-12"><strong>Level:</strong> Misdemeanor</p>
+    <p class="col-xs-12"><strong>Date:</strong> 01/19/1989</p>
+    <p class="col-xs-12"><strong>Sentence:</strong> Minimum</p>
+    <p class="col-xs-12"><strong>Length:</strong> 1 year, 0 months, 0 days</p>
+
+    <p class="col-xs-12"><strong>Case Number:</strong> I0888806</p>
+    <p class="col-xs-12"><strong>Offense:</strong> Driving While Intoxicated</p>
+    <p class="col-xs-12"><strong>Level:</strong> Felony</p>
+    <p class="col-xs-12"><strong>Date:</strong> 08/06/1981</p>
+    <p class="col-xs-12"><strong>Sentence:</strong> Minimum</p>
+    <p class="col-xs-12"><strong>Length:</strong> 2 years, 0 months, 0 days</p>
+
+<div class="btn-group-horizontal">
+    <button type="button" class="btn btn-primary">Approve</button>
+    <button type="button" class="btn btn-primary">Deny</button>
+    <!--This prompts SM to contact applicant with denial notice-->
+    <button type="button" class="btn btn-primary">Go Back</button>
+</div>
+
+
