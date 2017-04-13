@@ -1,117 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>Apps To Validate</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="mystyle2.css">
-	
-</head>
-<body>
+﻿<h2>Application Status Information:</h2>
 
-<div class="container-fluid" style="max-width:1000px">
-	<h2 class="text-center">Application Status Information:</h2>
-	</br>
-		<h5 class="text-center">
+<h5>
+    <select>
+        <option selected disabled>Filter By:</option>
+        <option value="1">First Name</option>
+        <option value="2">Last Name</option>
+        <option value="3">Date</option>
+        <option value="4">Sport</option>
+        <option value="5">School</option>
+    </select>
 
-<select>
-    <option selected disabled>Filter By:</option>
-    <option value="1">First Name</option>
-    <option value="2">Last Name</option>
-    <option value="3">Date</option>
-    <option value="4">Sport</option>
-    <option value="5">School</option>
-</select>
-</br>
-<select>
-    <option selected disabled>Choose Options:</option>
-    <option value="1">One</option>
-    <option value="2">Two</option>
-    <option value="3">Three</option>
-    <option value="4">Four</option>
-    <option value="5">Five</option>
-</select>
+    <select>
+        <option selected disabled>Choose Options:</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        <option value="4">Four</option>
+        <option value="5">Five</option>
+    </select>
 </h5>
-</br>
-<center>	
-<div style="overflow-x:auto;">
-
-<table style="text-align:center">
-<tr>
-<td bgcolor="Green"class="col-xs-3">Complete</td>
-<td bgcolor="Yellow"class="col-xs-3">Pending Validation</td>
-<td bgcolor="Red"class="col-xs-3">Incomplete Information</td>
-
-</tr>
-</table>
-</br>
-</br>
-
-<table style="text-align:center">
 	
-	<tr>
-		<td>Application Details</a></td>
-		<td class="col-xs-3">Applicant Name:</td>
-		<td class="col-xs-3">Application Start Date:</td>
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <td class="bg-success col-xs-3" style="font-weight:bold;">Complete</td>
+            <td class="bg-warning col-xs-3" style="font-weight:bold;">Pending Validation</td>
+            <td class="bg-danger col-xs-3" style="font-weight:bold;">Incomplete Information</td>
+        </tr>
+    </thead>
+</table>
 
-		
+<table class="table table-responsive table-striped">
+	<tr>
+		<td class="col-xs-2">Application Details</td>
+		<td class="col-xs-5">Applicant Name:</td>
+		<td class="col-xs-5">Application Start Date:</td>
 	</tr>
 	
 	<tr>
-		<td bgcolor="Green"><a href=""><input type=submit value="View Details"></a></td>
+		<td><a href=""><input class="btn btn-success" type=submit value="View Details"></a></td>
 		<td>Jane Doe</td>
 		<td>3/14/17</td>
-
-		
 	</tr>
 	
 	<tr>
-		<td bgcolor="Red"><a href=""><input type=submit value="View Details"></a></td>
+		<td><a href=""><input class="btn btn-danger" type=submit value="View Details"></a></td>
 		<td>Bob Doe</td>
 		<td>2/18/17</td>
-
-	
 	</tr>
 	
 	<tr>
-		<td bgcolor="Yellow"><a href=""><input type=submit value="View Details"></a></td>
+		<td><a href=""><input class="btn btn-warning" type=submit value="View Details"></a></td>
 		<td>John Doe</td>
 		<td>4/08/17</td>
-
-	
 	</tr>
-		<tr>
-		<td bgcolor="Green"><a href=""><input type=submit value="View Details"></a></td>
+
+	<tr>
+		<td><a href=""><input class="btn btn-success" type=submit value="View Details"></a></td>
 		<td>Blue Ivy</td>
 		<td>8/10/16</td>
-
-	
 	</tr>
-		<tr>
-		<td bgcolor="Green"><a href=""><input type=submit value="View Details"></a></td>
+
+	<tr>
+		<td><a href=""><input class="btn btn-success" type=submit value="View Details"></a></td>
 		<td>Danny Smith</td>
 		<td>2/28/17</td>
-
-	
 	</tr>
-		<tr>
-		<td bgcolor="Yellow"><a href=""><input type=submit value="View Details"></a></td>
+
+	<tr>
+		<td><a href=""><input class="btn btn-warning" type=submit value="View Details"></a></td>
 		<td>William Jones</td>
 		<td>5/18/17</td>
-
-	
 	</tr>
-	</table>
-</center>
-							
-							
-				</div>		
+</table>
+    	
 <div class="pull-right" style="margin-top:50px">
     <button type="button" class="btn btn-primary btn-md-10">Go back</button>
 </div>				
 
-</body>
-</html>
