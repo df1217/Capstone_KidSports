@@ -1,44 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-      <title>Status</title>
-	  	<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="mystyle.css">
-		
-  <style type="text/css">
-   .btn {
-	 margin: 20px auto;
-     font:bold 20px Arial;
-     width:200;
-     height:100;
-     background-color:green;
-     vertical-align: middle;
-     }
-    
-   </style>
-	
-		<!-- Need to add id for username for now I have hard-coded "John" -->
-		<h1 class="text-center">Hello, John. </h1> 
-		<h3 class="text-center">What would you like to do?</h3><br/>
-</head>
-<body>
-<div class="container-fluid" style="max-width:1000px">
-   <center>
-      
-    <div class="btn-group-vertical">
+﻿@{ 
+    ViewBag.Title = "Home";
+}
 
-		<button type="button" class="btn btn-primary">Enter Application Manually</button>
-		<button type="button" class="btn btn-primary">View In-Process Applications</button>
-	</div>
-	
-   </center>
+<div class="text-center">
+    <!-- Need to add id for username for now I have hard-coded "John" -->
+    <h1 class="text-center">Hello, John. </h1>
+    <h3 class="text-center">What would you like to do?</h3><br />
 
-
-		</div>				
-
-</body>
-</html>
+        <button type="button" class="btn btn-success col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 col-xs-12" style="margin-bottom:5px;">Enter Application Manually</button>
+        <button type="button" class="btn btn-success col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 col-xs-12" style="margin-bottom:5px;" onclick="location.href='@Url.Action("Applications", "Application")'">View Applications</button>
+</div>

@@ -47,7 +47,7 @@ namespace KidSports.Controllers
 
         #region SportsManager Views
         [HttpGet]
-        public IActionResult AppsToValidate()
+        public IActionResult Applications()
         {
             return View();
         }

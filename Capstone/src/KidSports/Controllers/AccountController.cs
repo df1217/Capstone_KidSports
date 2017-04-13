@@ -8,7 +8,6 @@ using KidSports.Repositories;
 
 namespace KidSports.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private UserManager<IdUser> userManager;
