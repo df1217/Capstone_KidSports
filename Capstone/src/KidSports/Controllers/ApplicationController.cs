@@ -19,6 +19,62 @@ namespace KidSports.Controllers
             _environment = environment;
         }
 
+        #region Home Page
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult NoApplication()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Appinprocess()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CompletedApplication()
+        {
+            return View();
+        }
+        #endregion
+
+        #region SportsManager Views
+        [HttpGet]
+        public IActionResult AppsToValidate()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ApplicantDetails()
+        {
+            return View();
+        }
+        #endregion
+
+        #region Background Check
+        [HttpGet]
+        //List all background checks that have been processed by the CRIS API and are awaiting approval.
+        public IActionResult BackgroundCheckResults()
+        {
+            return View();
+        }
+
+        //Display the result incidents of the specific background check.
+        [HttpGet]
+        public IActionResult BGCResultsDescription()
+        {
+            return View();
+        }
+        #endregion
+
         #region Application Step 1
         [HttpGet]
         public IActionResult Page1()
