@@ -22,6 +22,7 @@ namespace KidSports.Controllers
             userRepo = uRepo;
         }
 
+        #region Register
         [AllowAnonymous]
         public IActionResult Register()
         {
@@ -60,7 +61,9 @@ namespace KidSports.Controllers
             // We get here either if the model state is invalid or if create user fails
             return View(vm);
         }
+        #endregion
 
+        #region Login
         [AllowAnonymous]
         public ViewResult Login(string returnUrl)
         {
@@ -91,11 +94,21 @@ namespace KidSports.Controllers
             }
             return View(vm);
         }
+        #endregion
 
+        #region Logout
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
         }
+        #endregion
+
+        #region Profile
+        public IActionResult Profile()
+        {
+            return View();
+        }
+        #endregion
     }
 }
