@@ -22,6 +22,7 @@ namespace KidSports.Controllers
             userRepo = uRepo;
         }
 
+        #region Register
         [AllowAnonymous]
         public IActionResult Register()
         {
@@ -60,7 +61,9 @@ namespace KidSports.Controllers
             // We get here either if the model state is invalid or if create user fails
             return View(vm);
         }
+        #endregion
 
+        #region Login
         [AllowAnonymous]
         public ViewResult Login(string returnUrl)
         {
@@ -69,6 +72,7 @@ namespace KidSports.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel vm, string returnUrl)
         {
             if (ModelState.IsValid)
@@ -82,8 +86,7 @@ namespace KidSports.Controllers
                                 identityUser, vm.Password, false, false);
                     if (result.Succeeded)
                     {
-                        // return to the action that required authorization, or to home if returnUrl is null
-                        return RedirectToAction("Page4", "Application");
+                        return RedirectToAction("NoApplication", "Application");
                     }
                 }
                 ModelState.AddModelError(nameof(LoginViewModel.Email),
@@ -91,11 +94,29 @@ namespace KidSports.Controllers
             }
             return View(vm);
         }
+        #endregion
 
+        #region Logout
+        [AllowAnonymous]
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
         }
+        #endregion
+
+        #region Profile
+        public IActionResult Profile()
+        {
+            return View();
+        }
+        #endregion
+
+        #region Access Denied
+        public ViewResult AccessDenied()
+        {
+            return View();
+        }
+        #endregion
     }
 }

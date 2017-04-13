@@ -1,5 +1,12 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{ 
+    ViewBag.Title = "Home";
 }
+
+<div class="text-center">
+    <!-- Need to add id for username for now I have hard-coded "John" -->
+    <h1 class="text-center">Hello, John. </h1>
+    <h3 class="text-center">What would you like to do?</h3><br />
+
+        <button type="button" class="btn btn-success col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 col-xs-12" style="margin-bottom:5px;">Enter Application Manually</button>
+        <button type="button" class="btn btn-success col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 col-xs-12" style="margin-bottom:5px;" onclick="location.href='@Url.Action("Applications", "Application")'">View Applications</button>
+</div>

@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using KidSports.Models.ViewModels;
 using KidSports.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KidSports.Controllers
 {
+    [Authorize]
     public class ApplicationController : Controller
     {
         private IHostingEnvironment _environment;
@@ -19,22 +21,107 @@ namespace KidSports.Controllers
             _environment = environment;
         }
 
+        #region Home Page
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult NoApplication()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Appinprocess()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CompletedApplication()
+        {
+            return View();
+        }
+        #endregion
+
+        #region SportsManager Views
+        [HttpGet]
+        [Authorize(Roles = "SportsManager")]
+        public IActionResult Applications()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "SportsManager")]
+        public IActionResult ApplicantDetails()
+        {
+            return View();
+        }
+        #endregion
+
+        #region Background Check
+        [HttpGet]
+        //List all background checks that have been processed by the CRIS API and are awaiting approval.
+        public IActionResult BackgroundCheckResults()
+        {
+            return View();
+        }
+
+        //Display the result incidents of the specific background check.
+        [HttpGet]
+        public IActionResult BGCResultsDescription()
+        {
+            return View();
+        }
+        #endregion
+
+        #region Application Step 1
         [HttpGet]
         public IActionResult Page1()
         {
             return View();
         }
+
+        //[HttpPost]
+        //public IActionResult Page1()
+        //{
+        //    return View();
+        //}
+        #endregion
+
+        #region Application Step 2
         [HttpGet]
         public IActionResult Page2()
         {
             return View();
         }
+
+        //[HttpPost]
+        //public IActionResult Page2()
+        //{
+        //    return View();
+        //}
+        #endregion
+
+        #region Application Step 3
         [HttpGet]
         public IActionResult Page3()
         {
             return View();
         }
 
+        //[HttpPost]
+        //public IActionResult Page3()
+        //{
+        //    return View();
+        //}
+        #endregion
+
+        #region Application Step 4
         [HttpGet]
         public IActionResult Page4()
         {
@@ -56,6 +143,9 @@ namespace KidSports.Controllers
             }
             return View(p4Vm);
         }
+        #endregion
+
+        #region Application Step 5
         [HttpGet]
         public IActionResult Page5()
         {
@@ -77,6 +167,9 @@ namespace KidSports.Controllers
             }
             return View(p5Vm);
         }
+        #endregion
+
+        #region Application Step 6
         [HttpGet]
         public IActionResult Page6()
         {
@@ -97,13 +190,16 @@ namespace KidSports.Controllers
             }
             return View(p6Vm);
         }
+        #endregion
+
+        #region Application Step 7
         [HttpGet]
         public IActionResult Page7()
         {
             return View();
         }
-        [HttpPost]
 
+        [HttpPost]
         public async Task<IActionResult> Page7(Page7ViewModel p7Vm)
         {
             var uploads = Path.Combine(_environment.WebRootPath);
@@ -118,8 +214,7 @@ namespace KidSports.Controllers
             }
             return View(p7Vm);
         }
-
-       
+        #endregion
 
     }
 }

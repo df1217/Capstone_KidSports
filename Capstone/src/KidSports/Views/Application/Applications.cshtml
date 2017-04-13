@@ -1,0 +1,84 @@
+﻿@{ 
+    ViewBag.Title = "Applications";
+}
+
+<h2>Application Status Information:</h2>
+
+<div class="pull-right" style="margin-bottom:10px;">
+    <select>
+        <option selected disabled>Filter By:</option>
+        <option value="1">First Name</option>
+        <option value="2">Last Name</option>
+        <option value="3">Date</option>
+        <option value="4">Sport</option>
+        <option value="5">School</option>
+    </select>
+
+    <select>
+        <option selected disabled>Choose Options:</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        <option value="4">Four</option>
+        <option value="5">Five</option>
+    </select>
+</div>
+	
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <td class="bg-success col-xs-3" style="font-weight:bold;">Complete</td>
+            <td class="bg-warning col-xs-3" style="font-weight:bold;">Pending Validation</td>
+            <td class="bg-danger col-xs-3" style="font-weight:bold;">Incomplete Information</td>
+        </tr>
+    </thead>
+</table>
+
+<table class="table table-responsive table-striped">
+	<tr>
+		<td class="col-xs-2">Application Details</td>
+		<td class="col-xs-5">Applicant Name:</td>
+		<td class="col-xs-5">Application Start Date:</td>
+	</tr>
+	
+	<tr>
+		<td><a href=""><input class="btn btn-success" type=submit value="View Details"></a></td>
+		<td>Jane Doe</td>
+		<td>3/14/17</td>
+	</tr>
+	
+	<tr>
+		<td><a href=""><input class="btn btn-danger" type=submit value="View Details"></a></td>
+		<td>Bob Doe</td>
+		<td>2/18/17</td>
+	</tr>
+	
+	<tr>
+		<td><a href=""><input class="btn btn-warning" type=submit value="View Details"></a></td>
+		<td>John Doe</td>
+		<td>4/08/17</td>
+	</tr>
+
+	<tr>
+		<td><a href=""><input class="btn btn-success" type=submit value="View Details"></a></td>
+		<td>Blue Ivy</td>
+		<td>8/10/16</td>
+	</tr>
+
+	<tr>
+		<td><a href=""><input class="btn btn-success" type=submit value="View Details"></a></td>
+		<td>Danny Smith</td>
+		<td>2/28/17</td>
+	</tr>
+
+	<tr>
+		<td><a href=""><input class="btn btn-warning" type=submit value="View Details"></a></td>
+		<td>William Jones</td>
+		<td>5/18/17</td>
+	</tr>
+</table>
+    	
+<div class="pull-right" style="margin-top:50px">
+    <button type="button" class="btn btn-primary btn-md-10">Go back</button>
+</div>				
+

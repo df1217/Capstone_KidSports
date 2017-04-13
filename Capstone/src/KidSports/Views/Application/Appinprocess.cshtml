@@ -1,38 +1,34 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-      <title>Application In Progress</title>
-	  	<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="mystyle.css">
-
+﻿@{ 
+    ViewBag.Title = "Home";
+}
 	
-		<!-- Need to add id for username for now I have hard-coded "John" -->
-		<h1>Hello, John. </h1> 
-		<h3>Your application is in pending completion. 
-		<br/>Please refer to the chart below for further information and take appropriate action.</h3><br/>
-		<h4>Green = Complete
-		</br>Yellow = Pending validation
-		</br>Red = Missing or incomplete information</h4>
-</head>
-<body>
-<div class="container-fluid">
-<div class="table-responsive" style="padding-top:40px">
+<!-- Need to add id for username for now I have hard-coded "John" -->
+<h1>Hello, John. </h1> 
+<h3>Your application is in pending completion. 
+<br/>Please refer to the chart below for further information and take appropriate action.</h3><br/>
+
+<table class="table table-responsive">
+    <thead>
+        <tr><td colspan="12" style="font-weight:bold;">Application status is indicated by the colors below.</td></tr>
+        <tr>
+            <td class="bg-success col-xs-3" style="font-weight:bold;">Accepted</td>
+            <td class="bg-warning col-xs-3" style="font-weight:bold;">Pending approval</td>
+            <td class="bg-danger col-xs-3" style="font-weight:bold;">Needs to be completed</td>
+        </tr>
+    </thead>
+</table>
+
+<div class="table-responsive">
     <table class="table table-bordered">
         <tbody>
             <tr>
-                <td bgcolor="Yellow"><a href="">Background Check</a></td>
-                <td bgcolor="Green"><a href="">Coaching information</a></td>
-                <td bgcolor="Red"><a href="~/Views/Account/Page3.cshtml">Coaches Pledge</a></td>
-                <td bgcolor="Yellow"><a href="~/Views/Account/Page6.cshtml">Driver's License</a></td>
-                <td bgcolor="Green"><a href="~/Views/Account/Page4.cshtml">Concussion Course</a></td>
-                <td bgcolor="Green"><a href="~/Views/Account/Page5.cshtml">PCA Course</a></td>
-                <td bgcolor="Yellow"><a href="~/Views/Account/Page7.cshtml">Coaches ID Badge</a></td>
+                <td class="bg-warning"><a style="color:black; font-weight:bold;">Background Check</a></td>
+                <td class="bg-success"><a style="color:black; font-weight:bold;">Coaching Preferences</a></td>
+                <td class="bg-danger"><a style="color:black; font-weight:bold;">Coaches Pledge</a></td>
+                <td class="bg-warning"><a style="color:black; font-weight:bold;">Driver's License</a></td>
+                <td class="bg-success"><a style="color:black; font-weight:bold;">NFHS Concussion Course</a></td>
+                <td class="bg-success"><a style="color:black; font-weight:bold;">PCA Course</a></td>
+                <td class="bg-warning"><a style="color:black; font-weight:bold;">Coaches ID Badge</a></td>
             </tr>
         </tbody>
     </table>
@@ -41,6 +37,4 @@
 <div class="pull-right" style="margin-top:50px">
     <button type="button" class="btn btn-primary btn-md-10">Go back</button>
 </div>
-</div>
-</body>
-</html>
+
