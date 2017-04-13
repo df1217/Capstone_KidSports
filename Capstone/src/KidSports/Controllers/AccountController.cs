@@ -8,6 +8,7 @@ using KidSports.Repositories;
 
 namespace KidSports.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private UserManager<IdUser> userManager;
@@ -71,6 +72,7 @@ namespace KidSports.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel vm, string returnUrl)
         {
             if (ModelState.IsValid)
@@ -84,8 +86,7 @@ namespace KidSports.Controllers
                                 identityUser, vm.Password, false, false);
                     if (result.Succeeded)
                     {
-                        // return to the action that required authorization, or to home if returnUrl is null
-                        return RedirectToAction("Page4", "Application");
+                        return RedirectToAction("NoApplication", "Application");
                     }
                 }
                 ModelState.AddModelError(nameof(LoginViewModel.Email),
@@ -96,6 +97,7 @@ namespace KidSports.Controllers
         #endregion
 
         #region Logout
+        [AllowAnonymous]
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
@@ -105,6 +107,13 @@ namespace KidSports.Controllers
 
         #region Profile
         public IActionResult Profile()
+        {
+            return View();
+        }
+        #endregion
+
+        #region Access Denied
+        public ViewResult AccessDenied()
         {
             return View();
         }

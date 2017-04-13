@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using KidSports.Models.ViewModels;
 using KidSports.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KidSports.Controllers
 {
+    [Authorize]
     public class ApplicationController : Controller
     {
         private IHostingEnvironment _environment;
@@ -47,12 +49,14 @@ namespace KidSports.Controllers
 
         #region SportsManager Views
         [HttpGet]
+        [Authorize(Roles = "SportsManager")]
         public IActionResult Applications()
         {
             return View();
         }
 
         [HttpGet]
+        [Authorize(Roles = "SportsManager")]
         public IActionResult ApplicantDetails()
         {
             return View();

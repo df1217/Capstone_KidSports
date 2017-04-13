@@ -57,15 +57,25 @@ namespace KidSports.Repositories
                 }
 
                 // Add a user for testing
-                string firstName = "Test";
-                string middleName = "User";
-                string lastName = "One";
-                string email = "testuserone@gmail.com";
+                string firstName = "John";
+                string middleName = "Test";
+                string lastName = "Doe";
+                string email = "Johndoe@gmail.com";
                 string userName = email;
                 string password = "Test123.";
 
                 IdentityResult result;
                 user = userRepo.CreateUser(firstName, middleName, lastName, email, password, UserRole.Applicant, out result);
+
+                string firstName2 = "Jane";
+                string middleName2 = "Test";
+                string lastName2 = "Doe";
+                string email2 = "Janedoe@gmail.com";
+                string userName2 = email;
+                string password2 = "Test123.";
+
+                IdentityResult result2;
+                user = userRepo.CreateUser(firstName2, middleName2, lastName2, email2, password2, UserRole.SportsManager, out result2);
             }
         }
     }
