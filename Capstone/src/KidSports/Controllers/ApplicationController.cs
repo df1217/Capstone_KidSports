@@ -8,6 +8,7 @@ using System.IO;
 using KidSports.Models.ViewModels;
 using KidSports.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace KidSports.Controllers
 {
@@ -131,17 +132,21 @@ namespace KidSports.Controllers
         [HttpPost]
         public async Task<IActionResult> Page4(Page4ViewModel p4Vm)
         {
-            var uploads = Path.Combine(_environment.WebRootPath);
-            if (p4Vm.File.Length > 0)
-            {
-                using (var fileStream = new FileStream(Path.Combine(uploads, p4Vm.File.FileName), FileMode.Create))
+                if (p4Vm.File != null)
                 {
-                    await p4Vm.File.CopyToAsync(fileStream);
+                    var uploads = Path.Combine(_environment.WebRootPath);
+                    if (p4Vm.File.Length > 0)
+                    {
+                        using (var fileStream = new FileStream(Path.Combine(uploads, p4Vm.File.FileName), FileMode.Create))
+                        {
+                            await p4Vm.File.CopyToAsync(fileStream);
+                        }
+                        //p4Vm.Application.NfhsPath = $"\\{p4Vm.File.FileName}";
+                        return RedirectToAction("Page5", "Application");
+                    }
+                    else return View(p4Vm);
                 }
-                //p4Vm.Application.NfhsPath = $"\\{p4Vm.File.FileName}";
-                return RedirectToAction("Page5", "Application");
-            }
-            return View(p4Vm);
+                else return View(p4Vm);
         }
         #endregion
 
@@ -210,11 +215,12 @@ namespace KidSports.Controllers
                     await p7Vm.File.CopyToAsync(fileStream);
                 }
                 //p7Vm.Application.DlPath = $"\\{p7Vm.File.FileName}";
-                return RedirectToAction("Page7", "Application");
+                return RedirectToAction("Appinprocess", "Application");
             }
             return View(p7Vm);
         }
         #endregion
+        
 
     }
 }
