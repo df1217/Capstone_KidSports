@@ -7,7 +7,7 @@ namespace KidSports.Models
 {
     public class School
     {
-        public int SchooID { get; set; }
+        public int SchoolID { get; set; }
         public string SchoolName { get; set; }
 
     }

@@ -10,10 +10,6 @@ namespace KidSports.Controllers
 {
     public class EmployeeController : Controller
     {
-        // GET: /<controller>/
-        public IActionResult Index()
-        {
-            return View();
-        }
+
     }
 }

@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "Page 1";
+}
+
+<div class="container-fluid">
+	<h1 class="text-center">Step 1:</h1>
+	<h3 class="text-center">We need some information about you</h3><br />
+
+	<form>
+        <div class="row">
+		    <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+			    <label for="firstName" class="control-label">First Name</label>
+			    <input type="" value='' class="form-control" id="firstName" placeholder="">
+		    </div>
+		    <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+			    <label for="middleName" class="control-label">Middle Name</label>
+			    <input type="" value='' class="form-control" id="middleName" placeholder="">
+		    </div>
+		    <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+			    <label for="lastName" class="control-label">Last Name</label>
+			    <input type="" value='' class="form-control" id="lastName" placeholder="">
+		    </div>
+        </div>
+
+        <div class="row">
+		    <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+			    <label for="preferredName" class="control-label">Preferred Name</label>
+			    <input type="" value='' class="form-control" id="preferredName" placeholder="">
+		    </div>
+
+		    <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+			    <label for="previousName" class="control-label">Previous Last Name Used</label>
+			    <input type="" value='' class="form-control" id="previousName" placeholder="">
+		    </div>
+
+		    <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+			    <label for="dateOfBirht" class="control-label">Date of Birth</label>
+                <input type="date" class="form-control" placeholder="Date">
+			    @*<input type="" value='' class="form-control" id="dateOfBirth" placeholder="">*@
+		    </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+                <label for="cellPhone" class="control-label">Cell Phone</label>
+                <input type="" value='' class="form-control" id="cellPhone" placeholder="">
+            </div>
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+                <label for="altPhone" class="control-label">Alternate Phone</label>
+                <input type="" value='' class="form-control" id="altPhone" placeholder="">
+            </div>
+        </div>
+
+        <div class="row">
+		    <div class="form-group col-xs-offset-1 col-xs-10 col-md-7">
+			    <label for="address" class="control-label">Address</label>
+			    <input type="" value='' class="form-control" id="address" placeholder="">
+		    </div>
+		    <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+			    <label for="zip" class="control-label">Zip</label>
+			    <input type="" value='' class="form-control" id="zip" placeholder="">
+		    </div>
+            
+		    <div class="form-group col-xs-offset-1 col-xs-10 col-md-7">
+			    <label for="city" class="control-label">City</label>
+			    <input type="" value='' class="form-control" id="city" placeholder="">
+		    </div>
+
+		    <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+			    <label for="state" class="control-label">state</label>
+			    <select class="form-control">
+				    <option value="">Oregon</option>
+				    <option value="CA">California</option>
+				    <option value="OR">Idaho</option>
+				    <option value="WA">Washington</option>
+			    </select>
+		    </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-7">
+                <label for="timeInOregon" class="control-label">Time in Oregon</label>
+                <input type="" value='' class="form-control" id="timeInOregon" placeholder="">
+            </div>
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+                <label for="pState" class="control-label">Previous state lived in</label>
+                <input type="" value='' class="form-control" id="pState" placeholder="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-7">
+                <label for="curEmployer" class="control-label">Current Employer</label>
+                <input type="" value='' class="form-control" id="curEmployer" placeholder="">
+            </div>
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+                <label for="jobTitle" class="control-label">Job Title</label>
+                <input type="" value='' class="form-control" id="state" placeholder="">
+            </div>
+            </div><br />
+
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+                <div class="pull-left">
+                    <button type="button" class="btn btn-primary btn-md-10">Save</button>
+                </div>
+            </div>
+
+
+
+            <div class="pull-right">
+                <div class="form-group col-sm-12">
+                    <ul class="pagination">
+                        <li><a asp-controller="Application" asp-action="Page1" style="background-color:#218c48; color:black; font-weight:bold;">1</a></li>
+                        <li><a asp-controller="Application" asp-action="Page2" style="color:black; font-weight:bold;">2</a></li>
+                        <li><a asp-controller="Application" asp-action="Page3" style="color:black; font-weight:bold;">3</a></li>
+                        <li><a asp-controller="Application" asp-action="Page4" style="color:black; font-weight:bold;">4</a></li>
+                        <li><a asp-controller="Application" asp-action="Page5" style="color:black; font-weight:bold;">5</a></li>
+                        <li><a asp-controller="Application" asp-action="Page6" style="color:black; font-weight:bold;">6</a></li>
+                        <li><a asp-controller="Application" asp-action="Page7" style="color:black; font-weight:bold;">7</a></li>
+                    </ul>
+                </div>
+            </div>
+</form>
+ </div>

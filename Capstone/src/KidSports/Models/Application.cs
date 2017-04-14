@@ -8,9 +8,9 @@ namespace KidSports.Models
     public class Application
     {
         public int ApplicationID { get; set; }
-        public List<string> StatesLived { get; set; }
-        public List<string> CountriesLived { get; set; }
-        public List<string> PreviousLastNames { get; set; }
+        public List<State> StatesLived { get; set; }
+        public List<Country> CountriesLived { get; set; }
+        public List<LastName> PreviousLastNames { get; set; }
 
 
         public string BackgroundRequest { get; set; }
