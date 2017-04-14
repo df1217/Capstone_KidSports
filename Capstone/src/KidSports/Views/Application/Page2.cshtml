@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
 	<h1 class="text-center">Step 2:</h1>
-	<h3 class="text-center">What are you interested in...</h3><br />
+	<h3 class="text-center">What are you interested in</h3><br />
 
 	<form>
 		<div class="container-fluid">
@@ -56,62 +56,76 @@
 			</select>
 		</div>
 		<div></div>
+        <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+                <label for="gender" class="control-label">Gender<br />  Preference</label>
 
-		<div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-			<label for="gender" class="control-label">Gender</label>
+                <select class="form-control">
+                    <option value=""></option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
 
-			<select class="form-control">
-				<option value=""></option>
-				<option value="Male">Male</option>
-				<option value="Female">Female</option>
+                </select>
+            </div>
 
-			</select>
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+                <label for="grade" class="control-label">Grade<br />  Hold Control and Click</label>
+
+                <select multiple class="form-control">
+                    <option value=""></option>
+                    <option value="PK">Pre-K</option>
+                    <option value="KG">Kindergarden</option>
+                    <option value="1">1th Grade</option>
+                    <option value="2">2th Grade</option>
+
+                    <option value="3">3th Grade</option>
+                    <option value="4">4th Grade</option>
+                    <option value="5">5th Grade</option>
+                    <option value="6">6th Grade</option>
+                    <option value="7">7th Grade</option>
+                    <option value="8">8th Grade</option>
+                    <option value="9">9th Grade</option>
+                    <option value="10">10th Grade</option>
+                    <option value="11">11th Grade</option>
+                    <option value="12">12th Grade</option>
+                </select>
+            </div>
+
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+                <label for="childTeam" class="control-label">If coaching child's team, please note his/her name:</label>
+                <input type="childTeam" value='' class="form-control" id="childTeam" placeholder="">
+            </div>
+        </div>
+		<div sytle="text-align: center" >
+			<h3>Do you have previous experience?</h3>
 		</div>
+        <div class="row" style="margin-top:40px">
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+                <label for="yearsCoached" class="control-label">Previous Years Coached:</label>
+                <input type="yearsCoached" value='' class="form-control" id="yearsCoached" placeholder="">
+            </div>
 
-		<div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-			<label for="grade" class="control-label">Grade</label>
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+                <label for="gradesCoached" class="control-label">Previous Grades Coached</label>
+                <select class="form-control">
+                    <option value=""></option>
+                    <option value="5">5th Grade</option>
+                    <option value="6">6th Grade</option>
+                    <option value="7">7th Grade</option>
+                </select>
+            </div>
 
-			<select class="form-control">
-				<option value=""></option>
-				<option value="5">5th Grade</option>
-				<option value="6">6th Grade</option>
-				<option value="7">7th Grade</option>
-			</select>
-		</div>
-
-		<div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-			<label for="childTeam" class="control-label">If coaching child's team, please note his/her name:</label>
-			<input type="childTeam" value='' class="form-control" id="childTeam" placeholder="">
-		</div>
-
-		<div class="form-group col-xs-offset-1 col-xs-10 col-md-8">
-			<h4>Do you have previous experience?</h4>
-		</div>
-		<div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-			<label for="yearsCoached" class="control-label">Previous Years Coached:</label>
-			<input type="yearsCoached" value='' class="form-control" id="yearsCoached" placeholder="">
-		</div>
-		<div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-			<label for="gradesCoached" class="control-label">Previous Grades Coached</label>
-			<select class="form-control">
-				<option value=""></option>
-				<option value="5">5th Grade</option>
-				<option value="6">6th Grade</option>
-				<option value="7">7th Grade</option>
-			</select>
-		</div>
-
-		<div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-			<label for="experience" class="control-label">Years Experience</label>
-			<select class="form-control">
-				<option value=""></option>
-				<option value="1">1 year</option>
-				<option value="2">2 years</option>
-				<option value="3">3 years</option>
-				<option value="4">4 years</option>
-			</select>
-		</div>
-
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+                <label for="experience" class="control-label">Years Experience</label>
+                <select class="form-control">
+                    <option value=""></option>
+                    <option value="1">1 year</option>
+                    <option value="2">2 years</option>
+                    <option value="3">3 years</option>
+                    <option value="4">4 years</option>
+                </select>
+            </div>
+        </div>
 		<div class="form-group col-xs-offset-1 col-xs-10 col-md-8">
 			<div class="pull-left">
 				<button type="button" class="btn btn-primary btn-md-10">Save</button>
@@ -120,7 +134,7 @@
 	</form>
 
 	<div class="pull-right">
-		<div class="form-group col-sm-12 col-md-12">
+		<div class="form-group col-xs-12 col-sm-12 col-md-12">
 			<ul class="pagination">
                 <li><a asp-controller="Application" asp-action="Page1" style="color:black; font-weight:bold;">1</a></li>
                 <li><a asp-controller="Application" asp-action="Page2" style="background-color:#218c48; color:black; font-weight:bold;">2</a></li>

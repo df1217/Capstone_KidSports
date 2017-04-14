@@ -19,7 +19,7 @@
                     <input type="file" asp-for="File"
                            class="required borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
 
-                    <img id="previewHolder" alt="" width="920" height="400" />
+                    <img id="previewHolder" alt="" style="height:0px;"/>
                 </div>
             </div>
 
@@ -30,7 +30,7 @@
             </div>
 
             <div class="pull-right">
-                <div class="form-group col-xs-offset-0 col-xs-10 col-md-12">
+                <div class="form-group col-xs-12 col-md-12">
                     <ul class="pagination">
                         <li><a asp-controller="Application" asp-action="Page1" style="color:black; font-weight:bold;">1</a></li>
                         <li><a asp-controller="Application" asp-action="Page2" style="color:black; font-weight:bold;">2</a></li>
