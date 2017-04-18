@@ -14,8 +14,8 @@ namespace KidSports.Repositories
         {
             ApplicationDbContext context =
                 app.ApplicationServices.GetRequiredService<ApplicationDbContext>();
-            UserManager<IdUser> userManager =
-                app.ApplicationServices.GetRequiredService<UserManager<IdUser>>();
+            UserManager<User> userManager =
+                app.ApplicationServices.GetRequiredService<UserManager<User>>();
             RoleManager<IdentityRole> roleManager =
                 app.ApplicationServices.GetRequiredService<RoleManager<IdentityRole>>();
             UserRepository userRepo = new UserRepository(userManager, context);

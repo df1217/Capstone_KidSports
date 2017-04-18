@@ -1,38 +1,33 @@
 ﻿using KidSports.Models;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace KidSports.Repositories
 {
     public class UserRepository : IUserRepo
     {
-        private UserManager<IdUser> userManager;
+        private UserManager<User> userManager;
         private ApplicationDbContext context;
 
-        public UserRepository(UserManager<IdUser> um, ApplicationDbContext ctx)
+        public UserRepository(UserManager<User> um, ApplicationDbContext ctx)
         {
             userManager = um;
             context = ctx;
         }
 
-        // Create an IdUser object and a User object that points to the IdUser
-        public User CreateUser(string firstName, string middleName, string lastName, string eMail, string password, UserRole role, out IdentityResult identityResult)
+        // Create an User object and a User object that points to the User
+        public User CreateUser(string firstName, string middleName, string lastName, string eMail, string password, UserRole role, out IdentityResult result)
         {
-            User user = null;
-            identityResult = null;
+            result = null;
 
-            // Check to see if this IdUser already exists
+            // Check to see if this User already exists
             var asyncTask = userManager.FindByEmailAsync(eMail);
             asyncTask.Wait();
 
-            var identityUser = asyncTask.Result;
-            if (identityUser == null)
+            var user = asyncTask.Result;
+            if (user == null)
             {
-                // Create a new IdUser
-                identityUser = new IdUser
+                // Create a new User
+                user = new User
                 {
                     FirstName = firstName,
                     MiddleName = middleName,
@@ -41,39 +36,25 @@ namespace KidSports.Repositories
                     Email = eMail
                 };
 
-                var asyncResultTask = userManager.CreateAsync(identityUser, password);
+                var asyncResultTask = userManager.CreateAsync(user, password);
                 asyncResultTask.Wait();
-                identityResult = asyncResultTask.Result;
-                if (identityResult.Succeeded)
+                result = asyncResultTask.Result;
+                if (result.Succeeded)
                 {
-                    // Add a role to the IdUser
-                    asyncResultTask = userManager.AddToRoleAsync(identityUser, role.ToString());
+                    // Add a role to the User
+                    asyncResultTask = userManager.AddToRoleAsync(user, role.ToString());
                     asyncResultTask.Wait();
-                    identityResult = asyncResultTask.Result;
-                    if (identityResult.Succeeded)
-                    {
-                        // Create a User that points to the IdUser
-                        user = new User();
-                        user.IdUserID = identityUser.Id;
-                        //user.UserName = identityUser.UserName;
-                        //user.FirstName = identityUser.FirstName;
-                        //user.MiddleName = identityUser.MiddleName;
-                        //user.LastName = identityUser.LastName;
-                        //user.Email = identityUser.Email;
-                        context.Users.Add(user);
-                        context.SaveChanges();
-                    }
+                    result = asyncResultTask.Result;
                 }
                 else
                 {
-                    identityResult = null;  // The User already exists
+                    result = null;  // The User already exists
                 }
             }
-
             return user;
         }
 
-        public IdUser GetIdUserByEmail(string Email)
+        public User GetUserByEmail(string Email)
         {
             var asyncTask = userManager.FindByNameAsync(Email);
             var identityUser = asyncTask.Result;

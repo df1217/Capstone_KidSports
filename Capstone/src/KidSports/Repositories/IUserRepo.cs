@@ -7,6 +7,6 @@ namespace KidSports.Repositories
     public interface IUserRepo
     {
         User CreateUser(string firstName, string middleName, string lastName, string eMail, string password, UserRole role, out IdentityResult identityResult);
-        IdUser GetIdUserByEmail(string eMail);
+        User GetUserByEmail(string eMail);
     }
 }

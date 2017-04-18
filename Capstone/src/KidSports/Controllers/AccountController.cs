@@ -11,11 +11,11 @@ namespace KidSports.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private UserManager<IdUser> userManager;
-        private SignInManager<IdUser> signInManager;
+        private UserManager<User> userManager;
+        private SignInManager<User> signInManager;
         private IUserRepo userRepo;
 
-        public AccountController(UserManager<IdUser> userMgr, SignInManager<IdUser> signInMgr, IUserRepo uRepo)
+        public AccountController(UserManager<User> userMgr, SignInManager<User> signInMgr, IUserRepo uRepo)
         {
             userManager = userMgr;
             signInManager = signInMgr;
@@ -35,19 +35,19 @@ namespace KidSports.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityResult identityResult;
+                IdentityResult result;
                 User user = userRepo.CreateUser(vm.FirstName, vm.MiddleName, vm.LastName, vm.Email,
-                    vm.Password, UserRole.Applicant, out identityResult);
+                    vm.Password, UserRole.Applicant, out result);
 
-                if (identityResult != null)
+                if (result != null)
                 {
-                    if (identityResult.Succeeded)
+                    if (result.Succeeded)
                     {
                         return RedirectToAction("Login", "Account");
                     }
                     else
                     {
-                        foreach (IdentityError error in identityResult.Errors)
+                        foreach (IdentityError error in result.Errors)
                         {
                             ModelState.AddModelError("", error.Description);
                         }
@@ -77,7 +77,7 @@ namespace KidSports.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdUser identityUser = userRepo.GetIdUserByEmail(vm.Email);
+                User identityUser = userRepo.GetUserByEmail(vm.Email);
                 if (identityUser != null)
                 {
                     await signInManager.SignOutAsync();

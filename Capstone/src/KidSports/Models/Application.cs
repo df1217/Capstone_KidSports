@@ -71,17 +71,5 @@ namespace KidSports.Models
         public string PledgeInitials { get; set; }
 
         public List<Area> Region { get; set; }
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
