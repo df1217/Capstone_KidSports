@@ -163,6 +163,7 @@
 	</div>
 </div>
 <script>
+    // Hard Coded associative arrays of schools by area for UX
     var sEugeneSchools = {
         'camasRidge' : 'Camas Ridge',
         'charlamagne' : 'Charlamagne',
@@ -181,55 +182,122 @@
     };
 
     var springfieldSchools = {
-        'red' : 'Red',
-        'blue' : 'Blue',
-        'green' : 'Green',
-        'yellow' : 'Yellow'
+        'agnesStewart' : 'Agnes Stewart',
+        'briggs' : 'Briggs',
+        'centinnial' : 'Centinnial',
+        'douglasGardens' : 'Douglas Gardens',
+        'guyLee' : 'Guy Lee',
+        'hamlin' : 'Hamlin',
+        'maple' : 'Maple',
+        'mtVernon' : 'Mt Vernon',
+        'page' : 'Page',
+        'pleasantView' : 'Pleasant View',
+        'ridgeView' : 'Ridge View',
+        'riverBend' : 'River Bend',
+        'springfield' : 'Springfield',
+        'thurston' : 'Thurston',
+        'twoRiversDosRios' : 'Two River/Dos Rios',
+        'walterville' : 'Walterville',
+        'yolanda' : 'Yolanda'
+
+
     };
 
     var nEugeneSchools = {
-        'red' : 'Red',
-        'blue' : 'Blue',
-        'green' : 'Green',
-        'yellow' : 'Yellow'
+        'aubreyPark' : 'Aubrey Park',
+        'corridor' : 'Corridor',
+        'howard' : 'Howard',
+        'northEugeneElCaminoReal': 'North Eugene/El Camino Real',
+        'springCreek': 'Spring Creek',
+        'yujinGakuen': 'Yujin Gakuen'
+        
     };
 
     var sheldonSchools = {
-        'red' : 'Red',
-        'blue' : 'Blue',
-        'green' : 'Green',
-        'yellow' : 'Yellow'
+        'berthaHolt' : 'Bertha Holt',
+        'buenaVista' : 'Buena Vista',
+        'calYoung' : 'Cal Young',
+        'coburgCharter': 'Coburg Charter',
+        'eugeneChristian': 'Eugene Christian',
+        'gilham': 'Gilham',
+        'maristChristian': 'Marist Christian',
+        'sheldon': 'Sheldon',
+        'monroe': 'Monroe',
+        'stPaulCatholic': 'St Paul Catholic',
+        'willagillespie': 'Willagillespie',
+
     };
 
     var churchillSchools = {
-        'red': 'Red',
-        'blue': 'Blue',
-        'green': 'Green',
-        'yellow': 'Yellow'
+        'adams': 'Adams',
+        'ataJefferson': 'ATA/Jefferson',
+        'cesarChavez': 'Cesar Chavez',
+        'familySchool': 'Family School',
+        'kennedy': 'Kennedy',
+        'mcCornack': 'McCornack',
+        'twinOaks': 'Twin Oaks',
+        'willametteChristian': 'Willamette Christian'
+
     };
 
     var willametteSchools = {
-        'red': 'Red',
-        'blue': 'Blue',
-        'green': 'Green',
-        'yellow': 'Yellow'
+        'cascade': 'Cascade',
+        'clearLake': 'Clear Lake',
+        'danebo': 'Danebo',
+        'fairfield': 'Fairfield',
+        'irving': 'Irving',
+        'kalapula': 'Kalapula',
+        'malabon': 'Malabon',
+        'meadowView': 'Meadow View',
+        'prairieMtn': 'Prairie Mtn',
+        'shasta': 'Shasta',
+        'willamette': 'Willamette'
     };
    
 
 
-    
+  // fires when the page loads  
     $(document).ready(function () {
+        //fires when an area is selected from the select list with the id 'area'
         $("#area").click(function () {
-            if ($(this).val() == 'SouthEugene') {
-                $.each(sEugeneSchools, function (val, text) {
-                    console.log(val + " " + text);
-                   // $("#schools").append("<option>" + text + "</option>");
-                    $("#school").append($('<option>', { value: val, text: text }));
-                });
-            }
-           
+            //checks to see which value has been selected and calls the function
+            //to load schools based on selected area
+            if ($(this).val() == 'SouthEugene') 
+                listSchoolsByArea(sEugeneSchools);
+            
+            else if ($(this).val() == 'Springfield')
+                listSchoolsByArea(springfieldSchools);
+
+            else if ($(this).val() == 'NorthEugene') 
+                listSchoolsByArea(nEugeneSchools);
+
+            else if ($(this).val() == 'Sheldon') 
+                listSchoolsByArea(sheldonSchools);
+
+            else if ($(this).val() == 'Churchill') 
+                listSchoolsByArea(churchillSchools);
+
+            else if ($(this).val() == 'Willamette')         
+                listSchoolsByArea(willametteSchools);
+                
+            else
+                $("#school").children('option:not(:first)').remove();
         });
     });
+    function listSchoolsByArea(schoolArea)
+    {
+        //selects the list box with the id 'school' and removes all 
+        //options excluding the first.
+        $("#school").children('option:not(:first)').remove();
+        //loops through the parameter array and appends an option element
+        //to the school list foreach element in the given 
+        //associative array {value, text } pair
+        $.each(schoolArea, function (val, text) {
+        
+            $("#school").append($('<option>', { value: val, text: text }));
+        });
+   
+    }
 </script>
 
 	
