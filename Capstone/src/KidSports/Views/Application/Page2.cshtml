@@ -22,7 +22,7 @@
 		<div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
 			<label for="sport" class="control-label">Sport</label>
 			<select class="form-control">
-				<option value=""></option>
+                <option value="" selected="selected">Any</option>
 				<option value="Basketball">Basketball</option>
 				<option value="Baseball">Baseball</option>
 				<option value="Football">Football</option>
@@ -33,35 +33,34 @@
 		</div>
 
 		<div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-			<label for="HS Area" class="control-label">High School Area</label>
-			<select class="form-control">
-				<option value=""></option>
-				<option value="4J">4J</option>
-				<option value="Bethel">Bethel</option>
-				<option value="Eugene">Eugene</option>
+			<label for="HS Area" class="control-label">Area</label>
+			<select id="area"class="form-control">
+                <option value="Any" selected="selected">Any</option>
+				<option value="SouthEugene">South Eugene</option>
 				<option value="Springfield">Springfield</option>
+				<option value="NorthEugene">North Eugene</option>
+				<option value="Sheldon">Sheldon</option>
+                <option value="Churchill">Churchill</option>
+                <option value="Willamette">Willamette</option>
+                
+
 			</select>
 		</div>
 
 		<div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-			<label for="shool" class="control-label">School</label>
-			<select class="form-control">
-				<option value=""></option>
-				<option value="Churchill">Churchill</option>
-				<option value="North Eugene">North Eugene</option>
-				<option value="South Eugene">South Eugene</option>
-				<option value="Sheldon">Sheldon</option>
-				<option value="Springfield">Springfield</option>
-				<option value="Willamette">Willamette</option>
+			<label for="school"  class="control-label">School</label>
+			<select id="school"class="form-control">
+                <option value="" selected="selected">Any</option>
+				
 			</select>
 		</div>
 		<div></div>
         <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-                <label for="gender" class="control-label">Gender<br />  Preference</label>
+                <label for="gender" class="control-label">Gender Preference</label>
 
                 <select class="form-control">
-                    <option value=""></option>
+                    <option value="" selected="selected">Any</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
 
@@ -69,21 +68,19 @@
             </div>
 
             <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-                <label for="grade" class="control-label">Grade<br />  Hold Control and Click</label>
+                <label for="grade" class="control-label">Grade Preference</label>
 
                 <select multiple class="form-control">
-                    <option value=""></option>
-                    <option value="PK">Pre-K</option>
-                    <option value="KG">Kindergarden</option>
-                    <option value="1">1th Grade</option>
-                    <option value="2">2th Grade</option>
-
-                    <option value="3">3th Grade</option>
-                    <option value="4">4th Grade</option>
-                    <option value="5">5th Grade</option>
-                    <option value="6">6th Grade</option>
-                    <option value="7">7th Grade</option>
-                    <option value="8">8th Grade</option>
+                    <option value="" selected="selected">Any</option>
+                    <option value="0">Pre/Kindergarden</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
             
                 </select>
             </div>
@@ -99,27 +96,48 @@
         <div class="row" style="margin-top:40px">
             <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
                 <label for="yearsCoached" class="control-label">Previous Years Coached:</label>
-                <input type="yearsCoached" value='' class="form-control" id="yearsCoached" placeholder="">
+                <select multiple class="form-control">
+
+                    <option value="" selected="selected">None</option>
+                    <option value="2008">2008</option>
+                    <option value="2009">2009</option>
+                    <option value="2010">2010</option>
+                    <option value="2011">2011</option>
+                    <option value="2012">2012</option>
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                </select>
             </div>
 
             <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
                 <label for="gradesCoached" class="control-label">Previous Grades Coached</label>
-                <select class="form-control">
-                    <option value=""></option>
-                    <option value="5">5th Grade</option>
-                    <option value="6">6th Grade</option>
-                    <option value="7">7th Grade</option>
+                <select multiple class="form-control">
+                    
+                    <option value="" selected="selected">None</option>
+                    <option value="0">Pre/Kindergarden</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
                 </select>
             </div>
 
             <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
                 <label for="experience" class="control-label">Years Experience</label>
                 <select class="form-control">
-                    <option value=""></option>
-                    <option value="1">1 year</option>
-                    <option value="2">2 years</option>
-                    <option value="3">3 years</option>
-                    <option value="4">4 years</option>
+                    <option value="0" selected="selected">None</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">More than 5 </option>
                 </select>
             </div>
         </div>
@@ -144,5 +162,74 @@
 		</div>
 	</div>
 </div>
+<script>
+    var sEugeneSchools = {
+        'camasRidge' : 'Camas Ridge',
+        'charlamagne' : 'Charlamagne',
+        'edgewood': 'Edgewood',
+        'edison': 'Edison',
+        'farHorizonsMontessori': 'Far Horizon Montessori',
+        'oharaCatholic': 'Ohara Catholic',
+        'oakhill': 'Oak Hill',
+        'ridgelineMontessori': 'Ridgeline Montessori',
+        'rooselvelt': 'Rooselvelt',
+        'spencerButte': 'Spencer Butte', 
+        'southEugene': 'South Eugene',
+        'theVillageSchool': 'The Village School',
+
+        
+    };
+
+    var springfieldSchools = {
+        'red' : 'Red',
+        'blue' : 'Blue',
+        'green' : 'Green',
+        'yellow' : 'Yellow'
+    };
+
+    var nEugeneSchools = {
+        'red' : 'Red',
+        'blue' : 'Blue',
+        'green' : 'Green',
+        'yellow' : 'Yellow'
+    };
+
+    var sheldonSchools = {
+        'red' : 'Red',
+        'blue' : 'Blue',
+        'green' : 'Green',
+        'yellow' : 'Yellow'
+    };
+
+    var churchillSchools = {
+        'red': 'Red',
+        'blue': 'Blue',
+        'green': 'Green',
+        'yellow': 'Yellow'
+    };
+
+    var willametteSchools = {
+        'red': 'Red',
+        'blue': 'Blue',
+        'green': 'Green',
+        'yellow': 'Yellow'
+    };
+   
+
+
+    
+    $(document).ready(function () {
+        $("#area").click(function () {
+            if ($(this).val() == 'SouthEugene') {
+                $.each(sEugeneSchools, function (val, text) {
+                    console.log(val + " " + text);
+                   // $("#schools").append("<option>" + text + "</option>");
+                    $("#school").append($('<option>', { value: val, text: text }));
+                });
+            }
+           
+        });
+    });
+</script>
 
 	
