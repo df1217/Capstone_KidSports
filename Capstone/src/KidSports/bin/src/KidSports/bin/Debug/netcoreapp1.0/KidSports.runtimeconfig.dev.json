@@ -1,7 +1,11 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
+<<<<<<< HEAD
+      "C:\\Users\\Tiya\\.nuget\\packages"
+=======
       "C:\\Users\\anuch\\.nuget\\packages"
+>>>>>>> 502d853b7619b979838643dba8e90405f70d8af4
     ]
   }
 }
