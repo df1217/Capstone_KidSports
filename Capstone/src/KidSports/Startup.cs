@@ -32,12 +32,12 @@ namespace KidSports
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
                          Configuration["Data:KidSportsDB:ConnectionString"]));
 
-            services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(
-                Configuration["Data:KidSportsIdentity:ConnectionString"]));
+            //services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(
+            //    Configuration["Data:KidSportsIdentity:ConnectionString"]));
 
-            services.AddIdentity<IdUser, IdentityRole>(opts =>
+            services.AddIdentity<User, IdentityRole>(opts =>
             { opts.Cookies.ApplicationCookie.LoginPath = "/Account/Login"; })
-                 .AddEntityFrameworkStores<AppIdentityDbContext>();
+                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc();
             services.AddMemoryCache();
