@@ -5,65 +5,60 @@
 
 <div class="container-fluid">
 
-    @*<h1 class="text-center">Step 5:</h1>*@
     <h1 class="text-center">PCA Course</h1>
     <form asp-controller="Application" asp-action="Page5" method="post" enctype="multipart/form-data">
-        <div class="container-fluid">
-           
 
-            <a href="http://shopping.positivecoach.org/Double-Goal-Coach?search=Course">Click here to take the PCA Course.</a>
-            <div style="margin-top:15px">
-                <p>
-                    @* RENDER VOUCHER FROM CONTEXT *@
-                    <strong>Voucher Code: EmeraldKidSports16</strong>
-                    <div class="checkbox">
-                        <label><input type="checkbox" value=""><strong>I have completed the PCA Course.</strong></label>
-                    </div>
-                    
-                    <div class="row" style="margin: 20px 0px 20px 0px">
-                        <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-                        </div>
-                        <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-                                <label asp-for="Application.PcaSubmissionDate" class="control-label">Date:</label>
-                                <input type="date" class="form-control" placeholder="Date">
-                         </div>
-                        <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-                        </div>
-                    </div>
-                            <div class="form-group col-xs-offset-1 col-xs-10 col-md-10">
-                                <strong>Upload an image of your certificate of completion to verify:</strong>
-                            </div>
 
-                            <div class="container-fluid" style="margin-top:30px">
+        <a href="http://shopping.positivecoach.org/Double-Goal-Coach?search=Course">Click here to take the PCA Course.</a>
+        <div style="margin-top:15px">
+            <p>
+                <!--RENDER VOUCHER FROM CONTEXT-->
+                <strong>Voucher Code: EmeraldKidSports16</strong>
+        </div>
+        <div class="row" style="margin: 20px 0px 20px 0px">
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-6">
+                <div class="checkbox" style="text-align:justify">
 
-                                <div class="pull-left">
-                                    <input type="file" asp-for="File"
-                                           class="required borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
-                                    <img id="previewHolder" alt="" style="height:0px;"/>
-                                </div>
-                            </div>
 
-                            <div class="pull-left" style="margin-top:15px">
-                                <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-                                    <button type="submit" class="btn btn-primary btn-md-10">Save</button>
-                                </div>
-                            </div>
-
-                            <div class="pull-right">
-                                <div class="form-group col-xs-12 col-md-12">
-                                    <ul class="pagination">
-                                        <li><a asp-controller="Application" asp-action="Page1" style="color:black; font-weight:bold;">1</a></li>
-                                        <li><a asp-controller="Application" asp-action="Page2" style="color:black; font-weight:bold;">2</a></li>
-                                        <li><a asp-controller="Application" asp-action="Page3" style="color:black; font-weight:bold;">3</a></li>
-                                        <li><a asp-controller="Application" asp-action="Page4" style="color:black; font-weight:bold;">4</a></li>
-                                        <li><a asp-controller="Application" asp-action="Page5" style="background-color:#218c48; color:black; font-weight:bold;">5</a></li>
-                                        <li><a asp-controller="Application" asp-action="Page6" style="color:black; font-weight:bold;">6</a></li>
-                                        <li><a asp-controller="Application" asp-action="Page7" style="color:black; font-weight:bold;">7</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                    <label><input type="checkbox" value=""><strong>I have completed the PCA Course.</strong></label>
+                </div>
             </div>
+
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+                <label asp-for="Application.PcaSubmissionDate" class="control-label">Completion Date</label>
+                <input type="date" class="form-control" placeholder="Date">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-11" style="text-align:left">
+                <strong>Upload an image of your certificate of completion:</strong>
+            </div>
+        </div>
+        <div class="row" style="margin-top:30px">
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-2">
+                <input type="file" asp-for="File"
+                       class="required borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
+
+                <img id="previewHolder" alt="" style="height:20px;" />
+            </div>
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-2">
+                <input type="submit" name="uploadButton" class="upbtn" value="Upload" />
+            </div>
+        </div>
+
+
+        <div class="row">
+            <!-- Previous button -->
+            <div class="col-xs-offset-1 col-xs-4 col-md-offset-1 col-md-4">
+                <button onclick="location='/Application/Page4'" type="button" class="btn btn-success pull-left"> < Previous</button>
+            </div>
+
+            <!-- Next button -->
+            <div class="col-xs-offset-2 col-xs-4 col-md-offset-3 col-md-4">
+                <button onclick="location='/Application/Page6'" type="button" class="btn btn-success pull-right">Next > </button>
+            </div>
+        </div>
+
     </form>
 </div>
 

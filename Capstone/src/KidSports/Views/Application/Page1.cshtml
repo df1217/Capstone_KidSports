@@ -3,23 +3,27 @@
 }
 
 <div class="container-fluid">
-	@*<h1 class="text-center">Step 1:</h1>*@
-	<h1 class="text-center">Coach Information</h1><br />
 
-	<form>
+    <h1 class="text-center">Coach Information</h1><br />
+    <div class="form-group">
+        <span class="text-muted"><em><span style="color:red;">*</span> Indicates required field</em></span>
+    </div>
+
+    <form>
         <div class="row">
-		    <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-			    <label for="firstName" class="control-label">First Name</label>
-			    <input type="" value='' class="form-control" id="firstName" placeholder="">
-		    </div>
-		    <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-			    <label for="middleName" class="control-label">Middle Name</label>
-			    <input type="" value='' class="form-control" id="middleName" placeholder="">
-		    </div>
-		    <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-			    <label for="lastName" class="control-label">Last Name</label>
-			    <input type="" value='' class="form-control" id="lastName" placeholder="">
-		    </div>
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+                <label for="firstName" class="control-label">First Name<span style="color:red;">*</span></label>
+                <input type="" value='' class="form-control" id="firstName" placeholder="">
+            </div>
+
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+                <label for="middleName" class="control-label">Middle Name<span style="color:red;">*</span></label>
+                <input type="" value='' class="form-control" id="middleName" placeholder="">
+            </div>
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+                <label for="lastName" class="control-label">Last Name<span style="color:red;">*</span></label>
+                <input type="" value='' class="form-control" id="lastName" placeholder="">
+            </div>
         </div>
 
         <div class="row">
@@ -47,14 +51,13 @@
             </div>
 
             <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-                <label for="dateOfBirth" class="control-label">Date of Birth</label>
+                <label for="dateOfBirth" class="control-label">Date of Birth<span style="color:red;">*</span></label>
                 <input type="date" class="form-control" placeholder="Date">
-                @*<input type="" value='' class="form-control" id="dateOfBirth" placeholder="">*@
             </div>
 
             <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-                <label for="timeInOregon" class="control-label">Years Lived in Oregon</label>
-                <select name="timeInOregon"  class="form-control">
+                <label for="timeInOregon" class="control-label">Years Living in Oregon<span style="color:red;">*</span></label>
+                <select name="timeInOregon" class="form-control">
                     <option value="6" selected="selected">More than 5</option>
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -62,27 +65,27 @@
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
-                    
-                    
+
+
                 </select>
             </div>
         </div>
 
         <div class="row">
-		    <div class="form-group col-xs-offset-1 col-xs-10 col-md-7">
-			    <label for="address" class="control-label">Address</label>
-			    <input type="" value='' class="form-control" id="address" placeholder="">
-		    </div>
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-7">
+                <label for="address" class="control-label">Address</label>
+                <input type="" value='' class="form-control" id="address" placeholder="">
+            </div>
 
-		    <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
                 <label for="city" class="control-label">City</label>
                 <input type="" value='' class="form-control" id="city" placeholder="">
-		    </div>
+            </div>
         </div>
 
         <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-                <label for="state" class="control-label">state</label>
+                <label for="state" class="control-label">State<span style="color:red;">*</span></label>
                 <select name="state" id="state" class="form-control">
                     <option value="OR" selected="selected">Oregon</option>
                     <option value="AL">Alabama</option>
@@ -122,7 +125,7 @@
                     <option value="ND">North Dakota</option>
                     <option value="OH">Ohio</option>
                     <option value="OK">Oklahoma</option>
-                    
+
                     <option value="PA">Pennsylvania</option>
                     <option value="RI">Rhode Island</option>
                     <option value="SC">South Carolina</option>
@@ -138,17 +141,17 @@
                     <option value="WY">Wyoming</option>
                 </select>
             </div>
-            
+
             <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-                <label for="zip" class="control-label">Zip</label>
+                <label for="zip" class="control-label">Zip<span style="color:red;">*</span></label>
                 <input type="" value='' class="form-control" id="zip" placeholder="">
             </div>
 
             <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-                <label for="pState" class="control-label">Previous state lived in</label>
+                <label for="pState" class="control-label">Previous states lived in:<span style="color:red;">*</span></label>
                 <select multiple name="state" id="state" class="form-control">
                     <option value="" selected="selected">Select Multiple States</option>
-                    
+
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
                     <option value="AZ">Arizona</option>
@@ -201,23 +204,27 @@
                     <option value="WI">Wisconsin</option>
                     <option value="WY">Wyoming</option>
                 </select>
-            </div>        
+            </div>
         </div>
 
         <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-                <label for="cellPhone" class="control-label">Cell Phone</label>
-                <input type="" value='' class="form-control" id="cellPhone" placeholder="">
+                <label for="cellPhone" class="control-label">Cell Phone<span style="color:red;">*</span></label>
+                <input type="tel" value='' class="form-control" id="cellPhone" placeholder="5415551212">
             </div>
 
             <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
                 <label for="altPhone" class="control-label">Alternate Phone</label>
-                <input type="" value='' class="form-control" id="altPhone" placeholder="">
+                <input type="tel" value='' class="form-control" id="cellPhone" placeholder="5415551212">
+            </div>
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
+                <div class="checkbox">
+                    <label><input type="checkbox" value=""><strong>I have lived outside US.</strong></label>
+                </div>
             </div>
         </div>
-                
-   
-        
+
+
         <div class="row">
             <div class="form-group col-xs-offset-1 col-xs-10 col-md-7">
                 <label for="curEmployer" class="control-label">Current Employer</label>
@@ -227,40 +234,19 @@
                 <label for="jobTitle" class="control-label">Job Title</label>
                 <input type="" value='' class="form-control" id="state" placeholder="">
             </div>
+        </div>
+
+        <div class="row">
+            <!-- Previous button -->
+            <div class="col-xs-offset-1 col-xs-4 col-md-offset-1 col-md-4">
+                @*<button type="button" class="btn btn-success pull-left"> < Previous</button>*@
             </div>
 
-            <div class="row">
-                <!-- Previous button -->
-                <div class="col-xs-offset-1 col-xs-4 col-md-offset-1 col-md-4">
-                    <button type="button" class="btn btn-success pull-left"> < Previous</button>
-                </div>
-
-                <!-- Next button -->
-                <div class="col-xs-offset-2 col-xs-4 col-md-offset-3 col-md-4">
-                        <button type="button" class="btn btn-success pull-right">Next > </button>
-                </div>
+            <!-- Next button -->
+            <div class="col-xs-offset-2 col-xs-4 col-md-offset-3 col-md-4">
+                <button onclick="location='/Application/Page2'" type="button" class="btn btn-success pull-right">Next > </button>
             </div>
+        </div>
 
-        </form>
-    </div>          
-
-           
-
-
-<!--
-            <div class="pull-right">
-                <div class="form-group col-xs-12 col-sm-12">
-                    <ul class="pagination">
-                        <li><a asp-controller="Application" asp-action="Page1" style="background-color:#218c48; color:black; font-weight:bold;">1</a></li>
-                        <li><a asp-controller="Application" asp-action="Page2" style="color:black; font-weight:bold;">2</a></li>
-                        <li><a asp-controller="Application" asp-action="Page3" style="color:black; font-weight:bold;">3</a></li>
-                        <li><a asp-controller="Application" asp-action="Page4" style="color:black; font-weight:bold;">4</a></li>
-                        <li><a asp-controller="Application" asp-action="Page5" style="color:black; font-weight:bold;">5</a></li>
-                        <li><a asp-controller="Application" asp-action="Page6" style="color:black; font-weight:bold;">6</a></li>
-                        <li><a asp-controller="Application" asp-action="Page7" style="color:black; font-weight:bold;">7</a></li>
-                    </ul>
-                </div>
-            </div>
-    -->
-
-
+    </form>
+</div>  
