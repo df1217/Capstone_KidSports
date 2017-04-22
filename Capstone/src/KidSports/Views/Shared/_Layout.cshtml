@@ -17,64 +17,56 @@
 
 <body>
     <!-- Nav Bar -->
-    <div class="navbar navbar-fixed-top navbar-default" style="position: fixed; background-color:#218c48;">
-        <div class="navbar-inner">
-            <div class="container">
+            <div class="container col-xs-12" style="height:50px; background-color:#218c48;">
                 <a class="logo" style="position:absolute; display:block; left: 50%; margin-left: -100px; float: none;" href="http://www.kidsports.org/">
-                    <img src="/Images/logo.png" style="margin-top: 13px; width:200px;" />
+                    <img src="/Images/logo.png" style="margin-top: 15px; width:200px;" />
                 </a>
-            </div>
-        </div>
-        @if (User.Identity.Name != null)
-        {
-            <button type="button" onclick="location='/Account/Logout'" class="btn pull-right" style="background-color:white; font-weight:bold; font-size:12px; color:#218c48; margin-top:8px; margin-right:10px;">Logout</button>
-        }
-    </div>
 
+                @if (User.Identity.Name != null)
+                {
+                    <button type="button" onclick="location='/Account/Logout'" class="btn pull-right" style="background-color:white; font-weight:bold; font-size:12px; color:#218c48; margin-top:10px; margin-right:10px;">Logout</button>
+                }
+            </div>
+      
     <!-- Body -->
     <div class="col-md-offset-2 col-md-8 col-sm-12 col-xs-12 text-center" style="margin-top: 100px; margin-bottom: 250px;">
          @RenderBody()
     </div>
 
     <!-- Footer -->
-    <footer>
-        <div style="background-color:#081416; bottom:0px; left:0px; right:0px; margin-bottom:0px; position:fixed;">
-            <nav id="secondaryNavigation" data-content-field="navigation" style="text-align:center; padding-top:25px;">
-                <div class="col-md-offset-4 col-md-1 col-xs-12" style="display:inline;">
-                    <a href="https://www.instagram.com/kidsports4life/" target="_blank">
-                        <span style="color:white; font-family: 'Assistant', sans-serif;">Instagram</span>
-                    </a>
-                </div>
+    <footer class="col-xs-12" style="background: #081416; display: block; padding-top:15px; margin-bottom:0px;">
+        <div class="text-center">
+            <div class="col-md-offset-4 col-md-1 col-xs-offset-1 col-xs-10" style="display:inline;">
+                <a href="https://www.instagram.com/kidsports4life/" target="_blank">
+                    <span style="color:white; font-family: 'Assistant', sans-serif;">Instagram</span>
+                </a>
+            </div>
 
-                <div class="col-md-1 col-xs-12" style="display:inline;">
-                    <a href="https://www.facebook.com/www.emeraldkidsports/" target="_blank">
-                        <span style="color:white; font-family: 'Assistant', sans-serif;">Facebook</span>
-                    </a>
-                </div>
+            <div class="col-md-offset-0 col-md-1 col-xs-offset-1 col-xs-10" style="display:inline;">
+                <a href="https://www.facebook.com/www.emeraldkidsports/" target="_blank">
+                    <span style="color:white; font-family: 'Assistant', sans-serif;">Facebook</span>
+                </a>
+            </div>
 
-                <div class="col-md-1 col-xs-12" style="display:inline;">
-                    <a href="https://twitter.com/kidsports4life" target="_blank">
-                        <span style="color:white; font-family: 'Assistant', sans-serif;">Twitter</span>
-                    </a>
-                </div>
+            <div class="col-md-offset-0 col-md-1 col-xs-offset-1 col-xs-10" style="display:inline;">
+                <a href="https://twitter.com/kidsports4life" target="_blank">
+                    <span style="color:white; font-family: 'Assistant', sans-serif;">Twitter</span>
+                </a>
+            </div>
 
-                <div class="col-md-1 col-xs-12" style="display:inline;">
-                    <a href="http://www.kidsports.org/blog-1" target="_blank">
-                        <span style="color:white; font-family: 'Assistant', sans-serif;">Bev's Blog</span>
-                    </a>
-                </div>
-            </nav>
-
-            <div class="container-fluid" style="text-align:center; margin-bottom:25px;">
-                <div class="col-md-12 col-xs-12" data-layout-label="Footer Content" id="footerBlocks">
-                    <h3 class="text-align-center" style="color:white; font-weight:bold; font-size: 16px; font-family: 'Assistant', sans-serif;">
-                        2190 POLK STREET, EUGENE, OR 97405 | PHONE 541 683 2374 | FAX 541 302 9430 | EMAIL
-                        <a target="_blank" href="mailto:info@kidsports.org" style="color:white; font-family: 'Assistant', sans-serif;">INFO@KIDSPORTS.ORG</a>
-                    </h3>
-                </div>
+            <div class="col-md-offset-0 col-md-1 col-xs-offset-1 col-xs-10" style="display:inline;">
+                <a href="http://www.kidsports.org/blog-1" target="_blank">
+                    <span style="color:white; font-family: 'Assistant', sans-serif;">Bev's Blog</span>
+                </a>
             </div>
         </div>
-    </footer>
 
+            <div class="col-md-12 col-xs-12" style="text-align:center; margin-bottom:25px;">
+                <h3 class="text-align-center" style="color:white; font-weight:bold; font-size: 16px; font-family: 'Assistant', sans-serif;">
+                    2190 POLK STREET, EUGENE, OR 97405 | PHONE 541 683 2374 | FAX 541 302 9430 | EMAIL
+                    <a target="_blank" href="mailto:info@kidsports.org" style="color:white; font-family: 'Assistant', sans-serif;">INFO@KIDSPORTS.ORG</a>
+                </h3>
+            </div>
+    </footer>
 </body>
 </html>
