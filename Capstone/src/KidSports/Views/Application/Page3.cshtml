@@ -46,17 +46,30 @@
         </div>
     </div>
 
-    <div class="row" style="margin-top:15px">
-        <!-- Previous button -->
-        <div class="col-xs-offset-1 col-xs-4 col-md-offset-0 col-md-4">
+    @if (User.IsInRole("SportsManager") || User.IsInRole("Admin"))
+    {
+        <div class="col-xs-offset-1 col-xs-4 col-md-offset-0 col-md-5">
             <button onclick="location='/Application/Page2'" type="button" class="btn btn-success pull-left"> < Previous</button>
         </div>
 
-        <!-- Next button -->
-        <div class="col-xs-offset-2 col-xs-4 col-md-offset-4 col-md-4">
+        Html.RenderPartial("ApproveDeny.cshtml");
+
+        <div class="col-xs-offset-2 col-xs-4 col-md-offset-0 col-md-5">
             <button onclick="location='/Application/Page4'" type="button" class="btn btn-success pull-right">Next > </button>
+        </div>      
+    }
+    else
+    {
+        <div class="row" style="margin-top:15px">
+            <div class="col-xs-offset-1 col-xs-4 col-md-offset-0 col-md-4">
+                <button onclick="location='/Application/Page2'" type="button" class="btn btn-success pull-left"> < Previous</button>
+            </div>
+
+            <div class="col-xs-offset-2 col-xs-4 col-md-offset-4 col-md-4">
+                <button onclick="location='/Application/Page4'" type="button" class="btn btn-success pull-right">Next > </button>
+            </div>
         </div>
-    </div>
+    }
 
 
 </div>

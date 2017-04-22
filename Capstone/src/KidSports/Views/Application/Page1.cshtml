@@ -1,4 +1,7 @@
-﻿@{
+﻿@inject IAuthorizationService AuthorizationService
+@using Microsoft.AspNetCore.Authorization;
+
+@{
     ViewBag.Title = "Page 1";
 }
 
@@ -68,8 +71,6 @@
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
-
-
                         </select>
                     </div>
                 </div>
@@ -233,24 +234,35 @@
                         <label for="curEmployer" class="control-label">Current Employer</label>
                         <input type="" value='' class="form-control" id="curEmployer" placeholder="">
                     </div>
-                    <div class="form-group col-xs-offset-1 col-md-offset-0 col-md-4">
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                         <label for="jobTitle" class="control-label">Job Title</label>
                         <input type="" value='' class="form-control" id="state" placeholder="">
                     </div>
                 </div>
             </div>
-    <div class="row">
-        <!-- Previous button -->
-        <div class="col-xs-offset-1 col-xs-4 col-md-offset-1 col-md-4">
-            @*<button type="button" class="btn btn-success pull-left"> < Previous</button>*@
-        </div>
+   
+     
+           @if (User.IsInRole("SportsManager") || User.IsInRole("Admin"))
+           {
+                <div class="col-xs-offset-1 col-xs-4 col-md-offset-0 col-md-5"></div>
 
-        <!-- Next button -->
-        <div class="col-xs-offset-2 col-xs-4 col-md-offset-3 col-md-4">
-            <button onclick="location='/Application/Page2'" type="button" class="btn btn-success pull-right">Next > </button>
-        </div>
-    </div>
+                Html.RenderPartial("ApproveDeny.cshtml");
+
+                <div class="col-xs-offset-2 col-xs-4 col-md-offset-0 col-md-5">
+                    <button onclick="location='/Application/Page2'" type="button" class="btn btn-success pull-right">Next > </button>
+                </div>
+           }
+           else
+           {
+            <div class="row" style="margin-top:15px">
+                <div class="col-xs-offset-1 col-xs-4 col-md-offset-0 col-md-4">
+                </div>
+
+                <div class="col-xs-offset-2 col-xs-4 col-md-offset-4 col-md-4">
+                    <button onclick="location='/Application/Page2'" type="button" class="btn btn-success pull-right">Next > </button>
+                </div>
+            </div>
+           }
 
     </form>
-
 </div>  
