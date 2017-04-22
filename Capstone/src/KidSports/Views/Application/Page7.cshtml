@@ -7,53 +7,51 @@
 
     <h1 class="text-center">Coach ID Badge</h1>
     <form asp-controller="Application" asp-action="Page7" method="post" enctype="multipart/form-data">
-        <div class="row">
-            <div class="form-group col-xs-offset-1 col-xs-10 col-md-10">
-                Once you have completed the necessary requirements and have been approved by a KidSports Sports Manager-
-                you are required to obtain your KS Coach ID Badge.
-                <Strong>This card is required to be worn and visible for all games.</Strong>
+        <div class="well">
+            <div class="row">
+                <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-12">
+                    Once you have completed the necessary requirements and have been approved by a KidSports Sports Manager-
+                    you are required to obtain your KS Coach ID Badge.
+                    <Strong>This card is required to be worn and visible for all games.</Strong>
+                </div>
             </div>
-        </div>
-        <div class="row" style="margin-top:20px">
-            <div class="form-group col-xs-offset-1 col-xs-10 col-md-4">
-                <div style="text-align:left;">
-                    <strong>Image Requirements:</strong>
+            <div class="row" style="margin-top:20px">
+                <div class="form-group col-xs-offset-1 col-xs-10 col-md-4">
+                    <div style="text-align:left;">
+                        <strong>Image Requirements:</strong>
 
-                    <ul>
-                        <li style="text-align:left;">Mininum 8 mega pixel resolution</li>
-                        <li style="text-align:left;">No Hats or Sunglasses</li>
-                        <li style="text-align:left;">An individual photo</li>
+                        <ul>
+                            <li style="text-align:left;">Mininum 8 mega pixel resolution</li>
+                            <li style="text-align:left;">No Hats or Sunglasses</li>
+                            <li style="text-align:left;">An individual photo</li>
 
-                    </ul>
+                        </ul>
+                    </div>
+                </div>
+
+                
+            </div>
+
+            <div class="row" style="margin-top:30px">
+                <div class="row">
+                    <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
+                        <label for="" class="control-label">Upload Photo</label>
+                        <input type="file" asp-for="File"
+                               class="required borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
+                    </div>
                 </div>
             </div>
 
-            <div class="form-group col-xs-offset-1 col-xs-10 col-md-8">
-            </div>
         </div>
-
-        <div class="row" style="margin-top:30px">
-            <div class="form-group col-xs-offset-1 col-xs-10 col-md-2">
-                <input type="file" asp-for="File"
-                       class="required borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
-
-                <img id="previewHolder" alt="" style="height:20px;" />
-            </div>
-            <div class="form-group col-xs-offset-1 col-xs-10 col-md-2">
-                <input type="submit" name="uploadButton" class="upbtn" value="Upload" />
-            </div>
-        </div>
-
-
-        <div class="row">
+        <div class="row" style="margin-top:15px">
             <!-- Previous button -->
-            <div class="col-xs-offset-1 col-xs-4 col-md-offset-1 col-md-4">
+            <div class="col-xs-offset-1 col-xs-4 col-md-offset-0 col-md-4">
                 <button onclick="location='/Application/Page6'" type="button" class="btn btn-success pull-left"> < Previous</button>
             </div>
 
             <!-- Next button -->
-            <div class="col-xs-offset-2 col-xs-4 col-md-offset-3 col-md-4">
-                <button onclick="location='/Application/Appinprocess'" type="button" class="btn btn-success pull-right">Done</button>
+            <div class="col-xs-offset-2 col-xs-4 col-md-offset-4 col-md-4">
+                <button onclick="location='/Application/Appinprocess'" type="button" class="btn btn-success pull-right">Next > </button>
             </div>
         </div>
 

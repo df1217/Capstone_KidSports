@@ -8,53 +8,38 @@
     <h1 class="text-center">NFHS Concussion Course</h1><br />
 
     <form asp-controller="Application" asp-action="Page4" method="post" enctype="multipart/form-data">
+        <div class="well">
 
+            <a href="https://nfhslearn.com/courses/61064/concussion-in-sports">Take the NFHS Concussion Course</a>
+           
+                <div class="row" style="margin: 20px 0px 20px 0px">
+                    
 
-        <a href="https://nfhslearn.com/courses/61064/concussion-in-sports">Take the NFHS Concussion Course</a>
-        <div style="margin-top:15px">
-            <div class="row" style="margin: 20px 0px 20px 0px">
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-6">
-                    <div class="checkbox" style="text-align:justify">
-                        <label></label>  <label><input type="checkbox" value=""><strong>I have completed the NFHS Concussion Course.</strong></label>
+                    <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
+                        <label asp-for="Application.PcaSubmissionDate" class="control-label">Date of Completion:</label>
+                        <input type="date" class="form-control" placeholder="Date">
                     </div>
+
                 </div>
+            
 
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-                    <label asp-for="Application.PcaSubmissionDate" class="control-label">Completion Date:</label>
-                    <input type="date" class="form-control" placeholder="Date">
-                </div>
-
+                <div class="row">
+                    <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
+                        <label for="" class="control-label">Upload Certificate</label>
+                        <input type="file" asp-for="File"
+                               class="required borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
+                    </div>
+               </div>
             </div>
-        </div>
-
-
-        <div class="row">
-            <div class="form-group col-xs-offset-1 col-xs-10 col-md-5" style="text-align:left">
-                <p><strong>Upload an image of your certificate of completion:</strong></p>
-            </div>
-        </div>
-        <div class="row" style="margin-top:30px">
-            <div class="form-group col-xs-offset-1 col-xs-10 col-md-2">
-                <input type="file" asp-for="File"
-                       class="required borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
-
-                <img id="previewHolder" alt="" style="height:20px;" />
-            </div>
-            <div class="form-group col-xs-offset-1 col-xs-10 col-md-2">
-                <input type="submit" name="uploadButton" class="upbtn" value="Upload" />
-            </div>
-        </div>
-
-
-
-        <div class="row">
+           
+        <div class="row" style="margin-top:15px">
             <!-- Previous button -->
-            <div class="col-xs-offset-1 col-xs-4 col-md-offset-1 col-md-4">
+            <div class="col-xs-offset-1 col-xs-4 col-md-offset-0 col-md-4">
                 <button onclick="location='/Application/Page3'" type="button" class="btn btn-success pull-left"> < Previous</button>
             </div>
 
             <!-- Next button -->
-            <div class="col-xs-offset-2 col-xs-4 col-md-offset-3 col-md-4">
+            <div class="col-xs-offset-2 col-xs-4 col-md-offset-4 col-md-4">
                 <button onclick="location='/Application/Page5'" type="button" class="btn btn-success pull-right">Next > </button>
             </div>
         </div>
