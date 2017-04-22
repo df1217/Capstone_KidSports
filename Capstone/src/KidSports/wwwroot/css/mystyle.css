@@ -1,21 +1,25 @@
-/*.panel-footer{
-  background-color:#000000;
-  text-align: center;
-  font-size: 1em;
-  color: white;
-  margin-right: 20px;
- }
- 
-#footerImg{
-	padding-right: 20px;
-	padding-bottom: 20px;
- }
- 
- footer a{
-	 
-	 padding:20px;
-	 
- }*/
+   .btn {
+	 margin: 20px auto;
+     font:bold 20px Arial;
+     width:200;
+     height:100;
+     background-color:green;
+     vertical-align: middle;
+     }
+table {
+	align: center;
+    border-collapse: collapse;
+    border: 1px solid black;
+    width: 40%;
+	empty-cells: show; 
+}
+td{
+    width: 50%;
+    height: 2em;
+    border: 1px solid #ccc;
+}
+
+
  
 .radio{
 	margin-right: 10px;

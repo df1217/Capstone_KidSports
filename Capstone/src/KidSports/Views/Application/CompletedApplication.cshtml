@@ -1,28 +1,32 @@
-﻿@{ 
-    ViewBag.Title = "Home";
-}
+﻿<!-- Need to add id for username for now I have hard-coded "John" -->
+<h1 class="text-center">Hello, John. </h1>
+<h3 class="text-center">
+    Your application is complete and has been approved!<br />
+<img src="GreenCheckmark.jpg" alt="Green Checkmark" style="width:304px;height:228px;">
+</h3>
 
-<!-- Need to add id for username for now I have hard-coded "John" -->
-<h1 class="text-center">Hello, John. </h1> 
-<h3 class="text-center">Your application is complete and has been approved!</h3>
+<body>
+    <div class="container-fluid" style="max-width:1000px">
+        <center>
+            <table>
+                <tr>
+                    <td class="col-xs-3">Completed:</td>
+                    <td class="col-xs-3"></td>
+                </tr>
+                <tr>
+                    <td class="col-xs-3">Approved:</td>
+                    <td class="col-xs-3"></td>
+                </tr>
+                <tr>
+                    <td class="col-xs-3">Expired:</td>
+                    <td class="col-xs-3"></td>
+                </tr>
 
-<div style="margin-top:10px; margin-bottom:10px;">
-	<img src="~/Images/GreenCheckmark.jpg" alt="Green Checkmark" style="width:100px;">
-</div>
+            </table>
 
-<div class="table-responsive col-xs-12">
-    <table>
-	    <tr class="col-xs-12">
-		    <td colspan="6"><strong>Completed:</strong></td>
-		    <td colspan="6"></td>
-	    </tr>
-	    <tr class="col-xs-12">
-		    <td colspan="6"><strong>Approved:</strong></td>
-		    <td colspan="6"></td>
-	    </tr>
-	    <tr class="col-xs-12">
-		    <td colspan="6"><strong>Expires:</strong></td>
-		    <td colspan="6"></td>
-	    </tr>
-    </table>
-</div>
+        </center>
+
+
+    </div>
+
+</body>
