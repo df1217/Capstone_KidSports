@@ -148,26 +148,26 @@
 
         @if (User.IsInRole("SportsManager") || User.IsInRole("Admin"))
         {
-            <div class="col-xs-offset-1 col-xs-4 col-md-offset-0 col-md-5">
-                <button onclick="location='/Application/Page1'" type="button" class="btn btn-success pull-left"> < Previous</button>
+            <div class="btn-group col-xs-12 col-sm-3">
+                <button onclick="location='/Application/Page1'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
             </div>
 
             Html.RenderPartial("ApproveDeny.cshtml");
 
-            <div class="col-xs-offset-2 col-xs-4 col-md-offset-0 col-md-5">
-                <button onclick="location='/Application/Page3'" type="button" class="btn btn-success pull-right">Next > </button>
+            <div class="btn-group col-xs-12 col-sm-3">
+                <button onclick="location='/Application/Page3'" type="button" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i>  </button>
             </div>
         }
         else
         {
-            <div class="row" style="margin-top:15px">
-                <div class="col-xs-offset-1 col-xs-4 col-md-offset-0 col-md-4">
-                    <button onclick="location='/Application/Page1'" type="button" class="btn btn-success pull-left"> < Previous</button>
-                </div>
+            <div class="btn-group col-xs-12 col-sm-3">
+                <button onclick="location='/Application/Page1'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
+            </div>
 
-                <div class="col-xs-offset-2 col-xs-4 col-md-offset-4 col-md-4">
-                    <button onclick="location='/Application/Page3'" type="button" class="btn btn-success pull-right">Next > </button>
-                </div>
+            <div class="col-sm-6"></div>
+
+            <div class="btn-group col-xs-12 col-sm-3">
+                <button onclick="location='/Application/Page3'" type="button" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i>  </button>
             </div>
         }
 
@@ -270,7 +270,7 @@
   // fires when the page loads
     $(document).ready(function () {
         //fires when an area is selected from the select list with the id 'area'
-        $("#area").click(function () {
+        $("#area").change(function () {
             //checks to see which value has been selected and calls the function
             //to load schools based on selected area
             if ($(this).val() == 'SouthEugene')
