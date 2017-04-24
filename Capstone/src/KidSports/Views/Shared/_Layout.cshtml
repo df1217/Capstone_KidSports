@@ -16,65 +16,62 @@
 </head>
 
 <body>
-    <!-- Page Container -->
-    <div id="page-container">
-        <!-- Header Nav -->
-        <div id="header" class="container col-xs-12">
-            <a id="ksLinkLogo" class="logo" href="http://www.kidsports.org/">
-                <img id="ksLogo" src="/Images/logo.png"/>
-            </a>
+    <!-- Header Nav -->
+    <div id="header" class="container col-xs-12">
+        <a id="ksLinkLogo" class="logo" href="http://www.kidsports.org/">
+            <img id="ksLogo" src="/Images/logo.png" />
+        </a>
 
-            @if (User.Identity.Name != null)
-            {
-                <button id="logoutBtn" type="button" onclick="location='/Account/Logout'" class="btn pull-right">Logout</button>
-            }
-        </div>
+        @if (User.Identity.Name != null)
+        {
+            <button id="logoutBtn" type="button" onclick="location='/Account/Logout'" class="btn pull-right">Logout</button>
+        }
+    </div>
 
         <!-- Main Body -->
+    <div class="container">
         <div id="main-content" class="col-md-offset-2 col-md-8 col-sm-12 col-xs-12 text-center">
             @RenderBody()
         </div>
-
-        <!-- Footer -->
-        <div id="footer">
-            <div class="container">
-                <div class="row text-center">
-                    <div class="col-md-offset-0 col-md-3 col-xs-offset-1 col-xs-10">
-                        <a href="https://www.instagram.com/kidsports4life/" target="_blank">
-                            <span id="socialMediaLinks">Instagram</span>
-                        </a>
-                    </div>
-
-                    <div class="col-md-offset-0 col-md-3 col-xs-offset-1 col-xs-10">
-                        <a href="https://www.facebook.com/www.emeraldkidsports/" target="_blank">
-                            <span id="socialMediaLinks">Facebook</span>
-                        </a>
-                    </div>
-
-                    <div class="col-md-offset-0 col-md-3 col-xs-offset-1 col-xs-10">
-                        <a href="https://twitter.com/kidsports4life" target="_blank">
-                            <span id="socialMediaLinks">Twitter</span>
-                        </a>
-                    </div>
-
-                    <div class="col-md-offset-0 col-md-3 col-xs-offset-1 col-xs-10">
-                        <a href="http://www.kidsports.org/blog-1" target="_blank">
-                            <span id="socialMediaLinks">Bev's Blog</span>
-                        </a>
-                    </div>
+    </div> 
+  
+    <footer class="footer">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-offset-4 col-md-1 col-sm-3 col-xs-6">
+                    <a href="https://www.instagram.com/kidsports4life/" target="_blank">
+                        <span id="socialMediaLinks">Instagram</span>
+                    </a>
                 </div>
 
-                <div class="row">
-                    <div id="blockInfo" class="col-md-12 col-xs-12">
-                        <h3 id="footerHeader" class="text-center">
-                            2190 POLK STREET, EUGENE, OR 97405 | PHONE 541 683 2374 | FAX 541 302 9430 | EMAIL
-                            <a id="footerEmail" target="_blank" href="mailto:info@kidsports.org">INFO@KIDSPORTS.ORG</a>
-                        </h3>
-                    </div>
+                <div class="col-md-offset-0 col-md-1 col-sm-3  col-xs-6">
+                    <a href="https://www.facebook.com/www.emeraldkidsports/" target="_blank">
+                        <span id="socialMediaLinks">Facebook</span>
+                    </a>
+                </div>
+
+                <div class="col-md-offset-0 col-md-1 col-sm-3  col-xs-6">
+                    <a href="https://twitter.com/kidsports4life" target="_blank">
+                        <span id="socialMediaLinks">Twitter</span>
+                    </a>
+                </div>
+
+                <div class="col-md-offset-0 col-md-1 col-sm-3  col-xs-6">
+                    <a href="http://www.kidsports.org/blog-1" target="_blank">
+                        <span id="socialMediaLinks">Bev's Blog</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="blockInfo" class="col-md-12 col-xs-12">
+                    <h3 id="footerHeader" class="text-center">
+                        2190 POLK STREET, EUGENE, OR 97405 | PHONE 541 683 2374 | FAX 541 302 9430 | EMAIL
+                        <a id="footerEmail" target="_blank" href="mailto:info@kidsports.org">INFO@KIDSPORTS.ORG</a>
+                    </h3>
                 </div>
             </div>
         </div>
-    
-    </div>
+    </footer>
 </body>
 </html>
