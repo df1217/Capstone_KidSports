@@ -76,6 +76,17 @@ namespace KidSports.Repositories
 
                 IdentityResult result2;
                 user = userRepo.CreateUser(firstName2, middleName2, lastName2, email2, password2, UserRole.SportsManager, out result2);
+
+
+                string firstName3 = "Bob";
+                string middleName3 = "Test";
+                string lastName3 = "Doe";
+                string email3 = "Bobdoe@gmail.com";
+                string userName3 = email;
+                string password3 = "Test123.";
+
+                IdentityResult result3;
+                user = userRepo.CreateUser(firstName3, middleName3, lastName3, email3, password3, UserRole.Admin, out result3);
             }
         }
     }

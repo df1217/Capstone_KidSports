@@ -37,7 +37,7 @@ body {
 #header {
     height:50px; 
     background-color:#218c48;
-    position:fixed;
+    position:absolute;
     z-index: 10;
 }
 

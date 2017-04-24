@@ -84,9 +84,15 @@ namespace KidSports.Controllers
                     Microsoft.AspNetCore.Identity.SignInResult result =
                             await signInManager.PasswordSignInAsync(
                                 identityUser, vm.Password, false, false);
+
                     if (result.Succeeded)
-                    {   
-                        if (User.IsInRole("Admin") || User.IsInRole("SportsManager"))
+                    {
+                        var isAdmin = await userManager.IsInRoleAsync(identityUser, "Admin");
+                        var isSportsManager = await userManager.IsInRoleAsync(identityUser, "SportsManager");
+
+                        if (isAdmin)
+                            return RedirectToAction("BackgroundcheckResults", "Application");
+                        else if (isSportsManager)
                             return RedirectToAction("Applications", "Application");
                         else
                             return RedirectToAction("NoApplication", "Application");
