@@ -79,4 +79,9 @@ body {
     font-family: 'Assistant', sans-serif;
 }
 
+[class*="col-xs"] > .btn {
+    margin-bottom: 10px;
+}
+
+
 
