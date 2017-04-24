@@ -6,7 +6,7 @@
 
 <div class="pull-right" style="margin-bottom:10px;">
     <input type="text" style="height:32px;" />
-    <button class="btn btn-info">Search</button>
+    <button class="btn btn-primary">Search</button>
     @*<select>
             <option selected disabled>Filter By:</option>
             <option value="1">First Name</option>
@@ -47,7 +47,7 @@
 
     <tr>
         <th><input type="checkbox" /></th>
-        <td><a href=""><input class="btn btn-success" type=submit value="View Details"></a></td>
+        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-danger">View Details</button></td>
         <td>Jane Doe</td>
         <td>3/14/17</td>
         <td>3/14/17</td>
@@ -55,7 +55,7 @@
 
     <tr>
         <th><input type="checkbox" /></th>
-        <td><a href=""><input class="btn btn-danger" type=submit value="View Details"></a></td>
+        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-success">View Details</button></td>
         <td>Bob Doe</td>
         <td>2/18/17</td>
         <td>2/19/17</td>
@@ -63,7 +63,7 @@
 
     <tr>
         <th><input type="checkbox" /></th>
-        <td><a href=""><input class="btn btn-warning" type=submit value="View Details"></a></td>
+        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-success">View Details</button></td>
         <td>John Doe</td>
         <td>4/08/17</td>
         <td>4/12/17</td>
@@ -71,7 +71,7 @@
 
     <tr>
         <th><input type="checkbox" checked="checked" /></th>
-        <td><a href=""><input class="btn btn-success" type=submit value="View Details"></a></td>
+        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-danger">View Details</button></td>
         <td>Blue Ivy</td>
         <td>8/10/16</td>
         <td>8/10/16</td>
@@ -79,7 +79,7 @@
 
     <tr>
         <th><input type="checkbox" checked="checked" /></th>
-        <td><a href=""><input class="btn btn-success" type=submit value="View Details"></a></td>
+        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-success">View Details</button></td>
         <td>Danny Smith</td>
         <td>2/28/17</td>
         <td>3/1/17</td>
@@ -87,7 +87,7 @@
 
     <tr>
         <th><input type="checkbox" /></th>
-        <td><a href=""><input class="btn btn-warning" type=submit value="View Details"></a></td>
+        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-warning">View Details</button></td>
         <td>William Jones</td>
         <td>5/18/17</td>
         <td>5/18/17</td>
@@ -95,5 +95,5 @@
 </table>
 
 <div class="pull-right" style="margin-top:50px">
-    <button type="button" class="btn btn-primary btn-md-10">Go back</button>
+    <button type="button" onclick="location='/Application/Page1'" class="btn btn-primary btn-md-10">Enter Applicant Manually</button>
 </div>	

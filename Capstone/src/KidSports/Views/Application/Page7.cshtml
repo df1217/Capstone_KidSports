@@ -3,7 +3,7 @@
     ViewBag.Title = "Page 7";
 }
 
-<div class="container-fluid">
+
 
     <h1 class="text-center">Coach ID Badge</h1>
     <form asp-controller="Application" asp-action="Page7" method="post" enctype="multipart/form-data">
@@ -43,18 +43,29 @@
             </div>
 
         </div>
-        <div class="row" style="margin-top:15px">
-            <!-- Previous button -->
-            <div class="col-xs-offset-1 col-xs-4 col-md-offset-0 col-md-4">
-                <button onclick="location='/Application/Page6'" type="button" class="btn btn-success pull-left"> < Previous</button>
-            </div>
 
-            <!-- Next button -->
-            <div class="col-xs-offset-2 col-xs-4 col-md-offset-4 col-md-4">
-                <button onclick="location='/Application/Appinprocess'" type="button" class="btn btn-success pull-right">Next > </button>
-            </div>
+       @if (User.IsInRole("SportsManager") || User.IsInRole("Admin"))
+       {
+        <div class="btn-group col-xs-12 col-sm-3">
+            <button onclick="location='/Application/Page6'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
         </div>
 
+           Html.RenderPartial("ApproveDeny.cshtml");
 
+        <div class="btn-group col-xs-12 col-sm-3">
+            <button onclick="location='/Application/applications'" type="button" class="btn btn-primary col-xs-12 pull-right"><i class="fa fa-flag-checkered" aria-hidden='true'></i> Finish</button>
+        </div>
+       }
+       else
+       {
+            <div class="btn-group col-xs-12 col-sm-3">
+                <button onclick="location='/Application/Page6'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
+            </div>
+
+            <div class="col-sm-6"></div>
+
+            <div class="btn-group col-xs-12 col-sm-3">
+                <button onclick="location='/Application/Appinprocess'" type="button" class="btn btn-primary col-xs-12 pull-right"><i class="fa fa-flag-checkered" aria-hidden='true'></i> Finish</button>
+            </div>
+       }
     </form>
-</div>

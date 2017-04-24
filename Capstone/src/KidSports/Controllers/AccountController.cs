@@ -85,8 +85,11 @@ namespace KidSports.Controllers
                             await signInManager.PasswordSignInAsync(
                                 identityUser, vm.Password, false, false);
                     if (result.Succeeded)
-                    {
-                        return RedirectToAction("NoApplication", "Application");
+                    {   
+                        if (User.IsInRole("Admin") || User.IsInRole("SportsManager"))
+                            return RedirectToAction("Applications", "Application");
+                        else
+                            return RedirectToAction("NoApplication", "Application");
                     }
                 }
                 ModelState.AddModelError(nameof(LoginViewModel.Email),
