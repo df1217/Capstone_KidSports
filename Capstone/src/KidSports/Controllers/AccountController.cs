@@ -84,15 +84,18 @@ namespace KidSports.Controllers
                     Microsoft.AspNetCore.Identity.SignInResult result =
                             await signInManager.PasswordSignInAsync(
                                 identityUser, vm.Password, false, false);
+
                     if (result.Succeeded)
                     {
-                        if (User.Identity.IsAuthenticated)
-                        {
-                            if (User.IsInRole("Admin") || User.IsInRole("SportsManager"))
-                                return RedirectToAction("Applications", "Application");
-                            else
-                                return RedirectToAction("NoApplication", "Application");
-                        }
+                        var isAdmin = await userManager.IsInRoleAsync(identityUser, "Admin");
+                        var isSportsManager = await userManager.IsInRoleAsync(identityUser, "SportsManager");
+
+                        if (isAdmin)
+                            return RedirectToAction("BackgroundcheckResults", "Application");
+                        else if (isSportsManager)
+                            return RedirectToAction("Applications", "Application");
+                        else
+                            return RedirectToAction("NoApplication", "Application");
                     }
                 }
                 ModelState.AddModelError(nameof(LoginViewModel.Email),
