@@ -1,12 +1,12 @@
 ﻿@model Page5ViewModel
 @{
-    ViewBag.Title = "Page 5";
+    ViewBag.Title = "Pca Course";
 }
 
 <div class="container-fluid">
 
     <h1 class="text-center">PCA Course</h1>
-    <form asp-controller="Application" asp-action="Page5" method="post" enctype="multipart/form-data">
+    <form asp-controller="Application" asp-action="PcaCourse" method="post" enctype="multipart/form-data">
         <div class="well">
 
             <a href="http://shopping.positivecoach.org/Double-Goal-Coach?search=Course">Click here to take the PCA Course.</a>
@@ -39,25 +39,25 @@
         @if (User.IsInRole("SportsManager") || User.IsInRole("Admin"))
         {
             <div class="btn-group col-xs-12 col-sm-3">
-                <button onclick="location='/Application/Page4'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
+                <button onclick="location = '/Application/ConcussionCourse'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
             </div>
 
             Html.RenderPartial("ApproveDeny.cshtml");
 
             <div class="btn-group col-xs-12 col-sm-3">
-                <button onclick="location='/Application/Page6'" type="button" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i>  </button>
+                <button onclick="location='/Application/ID'" type="button" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i>  </button>
             </div>
         }
         else
         {
             <div class="btn-group col-xs-12 col-sm-3">
-                <button onclick="location='/Application/Page4'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
+                <button onclick="location = '/Application/ConcussionCourse'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
             </div>
 
             <div class="col-sm-6"></div>
 
             <div class="btn-group col-xs-12 col-sm-3">
-                <button onclick="location='/Application/Page6'" type="button" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i>  </button>
+                <button onclick="location='/Application/ID'" type="button" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i>  </button>
             </div>
         }
 
