@@ -1,24 +1,19 @@
 ﻿@{
-    ViewBag.Title = "Page 2";
+    ViewBag.Title = "Coach Interests";
 }
 
-    <div class="col-xs-12 row">
-        <h1 class="text-center">
-            Coaching Interests/Experience
-        </h1>
-    </div>
-
+    <h1 class="text-center">Coaching Interests</h1><br />
     <form>
         <div class="well">
             <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
+                <div class="col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                     <h4>Coaching position sought:</h4>
                 </div>
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
-                    <h5><input type="checkbox" value="" style="font-weight: bold;">Head Coach</h5>
+                <div class="col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
+                    <h5><input type="checkbox" value="" style="font-weight: bold;"> Head Coach </h5>
                 </div>
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
-                    <h5><input type="checkbox" value="" style="font-weight: bold;">Assistant Coach</h5><br />
+                <div class="col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
+                    <h5><input type="checkbox" value="" style="font-weight: bold;"> Assistant Coach </h5><br />
                 </div>
             </div>
             <div class="row">
@@ -150,25 +145,25 @@
         @if (User.IsInRole("SportsManager") || User.IsInRole("Admin"))
         {
             <div class="btn-group col-xs-12 col-sm-3">
-                <button onclick="location='/Application/Page1'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
+                <button onclick="location = '/Application/CoachInfo'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
             </div>
 
             Html.RenderPartial("ApproveDeny.cshtml");
 
             <div class="btn-group col-xs-12 col-sm-3">
-                <button onclick="location='/Application/Page3'" type="button" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i>  </button>
+                <button onclick="location = '/Application/CoachPledge'" type="button" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i>  </button>
             </div>
         }
         else
         {
             <div class="btn-group col-xs-12 col-sm-3">
-                <button onclick="location='/Application/Page1'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
+                <button onclick="location = '/Application/CoachInfo'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
             </div>
 
             <div class="col-sm-6"></div>
 
             <div class="btn-group col-xs-12 col-sm-3">
-                <button onclick="location='/Application/Page3'" type="button" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i>  </button>
+                <button onclick="location = '/Application/CoachPledge'" type="button" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i>  </button>
             </div>
         }
 

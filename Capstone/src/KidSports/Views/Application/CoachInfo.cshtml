@@ -1,4 +1,7 @@
-﻿@inject IAuthorizationService AuthorizationService
+﻿
+
+
+@inject IAuthorizationService AuthorizationService
 @using Microsoft.AspNetCore.Authorization;
 
 @{
@@ -249,7 +252,7 @@
             Html.RenderPartial("ApproveDeny.cshtml");
 
             <div class="btn-group col-xs-12 col-sm-3">
-                <button onclick="location='/Application/Page2'" type="button" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i> </button>
+                <button onclick="location='/Application/CoachInterests'" type="button" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i> </button>
             </div>
         }
         else
@@ -259,7 +262,7 @@
             <div class="col-sm-6"></div>
 
             <div class="btn-group col-xs-12 col-sm-3">
-                <button onclick="location='/Application/Page2'" type="button" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i>  </button>
+                <button onclick="location = '/Application/CoachInterests'" type="button" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i>  </button>
             </div>
         }
 

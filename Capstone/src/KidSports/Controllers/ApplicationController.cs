@@ -80,57 +80,57 @@ namespace KidSports.Controllers
         }
         #endregion
 
-        #region Application Step 1
+        #region Application Coach Information
         [HttpGet]
-        public IActionResult Page1()
+        public IActionResult CoachInfo()
         {
             return View();
         }
 
         //[HttpPost]
-        //public IActionResult Page1()
+        //public IActionResult CoachInfo()
         //{
         //    return View();
         //}
         #endregion
 
-        #region Application Step 2
+        #region Application Coach Interests
         [HttpGet]
-        public IActionResult Page2()
+        public IActionResult CoachInterests()
         {
             return View();
         }
 
         //[HttpPost]
-        //public IActionResult Page2()
+        //public IActionResult CoachInterests()
         //{
         //    return View();
         //}
         #endregion
 
-        #region Application Step 3
+        #region Application Coach Pledge
         [HttpGet]
-        public IActionResult Page3()
+        public IActionResult CoachPledge()
         {
             return View();
         }
 
         //[HttpPost]
-        //public IActionResult Page3()
+        //public IActionResult CoachPledge()
         //{
         //    return View();
         //}
         #endregion
 
-        #region Application Step 4
+        #region Application Concussion Course
         [HttpGet]
-        public IActionResult Page4()
+        public IActionResult ConcussionCourse()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Page4(Page4ViewModel p4Vm)
+        public async Task<IActionResult> ConcussionCourse(Page4ViewModel p4Vm)
         {
                 if (p4Vm.File != null)
                 {
@@ -142,7 +142,7 @@ namespace KidSports.Controllers
                             await p4Vm.File.CopyToAsync(fileStream);
                         }
                         //p4Vm.Application.NfhsPath = $"\\{p4Vm.File.FileName}";
-                        return RedirectToAction("Page5", "Application");
+                        return RedirectToAction("PcaCourse", "Application");
                     }
                     else return View(p4Vm);
                 }
@@ -150,15 +150,15 @@ namespace KidSports.Controllers
         }
         #endregion
 
-        #region Application Step 5
+        #region Application Pca Course
         [HttpGet]
-        public IActionResult Page5()
+        public IActionResult PcaCourse()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Page5(Page5ViewModel p5Vm)
+        public async Task<IActionResult> PcaCourse(Page5ViewModel p5Vm)
         {
             var uploads = Path.Combine(_environment.WebRootPath);
             if (p5Vm.File.Length > 0)
@@ -168,20 +168,20 @@ namespace KidSports.Controllers
                     await p5Vm.File.CopyToAsync(fileStream);
                 }
                 //p5Vm.Application.PcaPath = $"\\{p5Vm.File.FileName}";
-                return RedirectToAction("Page6", "Application");
+                return RedirectToAction("ID", "Application");
             }
             return View(p5Vm);
         }
         #endregion
 
-        #region Application Step 6
+        #region Application ID
         [HttpGet]
-        public IActionResult Page6()
+        public IActionResult ID()
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Page6(Page6ViewModel p6Vm)
+        public async Task<IActionResult> ID(Page6ViewModel p6Vm)
         {
             var uploads = Path.Combine(_environment.WebRootPath);
             if (p6Vm.File.Length > 0)
@@ -191,15 +191,15 @@ namespace KidSports.Controllers
                     await p6Vm.File.CopyToAsync(fileStream);
                 }
                 //p6Vm.Application.DlPath = $"\\{p6Vm.File.FileName}";
-                return RedirectToAction("Page7", "Application");
+                return RedirectToAction("Badge", "Application");
             }
             return View(p6Vm);
         }
         #endregion
 
-        #region Application Step 7
+        #region Application Badge
         [HttpGet]
-        public IActionResult Page7()
+        public IActionResult Badge()
         {
             return View();
         }

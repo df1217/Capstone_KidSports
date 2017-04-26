@@ -8,8 +8,8 @@ using KidSports.Repositories;
 namespace KidSports.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170421184742_initial")]
-    partial class initial
+    [Migration("20170425173756_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
