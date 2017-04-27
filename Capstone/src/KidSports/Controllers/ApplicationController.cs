@@ -205,7 +205,7 @@ namespace KidSports.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Page7(Page7ViewModel p7Vm)
+        public async Task<IActionResult> Badge(Page7ViewModel p7Vm)
         {
             var uploads = Path.Combine(_environment.WebRootPath);
             if (p7Vm.File.Length > 0)
@@ -220,7 +220,11 @@ namespace KidSports.Controllers
             return View(p7Vm);
         }
         #endregion
-        
 
+        //To test the page
+        public IActionResult UpdateApp()
+        {
+            return View();
+        }
     }
 }
