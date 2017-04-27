@@ -1,0 +1,71 @@
+﻿@model Page7ViewModel
+@{
+    ViewBag.Title = "Badge";
+}
+
+
+
+    <h1 class="text-center">Coach ID Badge</h1>
+    <form asp-controller="Application" asp-action="Badge" method="post" enctype="multipart/form-data">
+        <div class="well">
+            <div class="row">
+                <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-12">
+                    Once you have completed the necessary requirements and have been approved by a KidSports Sports Manager-
+                    you are required to obtain your KS Coach ID Badge.
+                    <Strong>This card is required to be worn and visible for all games.</Strong>
+                </div>
+            </div>
+            <div class="row" style="margin-top:20px">
+                <div class="form-group col-xs-offset-1 col-xs-10 col-md-4">
+                    <div style="text-align:left;">
+                        <strong>Image Requirements:</strong>
+
+                        <ul>
+                            <li style="text-align:left;">Mininum 8 mega pixel resolution</li>
+                            <li style="text-align:left;">No Hats or Sunglasses</li>
+                            <li style="text-align:left;">An individual photo</li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                
+            </div>
+
+            <div class="row" style="margin-top:30px">
+                <div class="row">
+                    <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
+                        <label for="" class="control-label">Upload Photo</label>
+                        <input type="file" asp-for="File"
+                               class="required borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+       @if (User.IsInRole("SportsManager") || User.IsInRole("Admin"))
+       {
+        <div class="btn-group col-xs-12 col-sm-3">
+            <button onclick="location='/Application/ID'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
+        </div>
+
+           Html.RenderPartial("ApproveDeny.cshtml");
+
+        <div class="btn-group col-xs-12 col-sm-3">
+            <button onclick="location='/Application/applications'" type="button" class="btn btn-primary col-xs-12 pull-right"><i class="fa fa-flag-checkered" aria-hidden='true'></i> Finish</button>
+        </div>
+       }
+       else
+       {
+            <div class="btn-group col-xs-12 col-sm-3">
+                <button onclick="location='/Application/ID'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
+            </div>
+
+            <div class="col-sm-6"></div>
+
+            <div class="btn-group col-xs-12 col-sm-3">
+                <button onclick="location='/Application/Appinprocess'" type="button" class="btn btn-primary col-xs-12 pull-right"><i class="fa fa-flag-checkered" aria-hidden='true'></i> Finish</button>
+            </div>
+       }
+    </form>

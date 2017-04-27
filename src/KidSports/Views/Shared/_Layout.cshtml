@@ -1,0 +1,77 @@
+﻿
+<!DOCTYPE html>
+
+<html style="width:100%; height:100%;">
+<head>
+    <meta name="viewport" content="width=device-width height=device-height" />
+    <title>@ViewBag.Title</title>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Assistant:200" rel="stylesheet">
+    <link href="~/css/layout.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header Nav -->
+    <div id="header" class="container col-xs-12">
+        <a id="ksLinkLogo" class="logo" href="http://www.kidsports.org/">
+            <img id="ksLogo" src="/Images/logo.png" />
+        </a>
+
+        @if (User.Identity.Name != null)
+        {
+            <button id="logoutBtn" type="button" onclick="location='/Account/Logout'" class="btn pull-right">Logout</button>
+        }
+    </div>
+
+        <!-- Main Body -->
+    <div class="container">
+        <div id="main-content" class="col-md-offset-2 col-md-8 col-sm-12 col-xs-12 text-center">
+            @RenderBody()
+        </div>
+    </div> 
+  
+    <footer class="footer">
+        <div class="container">
+            <div class="row text-center" style="padding-top:15px;">
+                <div class="col-md-offset-2 col-md-2 col-sm-3 col-xs-6">
+                    <a href="https://www.instagram.com/kidsports4life/" target="_blank">
+                        <span id="socialMediaLinks">Instagram</span>
+                    </a>
+                </div>
+
+                <div class="col-md-offset-0 col-md-2 col-sm-3  col-xs-6">
+                    <a href="https://www.facebook.com/www.emeraldkidsports/" target="_blank">
+                        <span id="socialMediaLinks">Facebook</span>
+                    </a>
+                </div>
+
+                <div class="col-md-offset-0 col-md-2 col-sm-3  col-xs-6">
+                    <a href="https://twitter.com/kidsports4life" target="_blank">
+                        <span id="socialMediaLinks">Twitter</span>
+                    </a>
+                </div>
+
+                <div class="col-md-offset-0 col-md-2 col-sm-3  col-xs-6">
+                    <a href="http://www.kidsports.org/blog-1" target="_blank">
+                        <span id="socialMediaLinks">Bev's Blog</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="blockInfo" class="col-md-12 col-xs-12">
+                    <h3 id="footerHeader" class="text-center">
+                        2190 POLK STREET, EUGENE, OR 97405 | PHONE 541 683 2374 | FAX 541 302 9430 | EMAIL
+                        <a id="footerEmail" target="_blank" href="mailto:info@kidsports.org">INFO@KIDSPORTS.ORG</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

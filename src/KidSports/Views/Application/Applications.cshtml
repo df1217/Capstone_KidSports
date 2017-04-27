@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "Applications";
+}
+
+<h2>Application Status Information:</h2>
+
+<div class="pull-right" style="margin-bottom:10px;">
+    <input type="text" style="height:32px;" />
+    <button class="btn btn-primary">Search</button>
+    @*<select>
+            <option selected disabled>Filter By:</option>
+            <option value="1">First Name</option>
+            <option value="2">Last Name</option>
+            <option value="3">Date</option>
+            <option value="4">Sport</option>
+            <option value="5">School</option>
+        </select>
+
+        <select>
+            <option selected disabled>Choose Options:</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+            <option value="4">Four</option>
+            <option value="5">Five</option>
+        </select>*@
+</div>
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <td class="bg-success col-xs-3" style="font-weight:bold;">Complete</td>
+            <td class="bg-warning col-xs-3" style="font-weight:bold;">Pending Validation</td>
+            <td class="bg-danger col-xs-3" style="font-weight:bold;">Incomplete Information</td>
+        </tr>
+    </thead>
+</table>
+
+<table class="table table-responsive table-striped">
+    <tr>
+        <td class=""></td>
+        <td class="col-xs-3">Application Details</td>
+        <td class="col-xs-3">Applicant Name</td>
+        <td class="col-xs-3">Application Start Date</td>
+        <td class="col-xs-3">Application Completion Date</td>
+    </tr>
+
+    <tr>
+        <th><input type="checkbox" /></th>
+        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-danger">View Details</button></td>
+        <td>Jane Doe</td>
+        <td>3/14/17</td>
+        <td>3/14/17</td>
+    </tr>
+
+    <tr>
+        <th><input type="checkbox" /></th>
+        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-success">View Details</button></td>
+        <td>Bob Doe</td>
+        <td>2/18/17</td>
+        <td>2/19/17</td>
+    </tr>
+
+    <tr>
+        <th><input type="checkbox" /></th>
+        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-success">View Details</button></td>
+        <td>John Doe</td>
+        <td>4/08/17</td>
+        <td>4/12/17</td>
+    </tr>
+
+    <tr>
+        <th><input type="checkbox" checked="checked" /></th>
+        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-danger">View Details</button></td>
+        <td>Blue Ivy</td>
+        <td>8/10/16</td>
+        <td>8/10/16</td>
+    </tr>
+
+    <tr>
+        <th><input type="checkbox" checked="checked" /></th>
+        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-success">View Details</button></td>
+        <td>Danny Smith</td>
+        <td>2/28/17</td>
+        <td>3/1/17</td>
+    </tr>
+
+    <tr>
+        <th><input type="checkbox" /></th>
+        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-warning">View Details</button></td>
+        <td>William Jones</td>
+        <td>5/18/17</td>
+        <td>5/18/17</td>
+    </tr>
+</table>
+
+<div class="pull-right" style="margin-top:50px">
+    <button type="button" onclick="location = '/Application/CoachInfo'" class="btn btn-primary btn-md-10">Enter Applicant Manually</button>
+</div>	
