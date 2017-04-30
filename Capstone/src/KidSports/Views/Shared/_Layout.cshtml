@@ -15,6 +15,12 @@
     <body>
         <nav class="navbar navHeader navbar-static-top" role="navigation">
             
+            <!-- Logo -->
+            <a id="ksLinkLogo" class="logo hidden-xs hidden-sm hidden-md" href="http://www.kidsports.org/"><img id="ksLogo" src="/Images/logo.png" /></a>
+
+            <!-- Only display stuff on nav if the user is logged in -->
+            @if (User.Identity.Name != null)
+            {
                 <!-- Icons for xs devices -->
                 <div class="navbar-header navHeader">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#Nav">
@@ -27,10 +33,6 @@
 
                 <!-- The nav links and other content for toggling -->
                 <div class="collapse navbar-collapse" id="Nav">
-                    
-                    <!-- Logo -->
-                    <a id="ksLinkLogo" class="logo hidden-xs hidden-sm hidden-md" href="http://www.kidsports.org/"><img id="ksLogo" src="/Images/logo.png" /></a>
-
                     <ul id="navLinks" class="nav navbar-nav">
                         <li><a>Home</a></li>
 
@@ -53,7 +55,7 @@
                         <li><a onclick="location='/Account/Logout'">Logout</a></li>
                     </ul>
                 </div>
-            
+            }
         </nav>
 
 
