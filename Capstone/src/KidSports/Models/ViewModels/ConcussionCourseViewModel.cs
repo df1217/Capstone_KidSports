@@ -6,8 +6,10 @@ namespace KidSports.Models.ViewModels
 {
     public class ConcussionCourseViewModel
     {
-        public bool HasClicked{ get; set; }
+        public int ApplicationID { get; set; }
         public DateTime ConcussionCourseDate { get; set; }
         public IFormFile File { get; set; }
+        public Nullable<bool> IsApproved { get; set; }
+
     }
 }

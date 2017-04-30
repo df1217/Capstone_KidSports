@@ -101,6 +101,16 @@ namespace KidSports.Controllers
             return View();
         }
 
+        //CoachInterests(int AppID, ViewModel vm)
+        //Application a = repo.GetApplicationByID(AppID)
+        //if (!IsNullOrEmpty(a.information)
+        //    vm.information == a.information
+        // check rest of app see what fields are already complete
+        //
+        // return view(vm);
+
+
+
         //[HttpPost]
         //public IActionResult CoachInterests()
         //{
