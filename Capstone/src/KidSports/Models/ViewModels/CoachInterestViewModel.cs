@@ -8,6 +8,7 @@ namespace KidSports.Models.ViewModels
     public class CoachInterestViewModel
     {
         public int ApplicationID { get; set; }
+        public ApplicationStatus ApplicationStatus { get; set; }
         public bool IsHeadCoach { get; set; }
         public Sport Sport { get; set; }
        

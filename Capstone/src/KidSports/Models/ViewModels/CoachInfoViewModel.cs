@@ -11,7 +11,11 @@ namespace KidSports.Models.ViewModels
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
-       
+        public LastName PreviousLastName1 { get; set; }
+        public LastName PreviousLastName2 { get; set; }
+        public LastName PreviousLastName3 { get; set; }
+
+
 
         public List<LastName> PreviousLastNames { get; set; }
         public string PreferredName { get; set; }
