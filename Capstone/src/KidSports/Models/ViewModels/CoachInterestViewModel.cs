@@ -7,6 +7,8 @@ namespace KidSports.Models.ViewModels
 {
     public class CoachInterestViewModel
     {
+        public int ApplicationID { get; set; }
+        public ApplicationStatus ApplicationStatus { get; set; }
         public bool IsHeadCoach { get; set; }
         public Sport Sport { get; set; }
        
@@ -14,10 +16,14 @@ namespace KidSports.Models.ViewModels
         public School School { get; set; }
 
         public string Gender { get; set; }
-        public Nullable<int> GradePreference{ get; set; }
+        public List<int> GradePreference{ get; set; }
         public string ChildTeam { get; set; }
-        public Nullable<int> YearsCoached { get; set; }
-        public Nullable<int> GradesCoached { get; set; }
+        public List<PreviousYearsCoached> PreviousYearsCoached { get; set; }
+        public List<PreviousGradesCoached> PreviousGradesCoached { get; set; }
+        public Nullable<bool> IsApproved { get; set; }
+
+
+
 
 
 
