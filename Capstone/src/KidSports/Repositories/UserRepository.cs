@@ -1,4 +1,7 @@
-﻿using KidSports.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using KidSports.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace KidSports.Repositories
@@ -61,5 +64,14 @@ namespace KidSports.Repositories
             return identityUser;
         }
 
+        public IEnumerable<User> GetAllUsers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<User> GetFilteredUsers()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
