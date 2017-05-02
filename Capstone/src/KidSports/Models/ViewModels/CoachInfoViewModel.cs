@@ -7,12 +7,15 @@ namespace KidSports.Models.ViewModels
 {
     public class CoachInfoViewModel
     {
+        public int ApplicationID { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
-        public string PreviousLastName1 { get; set; }
-        public string PreviousLastName2 { get; set; }
-        public string PreviousLastName3 { get; set; }
+        public LastName PreviousLastName1 { get; set; }
+        public LastName PreviousLastName2 { get; set; }
+        public LastName PreviousLastName3 { get; set; }
+
+
 
         public List<LastName> PreviousLastNames { get; set; }
         public string PreferredName { get; set; }
@@ -28,6 +31,8 @@ namespace KidSports.Models.ViewModels
         public string AlternatePhone { get; set; }
         public string CurrentEmployer { get; set; }
         public string JobTitle { get; set; }
+        public Nullable<bool> IsApproved { get; set; }
+
 
 
 
