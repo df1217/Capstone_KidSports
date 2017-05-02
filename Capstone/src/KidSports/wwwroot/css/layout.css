@@ -96,4 +96,17 @@ body {
 }
 
 
+h1, h2 {
+    font-weight:bold;
+     font-family: 'Assistant', sans-serif;
+}
+
+label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size:16px;
+}
+
+p {
+    font-family: 'Raleway', sans-serif;
+}
 
