@@ -7,5 +7,13 @@ namespace KidSports.Models.ViewModels
 {
     public class CoachPledgeViewModel
     {
+        public int ApplicationID { get; set; }
+
+        public ApplicationStatus ApplicationStatus { get; set; }
+        public string Name { get; set; }
+        public string  Initials { get; set; }
+        public  DateTime PledgeSubmissionDate { get; set; }
+        public Nullable<bool> IsApproved { get; set; }
+
     }
 }

@@ -5,7 +5,7 @@
 
 <form asp-controller="Admin" asp-action="UpdateUser" method="post" encrypte="multipart/form-data">
     <div class="well">
-        <h3><strong>Update Current User</strong></h3>
+        <h1 style="text-align:left"><strong>Update Current User</strong></h1>
         <br>
         <div class="row">
             <div class="col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-3">
@@ -26,17 +26,20 @@
                     <option>Adminstrator</option>
                 </select>
             </div>
-            <button type="button" class="btn btn-primary col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-2">Reset Password</button>
-            <button type="button" class="btn btn-primary col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-2">Delete User</button>
-      
+
+            <div class="col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-3">
+                <button type="button" class="btn btn-primary col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-12">Reset Password</button>
+                <button type="button" class="btn btn-primary col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-12">Delete User</button>
+            </div>
 
         </div>
-        
 
-        <hr />
+    </div>
+
+    <div class="well">
+        <h1 style="text-align:left"><strong>Add New User</strong></h1>
+        <br>
         <div class="row">
-            <h3><strong>Add New User</strong></h3>
-            <br>
             <div class="col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-3">
                 <label class="control-label">Name</label>
                 <input class="form-control">
@@ -55,16 +58,19 @@
                     <option>Adminstrator</option>
                 </select>
             </div>
-            <button type="button" class="btn btn-primary col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-3">Add</button>
 
+            <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-3" style="padding-top:25px">
+                <button type="button" class="btn btn-primary col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-12">Add</button>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="btn-group col-xs-12 col-sm-5"></div>
-        <div class="btn-group col-xs-12 col-sm-4"></div>
-        <div class="btn-group col-xs-12 col-sm-3">
-            <button onclick="save" type="button" class="btn btn-primary col-xs-12">Save Changes</button>
-        </div>
-    </div>
-
 </form>
+<div class="row">
+    <div class="btn-group col-xs-12 col-sm-5"></div>
+    <div class="btn-group col-xs-12 col-sm-4"></div>
+    <div class="btn-group col-xs-12 col-sm-3">
+        <button onclick="save" type="button" class="btn btn-primary col-xs-12">Save Changes</button>
+    </div>
+</div>
+
+

@@ -20,8 +20,8 @@ body {
 }
 
 #ksLogo {
-    margin-top: 15px;
-    width:200px; 
+    margin-top:-15px;
+    width:150px; 
     z-index: 10;
 }
 
@@ -34,11 +34,25 @@ body {
      z-index: 10;
 }
 
-#header {
-    height:50px; 
+.navHeader { 
     background-color:#218c48;
-    position:absolute;
-    z-index: 10;
+    font-weight:bold;
+}
+
+#navLinks > li > a:hover {
+    background-color: #5CB85C;
+}
+
+#navLinks > li > a {
+    color:white;
+}
+
+.navbar-toggle {
+    border-color: white;
+}
+
+.navbar-toggle > span {
+    background-color: white;
 }
 
 #logoutBtn {
@@ -50,12 +64,10 @@ body {
 }
 
 #main-content {
-    margin-top: 100px;
+    margin-top: 5px;
     padding-bottom:150px;
     overflow: auto;
 }
-
-
 
 #socialMediaLinks {
      color:white; 
@@ -84,4 +96,17 @@ body {
 }
 
 
+h1, h2 {
+    font-weight:bold;
+     font-family: 'Assistant', sans-serif;
+}
+
+label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size:16px;
+}
+
+p {
+    font-family: 'Raleway', sans-serif;
+}
 

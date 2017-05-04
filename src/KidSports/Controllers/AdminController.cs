@@ -8,15 +8,24 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KidSports.Controllers
 {
-    public class Admin : Controller
+    public class AdminController : Controller
     {
         // GET: /<controller>/
-        public IActionResult UpdateApp()
+        public IActionResult UpdateAppContent()
+        {
+            return View();
+        }
+        public IActionResult UpdateAppLink()
         {
             return View();
         }
 
         public IActionResult UpdateUser()
+        {
+            return View();
+        }
+
+        public IActionResult UpdateProfile()
         {
             return View();
         }

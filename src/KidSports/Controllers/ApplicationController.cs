@@ -101,6 +101,16 @@ namespace KidSports.Controllers
             return View();
         }
 
+        //CoachInterests(int AppID, ViewModel vm)
+        //Application a = repo.GetApplicationByID(AppID)
+        //if (!IsNullOrEmpty(a.information)
+        //    vm.information == a.information
+        // check rest of app see what fields are already complete
+        //
+        // return view(vm);
+
+
+
         //[HttpPost]
         //public IActionResult CoachInterests()
         //{
@@ -130,7 +140,7 @@ namespace KidSports.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ConcussionCourse(Page4ViewModel p4Vm)
+        public async Task<IActionResult> ConcussionCourse(ConcussionCourseViewModel p4Vm)
         {
                 if (p4Vm.File != null)
                 {
@@ -158,7 +168,7 @@ namespace KidSports.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PcaCourse(Page5ViewModel p5Vm)
+        public async Task<IActionResult> PcaCourse(IDViewModel p5Vm)
         {
             var uploads = Path.Combine(_environment.WebRootPath);
             if (p5Vm.File.Length > 0)
@@ -181,7 +191,7 @@ namespace KidSports.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> ID(Page6ViewModel p6Vm)
+        public async Task<IActionResult> ID(PcaCourseViewModel p6Vm)
         {
             var uploads = Path.Combine(_environment.WebRootPath);
             if (p6Vm.File.Length > 0)
@@ -205,7 +215,7 @@ namespace KidSports.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Page7(Page7ViewModel p7Vm)
+        public async Task<IActionResult> Page7(BadgeViewModel p7Vm)
         {
             var uploads = Path.Combine(_environment.WebRootPath);
             if (p7Vm.File.Length > 0)

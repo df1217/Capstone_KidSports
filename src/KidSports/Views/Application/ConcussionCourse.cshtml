@@ -1,4 +1,4 @@
-﻿@model Page4ViewModel
+﻿@model ConcussionCourseViewModel
 @{
     ViewBag.Title = "Concussion Course";
 }
@@ -15,7 +15,7 @@
                     
 
                     <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
-                        <label asp-for="Application.PcaSubmissionDate" class="control-label">Date of Completion:</label>
+                        <label class="control-label">Date of Completion:</label>
                         <input type="date" class="form-control" placeholder="Date">
                     </div>
 
@@ -24,7 +24,7 @@
 
                 <div class="row">
                     <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
-                        <label for="" class="control-label">Upload Certificate</label>
+                        <label  class="control-label">Upload Certificate</label>
                         <input type="file" asp-for="File"
                                class="required borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
                     </div>
