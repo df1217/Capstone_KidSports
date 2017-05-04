@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Background Check Results";
+}
+
+<h3 class="text-left">Case 1:</h3>
+<ul style="list-style:none">
+    <li style="text-align:left;"><strong>Jurisdiction:</strong> Idaho Department of Corrections</listyle="text-align:left;">
+    <li style="text-align:left;"><strong>Date:</strong> 02/11/1989</listyle="text-align:left;">
+    <li style="text-align:left;"><strong>Status:</strong> Probation</li>
+</ul>
+
+<h3 class="text-left">Offense Information:</h3>
+<ul style="list-style:none">
+    <li style="text-align:left;"><strong>Case Number:</strong> C-98872148-A</li>
+    <li style="text-align:left;"><strong>Offense:</strong> Petit Larcen</li>
+    <li style="text-align:left;"><strong>Level:</strong> Misdemeanor</li>
+    <li style="text-align:left;"><strong>Date:</strong> 01/19/1989</li>
+    <li style="text-align:left;"><strong>Sentence:</strong> Minimum</li>
+    <li style="text-align:left;"><strong>Length:</strong> 1 year, 0 months, 0 days</li>
+    <li style="text-align:left;"><strong>Case Number:</strong> I0888806</</li>
+    <li style="text-align:left;"><strong>Offense:</strong> Driving While Intoxicated</li>
+    <li style="text-align:left;"><strong>Level:</strong> Felony</li>
+    <li style="text-align:left;"><strong>Date:</strong> 08/06/1981</li>
+    <li style="text-align:left;"><strong>Sentence:</strong> Minimum</li>
+    <li style="text-align:left;"><strong>Length:</strong> 2 years, 0 months, 0 days</li>
+</ul>
+
+<div class="btn-group-horizontal">
+    <button type="button" class="btn btn-success">Approve</button>
+    <button type="button" class="btn btn-danger">Deny</button>
+    <!--This prompts SM to contact applicant with denial notice-->
+    <button type="button" onclick="location='/Application/BackgroundcheckResults'" class="btn btn-primary">Go Back</button>
+</div>
