@@ -33,9 +33,9 @@ namespace KidSports.Models
         public School AppSchool { get; set; }
         public Sport AppSport { get; set; }
 
-        public List<PreviousYearsCoached> PreviousYearsCoached { get; set; }
+        public List<PreviousYearsCoached> YearCoached { get; set; }
         
-        public List<PreviousGradesCoached> PreviousGradesCoached { get; set; }
+        public List<PreviousGradessCoached> PrevGradesCoached { get; set; }
         public string NameOfChild { get; set; }
 
         public int YearsExperience { get; set; }
@@ -73,7 +73,7 @@ namespace KidSports.Models
 
         public List<Area> Region { get; set; }
         public string AppGender { get; set; }
-        public string AppGrade { get; internal set; }
-        public Area AppArea { get; internal set; }
+        public string AppGrade { get; set; }
+        public Area AppArea { get; set; }
     }
 }
