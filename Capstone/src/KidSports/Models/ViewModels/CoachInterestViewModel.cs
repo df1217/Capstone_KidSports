@@ -19,7 +19,7 @@ namespace KidSports.Models.ViewModels
         public List<int> GradePreference{ get; set; }
         public string ChildTeam { get; set; }
         public List<PreviousYearsCoached> PreviousYearsCoached { get; set; }
-        public List<PreviousGradesCoached> PreviousGradesCoached { get; set; }
+        public List<PreviousYearsCoached> PreviousGradesCoached { get; set; }
         public Nullable<bool> IsApproved { get; set; }
 
 

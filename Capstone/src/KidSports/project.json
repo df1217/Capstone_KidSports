@@ -32,7 +32,8 @@
       "version": "1.0.1"
     },
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-    "System.ComponentModel.Annotations": "4.3.0"
+    "System.ComponentModel.Annotations": "4.3.0",
+    "xunit": "2.2.0"
   },
 
   "frameworks": {
