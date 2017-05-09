@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using KidSports.Models.ViewModels;
-using KidSports.Models;
+using KidSports.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -16,11 +16,18 @@ namespace KidSports.Controllers
     public class ApplicationController : Controller
     {
         private IHostingEnvironment _environment;
+        //private IApplicationRepo repository;
 
         public ApplicationController(IHostingEnvironment environment)
         {
             _environment = environment;
         }
+
+
+        //public ApplicationController(IApplicationRepo repo)
+        //{
+        //    repository = repo;
+        //}
 
         #region Home Page
         [HttpGet]
