@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace KidSports.Models
 {
-    public class PreviousGradessCoached
+    public class PreviousGradesCoached
     {
         public int PreviousGradesCoachedID { get; set; }
         public string GradeName { get; set; }

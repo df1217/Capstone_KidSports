@@ -66,12 +66,18 @@ namespace KidSports.Repositories
 
         public IEnumerable<User> GetAllUsers()
         {
-            throw new NotImplementedException();
+            return context.Users.ToList();
         }
 
-        public IQueryable<User> GetFilteredUsers()
+        public IQueryable<User> GetFilteredUsers(string SearchParam = null)
         {
-            throw new NotImplementedException();
+            var result = context.Users.AsQueryable();
+            if (SearchParam != null)
+            {
+                if (!string.IsNullOrEmpty(SearchParam))
+                    result = result.Where(x => x.Email.Contains(SearchParam) || x.FirstName.Contains(SearchParam) || x.LastName.Contains(SearchParam));
+            }
+            return result;
         }
     }
 }

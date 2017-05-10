@@ -8,14 +8,30 @@ using KidSports.Repositories;
 namespace KidSports.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170430222745_init")]
-    partial class init
+    [Migration("20170510051143_stateTesting")]
+    partial class stateTesting
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("KidSports.Models.AppAreaJoin", b =>
+                {
+                    b.Property<int>("AppAreaJoinID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ApplicationID");
+
+                    b.Property<int>("AreaID");
+
+                    b.HasKey("AppAreaJoinID");
+
+                    b.HasIndex("ApplicationID");
+
+                    b.ToTable("AppAreaJoin");
+                });
 
             modelBuilder.Entity("KidSports.Models.Application", b =>
                 {
@@ -24,17 +40,15 @@ namespace KidSports.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<DateTime>("AppApprovalDate");
+                    b.Property<int?>("AppAreaAreaID");
 
-                    b.Property<DateTime>("AppCompletionDate");
+                    b.Property<string>("AppGender");
 
-                    b.Property<bool>("AppIsChecked");
+                    b.Property<string>("AppGrade");
 
                     b.Property<int?>("AppSchoolSchoolID");
 
                     b.Property<int?>("AppSportSportID");
-
-                    b.Property<DateTime>("AppStartDate");
 
                     b.Property<string>("BackgroundRequest");
 
@@ -45,10 +59,6 @@ namespace KidSports.Migrations
                     b.Property<string>("BadgePath");
 
                     b.Property<DateTime>("BadgeSubmissionDate");
-
-                    b.Property<DateTime>("BcApprovalDate");
-
-                    b.Property<DateTime>("BcSubmissionDate");
 
                     b.Property<string>("City");
 
@@ -61,6 +71,8 @@ namespace KidSports.Migrations
                     b.Property<string>("DlPath");
 
                     b.Property<DateTime>("DlSubmissionDate");
+
+                    b.Property<bool>("HasContacted");
 
                     b.Property<string>("JobTitle");
 
@@ -90,10 +102,6 @@ namespace KidSports.Migrations
 
                     b.Property<DateTime>("PledgeSubmissionDate");
 
-                    b.Property<DateTime>("PrefApprovalDate");
-
-                    b.Property<DateTime>("PrefSubmissionDate");
-
                     b.Property<int?>("StateID");
 
                     b.Property<string>("UserId");
@@ -103,6 +111,8 @@ namespace KidSports.Migrations
                     b.Property<string>("ZipCode");
 
                     b.HasKey("ApplicationID");
+
+                    b.HasIndex("AppAreaAreaID");
 
                     b.HasIndex("AppSchoolSchoolID");
 
@@ -115,18 +125,62 @@ namespace KidSports.Migrations
                     b.ToTable("Applications");
                 });
 
+            modelBuilder.Entity("KidSports.Models.ApplicationStatus", b =>
+                {
+                    b.Property<int>("ApplicationStatusID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("AppApprovalDate");
+
+                    b.Property<DateTime>("AppCompletionDate");
+
+                    b.Property<DateTime>("AppDenialDate");
+
+                    b.Property<DateTime>("AppStartDate");
+
+                    b.Property<int>("ApplicationID");
+
+                    b.Property<DateTime>("BcApprovalDate");
+
+                    b.Property<DateTime>("BcStartDate");
+
+                    b.Property<DateTime>("BcSubmissionDate");
+
+                    b.Property<DateTime>("PrefApprovalDate");
+
+                    b.Property<DateTime>("PrefDenialDate");
+
+                    b.Property<DateTime>("PrefSubmissionDate");
+
+                    b.HasKey("ApplicationStatusID");
+
+                    b.ToTable("ApplicationStatus");
+                });
+
+            modelBuilder.Entity("KidSports.Models.AppStateJoin", b =>
+                {
+                    b.Property<int>("AppStateJoinID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ApplicationID");
+
+                    b.Property<int>("StateID");
+
+                    b.HasKey("AppStateJoinID");
+
+                    b.HasIndex("ApplicationID");
+
+                    b.ToTable("AppStateJoin");
+                });
+
             modelBuilder.Entity("KidSports.Models.Area", b =>
                 {
                     b.Property<int>("AreaID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ApplicationID");
-
                     b.Property<string>("AreaName");
 
                     b.HasKey("AreaID");
-
-                    b.HasIndex("ApplicationID");
 
                     b.ToTable("Areas");
                 });
@@ -234,15 +288,11 @@ namespace KidSports.Migrations
                     b.Property<int>("StateID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ApplicationID");
-
                     b.Property<string>("StateName");
 
                     b.HasKey("StateID");
 
-                    b.HasIndex("ApplicationID");
-
-                    b.ToTable("State");
+                    b.ToTable("States");
                 });
 
             modelBuilder.Entity("KidSports.Models.User", b =>
@@ -407,8 +457,20 @@ namespace KidSports.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("KidSports.Models.AppAreaJoin", b =>
+                {
+                    b.HasOne("KidSports.Models.Application")
+                        .WithMany("Areas")
+                        .HasForeignKey("ApplicationID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("KidSports.Models.Application", b =>
                 {
+                    b.HasOne("KidSports.Models.Area", "AppArea")
+                        .WithMany()
+                        .HasForeignKey("AppAreaAreaID");
+
                     b.HasOne("KidSports.Models.School", "AppSchool")
                         .WithMany()
                         .HasForeignKey("AppSchoolSchoolID");
@@ -426,11 +488,12 @@ namespace KidSports.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("KidSports.Models.Area", b =>
+            modelBuilder.Entity("KidSports.Models.AppStateJoin", b =>
                 {
                     b.HasOne("KidSports.Models.Application")
-                        .WithMany("Region")
-                        .HasForeignKey("ApplicationID");
+                        .WithMany("StatesLived")
+                        .HasForeignKey("ApplicationID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("KidSports.Models.Country", b =>
@@ -466,13 +529,6 @@ namespace KidSports.Migrations
                     b.HasOne("KidSports.Models.Area")
                         .WithMany("AreaSchools")
                         .HasForeignKey("AreaID");
-                });
-
-            modelBuilder.Entity("KidSports.Models.State", b =>
-                {
-                    b.HasOne("KidSports.Models.Application")
-                        .WithMany("StatesLived")
-                        .HasForeignKey("ApplicationID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
