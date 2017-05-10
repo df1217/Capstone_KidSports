@@ -5,10 +5,46 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace KidSports.Migrations
 {
-    public partial class init : Migration
+    public partial class stateTesting : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ApplicationStatus",
+                columns: table => new
+                {
+                    ApplicationStatusID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AppApprovalDate = table.Column<DateTime>(nullable: false),
+                    AppCompletionDate = table.Column<DateTime>(nullable: false),
+                    AppDenialDate = table.Column<DateTime>(nullable: false),
+                    AppStartDate = table.Column<DateTime>(nullable: false),
+                    ApplicationID = table.Column<int>(nullable: false),
+                    BcApprovalDate = table.Column<DateTime>(nullable: false),
+                    BcStartDate = table.Column<DateTime>(nullable: false),
+                    BcSubmissionDate = table.Column<DateTime>(nullable: false),
+                    PrefApprovalDate = table.Column<DateTime>(nullable: false),
+                    PrefDenialDate = table.Column<DateTime>(nullable: false),
+                    PrefSubmissionDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplicationStatus", x => x.ApplicationStatusID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Areas",
+                columns: table => new
+                {
+                    AreaID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AreaName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Areas", x => x.AreaID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Sports",
                 columns: table => new
@@ -23,6 +59,19 @@ namespace KidSports.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sports", x => x.SportID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "States",
+                columns: table => new
+                {
+                    StateID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    StateName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_States", x => x.StateID);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,6 +128,26 @@ namespace KidSports.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Schools",
+                columns: table => new
+                {
+                    SchoolID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AreaID = table.Column<int>(nullable: true),
+                    SchoolName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Schools", x => x.SchoolID);
+                    table.ForeignKey(
+                        name: "FK_Schools_Areas_AreaID",
+                        column: x => x.AreaID,
+                        principalTable: "Areas",
+                        principalColumn: "AreaID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -168,135 +237,29 @@ namespace KidSports.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Areas",
-                columns: table => new
-                {
-                    AreaID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ApplicationID = table.Column<int>(nullable: true),
-                    AreaName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Areas", x => x.AreaID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Schools",
-                columns: table => new
-                {
-                    SchoolID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AreaID = table.Column<int>(nullable: true),
-                    SchoolName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Schools", x => x.SchoolID);
-                    table.ForeignKey(
-                        name: "FK_Schools_Areas_AreaID",
-                        column: x => x.AreaID,
-                        principalTable: "Areas",
-                        principalColumn: "AreaID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Country",
-                columns: table => new
-                {
-                    CountryID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ApplicationID = table.Column<int>(nullable: true),
-                    CountryName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Country", x => x.CountryID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "LastName",
-                columns: table => new
-                {
-                    LastNameID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ApplicationID = table.Column<int>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LastName", x => x.LastNameID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PreviousGradesCoached",
-                columns: table => new
-                {
-                    PreviousGradesCoachedID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ApplicationID = table.Column<int>(nullable: true),
-                    GradeName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PreviousGradesCoached", x => x.PreviousGradesCoachedID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PreviousYearsCoached",
-                columns: table => new
-                {
-                    PreviousYearsCoachedID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ApplicationID = table.Column<int>(nullable: true),
-                    YearCoached = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PreviousYearsCoached", x => x.PreviousYearsCoachedID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "State",
-                columns: table => new
-                {
-                    StateID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ApplicationID = table.Column<int>(nullable: true),
-                    StateName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_State", x => x.StateID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Applications",
                 columns: table => new
                 {
                     ApplicationID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Address = table.Column<string>(nullable: true),
-                    AppApprovalDate = table.Column<DateTime>(nullable: false),
-                    AppCompletionDate = table.Column<DateTime>(nullable: false),
-                    AppIsChecked = table.Column<bool>(nullable: false),
+                    AppAreaAreaID = table.Column<int>(nullable: true),
+                    AppGender = table.Column<string>(nullable: true),
+                    AppGrade = table.Column<string>(nullable: true),
                     AppSchoolSchoolID = table.Column<int>(nullable: true),
                     AppSportSportID = table.Column<int>(nullable: true),
-                    AppStartDate = table.Column<DateTime>(nullable: false),
                     BackgroundRequest = table.Column<string>(nullable: true),
                     BackgroundResult = table.Column<string>(nullable: true),
                     BadgeApprovalDate = table.Column<DateTime>(nullable: false),
                     BadgePath = table.Column<string>(nullable: true),
                     BadgeSubmissionDate = table.Column<DateTime>(nullable: false),
-                    BcApprovalDate = table.Column<DateTime>(nullable: false),
-                    BcSubmissionDate = table.Column<DateTime>(nullable: false),
                     City = table.Column<string>(nullable: true),
                     CurrentEmployer = table.Column<string>(nullable: true),
                     DOB = table.Column<DateTime>(nullable: false),
                     DlApprovalDate = table.Column<DateTime>(nullable: false),
                     DlPath = table.Column<string>(nullable: true),
                     DlSubmissionDate = table.Column<DateTime>(nullable: false),
+                    HasContacted = table.Column<bool>(nullable: false),
                     JobTitle = table.Column<string>(nullable: true),
                     NameOfChild = table.Column<string>(nullable: true),
                     NfhsApprovalDate = table.Column<DateTime>(nullable: false),
@@ -311,8 +274,6 @@ namespace KidSports.Migrations
                     PledgeApprovalDate = table.Column<DateTime>(nullable: false),
                     PledgeInitials = table.Column<string>(nullable: true),
                     PledgeSubmissionDate = table.Column<DateTime>(nullable: false),
-                    PrefApprovalDate = table.Column<DateTime>(nullable: false),
-                    PrefSubmissionDate = table.Column<DateTime>(nullable: false),
                     StateID = table.Column<int>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
                     YearsExperience = table.Column<int>(nullable: false),
@@ -321,6 +282,12 @@ namespace KidSports.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Applications", x => x.ApplicationID);
+                    table.ForeignKey(
+                        name: "FK_Applications_Areas_AppAreaAreaID",
+                        column: x => x.AppAreaAreaID,
+                        principalTable: "Areas",
+                        principalColumn: "AreaID",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Applications_Schools_AppSchoolSchoolID",
                         column: x => x.AppSchoolSchoolID,
@@ -334,9 +301,9 @@ namespace KidSports.Migrations
                         principalColumn: "SportID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Applications_State_StateID",
+                        name: "FK_Applications_States_StateID",
                         column: x => x.StateID,
-                        principalTable: "State",
+                        principalTable: "States",
                         principalColumn: "StateID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -346,6 +313,136 @@ namespace KidSports.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "AppAreaJoin",
+                columns: table => new
+                {
+                    AppAreaJoinID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ApplicationID = table.Column<int>(nullable: false),
+                    AreaID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppAreaJoin", x => x.AppAreaJoinID);
+                    table.ForeignKey(
+                        name: "FK_AppAreaJoin_Applications_ApplicationID",
+                        column: x => x.ApplicationID,
+                        principalTable: "Applications",
+                        principalColumn: "ApplicationID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppStateJoin",
+                columns: table => new
+                {
+                    AppStateJoinID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ApplicationID = table.Column<int>(nullable: false),
+                    StateID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppStateJoin", x => x.AppStateJoinID);
+                    table.ForeignKey(
+                        name: "FK_AppStateJoin_Applications_ApplicationID",
+                        column: x => x.ApplicationID,
+                        principalTable: "Applications",
+                        principalColumn: "ApplicationID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Country",
+                columns: table => new
+                {
+                    CountryID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ApplicationID = table.Column<int>(nullable: true),
+                    CountryName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Country", x => x.CountryID);
+                    table.ForeignKey(
+                        name: "FK_Country_Applications_ApplicationID",
+                        column: x => x.ApplicationID,
+                        principalTable: "Applications",
+                        principalColumn: "ApplicationID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LastName",
+                columns: table => new
+                {
+                    LastNameID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ApplicationID = table.Column<int>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LastName", x => x.LastNameID);
+                    table.ForeignKey(
+                        name: "FK_LastName_Applications_ApplicationID",
+                        column: x => x.ApplicationID,
+                        principalTable: "Applications",
+                        principalColumn: "ApplicationID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PreviousGradesCoached",
+                columns: table => new
+                {
+                    PreviousGradesCoachedID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ApplicationID = table.Column<int>(nullable: true),
+                    GradeName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PreviousGradesCoached", x => x.PreviousGradesCoachedID);
+                    table.ForeignKey(
+                        name: "FK_PreviousGradesCoached_Applications_ApplicationID",
+                        column: x => x.ApplicationID,
+                        principalTable: "Applications",
+                        principalColumn: "ApplicationID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PreviousYearsCoached",
+                columns: table => new
+                {
+                    PreviousYearsCoachedID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ApplicationID = table.Column<int>(nullable: true),
+                    YearCoached = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PreviousYearsCoached", x => x.PreviousYearsCoachedID);
+                    table.ForeignKey(
+                        name: "FK_PreviousYearsCoached_Applications_ApplicationID",
+                        column: x => x.ApplicationID,
+                        principalTable: "Applications",
+                        principalColumn: "ApplicationID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppAreaJoin_ApplicationID",
+                table: "AppAreaJoin",
+                column: "ApplicationID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Applications_AppAreaAreaID",
+                table: "Applications",
+                column: "AppAreaAreaID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Applications_AppSchoolSchoolID",
@@ -368,8 +465,8 @@ namespace KidSports.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Areas_ApplicationID",
-                table: "Areas",
+                name: "IX_AppStateJoin_ApplicationID",
+                table: "AppStateJoin",
                 column: "ApplicationID");
 
             migrationBuilder.CreateIndex(
@@ -396,11 +493,6 @@ namespace KidSports.Migrations
                 name: "IX_Schools_AreaID",
                 table: "Schools",
                 column: "AreaID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_State_ApplicationID",
-                table: "State",
-                column: "ApplicationID");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
@@ -442,69 +534,18 @@ namespace KidSports.Migrations
                 name: "IX_AspNetUserRoles_UserId",
                 table: "AspNetUserRoles",
                 column: "UserId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Areas_Applications_ApplicationID",
-                table: "Areas",
-                column: "ApplicationID",
-                principalTable: "Applications",
-                principalColumn: "ApplicationID",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Country_Applications_ApplicationID",
-                table: "Country",
-                column: "ApplicationID",
-                principalTable: "Applications",
-                principalColumn: "ApplicationID",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_LastName_Applications_ApplicationID",
-                table: "LastName",
-                column: "ApplicationID",
-                principalTable: "Applications",
-                principalColumn: "ApplicationID",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_PreviousGradesCoached_Applications_ApplicationID",
-                table: "PreviousGradesCoached",
-                column: "ApplicationID",
-                principalTable: "Applications",
-                principalColumn: "ApplicationID",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_PreviousYearsCoached_Applications_ApplicationID",
-                table: "PreviousYearsCoached",
-                column: "ApplicationID",
-                principalTable: "Applications",
-                principalColumn: "ApplicationID",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_State_Applications_ApplicationID",
-                table: "State",
-                column: "ApplicationID",
-                principalTable: "Applications",
-                principalColumn: "ApplicationID",
-                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Applications_Schools_AppSchoolSchoolID",
-                table: "Applications");
+            migrationBuilder.DropTable(
+                name: "AppAreaJoin");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Applications_Sports_AppSportSportID",
-                table: "Applications");
+            migrationBuilder.DropTable(
+                name: "ApplicationStatus");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Applications_State_StateID",
-                table: "Applications");
+            migrationBuilder.DropTable(
+                name: "AppStateJoin");
 
             migrationBuilder.DropTable(
                 name: "Country");
@@ -534,25 +575,25 @@ namespace KidSports.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Applications");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Schools");
 
             migrationBuilder.DropTable(
-                name: "Areas");
-
-            migrationBuilder.DropTable(
                 name: "Sports");
 
             migrationBuilder.DropTable(
-                name: "State");
-
-            migrationBuilder.DropTable(
-                name: "Applications");
+                name: "States");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Areas");
         }
     }
 }

@@ -11,6 +11,6 @@ namespace KidSports.Repositories
         User CreateUser(string firstName, string middleName, string lastName, string eMail, string password, UserRole role, out IdentityResult identityResult);
         User GetUserByEmail(string eMail);
         IEnumerable<User> GetAllUsers();
-        IQueryable<User> GetFilteredUsers();
+        IQueryable<User> GetFilteredUsers(string SearchParam);
     }
 }
