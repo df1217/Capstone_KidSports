@@ -1,0 +1,53 @@
+   .btn {
+	 margin: 20px auto;
+	 font:bold 20px Arial;
+	 width:200;
+	 height:100;
+	 background-color:green;
+	 vertical-align: middle;
+	 }
+table {
+	align: center;
+	border-collapse: collapse;
+	border: 1px solid black;
+	width: 40%;
+	empty-cells: show; 
+}
+td{
+	width: 50%;
+	height: 2em;
+	border: 1px solid #ccc;
+}
+
+
+ 
+.radio{
+	margin-right: 10px;
+}	
+ 
+input[type="radio"] 
+{
+margin-right: 10px;
+}
+
+p {
+padding-bottom: 15px;
+}
+
+
+/*img {
+	max-width:100%;
+	max-height:0;	
+}*/
+
+#AppDetail{
+	font-size:small;
+	text-align:center;
+	word-wrap: normal;
+	column-width:105px;
+	padding-left:20px;
+	padding-top: 5px;
+	outline: 2px solid;
+	
+}
+
