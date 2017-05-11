@@ -10,6 +10,7 @@ namespace KidSports.Models.ViewModels
         public int ApplicationID { get; set; }
         public ApplicationStatus ApplicationStatus { get; set; }
         public bool IsHeadCoach { get; set; }
+        public bool IsAssistantCoach { get; set; }
         public Sport Sport { get; set; }
        
         public Area Area { get; set; }
@@ -19,10 +20,14 @@ namespace KidSports.Models.ViewModels
         public List<int> GradePreference{ get; set; }
         public string ChildTeam { get; set; }
         public List<PreviousYearsCoached> PreviousYearsCoached { get; set; }
-        public List<PreviousYearsCoached> PreviousGradesCoached { get; set; }
+        public List<PreviousGradesCoached> PreviousGradesCoached { get; set; }
         public Nullable<bool> IsApproved { get; set; }
-
-
+        public List<Area> AllAreas { get; set; }
+        public List<School> SchoolsByArea { get; set; }
+        public List<Sport> AllSports { get; set; }
+        public List<PreviousYearsCoached> AllYears { get; set; }
+        public List<PreviousGradesCoached> AllGrades { get; set; }
+        public int YearsExperience { get; set; }
 
 
 

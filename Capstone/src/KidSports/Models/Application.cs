@@ -9,7 +9,7 @@ namespace KidSports.Models
     {
         public int ApplicationID { get; set; }
         public List<AppStateJoin> StatesLived { get; set; }
-        public List<Country> CountriesLived { get; set; }
+        public bool HasLivedOutsideUSA{ get; set; }
         //change to boolean
         public List<LastName> PreviousLastNames { get; set; }
 

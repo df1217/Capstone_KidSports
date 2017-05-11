@@ -9,6 +9,7 @@ using KidSports.Models.ViewModels;
 using KidSports.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using KidSports.Models;
 
 namespace KidSports.Controllers
 {
@@ -34,6 +35,14 @@ namespace KidSports.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index(Application Application)
+        {
+
+            Application app = new Application();
+            return RedirectToAction("Application/CoachInfo", new { AppId = app.ApplicationID });
         }
 
         [HttpGet]
@@ -94,11 +103,12 @@ namespace KidSports.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult CoachInfo()
-        //{
-        //    return View();
-        //}
+        [HttpPost]
+        public IActionResult CoachInfo(CoachInfoViewModel CInfoVm)
+        {
+
+           return View();
+        }
         #endregion
 
         #region Application Coach Interests
