@@ -95,7 +95,7 @@ namespace KidSports.Controllers
                         else if (isSportsManager)
                             return RedirectToAction("Applications", "Application");
                         else
-                            return RedirectToAction("NoApplication", "Application");
+                            return RedirectToAction("Index", "Application");
                     }
                 }
                 ModelState.AddModelError(nameof(LoginViewModel.Email),

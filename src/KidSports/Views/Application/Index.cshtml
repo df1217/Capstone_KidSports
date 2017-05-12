@@ -52,9 +52,9 @@
  
  
          <div class="row">
-             <div class="btn-group-vertical">
-                 <button type = "button" onclick="location='/Application/Index'" class="btn btn-success">Lets get started!</button>
-             </div>
+             <form asp-action="Index" asp-controller="Application" method="POST">
+                 <input type="submit" class="btn btn-success" value="Lets get started!" />
+             </form>
          </div>
      }
 

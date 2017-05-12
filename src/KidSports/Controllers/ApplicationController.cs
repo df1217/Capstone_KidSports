@@ -38,10 +38,12 @@ namespace KidSports.Controllers
             User user = await userManager.FindByNameAsync(User.Identity.Name);
             if (user != null)
             {
+                user = userRepo.GetDetailedUser(user);
                 if (user.currentYearApp != null)
                 {
                     int id = user.currentYearApp.ApplicationID;
-                    RedirectToAction("Index", new { AppID = id });
+                    ivm.ApplicationID = id;
+                    return View(ivm);
                 }
             }
 
@@ -50,17 +52,27 @@ namespace KidSports.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(IndexViewModel ivm = null)
+        public async Task<IActionResult> Index(IndexViewModel ivm = null)
         {
             if (ivm.ApplicationID != 0)
             {
-                /* Use app id to do stuff */ 
-                RedirectToAction("Index", new { AppID = ivm.ApplicationID });
+                /* Use app id to do stuff */
+                return RedirectToAction("CoachInfo", ivm);
             }
-
-            return View(ivm);
+            else
+            {
+                Application app = new Application();
+                appRepo.CreateApp(app);
+                ivm.ApplicationID = app.ApplicationID;
+                User user = await userManager.FindByNameAsync(User.Identity.Name);
+                if (user != null)
+                {
+                    user.currentYearApp = app;
+                    userRepo.Update(user);
+                }
+                return RedirectToAction("CoachInfo", ivm);
+            }
         }
-
 
         [HttpGet]
         public IActionResult NoApplication()

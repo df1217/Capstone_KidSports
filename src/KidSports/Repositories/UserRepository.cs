@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using KidSports.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace KidSports.Repositories
 {
@@ -55,6 +56,12 @@ namespace KidSports.Repositories
                 }
             }
             return user;
+        }
+
+        public User GetDetailedUser(User user)
+        {
+            /* TODO we are gonna need to add way more includes here */
+            return context.Users.Where(x => x.Id == user.Id).Include(x => x.currentYearApp).SingleOrDefault();
         }
 
         public User GetUserByEmail(string Email)
