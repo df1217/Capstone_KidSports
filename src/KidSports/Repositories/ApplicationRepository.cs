@@ -20,6 +20,11 @@ namespace KidSports.Repositories
             return context.Applications.ToList();
         }
 
+        public Application GetApplicationByID(int id)
+        {
+            return context.Applications.Where(x => x.ApplicationID == id).SingleOrDefault();
+        }
+
         public IQueryable<Application> GetFilteredApplications(ApplicantSearchModel searchModel)
         {
             var result = context.Applications.AsQueryable();
@@ -41,6 +46,25 @@ namespace KidSports.Repositories
                     result = result.Where(x => x.AppGrade == searchModel.Grade);
             }
             return result;
+        }
+
+        public Application CreateApp(Application app)
+        {
+            context.Applications.Add(app);
+            context.SaveChanges();
+            return app;
+        }
+
+        public int Update(Application app)
+        {
+            if (app.ApplicationID == 0)
+            {
+                context.Applications.Add(app);
+            }
+            else
+                context.Applications.Update(app);
+
+            return context.SaveChanges();
         }
     }
 }

@@ -9,6 +9,8 @@ using KidSports.Models.ViewModels;
 using KidSports.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using KidSports.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 namespace KidSports.Controllers
 {
@@ -16,36 +18,62 @@ namespace KidSports.Controllers
     public class ApplicationController : Controller
     {
         private IHostingEnvironment _environment;
+        private IApplicationRepo appRepo;
+        private IUserRepo userRepo;
+        UserManager<User> userManager;
 
-        public ApplicationController(IHostingEnvironment environment)
+        public ApplicationController(UserManager<User> UM, IHostingEnvironment environment, IApplicationRepo apprepo, IUserRepo userrepo)
         {
+            userManager = UM;
             _environment = environment;
+            appRepo = apprepo;
+            userRepo = userrepo;
         }
 
         #region Home Page
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            IndexViewModel ivm = new IndexViewModel();
+            User user = await userManager.FindByNameAsync(User.Identity.Name);
+            if (user != null)
+            {
+                user = userRepo.GetDetailedUser(user);
+                if (user.currentYearApp != null)
+                {
+                    int id = user.currentYearApp.ApplicationID;
+                    ivm.ApplicationID = id;
+                    return View(ivm);
+                }
+            }
+
+            ivm.ApplicationID = 0;
+            return View(ivm);
         }
 
-        [HttpGet]
-        public IActionResult NoApplication()
+        [HttpPost]
+        public async Task<IActionResult> Index(IndexViewModel ivm = null)
         {
-            return View();
+            if (ivm.ApplicationID != 0)
+            {
+                /* Use app id to do stuff */
+                return RedirectToAction("CoachInfo", ivm);
+            }
+            else
+            {
+                Application app = new Application();
+                appRepo.CreateApp(app);
+                ivm.ApplicationID = app.ApplicationID;
+                User user = await userManager.FindByNameAsync(User.Identity.Name);
+                if (user != null)
+                {
+                    user.currentYearApp = app;
+                    userRepo.Update(user);
+                }
+                return RedirectToAction("CoachInfo", ivm);
+            }
         }
 
-        [HttpGet]
-        public IActionResult Appinprocess()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult CompletedApplication()
-        {
-            return View();
-        }
         #endregion
 
         #region SportsManager Views

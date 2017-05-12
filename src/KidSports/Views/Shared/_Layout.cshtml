@@ -39,20 +39,25 @@
                 <!-- The nav links and other content for toggling -->
                 <div class="collapse navbar-collapse" id="Nav">
                     <ul id="navLinks" class="nav navbar-nav">
-                        <li><a>Home</a></li>
+
+                        @if (User.IsInRole("Applicant"))
+                        {
+                            <li><a onclick="location='/Application/Index'">Home</a></li>
+                        }
 
                         <!-- Links for admins -->
                         @if (User.IsInRole("Admin"))
                         {
-                            <li><a>Add App Options</a></li>
-                            <li><a>Change Site Links</a></li>
-                            <li><a>Update Users</a></li>
+                            <li><a onclick="location='/Admin/UpdateAppContent'">Add App Options</a></li>
+                            <li><a onclick="location='/Admin/UpdateAppLink'">Change Site Links</a></li>
+                            <li><a onclick="location='/Admin/UpdateUser'">Update Users</a></li>
+                            <li><a onclick="location='/Admin/UpdateUser'">Update Users</a></li>
                         }
 
                         <!-- Links for Sports Managers -->
                         @if (User.IsInRole("SportsManager") || User.IsInRole("Admin"))
                         {
-                            <li><a>View Applications</a></li>
+                            <li><a onclick="location='/Application/Applications'">View Applications</a></li>
                             <li><a>test</a></li>
                             <li><a>test2</a></li>
                         }
