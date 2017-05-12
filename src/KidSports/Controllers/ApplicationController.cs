@@ -9,6 +9,8 @@ using KidSports.Models.ViewModels;
 using KidSports.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using KidSports.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 namespace KidSports.Controllers
 {
@@ -16,18 +18,49 @@ namespace KidSports.Controllers
     public class ApplicationController : Controller
     {
         private IHostingEnvironment _environment;
+        private IApplicationRepo appRepo;
+        private IUserRepo userRepo;
+        UserManager<User> userManager;
 
-        public ApplicationController(IHostingEnvironment environment)
+        public ApplicationController(UserManager<User> UM, IHostingEnvironment environment, IApplicationRepo apprepo, IUserRepo userrepo)
         {
+            userManager = UM;
             _environment = environment;
+            appRepo = apprepo;
+            userRepo = userrepo;
         }
 
         #region Home Page
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            IndexViewModel ivm = new IndexViewModel();
+            User user = await userManager.FindByNameAsync(User.Identity.Name);
+            if (user != null)
+            {
+                if (user.currentYearApp != null)
+                {
+                    int id = user.currentYearApp.ApplicationID;
+                    RedirectToAction("Index", new { AppID = id });
+                }
+            }
+
+            ivm.ApplicationID = 0;
+            return View(ivm);
         }
+
+        [HttpPost]
+        public IActionResult Index(IndexViewModel ivm = null)
+        {
+            if (ivm.ApplicationID != 0)
+            {
+                /* Use app id to do stuff */ 
+                RedirectToAction("Index", new { AppID = ivm.ApplicationID });
+            }
+
+            return View(ivm);
+        }
+
 
         [HttpGet]
         public IActionResult NoApplication()

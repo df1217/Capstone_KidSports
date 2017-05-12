@@ -1,0 +1,61 @@
+﻿@model IndexViewModel
+ 
+ @{
+     ViewBag.Title = "Home";
+ }
+ 
+ <h1>Hello, John. </h1>
+ 
+ <div class="well">
+    
+        @if (Model.ApplicationID != 0)
+        {
+            <h3>
+               Your application is pending completion.
+               <br/> Please refer to the chart below for further information and take appropriate action.
+            </h3>
+          
+          
+         <table class="table table-responsive">
+             <thead>
+                 <tr><td colspan = "12" style="font-weight:bold;">Application status is indicated by the colors below.</td></tr>
+                <tr>
+                     <td class="bg-success col-xs-3" style="font-weight:bold;">Accepted</td>
+                     <td class="bg-warning col-xs-3" style="font-weight:bold;">Pending approval</td>
+                    <td class="bg-danger col-xs-3" style="font-weight:bold;">Needs to be completed</td>
+                 </tr>
+             </thead>
+         </table>
+ 
+         <div class="table-responsive">
+             <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="bg-warning"><a style = "color:black; font-weight:bold;" onclick="location = '/Application/CoachInfo'">Background Check</a></td>
+                         <td class="bg-success"><a style = "color:black; font-weight:bold;" onclick="location='/Application/CoachInterests'">Coaching Preferences</a></td>
+                         <td class="bg-danger"><a style = "color:black; font-weight:bold;" onclick="location = '/Application/CoachPledge'">Coaches Pledge</a></td>
+                        <td class="bg-warning"><a style = "color:black; font-weight:bold;" onclick="location='/Application/ID'">Driver's License</a></td>
+                         <td class="bg-success"><a style = "color:black; font-weight:bold;" onclick="location='/Application/ConcussionCourse'">NFHS Concussion Course</a></td>
+                         <td class="bg-success"><a style = "color:black; font-weight:bold;" onclick="location = '/Application/PcaCourse'">PCA Course</a></td>
+                         <td class="bg-warning"><a style = "color:black; font-weight:bold;" onclick="location = '/Application/Badge'">Coaches ID Badge</a></td>
+                    </tr>
+                 </tbody>
+             </table>
+        </div>
+     }
+     else
+     {
+        <h3 class="text-center">
+             You are not currently registered.<br />
+             Please click here to begin or renew your application.
+         </h3>
+ 
+ 
+         <div class="row">
+             <div class="btn-group-vertical">
+                 <button type = "button" onclick="location='/Application/Index'" class="btn btn-success">Lets get started!</button>
+             </div>
+         </div>
+     }
+
+</div>

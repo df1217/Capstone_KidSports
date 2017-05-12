@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KidSports.Repositories
 {
-    public class AreaRepository
+    public class AreaRepository : IAreaRepo
     {
         private ApplicationDbContext context;
 
