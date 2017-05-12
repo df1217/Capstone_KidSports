@@ -74,23 +74,6 @@ namespace KidSports.Controllers
             }
         }
 
-        [HttpGet]
-        public IActionResult NoApplication()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult Appinprocess()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult CompletedApplication()
-        {
-            return View();
-        }
         #endregion
 
         #region SportsManager Views
