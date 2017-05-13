@@ -112,14 +112,18 @@ namespace KidSports.Controllers
         [HttpGet]
         public IActionResult CoachInfo()
         {
-            return View();
+            CoachInfoViewModel civm = new CoachInfoViewModel();
+            return View(civm);
         }
 
-        //[HttpPost]
-        //public IActionResult CoachInfo()
-        //{
-        //    return View();
-        //}
+        [HttpPost]
+        public IActionResult CoachInfo(CoachInfoViewModel civm)
+        {
+            if (civm.Direction == "Next")
+                return RedirectToAction("CoachInterests");
+
+            return View(civm);
+        }
         #endregion
 
         #region Application Coach Interests
