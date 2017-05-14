@@ -17,32 +17,34 @@
                 </p>
             </div>
         </div>
-        <div>
-            <a href="~/CoachEthicContract.pdf">View terms of the coaches pledge here.</a>
-        </div>
+   
+            <div>
+                <a href="~/CoachEthicContract.pdf">View terms of the coaches pledge here.</a>
+            </div>
 
-        @*<div class="row">*@
+            @*<div class="row">*@
             @*<div class="form-group col-md-offset-1 col-xs-10 col-md-11" style="text-align:center">*@
-                <p>I pledge to observe, practice, and uphold the KS/PCA Coaces Pledge.</p>
+        <h5><input type="checkbox" value="" style="font-weight: bold;">I agree to the Terms and Conditions.</h5>
+        <p>I pledge to observe, practice, and uphold the KS/PCA Coaces Pledge.</p>
             @*</div>*@
-        @*</div>*@
-        <div class="row">
-            <div class="col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-6">
-                <label class="control-label">Name<span style="color:red;">*</span></label>
-                <input class="form-control">
-            </div>
+            @*</div>*@
+            <div class="row">
+                <div class="col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-6">
+                    <label class="control-label">Name<span style="color:red;">*</span></label>
+                    <input class="form-control">
+                </div>
 
-            <div class="col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-2">
-                <label class="control-label">Initial<span style="color:red;">*</span></label>
-                <input class="form-control">
-            </div>
+                <div class="col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-2">
+                    <label class="control-label">Initial<span style="color:red;">*</span></label>
+                    <input class="form-control">
+                </div>
 
-            <div class="col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
-                <label class="control-label">Date<span style="color:red;">*</span></label>
-                <input type="date" class="form-control" placeholder="Date">
+                <div class="col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
+                    <label class="control-label">Date<span style="color:red;">*</span></label>
+                    <input type="date" class="form-control" placeholder="Date">
+                </div>
             </div>
         </div>
-    </div>
 
    @if (User.IsInRole("SportsManager") || User.IsInRole("Admin"))
    {
