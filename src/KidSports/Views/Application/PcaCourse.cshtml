@@ -7,6 +7,7 @@
 
     <h1 class="text-center">PCA Course</h1>
     <form asp-controller="Application" asp-action="PcaCourse" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="@Model.ApplicationID" value="@Model.ApplicationID" />
         <div class="well">
 
             <a href="http://shopping.positivecoach.org/Double-Goal-Coach?search=Course">Click here to take the PCA Course.</a>

@@ -65,7 +65,7 @@ namespace KidSports.Controllers
                 if (ivm.PageName == "CoachPledge")
                     return RedirectToAction("CoachPledge", ivm.ApplicationID);
                 if (ivm.PageName == "ConcussionCourse")
-                    return RedirectToAction("ConcussionCourse", ivm.ApplicationID);
+                    return RedirectToAction("ConcussionCourse", new { AppID = ivm.ApplicationID });
                 if (ivm.PageName == "PcaCourse")
                     return RedirectToAction("PcaCourse", ivm.ApplicationID);
                 if (ivm.PageName == "ID")
@@ -221,6 +221,7 @@ namespace KidSports.Controllers
             //Get the coaches current app
             Application currentApp = appRepo.GetApplicationByID(AppID);
             ConcussionCourseViewModel ccvm = new ConcussionCourseViewModel();
+            ccvm.ApplicationID = AppID;
             //If any information exists, bind it to the view model.
 
             //Display the view.
@@ -236,15 +237,16 @@ namespace KidSports.Controllers
 
             if (ccvm.File != null)
             {
-                var uploads = Path.Combine(_environment.WebRootPath);
+                var uploads = Path.Combine(_environment.WebRootPath, "Images", "ConcussionCourse");
                 if (ccvm.File.Length > 0)
                 {
-                    using (var fileStream = new FileStream(Path.Combine(uploads, ccvm.File.FileName), FileMode.Create))
+                    using (var fileStream = new FileStream(Path.Combine(uploads, ccvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
                     {
                         await ccvm.File.CopyToAsync(fileStream);
+                        currentApp.NfhsPath = fileStream.Name.ToString();
                     }
-                    //ccvm.Application.NfhsPath = $"\\{p4Vm.File.FileName}";
                 }
+                appRepo.Update(currentApp);
             }
 
            
@@ -312,6 +314,7 @@ namespace KidSports.Controllers
             //Get the coaches current app
             Application currentApp = appRepo.GetApplicationByID(AppID);
             IDViewModel idvm = new IDViewModel();
+            idvm.ApplicationID = AppID;
             //If any information exists, bind it to the view model.
 
             //Display the view.
