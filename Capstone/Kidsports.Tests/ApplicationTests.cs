@@ -11,44 +11,43 @@ namespace Kidsports.Tests
 {
     public class ApplicationTests
     {
-        FakeAppRepository repository = new FakeAppRepository();
-        ApplicationController controller;
-        List<Application> AppsFromRepo;
+        FakeRepository repo;
+        List<Application> applications = new List<Application>();
 
 
         public ApplicationTests()
         {
-            repository = new FakeAppRepository();
-            AppsFromRepo = repository.GetAllApplications().ToList();
-            //controller = new ApplicationController(repository);
+  
         }
 
         [Fact]
-        public void GetAllApplications()
+        public void DoesGetAllApplications()
         {
+            repo = new FakeRepository();
+            //Assert.Equal(3, applications.Count());
+          
+            Assert.Equal("Springfield", repo.GetAllApplications()[0].City);
+            //Assert.Equal(repo.GetAllApplications()[0].Address, "Springfield");
+
+
+
+        }
+
+        [Fact]
+        public void IsDoubleFilterQuerable()
+        {
+            repo = new FakeRepository();
             //Act
-            FakeAppRepository fake = new FakeAppRepository();
-            List<Application> apps = fake.GetAllApplications();
-            Assert.Equal(3, apps.Count());
-            // Assert
-            //Assert.Equal("Pleasant Hill", apps[0].AppArea.AreaName ); 
-               
-            //Assert.Equal(AppsFromRepo[i].AppArea,
-            //    applications[i].AppArea);
-            //Assert.Equal(AppsFromRepo[i].AppGender,
-            //    applications[i].AppGender);
+            ApplicantSearchModel asm = new ApplicantSearchModel();
+            asm.Sport = "lacrosse";
+            asm.Area = "North Eugene";
+
+            List<Application> applications = repo.GetFilteredApplications(asm).ToList();
             
 
+            //Assert
+            Assert.Equal(1, applications.Count);
+
         }
-
-
-        [Fact]
-        public IQueryable<Application> GetFilteredApplications(ApplicantSearchModel searchModel)
-        {
-            throw new NotImplementedException();
-        }
-
-
     }
-
 }

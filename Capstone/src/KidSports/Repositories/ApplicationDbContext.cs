@@ -1,7 +1,6 @@
 ﻿using KidSports.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace KidSports.Repositories
 {
@@ -17,7 +16,6 @@ namespace KidSports.Repositories
         public DbSet<PreviousGradesCoached> PreviousGradesCoached { get; set; }
         public DbSet<PreviousYearsCoached> PreviousYearsCoached{ get; set; }
         public DbSet<ApplicationStatus> ApplicationStatus{ get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

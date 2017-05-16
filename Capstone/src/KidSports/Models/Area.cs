@@ -10,5 +10,6 @@ namespace KidSports.Models
         public int AreaID { get; set; }
         public string AreaName { get; set; }
         public List<School> AreaSchools { get; set; }
+
     }
 }

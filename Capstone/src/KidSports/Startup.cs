@@ -39,6 +39,12 @@ namespace KidSports
             { opts.Cookies.ApplicationCookie.LoginPath = "/Account/Login"; })
                  .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddTransient<IApplicationRepo, ApplicationRepository>();
+            services.AddTransient<IUserRepo, UserRepository>();
+            services.AddTransient<IStateRepo, StateRepository>();
+            services.AddTransient<IAreaRepo, AreaRepository>();
+            services.AddTransient<ISchoolRepo, SchoolRepository>();
+
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();

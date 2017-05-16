@@ -3,12 +3,18 @@
 
 <html style="width:100%; height:100%;">
 <head>
+    <meta charset="utf-8" />
+    <meta name="language" content="English">
     <meta name="viewport" content="width=device-width height=device-height" />
     <title>@ViewBag.Title</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+
+    <script src="~/js/tooltip.js"></script>
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Assistant:200" rel="stylesheet">
@@ -39,20 +45,25 @@
                 <!-- The nav links and other content for toggling -->
                 <div class="collapse navbar-collapse" id="Nav">
                     <ul id="navLinks" class="nav navbar-nav">
-                        <li><a>Home</a></li>
+
+                        @if (User.IsInRole("Applicant"))
+                        {
+                            <li><a onclick="location='/Application/Index'">Home</a></li>
+                        }
 
                         <!-- Links for admins -->
                         @if (User.IsInRole("Admin"))
                         {
-                            <li><a>Add App Options</a></li>
-                            <li><a>Change Site Links</a></li>
-                            <li><a>Update Users</a></li>
+                            <li><a onclick="location='/Admin/UpdateAppContent'">Add App Options</a></li>
+                            <li><a onclick="location='/Admin/UpdateAppLink'">Change Site Links</a></li>
+                            <li><a onclick="location='/Admin/UpdateUser'">Update Users</a></li>
+                            <li><a onclick="location='/Admin/UpdateUser'">Update Users</a></li>
                         }
 
                         <!-- Links for Sports Managers -->
                         @if (User.IsInRole("SportsManager") || User.IsInRole("Admin"))
                         {
-                            <li><a>View Applications</a></li>
+                            <li><a onclick="location='/Application/Applications'">View Applications</a></li>
                             <li><a>test</a></li>
                             <li><a>test2</a></li>
                         }

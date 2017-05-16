@@ -12,5 +12,7 @@ namespace KidSports.Repositories
         User GetUserByEmail(string eMail);
         IEnumerable<User> GetAllUsers();
         IQueryable<User> GetFilteredUsers(string SearchParam);
+        int Update(User user);
+        User GetDetailedUser(User user);
     }
 }

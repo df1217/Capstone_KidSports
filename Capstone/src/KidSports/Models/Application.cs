@@ -8,8 +8,8 @@ namespace KidSports.Models
     public class Application
     {
         public int ApplicationID { get; set; }
-        public List<AppStateJoin> StatesLived { get; set; }
-        public bool HasLivedOutsideUSA{ get; set; }
+        public List<State> StatesLived { get; set; }
+        public List<Country> CountriesLived { get; set; }
         //change to boolean
         public List<LastName> PreviousLastNames { get; set; }
 
@@ -19,6 +19,9 @@ namespace KidSports.Models
         public string BackgroundResult { get; set; }
         // string xml
         public DateTime DOB { get; set; }
+
+        public bool IsHeadCoach { get; set; }
+        public bool IsAssistantCoach { get; set; }
 
         public string CurrentEmployer { get; set; }
         public string JobTitle { get; set; }
@@ -33,9 +36,9 @@ namespace KidSports.Models
         public School AppSchool { get; set; }
         public Sport AppSport { get; set; }
 
-        public List<PreviousYearsCoached> YearCoached { get; set; }
+        public List<PreviousYearsCoached> PreviousYearsCoached { get; set; }
         
-        public List<PreviousGradesCoached> PrevGradesCoached { get; set; }
+        public List<PreviousGradesCoached> PreviousGradesCoached { get; set; }
         public string NameOfChild { get; set; }
 
         public int YearsExperience { get; set; }
@@ -71,9 +74,9 @@ namespace KidSports.Models
         public DateTime PledgeApprovalDate { get; set; }
         public string PledgeInitials { get; set; }
 
-        public List<AppAreaJoin> Areas { get; set; }
+        public List<Area> Region { get; set; }
         public string AppGender { get; set; }
-        public string AppGrade { get; set; }
+        public string AppGrade { get;  set; }
         public Area AppArea { get; set; }
     }
 }

@@ -1639,8 +1639,7 @@
           "Microsoft.Extensions.Logging.Debug": "1.0.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
           "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-          "System.ComponentModel.Annotations": "4.3.0",
-          "xunit": "2.2.0"
+          "System.ComponentModel.Annotations": "4.3.0"
         },
         "runtime": {
           "KidSports.dll": {}

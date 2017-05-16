@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +7,7 @@ namespace KidSports.Models.ViewModels
 {
     public class CoachInfoViewModel
     {
+        public string Direction { get; set; }
         public int ApplicationID { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -16,8 +16,6 @@ namespace KidSports.Models.ViewModels
         public LastName PreviousLastName2 { get; set; }
         public LastName PreviousLastName3 { get; set; }
 
-
-        public bool HasLivedOutsideUSA{ get; set; }
         public List<LastName> PreviousLastNames { get; set; }
         public string PreferredName { get; set; }
         public DateTime DOB { get; set; }
@@ -33,7 +31,6 @@ namespace KidSports.Models.ViewModels
         public string CurrentEmployer { get; set; }
         public string JobTitle { get; set; }
         public Nullable<bool> IsApproved { get; set; }
-        public List<State> AllStates { get; set; }
 
 
 

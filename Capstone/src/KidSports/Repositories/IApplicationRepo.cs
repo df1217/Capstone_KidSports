@@ -10,6 +10,8 @@ namespace KidSports.Repositories
     {
         List<Application> GetAllApplications();
         IQueryable<Application> GetFilteredApplications(ApplicantSearchModel searchModel);
-
+        Application GetApplicationByID(int id);
+        int Update(Application app);
+        Application CreateApp(Application app);
     }
 }

@@ -13,5 +13,6 @@ namespace KidSports.Models
         public string MiddleName { get; set; }
 
         public List<Application> UserApplications{ get; set; }
+        public Application currentYearApp { get; set; }
     }
 }

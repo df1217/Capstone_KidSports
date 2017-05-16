@@ -9,7 +9,7 @@ namespace Kidsports.Tests
 {
     public class UserTests
     {
-        
+
         [Fact]
         public void CanCreateUser()
         {
@@ -40,6 +40,6 @@ namespace Kidsports.Tests
             Assert.Equal("Jones", n.LastName);
         }
 
-        
+
     }
 }

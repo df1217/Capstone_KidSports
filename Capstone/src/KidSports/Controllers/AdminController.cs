@@ -24,5 +24,10 @@ namespace KidSports.Controllers
         {
             return View();
         }
+
+        public IActionResult UpdateProfile()
+        {
+            return View();
+        }
     }
 }
