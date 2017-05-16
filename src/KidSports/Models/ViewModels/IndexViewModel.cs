@@ -8,10 +8,8 @@ namespace KidSports.Models.ViewModels
     public class IndexViewModel
     {
         public int ApplicationID { get; set; }
-
-        public string Direction { get; set; }
-
-        public string PageName { get; set; }
         public ApplicationStatus ApplicationStatus { get; set; }
+        public Application Application { get; set; }
+        public string PageName { get; set; }
     }
 }

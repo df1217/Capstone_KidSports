@@ -20,6 +20,9 @@ namespace KidSports.Models
         // string xml
         public DateTime DOB { get; set; }
 
+        public bool IsHeadCoach { get; set; }
+        public bool IsAssistantCoach { get; set; }
+
         public string CurrentEmployer { get; set; }
         public string JobTitle { get; set; }
 
