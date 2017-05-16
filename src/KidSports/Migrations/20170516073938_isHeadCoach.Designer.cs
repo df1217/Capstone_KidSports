@@ -8,8 +8,8 @@ using KidSports.Repositories;
 namespace KidSports.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170430222745_init")]
-    partial class init
+    [Migration("20170516073938_isHeadCoach")]
+    partial class isHeadCoach
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,17 +24,15 @@ namespace KidSports.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<DateTime>("AppApprovalDate");
+                    b.Property<int?>("AppAreaAreaID");
 
-                    b.Property<DateTime>("AppCompletionDate");
+                    b.Property<string>("AppGender");
 
-                    b.Property<bool>("AppIsChecked");
+                    b.Property<string>("AppGrade");
 
                     b.Property<int?>("AppSchoolSchoolID");
 
                     b.Property<int?>("AppSportSportID");
-
-                    b.Property<DateTime>("AppStartDate");
 
                     b.Property<string>("BackgroundRequest");
 
@@ -45,10 +43,6 @@ namespace KidSports.Migrations
                     b.Property<string>("BadgePath");
 
                     b.Property<DateTime>("BadgeSubmissionDate");
-
-                    b.Property<DateTime>("BcApprovalDate");
-
-                    b.Property<DateTime>("BcSubmissionDate");
 
                     b.Property<string>("City");
 
@@ -61,6 +55,12 @@ namespace KidSports.Migrations
                     b.Property<string>("DlPath");
 
                     b.Property<DateTime>("DlSubmissionDate");
+
+                    b.Property<bool>("HasContacted");
+
+                    b.Property<bool>("IsAssistantCoach");
+
+                    b.Property<bool>("IsHeadCoach");
 
                     b.Property<string>("JobTitle");
 
@@ -90,10 +90,6 @@ namespace KidSports.Migrations
 
                     b.Property<DateTime>("PledgeSubmissionDate");
 
-                    b.Property<DateTime>("PrefApprovalDate");
-
-                    b.Property<DateTime>("PrefSubmissionDate");
-
                     b.Property<int?>("StateID");
 
                     b.Property<string>("UserId");
@@ -104,6 +100,8 @@ namespace KidSports.Migrations
 
                     b.HasKey("ApplicationID");
 
+                    b.HasIndex("AppAreaAreaID");
+
                     b.HasIndex("AppSchoolSchoolID");
 
                     b.HasIndex("AppSportSportID");
@@ -113,6 +111,38 @@ namespace KidSports.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Applications");
+                });
+
+            modelBuilder.Entity("KidSports.Models.ApplicationStatus", b =>
+                {
+                    b.Property<int>("ApplicationStatusID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("AppApprovalDate");
+
+                    b.Property<DateTime>("AppCompletionDate");
+
+                    b.Property<DateTime>("AppDenialDate");
+
+                    b.Property<DateTime>("AppStartDate");
+
+                    b.Property<int>("ApplicationID");
+
+                    b.Property<DateTime>("BcApprovalDate");
+
+                    b.Property<DateTime>("BcStartDate");
+
+                    b.Property<DateTime>("BcSubmissionDate");
+
+                    b.Property<DateTime>("PrefApprovalDate");
+
+                    b.Property<DateTime>("PrefDenialDate");
+
+                    b.Property<DateTime>("PrefSubmissionDate");
+
+                    b.HasKey("ApplicationStatusID");
+
+                    b.ToTable("ApplicationStatus");
                 });
 
             modelBuilder.Entity("KidSports.Models.Area", b =>
@@ -242,7 +272,7 @@ namespace KidSports.Migrations
 
                     b.HasIndex("ApplicationID");
 
-                    b.ToTable("State");
+                    b.ToTable("States");
                 });
 
             modelBuilder.Entity("KidSports.Models.User", b =>
@@ -288,6 +318,8 @@ namespace KidSports.Migrations
                     b.Property<string>("UserName")
                         .HasAnnotation("MaxLength", 256);
 
+                    b.Property<int?>("currentYearAppApplicationID");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -296,6 +328,8 @@ namespace KidSports.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasName("UserNameIndex");
+
+                    b.HasIndex("currentYearAppApplicationID");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -409,6 +443,10 @@ namespace KidSports.Migrations
 
             modelBuilder.Entity("KidSports.Models.Application", b =>
                 {
+                    b.HasOne("KidSports.Models.Area", "AppArea")
+                        .WithMany()
+                        .HasForeignKey("AppAreaAreaID");
+
                     b.HasOne("KidSports.Models.School", "AppSchool")
                         .WithMany()
                         .HasForeignKey("AppSchoolSchoolID");
@@ -473,6 +511,13 @@ namespace KidSports.Migrations
                     b.HasOne("KidSports.Models.Application")
                         .WithMany("StatesLived")
                         .HasForeignKey("ApplicationID");
+                });
+
+            modelBuilder.Entity("KidSports.Models.User", b =>
+                {
+                    b.HasOne("KidSports.Models.Application", "currentYearApp")
+                        .WithMany()
+                        .HasForeignKey("currentYearAppApplicationID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

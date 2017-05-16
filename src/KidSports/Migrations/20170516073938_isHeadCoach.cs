@@ -5,10 +5,33 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace KidSports.Migrations
 {
-    public partial class init : Migration
+    public partial class isHeadCoach : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ApplicationStatus",
+                columns: table => new
+                {
+                    ApplicationStatusID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AppApprovalDate = table.Column<DateTime>(nullable: false),
+                    AppCompletionDate = table.Column<DateTime>(nullable: false),
+                    AppDenialDate = table.Column<DateTime>(nullable: false),
+                    AppStartDate = table.Column<DateTime>(nullable: false),
+                    ApplicationID = table.Column<int>(nullable: false),
+                    BcApprovalDate = table.Column<DateTime>(nullable: false),
+                    BcStartDate = table.Column<DateTime>(nullable: false),
+                    BcSubmissionDate = table.Column<DateTime>(nullable: false),
+                    PrefApprovalDate = table.Column<DateTime>(nullable: false),
+                    PrefDenialDate = table.Column<DateTime>(nullable: false),
+                    PrefSubmissionDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplicationStatus", x => x.ApplicationStatusID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Sports",
                 columns: table => new
@@ -23,34 +46,6 @@ namespace KidSports.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sports", x => x.SportID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    MiddleName = table.Column<string>(nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,47 +77,6 @@ namespace KidSports.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserLogins",
-                columns: table => new
-                {
-                    LoginProvider = table.Column<string>(nullable: false),
-                    ProviderKey = table.Column<string>(nullable: false),
-                    ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -139,30 +93,6 @@ namespace KidSports.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserRoles",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -258,7 +188,7 @@ namespace KidSports.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "State",
+                name: "States",
                 columns: table => new
                 {
                     StateID = table.Column<int>(nullable: false)
@@ -268,7 +198,36 @@ namespace KidSports.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_State", x => x.StateID);
+                    table.PrimaryKey("PK_States", x => x.StateID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    MiddleName = table.Column<string>(nullable: true),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
+                    currentYearAppApplicationID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -278,25 +237,25 @@ namespace KidSports.Migrations
                     ApplicationID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Address = table.Column<string>(nullable: true),
-                    AppApprovalDate = table.Column<DateTime>(nullable: false),
-                    AppCompletionDate = table.Column<DateTime>(nullable: false),
-                    AppIsChecked = table.Column<bool>(nullable: false),
+                    AppAreaAreaID = table.Column<int>(nullable: true),
+                    AppGender = table.Column<string>(nullable: true),
+                    AppGrade = table.Column<string>(nullable: true),
                     AppSchoolSchoolID = table.Column<int>(nullable: true),
                     AppSportSportID = table.Column<int>(nullable: true),
-                    AppStartDate = table.Column<DateTime>(nullable: false),
                     BackgroundRequest = table.Column<string>(nullable: true),
                     BackgroundResult = table.Column<string>(nullable: true),
                     BadgeApprovalDate = table.Column<DateTime>(nullable: false),
                     BadgePath = table.Column<string>(nullable: true),
                     BadgeSubmissionDate = table.Column<DateTime>(nullable: false),
-                    BcApprovalDate = table.Column<DateTime>(nullable: false),
-                    BcSubmissionDate = table.Column<DateTime>(nullable: false),
                     City = table.Column<string>(nullable: true),
                     CurrentEmployer = table.Column<string>(nullable: true),
                     DOB = table.Column<DateTime>(nullable: false),
                     DlApprovalDate = table.Column<DateTime>(nullable: false),
                     DlPath = table.Column<string>(nullable: true),
                     DlSubmissionDate = table.Column<DateTime>(nullable: false),
+                    HasContacted = table.Column<bool>(nullable: false),
+                    IsAssistantCoach = table.Column<bool>(nullable: false),
+                    IsHeadCoach = table.Column<bool>(nullable: false),
                     JobTitle = table.Column<string>(nullable: true),
                     NameOfChild = table.Column<string>(nullable: true),
                     NfhsApprovalDate = table.Column<DateTime>(nullable: false),
@@ -311,8 +270,6 @@ namespace KidSports.Migrations
                     PledgeApprovalDate = table.Column<DateTime>(nullable: false),
                     PledgeInitials = table.Column<string>(nullable: true),
                     PledgeSubmissionDate = table.Column<DateTime>(nullable: false),
-                    PrefApprovalDate = table.Column<DateTime>(nullable: false),
-                    PrefSubmissionDate = table.Column<DateTime>(nullable: false),
                     StateID = table.Column<int>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
                     YearsExperience = table.Column<int>(nullable: false),
@@ -321,6 +278,12 @@ namespace KidSports.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Applications", x => x.ApplicationID);
+                    table.ForeignKey(
+                        name: "FK_Applications_Areas_AppAreaAreaID",
+                        column: x => x.AppAreaAreaID,
+                        principalTable: "Areas",
+                        principalColumn: "AreaID",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Applications_Schools_AppSchoolSchoolID",
                         column: x => x.AppSchoolSchoolID,
@@ -334,9 +297,9 @@ namespace KidSports.Migrations
                         principalColumn: "SportID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Applications_State_StateID",
+                        name: "FK_Applications_States_StateID",
                         column: x => x.StateID,
-                        principalTable: "State",
+                        principalTable: "States",
                         principalColumn: "StateID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -346,6 +309,76 @@ namespace KidSports.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserLogins",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
+                    ProviderDisplayName = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    RoleId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Applications_AppAreaAreaID",
+                table: "Applications",
+                column: "AppAreaAreaID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Applications_AppSchoolSchoolID",
@@ -398,8 +431,8 @@ namespace KidSports.Migrations
                 column: "AreaID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_State_ApplicationID",
-                table: "State",
+                name: "IX_States_ApplicationID",
+                table: "States",
                 column: "ApplicationID");
 
             migrationBuilder.CreateIndex(
@@ -412,6 +445,11 @@ namespace KidSports.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_currentYearAppApplicationID",
+                table: "AspNetUsers",
+                column: "currentYearAppApplicationID");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
@@ -484,9 +522,17 @@ namespace KidSports.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_State_Applications_ApplicationID",
-                table: "State",
+                name: "FK_States_Applications_ApplicationID",
+                table: "States",
                 column: "ApplicationID",
+                principalTable: "Applications",
+                principalColumn: "ApplicationID",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_AspNetUsers_Applications_currentYearAppApplicationID",
+                table: "AspNetUsers",
+                column: "currentYearAppApplicationID",
                 principalTable: "Applications",
                 principalColumn: "ApplicationID",
                 onDelete: ReferentialAction.Restrict);
@@ -494,6 +540,14 @@ namespace KidSports.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Applications_Areas_AppAreaAreaID",
+                table: "Applications");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Schools_Areas_AreaID",
+                table: "Schools");
+
             migrationBuilder.DropForeignKey(
                 name: "FK_Applications_Schools_AppSchoolSchoolID",
                 table: "Applications");
@@ -503,8 +557,15 @@ namespace KidSports.Migrations
                 table: "Applications");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Applications_State_StateID",
+                name: "FK_Applications_States_StateID",
                 table: "Applications");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Applications_AspNetUsers_UserId",
+                table: "Applications");
+
+            migrationBuilder.DropTable(
+                name: "ApplicationStatus");
 
             migrationBuilder.DropTable(
                 name: "Country");
@@ -537,22 +598,22 @@ namespace KidSports.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Schools");
+                name: "Areas");
 
             migrationBuilder.DropTable(
-                name: "Areas");
+                name: "Schools");
 
             migrationBuilder.DropTable(
                 name: "Sports");
 
             migrationBuilder.DropTable(
-                name: "State");
-
-            migrationBuilder.DropTable(
-                name: "Applications");
+                name: "States");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Applications");
         }
     }
 }

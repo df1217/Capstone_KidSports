@@ -57,6 +57,10 @@ namespace KidSports.Migrations
 
                     b.Property<bool>("HasContacted");
 
+                    b.Property<bool>("IsAssistantCoach");
+
+                    b.Property<bool>("IsHeadCoach");
+
                     b.Property<string>("JobTitle");
 
                     b.Property<string>("NameOfChild");

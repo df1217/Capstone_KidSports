@@ -7,13 +7,12 @@ namespace KidSports.Models.ViewModels
 {
     public class CoachInterestViewModel
     {
+        public string Direction { get; set; }
         public int ApplicationID { get; set; }
         public ApplicationStatus ApplicationStatus { get; set; }
         public bool IsHeadCoach { get; set; }
         public Sport Sport { get; set; }
-        public string Direction { get; set; }
 
-        public string PageName { get; set; }
         public Area Area { get; set; }
         public School School { get; set; }
 

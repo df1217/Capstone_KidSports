@@ -7,6 +7,7 @@ namespace KidSports.Models.ViewModels
 {
     public class CoachInfoViewModel
     {
+        public string Direction { get; set; }
         public int ApplicationID { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -14,10 +15,6 @@ namespace KidSports.Models.ViewModels
         public LastName PreviousLastName1 { get; set; }
         public LastName PreviousLastName2 { get; set; }
         public LastName PreviousLastName3 { get; set; }
-
-        public string Direction { get; set; }
-
-        public string PageName { get; set; }
 
         public List<LastName> PreviousLastNames { get; set; }
         public string PreferredName { get; set; }

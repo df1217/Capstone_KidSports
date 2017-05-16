@@ -49,25 +49,25 @@
        @if (User.IsInRole("SportsManager") || User.IsInRole("Admin"))
        {
         <div class="btn-group col-xs-12 col-sm-3">
-            <button onclick="location='/Application/ID'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
+            <button type="submit" name="Direction" value="previous" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
         </div>
 
            Html.RenderPartial("ApproveDeny.cshtml");
 
         <div class="btn-group col-xs-12 col-sm-3">
-            <button onclick="location='/Application/applications'" type="button" class="btn btn-primary col-xs-12 pull-right"><i class="fa fa-flag-checkered" aria-hidden='true'></i> Finish</button>
+            <button type="submit" name="Direction" value="next" class="btn btn-primary col-xs-12 pull-right"><i class="fa fa-flag-checkered" aria-hidden='true'></i> Finish</button>
         </div>
        }
        else
        {
             <div class="btn-group col-xs-12 col-sm-3">
-                <button onclick="location='/Application/ID'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
+                <button type="submit" name="Direction" value="previous" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
             </div>
 
             <div class="col-sm-6"></div>
 
             <div class="btn-group col-xs-12 col-sm-3">
-                <button onclick="location='/Application/Index'" type="button" class="btn btn-primary col-xs-12 pull-right"><i class="fa fa-flag-checkered" aria-hidden='true'></i> Finish</button>
+                <button type="submit" name="Direction" value="next" class="btn btn-primary col-xs-12 pull-right"><i class="fa fa-flag-checkered" aria-hidden='true'></i> Finish</button>
             </div>
        }
     </form>

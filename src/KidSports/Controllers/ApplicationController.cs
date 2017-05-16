@@ -52,12 +52,27 @@ namespace KidSports.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(IndexViewModel ivm = null)
+        public async Task<IActionResult> Index(IndexViewModel ivm)
         {
+
             if (ivm.ApplicationID != 0)
             {
                 /* Use app id to do stuff */
-                return RedirectToAction("CoachInfo", ivm);
+                if (ivm.PageName == "CoachInfo") 
+                    return RedirectToAction("CoachInfo", ivm.ApplicationID);
+                if (ivm.PageName == "CoachInterests")
+                    return RedirectToAction("CoachInterests", ivm.ApplicationID);
+                if (ivm.PageName == "CoachPledge")
+                    return RedirectToAction("CoachPledge", ivm.ApplicationID);
+                if (ivm.PageName == "ConcussionCourse")
+                    return RedirectToAction("ConcussionCourse", ivm.ApplicationID);
+                if (ivm.PageName == "PcaCourse")
+                    return RedirectToAction("PcaCourse", ivm.ApplicationID);
+                if (ivm.PageName == "ID")
+                    return RedirectToAction("ID", ivm.ApplicationID);
+                if (ivm.PageName == "Badge")
+                    return RedirectToAction("Badge", ivm.ApplicationID);
+                return View(ivm);
             }
             else
             {
@@ -70,7 +85,7 @@ namespace KidSports.Controllers
                     user.currentYearApp = app;
                     userRepo.Update(user);
                 }
-                return RedirectToAction("CoachInfo", ivm);
+                return RedirectToAction("CoachInfo", ivm.ApplicationID);
             }
         }
 
@@ -110,156 +125,269 @@ namespace KidSports.Controllers
 
         #region Application Coach Information
         [HttpGet]
-        public IActionResult CoachInfo()
+        public IActionResult CoachInfo(int AppID)
         {
+            //Get the coaches current app
+            Application currentApp = appRepo.GetApplicationByID(AppID);
             CoachInfoViewModel civm = new CoachInfoViewModel();
+            //If any information exists, bind it to the view model.
+
+            //Display the view.
             return View(civm);
         }
 
         [HttpPost]
         public IActionResult CoachInfo(CoachInfoViewModel civm)
         {
-            if (civm.Direction == "Next")
-                return RedirectToAction("CoachInterests");
+            //Process all data that is in the view model. If anything is new or changed,
+            //update the coaches current application.
 
+
+            //Decide which direction is being taken (this page only has next).
+            if (civm.Direction == "next")
+                return RedirectToAction("CoachInterests", civm.ApplicationID);
+
+            //if all else fails, post back to the same page.
             return View(civm);
         }
         #endregion
 
         #region Application Coach Interests
         [HttpGet]
-        public IActionResult CoachInterests()
+        public IActionResult CoachInterests(int AppID)
         {
-            return View();
+            //Get the coaches current app
+            Application currentApp = appRepo.GetApplicationByID(AppID);
+            CoachInterestViewModel civm = new CoachInterestViewModel();
+            //If any information exists, bind it to the view model.
+
+            //Display the view.
+            return View(civm);
         }
 
-        //CoachInterests(int AppID, ViewModel vm)
-        //Application a = repo.GetApplicationByID(AppID)
-        //if (!IsNullOrEmpty(a.information)
-        //    vm.information == a.information
-        // check rest of app see what fields are already complete
-        //
-        // return view(vm);
+        [HttpPost]
+        public IActionResult CoachInterests(CoachInterestViewModel civm)
+        {
+            //Process all data that is in the view model. If anything is new or changed,
+            //update the coaches current application.
 
 
+            //Decide which direction is being taken.
+            if (civm.Direction == "previous")
+                return RedirectToAction("CoachInfo", civm.ApplicationID);
+            if (civm.Direction == "next")
+                return RedirectToAction("CoachPledge", civm.ApplicationID);
 
-        //[HttpPost]
-        //public IActionResult CoachInterests()
-        //{
-        //    return View();
-        //}
+            //if all else fails, post back to the same page.
+            return View(civm);
+        }
         #endregion
 
         #region Application Coach Pledge
         [HttpGet]
-        public IActionResult CoachPledge()
+        public IActionResult CoachPledge(int AppID)
         {
-            return View();
+            //Get the coaches current app
+            Application currentApp = appRepo.GetApplicationByID(AppID);
+            CoachPledgeViewModel cpvm = new CoachPledgeViewModel();
+            //If any information exists, bind it to the view model.
+
+            //Display the view.
+            return View(cpvm);
         }
 
-        //[HttpPost]
-        //public IActionResult CoachPledge()
-        //{
-        //    return View();
-        //}
+        [HttpPost]
+        public IActionResult CoachPledge(CoachPledgeViewModel cpvm)
+        {
+            //Process all data that is in the view model. If anything is new or changed,
+            //update the coaches current application.
+
+
+            //Decide which direction is being taken.
+            if (cpvm.Direction == "previous")
+                return RedirectToAction("CoachInterests", cpvm.ApplicationID);
+            if (cpvm.Direction == "next")
+                return RedirectToAction("ConcussionCourse", cpvm.ApplicationID);
+
+            //if all else fails, post back to the same page.
+            return View(cpvm);
+        }
         #endregion
 
         #region Application Concussion Course
         [HttpGet]
-        public IActionResult ConcussionCourse()
+        public IActionResult ConcussionCourse(int AppID)
         {
-            return View();
+            //Get the coaches current app
+            Application currentApp = appRepo.GetApplicationByID(AppID);
+            ConcussionCourseViewModel ccvm = new ConcussionCourseViewModel();
+            //If any information exists, bind it to the view model.
+
+            //Display the view.
+            return View(ccvm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> ConcussionCourse(ConcussionCourseViewModel p4Vm)
+        public async Task<IActionResult> ConcussionCourse(ConcussionCourseViewModel ccvm)
         {
-                if (p4Vm.File != null)
+            //Process all data that is in the view model. If anything is new or changed,
+            //update the coaches current application.
+            Application currentApp = appRepo.GetApplicationByID(ccvm.ApplicationID);
+
+            if (ccvm.File != null)
+            {
+                var uploads = Path.Combine(_environment.WebRootPath);
+                if (ccvm.File.Length > 0)
                 {
-                    var uploads = Path.Combine(_environment.WebRootPath);
-                    if (p4Vm.File.Length > 0)
+                    using (var fileStream = new FileStream(Path.Combine(uploads, ccvm.File.FileName), FileMode.Create))
                     {
-                        using (var fileStream = new FileStream(Path.Combine(uploads, p4Vm.File.FileName), FileMode.Create))
-                        {
-                            await p4Vm.File.CopyToAsync(fileStream);
-                        }
-                        //p4Vm.Application.NfhsPath = $"\\{p4Vm.File.FileName}";
-                        return RedirectToAction("PcaCourse", "Application");
+                        await ccvm.File.CopyToAsync(fileStream);
                     }
-                    else return View(p4Vm);
+                    //ccvm.Application.NfhsPath = $"\\{p4Vm.File.FileName}";
                 }
-                else return View(p4Vm);
+            }
+
+           
+
+
+            //Decide which direction is being taken.
+            if (ccvm.Direction == "previous")
+                return RedirectToAction("CoachPledge", ccvm.ApplicationID);
+            if (ccvm.Direction == "next")
+            {
+                if (currentApp.IsHeadCoach == true)
+                    return RedirectToAction("PcaCourse", ccvm.ApplicationID);
+                else
+                    return RedirectToAction("ID", ccvm.ApplicationID);
+            }
+
+            //if all else fails, post back to the same page.
+            return View(ccvm);
         }
         #endregion
 
         #region Application Pca Course
         [HttpGet]
-        public IActionResult PcaCourse()
+        public IActionResult PcaCourse(int AppID)
         {
-            return View();
+            //Get the coaches current app
+            Application currentApp = appRepo.GetApplicationByID(AppID);
+            PcaCourseViewModel pcvm = new PcaCourseViewModel();
+            //If any information exists, bind it to the view model.
+
+            //Display the view.
+            return View(pcvm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> PcaCourse(IDViewModel p5Vm)
+        public async Task<IActionResult> PcaCourse(PcaCourseViewModel pcvm)
         {
+            //Process all data that is in the view model. If anything is new or changed,
+            //update the coaches current application.
             var uploads = Path.Combine(_environment.WebRootPath);
-            if (p5Vm.File.Length > 0)
+            if (pcvm.File.Length > 0)
             {
-                using (var fileStream = new FileStream(Path.Combine(uploads, p5Vm.File.FileName), FileMode.Create))
+                using (var fileStream = new FileStream(Path.Combine(uploads, pcvm.File.FileName), FileMode.Create))
                 {
-                    await p5Vm.File.CopyToAsync(fileStream);
+                    await pcvm.File.CopyToAsync(fileStream);
                 }
                 //p5Vm.Application.PcaPath = $"\\{p5Vm.File.FileName}";
-                return RedirectToAction("ID", "Application");
             }
-            return View(p5Vm);
+
+            //Decide which direction is being taken.
+            if (pcvm.Direction == "previous")
+                return RedirectToAction("CoachPledge", pcvm.ApplicationID);
+            if (pcvm.Direction == "next")
+                return RedirectToAction("ID", pcvm.ApplicationID);
+
+            //if all else fails, post back to the same page.
+            return View(pcvm);
         }
         #endregion
 
         #region Application ID
         [HttpGet]
-        public IActionResult ID()
+        public IActionResult ID(int AppID)
         {
-            return View();
+            //Get the coaches current app
+            Application currentApp = appRepo.GetApplicationByID(AppID);
+            IDViewModel idvm = new IDViewModel();
+            //If any information exists, bind it to the view model.
+
+            //Display the view.
+            return View(idvm);
         }
+
         [HttpPost]
-        public async Task<IActionResult> ID(PcaCourseViewModel p6Vm)
+        public async Task<IActionResult> ID(IDViewModel idvm)
         {
+            //Process all data that is in the view model. If anything is new or changed,
+            //update the coaches current application.
+            Application currentApp = appRepo.GetApplicationByID(idvm.ApplicationID);
+
             var uploads = Path.Combine(_environment.WebRootPath);
-            if (p6Vm.File.Length > 0)
+            if (idvm.File.Length > 0)
             {
-                using (var fileStream = new FileStream(Path.Combine(uploads, p6Vm.File.FileName), FileMode.Create))
+                using (var fileStream = new FileStream(Path.Combine(uploads, idvm.File.FileName), FileMode.Create))
                 {
-                    await p6Vm.File.CopyToAsync(fileStream);
+                    await idvm.File.CopyToAsync(fileStream);
                 }
                 //p6Vm.Application.DlPath = $"\\{p6Vm.File.FileName}";
-                return RedirectToAction("Badge", "Application");
             }
-            return View(p6Vm);
+
+            //Decide which direction is being taken.
+            if (idvm.Direction == "previous")
+            {
+                if (currentApp.IsHeadCoach == true)
+                    return RedirectToAction("PcaCourse", idvm.ApplicationID);
+                else
+                    return RedirectToAction("ConcussionCourse", idvm.ApplicationID);
+            }
+            if (idvm.Direction == "next")
+                return RedirectToAction("Badge", idvm.ApplicationID);
+
+            //if all else fails, post back to the same page.
+            return View(idvm);
         }
         #endregion
 
         #region Application Badge
         [HttpGet]
-        public IActionResult Badge()
+        public IActionResult Badge(int AppID)
         {
-            return View();
+            //Get the coaches current app
+            Application currentApp = appRepo.GetApplicationByID(AppID);
+            BadgeViewModel bvm = new BadgeViewModel();
+            //If any information exists, bind it to the view model.
+
+            //Display the view.
+            return View(bvm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Page7(BadgeViewModel p7Vm)
+        public async Task<IActionResult> Page7(BadgeViewModel bvm)
         {
+            //Process all data that is in the view model. If anything is new or changed,
+            //update the coaches current application.
             var uploads = Path.Combine(_environment.WebRootPath);
-            if (p7Vm.File.Length > 0)
+            if (bvm.File.Length > 0)
             {
-                using (var fileStream = new FileStream(Path.Combine(uploads, p7Vm.File.FileName), FileMode.Create))
+                using (var fileStream = new FileStream(Path.Combine(uploads, bvm.File.FileName), FileMode.Create))
                 {
-                    await p7Vm.File.CopyToAsync(fileStream);
+                    await bvm.File.CopyToAsync(fileStream);
                 }
                 //p7Vm.Application.DlPath = $"\\{p7Vm.File.FileName}";
-                return RedirectToAction("Appinprocess", "Application");
             }
-            return View(p7Vm);
+
+            //Decide which direction is being taken.
+            if (bvm.Direction == "previous")
+                return RedirectToAction("ID", bvm.ApplicationID);
+            //This is going to need to check if the user is an admin/sportsmanager since they have a different "index"
+            if (bvm.Direction == "next")
+                return RedirectToAction("Index");
+
+            //if all else fails, post back to the same page.
+            return View(bvm);
         }
         #endregion
         

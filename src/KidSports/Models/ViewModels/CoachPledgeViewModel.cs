@@ -7,10 +7,9 @@ namespace KidSports.Models.ViewModels
 {
     public class CoachPledgeViewModel
     {
-        public int ApplicationID { get; set; }
         public string Direction { get; set; }
+        public int ApplicationID { get; set; }
 
-        public string PageName { get; set; }
         public ApplicationStatus ApplicationStatus { get; set; }
         public string Name { get; set; }
         public string  Initials { get; set; }
