@@ -6,19 +6,23 @@ using KidSports.Models;
 using KidSports.Repositories;
 using Microsoft.AspNetCore.Identity;
 
-namespace Kidsports.Tests.Repositories
+namespace Kidsports.Tests
 {
     public class FakeRepository : IApplicationRepo
     {
-        User user1 = new User() { FirstName = "Paul", MiddleName = "M", LastName = "Smith" };
-        User user2 = new User() { FirstName = "Scott", MiddleName = "J", LastName = "Kinney" };
-        User user3 = new User() { FirstName = "Belinda", MiddleName = "L", LastName = "Carlisle" };
-        List<Application> applications = new List<Application>();
-
+        User user1;
+        User user2;
+        User user3;
+        List<Application> applications;
 
         public FakeRepository()
 
         {
+            user1 = new User() { FirstName = "Paul", MiddleName = "M", LastName = "Smith" };
+            user2 = new User() { FirstName = "Scott", MiddleName = "J", LastName = "Kinney" };
+            user3 = new User() { FirstName = "Belinda", MiddleName = "L", LastName = "Carlisle" };
+            applications = new List<Application>();
+
             Application app1 = new Application()
             {
 
@@ -34,27 +38,27 @@ namespace Kidsports.Tests.Repositories
 
                 AppSport = new Sport() { SportName = "Soccer", Gender = "Boys", MaxGrade = 7 },
 
-                //StatesLived = new List<State>() {
-                //   new State() {StateName = "California" },
-                //   new State() {StateName = "Oregon" },
-                //   new State() {StateName = "Idaho" },
-                //},
-                //CountriesLived = new List<Country> {
-                //    new Country() {CountryName = "Canada" },
-                //},
+                StatesLived = new List<State>() {
+                   new State() {StateName = "California" },
+                   new State() {StateName = "Oregon" },
+                   new State() {StateName = "Idaho" },
+                },
+                CountriesLived = new List<Country> {
+                    new Country() {CountryName = "Canada" },
+                },
                 CurrentEmployer = "Best Buy",
                 JobTitle = "Stocker",
 
                 //YearCoached = new List<PreviousYearsCoached> {
                 //    new PreviousYearsCoached() {YearCoached = 2010}
-                },
+                //},
                 //PrevGradesCoached = new List<PreviousGradessCoached> {
                 //    new PreviousGradessCoached() {GradeName = "8th" }
                 //},
-                YearsExperience = 6
+                YearsExperience = 7
             };
 
-
+            applications.Add(app1);
 
 
 
@@ -80,12 +84,12 @@ namespace Kidsports.Tests.Repositories
 
                 AppSport = new Sport() { SportName = "Basketball", Gender = "Boys" },
 
-                //StatesLived = new List<State> {
-                //    new State() { StateName = "Texas" }
-                //    },
-                //CountriesLived = new List<Country> {
-                //    new Country() {CountryName = "Mexico" }
-            },
+                StatesLived = new List<State> {
+                    new State() { StateName = "Texas" }
+                    },
+                CountriesLived = new List<Country> {
+                    new Country() {CountryName = "Mexico" }
+                },
                 CurrentEmployer = "Lowe's",
                 JobTitle = "Cashier",
 
@@ -99,7 +103,7 @@ namespace Kidsports.Tests.Repositories
                 YearsExperience = 5,
             };
 
-        applications.Add(app2);
+            applications.Add(app2);
 
 
 
@@ -123,34 +127,57 @@ namespace Kidsports.Tests.Repositories
 
                 AppSport = new Sport() { SportName = "lacrosse", Gender = "Girls" },
 
-                //StatesLived = new List<State> {
-                //    new State() { StateName = "Washington" }
-                //    },
-                //CountriesLived = new List<Country> {
-                //    new Country() {CountryName = "Canada" }
-                //},
+                StatesLived = new List<State> {
+                    new State() { StateName = "Washington" }
+                    },
+                CountriesLived = new List<Country> {
+                    new Country() {CountryName = "Canada" }
+                },
                 CurrentEmployer = "IDX",
                 JobTitle = "Tech Support",
 
-                YearCoached = new List<PreviousYearsCoached> {
-                    new PreviousYearsCoached() {YearCoached = 2012}
-                },
-                PrevGradesCoached = new List<PreviousGradessCoached> {
-                    new PreviousGradessCoached() {GradeName = "4th" }
-                },
+               
+                
 
                 YearsExperience = 1,
             };
 
-        user1.UserApplications.Add(app1);
-            user2.UserApplications.Add(app2);
-            user3.UserApplications.Add(app3);
-public List<Application> GetAllApplications()
+            //user1.UserApplications.Add(app1);
+            //user2.UserApplications.Add(app2);
+            //user3.UserApplications.Add(app3);
+
+        }
+
+        public List<Application> GetAllApplications()
         {
-            throw new NotImplementedException();
+            return applications;
         }
 
         public IQueryable<Application> GetFilteredApplications(ApplicantSearchModel searchModel)
+        {
+            //set up using applications to test
+            var result = applications.AsQueryable();
+            if (searchModel != null)
+            {
+                if (!string.IsNullOrEmpty(searchModel.Area))
+                    result = result.Where(x => x.AppArea.AreaName == searchModel.Area);
+
+                if (!string.IsNullOrEmpty(searchModel.School))
+                    result = result.Where(x => x.AppSchool.SchoolName == searchModel.School);
+
+                if (!string.IsNullOrEmpty(searchModel.Sport))
+                    result = result.Where(x => x.AppSport.SportName == searchModel.Sport);
+
+                if (!string.IsNullOrEmpty(searchModel.Gender))
+                    result = result.Where(x => x.AppGender == searchModel.Gender);
+
+                if (!string.IsNullOrEmpty(searchModel.Grade))
+                    result = result.Where(x => x.AppGrade == searchModel.Grade);
+            }
+            return result;
+        }
+
+        public int Update(Application application)
         {
             throw new NotImplementedException();
         }
@@ -160,13 +187,11 @@ public List<Application> GetAllApplications()
             throw new NotImplementedException();
         }
 
-        public int Update(Application app)
-        {
-            throw new NotImplementedException();
-        }
-
         public Application CreateApp(Application app)
         {
             throw new NotImplementedException();
         }
     }
+
+}
+

@@ -73,7 +73,7 @@ namespace KidSports.Models
 
         public List<Area> Region { get; set; }
         public string AppGender { get; set; }
-        public string AppGrade { get; internal set; }
-        public Area AppArea { get; internal set; }
+        public string AppGrade { get;  set; }
+        public Area AppArea { get; set; }
     }
 }
