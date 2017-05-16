@@ -4,7 +4,8 @@
 }
 
     <h1 class="text-center">Coaching Interests</h1><br />
-    <form>
+    <form asp-controller="Application" asp-action="CoachInterests" method="post">
+        <input type="hidden" asp-for="@Model.ApplicationID" value="@Model.ApplicationID" />
         <div class="well">
             <div class="row">
                 <div class="col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
@@ -136,25 +137,25 @@
         @if (User.IsInRole("SportsManager") || User.IsInRole("Admin"))
         {
             <div class="btn-group col-xs-12 col-sm-3">
-                <button onclick="location = '/Application/CoachInfo'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
+                <button type="submit" name="Direction" value="previous" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
             </div>
 
             Html.RenderPartial("ApproveDeny.cshtml");
 
             <div class="btn-group col-xs-12 col-sm-3">
-                <button onclick="location = '/Application/CoachPledge'" type="button" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i>  </button>
+                <button type="submit" name="Direction" value="next" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i>  </button>
             </div>
         }
         else
         {
             <div class="btn-group col-xs-12 col-sm-3">
-                <button onclick="location = '/Application/CoachInfo'" type="button" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
+                <button type="submit" name="Direction" value="previous" class="btn btn-primary col-xs-12 pull-left"> <i class="fa fa-arrow-left" aria-hidden='true'></i>  Previous</button>
             </div>
 
             <div class="col-sm-6"></div>
 
             <div class="btn-group col-xs-12 col-sm-3">
-                <button onclick="location = '/Application/CoachPledge'" type="button" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i>  </button>
+                <button type="submit" name="Direction" value="next" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i>  </button>
             </div>
         }
 

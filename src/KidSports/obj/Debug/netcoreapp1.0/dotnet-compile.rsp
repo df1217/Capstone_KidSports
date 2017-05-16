@@ -214,12 +214,8 @@ C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSport
 C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Controllers\AdminController.cs
 C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Controllers\ApplicationController.cs
 C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Controllers\EmployeeController.cs
-C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Migrations\20170430222745_init.cs
-C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Migrations\20170430222745_init.Designer.cs
-C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Migrations\20170430233000_Status.cs
-C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Migrations\20170430233000_Status.Designer.cs
-C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Migrations\20170513183546_sladkfjsafd.cs
-C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Migrations\20170513183546_sladkfjsafd.Designer.cs
+C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Migrations\20170516073938_isHeadCoach.cs
+C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Migrations\20170516073938_isHeadCoach.Designer.cs
 C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Migrations\ApplicationDbContextModelSnapshot.cs
 C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Models\ApplicantSearchModel.cs
 C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Models\Application.cs
@@ -249,8 +245,10 @@ C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSport
 C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Models\ViewModels\UpdateUser.cs
 C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Repositories\ApplicationDbContext.cs
 C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Repositories\ApplicationRepository.cs
+C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Repositories\AppStatusRepository.cs
 C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Repositories\AreaRepository.cs
 C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Repositories\IApplicationRepo.cs
+C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Repositories\IAppStatusRepo.cs
 C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Repositories\IAreaRepo.cs
 C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Repositories\ISchoolRepo.cs
 C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\Repositories\IStateRepo.cs
