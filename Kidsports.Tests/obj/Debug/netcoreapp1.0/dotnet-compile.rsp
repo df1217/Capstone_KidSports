@@ -214,6 +214,7 @@
 --reference:C:\Users\anuch\.nuget\packages\xunit.runner.reporters\2.2.0-beta2-build3300\lib\netstandard1.1\xunit.runner.reporters.dotnet.dll
 --reference:C:\Users\anuch\.nuget\packages\xunit.runner.utility\2.2.0-beta2-build3300\lib\netstandard1.1\xunit.runner.utility.dotnet.dll
 --reference:C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\src\KidSports\bin\Debug\netcoreapp1.0\KidSports.dll
-C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\Kidsports.Tests\Class1.cs
+C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\Kidsports.Tests\ApplicationTests.cs
+C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\Kidsports.Tests\UserTests.cs
 C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\Kidsports.Tests\Properties\AssemblyInfo.cs
-C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\Kidsports.Tests\Repositories\FakeRepository.cs
+C:\Users\anuch\Desktop\Kidsports\Kidsports051317\Capstone_KidSports\Kidsports.Tests\Repository\FakeRepository.cs
