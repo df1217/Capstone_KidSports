@@ -11,5 +11,6 @@ namespace KidSports.Models.ViewModels
         public ApplicationStatus ApplicationStatus { get; set; }
         public Application Application { get; set; }
         public string PageName { get; set; }
+        public string UserFirstName { get; set; }
     }
 }
