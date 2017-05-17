@@ -8,8 +8,8 @@ using KidSports.Repositories;
 namespace KidSports.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170516073938_isHeadCoach")]
-    partial class isHeadCoach
+    [Migration("20170517225712_AspFor")]
+    partial class AspFor
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,6 +64,8 @@ namespace KidSports.Migrations
 
                     b.Property<string>("JobTitle");
 
+                    b.Property<bool>("LivedOutsideUSA");
+
                     b.Property<string>("NameOfChild");
 
                     b.Property<DateTime>("NfhsApprovalDate");
@@ -95,6 +97,8 @@ namespace KidSports.Migrations
                     b.Property<string>("UserId");
 
                     b.Property<int>("YearsExperience");
+
+                    b.Property<int>("YearsLivedInOregon");
 
                     b.Property<string>("ZipCode");
 
@@ -161,20 +165,28 @@ namespace KidSports.Migrations
                     b.ToTable("Areas");
                 });
 
-            modelBuilder.Entity("KidSports.Models.Country", b =>
+            modelBuilder.Entity("KidSports.Models.Experience", b =>
                 {
-                    b.Property<int>("CountryID")
+                    b.Property<int>("ExperienceID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ApplicationID");
+                    b.Property<string>("ExperienceName");
 
-                    b.Property<string>("CountryName");
+                    b.HasKey("ExperienceID");
 
-                    b.HasKey("CountryID");
+                    b.ToTable("Experience");
+                });
 
-                    b.HasIndex("ApplicationID");
+            modelBuilder.Entity("KidSports.Models.Grade", b =>
+                {
+                    b.Property<int>("GradeID")
+                        .ValueGeneratedOnAdd();
 
-                    b.ToTable("Country");
+                    b.Property<string>("GradeName");
+
+                    b.HasKey("GradeID");
+
+                    b.ToTable("Grades");
                 });
 
             modelBuilder.Entity("KidSports.Models.LastName", b =>
@@ -191,38 +203,6 @@ namespace KidSports.Migrations
                     b.HasIndex("ApplicationID");
 
                     b.ToTable("LastName");
-                });
-
-            modelBuilder.Entity("KidSports.Models.PreviousGradesCoached", b =>
-                {
-                    b.Property<int>("PreviousGradesCoachedID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("ApplicationID");
-
-                    b.Property<string>("GradeName");
-
-                    b.HasKey("PreviousGradesCoachedID");
-
-                    b.HasIndex("ApplicationID");
-
-                    b.ToTable("PreviousGradesCoached");
-                });
-
-            modelBuilder.Entity("KidSports.Models.PreviousYearsCoached", b =>
-                {
-                    b.Property<int>("PreviousYearsCoachedID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("ApplicationID");
-
-                    b.Property<int>("YearCoached");
-
-                    b.HasKey("PreviousYearsCoachedID");
-
-                    b.HasIndex("ApplicationID");
-
-                    b.ToTable("PreviousYearsCoached");
                 });
 
             modelBuilder.Entity("KidSports.Models.School", b =>
@@ -471,31 +451,10 @@ namespace KidSports.Migrations
                         .HasForeignKey("ApplicationID");
                 });
 
-            modelBuilder.Entity("KidSports.Models.Country", b =>
-                {
-                    b.HasOne("KidSports.Models.Application")
-                        .WithMany("CountriesLived")
-                        .HasForeignKey("ApplicationID");
-                });
-
             modelBuilder.Entity("KidSports.Models.LastName", b =>
                 {
                     b.HasOne("KidSports.Models.Application")
                         .WithMany("PreviousLastNames")
-                        .HasForeignKey("ApplicationID");
-                });
-
-            modelBuilder.Entity("KidSports.Models.PreviousGradesCoached", b =>
-                {
-                    b.HasOne("KidSports.Models.Application")
-                        .WithMany("PreviousGradesCoached")
-                        .HasForeignKey("ApplicationID");
-                });
-
-            modelBuilder.Entity("KidSports.Models.PreviousYearsCoached", b =>
-                {
-                    b.HasOne("KidSports.Models.Application")
-                        .WithMany("PreviousYearsCoached")
                         .HasForeignKey("ApplicationID");
                 });
 

@@ -17,13 +17,22 @@ namespace KidSports.Models.ViewModels
         public School School { get; set; }
 
         public string Gender { get; set; }
-        public List<int> GradePreference{ get; set; }
+        public Grade GradePreference{ get; set; }
         public string ChildTeam { get; set; }
-        public List<PreviousYearsCoached> PreviousYearsCoached { get; set; }
-        public List<PreviousGradesCoached> PreviousGradesCoached { get; set; }
+       
         public Nullable<bool> IsApproved { get; set; }
 
+        public List<Grade> AllGrades { get; set; }
+        public List<Experience> AllExperience { get; set; }
 
+        public bool IsAssistantCoach { get; set; }
+       
+        public List<Area> AllAreas { get; set; }
+        public List<School> SchoolsByArea { get; set; }
+        public List<Sport> AllSports { get; set; }
+        public int YearsExperience { get; set; }
+
+        public List<Experience> PreviousExperience { get; set; }
 
 
 

@@ -15,7 +15,7 @@ namespace KidSports.Models.ViewModels
         public LastName PreviousLastName1 { get; set; }
         public LastName PreviousLastName2 { get; set; }
         public LastName PreviousLastName3 { get; set; }
-
+        public List<State> AllStates { get; set; }
         public List<LastName> PreviousLastNames { get; set; }
         public string PreferredName { get; set; }
         public DateTime DOB { get; set; }
@@ -25,7 +25,7 @@ namespace KidSports.Models.ViewModels
         public State State { get; set; }
         public string Zip { get; set; }
         public List<State> PreviousStates { get; set; }
-
+        public bool HasLivedOutsideUSA { get; set; }
         public string CellPhone{ get; set; }
         public string AlternatePhone { get; set; }
         public string CurrentEmployer { get; set; }

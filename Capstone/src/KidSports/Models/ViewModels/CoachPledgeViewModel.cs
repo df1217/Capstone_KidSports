@@ -10,6 +10,8 @@ namespace KidSports.Models.ViewModels
         public string Direction { get; set; }
         public int ApplicationID { get; set; }
 
+        public bool IsInAgreement { get; set; }
+
         public ApplicationStatus ApplicationStatus { get; set; }
         public string Name { get; set; }
         public string  Initials { get; set; }
