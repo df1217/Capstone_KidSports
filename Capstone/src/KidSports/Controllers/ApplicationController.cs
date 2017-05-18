@@ -298,9 +298,11 @@ namespace KidSports.Controllers
                 if (civm.Area != null) currentApp.AppArea = civm.Area;
                 if (civm.Gender != null) currentApp.AppGender = civm.Gender;
                 if (civm.GradePreference != null) currentApp.AppGrade = civm.GradePreference.GradeName;
+                currentApp.IsHeadCoach = civm.IsHeadCoach;
                 if (civm.School != null) currentApp.AppSchool = civm.School;
                 if (civm.Sport != null) currentApp.AppSport = civm.Sport;
                 currentApp.YearsExperience = civm.YearsExperience;
+                appRepo.Update(currentApp);
 
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
