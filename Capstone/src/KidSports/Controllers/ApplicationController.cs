@@ -450,6 +450,7 @@ namespace KidSports.Controllers
                 ConcussionCourseViewModel ccvm = new ConcussionCourseViewModel();
                 ccvm.ApplicationID = AppID;
                 //If any information exists, bind it to the view model.
+                if (currentApp.NfhsPath != null) ccvm.NfhsPath = currentApp.NfhsPath; else ccvm.NfhsPath = "";
 
                 //Display the view.
                 return View(ccvm);
@@ -485,7 +486,7 @@ namespace KidSports.Controllers
                         using (var fileStream = new FileStream(Path.Combine(uploads, ccvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
                         {
                             await ccvm.File.CopyToAsync(fileStream);
-                            currentApp.NfhsPath = fileStream.Name.ToString();
+                            currentApp.NfhsPath = "..\\Images\\ConcussionCourse\\" + currentApp.ApplicationID.ToString() + ".jpg";
                         }
                     }
                     appRepo.Update(currentApp);
@@ -528,6 +529,7 @@ namespace KidSports.Controllers
                 PcaCourseViewModel pcvm = new PcaCourseViewModel();
                 pcvm.ApplicationID = AppID;
                 //If any information exists, bind it to the view model.
+                if (currentApp.PcaPath != null) pcvm.PcaPath = currentApp.PcaPath; else pcvm.PcaPath = "";
 
                 //Display the view.
                 return View(pcvm);
@@ -558,7 +560,7 @@ namespace KidSports.Controllers
                     using (var fileStream = new FileStream(Path.Combine(uploads, pcvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
                     {
                         await pcvm.File.CopyToAsync(fileStream);
-                        currentApp.NfhsPath = fileStream.Name.ToString();
+                        currentApp.PcaPath = "..\\Images\\PcaCourse\\" + currentApp.ApplicationID.ToString() + ".jpg";
                     }
                 }
                 appRepo.Update(currentApp);
@@ -595,6 +597,7 @@ namespace KidSports.Controllers
                 IDViewModel idvm = new IDViewModel();
                 idvm.ApplicationID = AppID;
                 //If any information exists, bind it to the view model.
+                if (currentApp.DlPath != null) idvm.IDPath = currentApp.DlPath; else idvm.IDPath = "";
 
                 //Display the view.
                 return View(idvm);
@@ -625,7 +628,7 @@ namespace KidSports.Controllers
                     using (var fileStream = new FileStream(Path.Combine(uploads, idvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
                     {
                         await idvm.File.CopyToAsync(fileStream);
-                        currentApp.NfhsPath = fileStream.Name.ToString();
+                        currentApp.DlPath = "..\\Images\\ID\\" + currentApp.ApplicationID.ToString() + ".jpg";
                     }
                 }
                 appRepo.Update(currentApp);
@@ -668,6 +671,7 @@ namespace KidSports.Controllers
                 BadgeViewModel bvm = new BadgeViewModel();
                 bvm.ApplicationID = AppID;
                 //If any information exists, bind it to the view model.
+                if (currentApp.BadgePath != null) bvm.BadgePath = currentApp.BadgePath; else bvm.BadgePath = "";
 
                 //Display the view.
                 return View(bvm);
@@ -698,7 +702,7 @@ namespace KidSports.Controllers
                     using (var fileStream = new FileStream(Path.Combine(uploads, bvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
                     {
                         await bvm.File.CopyToAsync(fileStream);
-                        currentApp.NfhsPath = fileStream.Name.ToString();
+                        currentApp.BadgePath = "..\\Images\\Badge\\" + currentApp.ApplicationID.ToString() + ".jpg";
                     }
                 }
                 appRepo.Update(currentApp);
