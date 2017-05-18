@@ -9,8 +9,8 @@ namespace KidSports.Models
     {
         public int ApplicationID { get; set; }
         public List<State> StatesLived { get; set; }
-        public List<Country> CountriesLived { get; set; }
-        //change to boolean
+        public bool LivedOutsideUSA { get; set; }
+        
         public List<LastName> PreviousLastNames { get; set; }
 
 
@@ -22,7 +22,7 @@ namespace KidSports.Models
 
         public bool IsHeadCoach { get; set; }
         public bool IsAssistantCoach { get; set; }
-
+        public int YearsLivedInOregon { get; set; }
         public string CurrentEmployer { get; set; }
         public string JobTitle { get; set; }
 
@@ -35,10 +35,8 @@ namespace KidSports.Models
 
         public School AppSchool { get; set; }
         public Sport AppSport { get; set; }
-
-        public List<PreviousYearsCoached> PreviousYearsCoached { get; set; }
         
-        public List<PreviousGradesCoached> PreviousGradesCoached { get; set; }
+        
         public string NameOfChild { get; set; }
 
         public int YearsExperience { get; set; }

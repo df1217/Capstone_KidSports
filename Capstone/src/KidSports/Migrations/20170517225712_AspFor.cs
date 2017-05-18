@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace KidSports.Migrations
 {
-    public partial class isHeadCoach : Migration
+    public partial class AspFor : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,6 +30,32 @@ namespace KidSports.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ApplicationStatus", x => x.ApplicationStatusID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Experience",
+                columns: table => new
+                {
+                    ExperienceID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ExperienceName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Experience", x => x.ExperienceID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Grades",
+                columns: table => new
+                {
+                    GradeID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    GradeName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Grades", x => x.GradeID);
                 });
 
             migrationBuilder.CreateTable(
@@ -132,20 +158,6 @@ namespace KidSports.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Country",
-                columns: table => new
-                {
-                    CountryID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ApplicationID = table.Column<int>(nullable: true),
-                    CountryName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Country", x => x.CountryID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "LastName",
                 columns: table => new
                 {
@@ -157,34 +169,6 @@ namespace KidSports.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_LastName", x => x.LastNameID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PreviousGradesCoached",
-                columns: table => new
-                {
-                    PreviousGradesCoachedID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ApplicationID = table.Column<int>(nullable: true),
-                    GradeName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PreviousGradesCoached", x => x.PreviousGradesCoachedID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PreviousYearsCoached",
-                columns: table => new
-                {
-                    PreviousYearsCoachedID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ApplicationID = table.Column<int>(nullable: true),
-                    YearCoached = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PreviousYearsCoached", x => x.PreviousYearsCoachedID);
                 });
 
             migrationBuilder.CreateTable(
@@ -257,6 +241,7 @@ namespace KidSports.Migrations
                     IsAssistantCoach = table.Column<bool>(nullable: false),
                     IsHeadCoach = table.Column<bool>(nullable: false),
                     JobTitle = table.Column<string>(nullable: true),
+                    LivedOutsideUSA = table.Column<bool>(nullable: false),
                     NameOfChild = table.Column<string>(nullable: true),
                     NfhsApprovalDate = table.Column<DateTime>(nullable: false),
                     NfhsIsChecked = table.Column<bool>(nullable: false),
@@ -273,6 +258,7 @@ namespace KidSports.Migrations
                     StateID = table.Column<int>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
                     YearsExperience = table.Column<int>(nullable: false),
+                    YearsLivedInOregon = table.Column<int>(nullable: false),
                     ZipCode = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -406,23 +392,8 @@ namespace KidSports.Migrations
                 column: "ApplicationID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Country_ApplicationID",
-                table: "Country",
-                column: "ApplicationID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_LastName_ApplicationID",
                 table: "LastName",
-                column: "ApplicationID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PreviousGradesCoached_ApplicationID",
-                table: "PreviousGradesCoached",
-                column: "ApplicationID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PreviousYearsCoached_ApplicationID",
-                table: "PreviousYearsCoached",
                 column: "ApplicationID");
 
             migrationBuilder.CreateIndex(
@@ -490,32 +461,8 @@ namespace KidSports.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Country_Applications_ApplicationID",
-                table: "Country",
-                column: "ApplicationID",
-                principalTable: "Applications",
-                principalColumn: "ApplicationID",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
                 name: "FK_LastName_Applications_ApplicationID",
                 table: "LastName",
-                column: "ApplicationID",
-                principalTable: "Applications",
-                principalColumn: "ApplicationID",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_PreviousGradesCoached_Applications_ApplicationID",
-                table: "PreviousGradesCoached",
-                column: "ApplicationID",
-                principalTable: "Applications",
-                principalColumn: "ApplicationID",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_PreviousYearsCoached_Applications_ApplicationID",
-                table: "PreviousYearsCoached",
                 column: "ApplicationID",
                 principalTable: "Applications",
                 principalColumn: "ApplicationID",
@@ -568,16 +515,13 @@ namespace KidSports.Migrations
                 name: "ApplicationStatus");
 
             migrationBuilder.DropTable(
-                name: "Country");
+                name: "Experience");
+
+            migrationBuilder.DropTable(
+                name: "Grades");
 
             migrationBuilder.DropTable(
                 name: "LastName");
-
-            migrationBuilder.DropTable(
-                name: "PreviousGradesCoached");
-
-            migrationBuilder.DropTable(
-                name: "PreviousYearsCoached");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");

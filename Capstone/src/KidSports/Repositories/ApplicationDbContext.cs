@@ -13,8 +13,8 @@ namespace KidSports.Repositories
         public DbSet<School> Schools { get; set; }
         public DbSet<Area> Areas { get; set; }
         public DbSet<State> States { get; set; }
-        public DbSet<PreviousGradesCoached> PreviousGradesCoached { get; set; }
-        public DbSet<PreviousYearsCoached> PreviousYearsCoached{ get; set; }
+        public DbSet<Grade> Grades { get; set; }
+        public DbSet<Experience> Experience { get; set; }
         public DbSet<ApplicationStatus> ApplicationStatus{ get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

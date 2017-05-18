@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace KidSports.Models
 {
-    public class PreviousGradesCoached
+    public class Grade
     {
-        public int PreviousGradesCoachedID { get; set; }
+        public int GradeID { get; set; }
         public string GradeName { get; set; }
     }
 }
