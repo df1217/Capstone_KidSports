@@ -30,20 +30,5 @@ namespace KidSports.Models.ViewModels
         public string AlternatePhone { get; set; }
         public string CurrentEmployer { get; set; }
         public string JobTitle { get; set; }
-        public Nullable<bool> IsApproved { get; set; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

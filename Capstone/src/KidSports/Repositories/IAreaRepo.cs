@@ -9,5 +9,6 @@ namespace KidSports.Repositories
     public interface IAreaRepo
     {
         List<Area> GetAllAreas();
+        Area GetAreaByID(int id);
     }
 }

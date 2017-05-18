@@ -9,7 +9,6 @@ namespace KidSports.Models.ViewModels
     {
         public string Direction { get; set; }
         public int ApplicationID { get; set; }
-        public ApplicationStatus ApplicationStatus { get; set; }
         public bool IsHeadCoach { get; set; }
         public Sport Sport { get; set; }
 
@@ -17,10 +16,8 @@ namespace KidSports.Models.ViewModels
         public School School { get; set; }
 
         public string Gender { get; set; }
-        public Grade GradePreference{ get; set; }
+        public string GradePreference{ get; set; }
         public string ChildTeam { get; set; }
-       
-        public Nullable<bool> IsApproved { get; set; }
 
         public List<Grade> AllGrades { get; set; }
         public List<Experience> AllExperience { get; set; }
@@ -33,14 +30,7 @@ namespace KidSports.Models.ViewModels
         public int YearsExperience { get; set; }
 
         public List<Experience> PreviousExperience { get; set; }
-
-
-
-
-
-
-
-
-
+        public int newPickedAreaID { get; set; }
+        public int newPickedSchoolID { get; set; }
     }
 }

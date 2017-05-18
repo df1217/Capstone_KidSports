@@ -29,5 +29,10 @@ namespace KidSports.Repositories
         {
             return context.Schools.Where(x => area.AreaSchools.Contains(x)).ToList();
         }
+
+        public School GetSchoolByID(int id)
+        {
+            return context.Schools.Where(x => x.SchoolID == id).SingleOrDefault();
+        }
     }
 }

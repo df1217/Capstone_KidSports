@@ -43,7 +43,7 @@
                     
                         <label asp-for="Area" class="control-label">Area</label>
              
-                        <select asp-for="Area"  class="form-control">
+                        <select asp-for="newPickedAreaID"  class="form-control">
                             <option value="Any" selected="selected">Any</option>
                             @foreach (Area a in Model.AllAreas)
                             {
@@ -62,7 +62,7 @@
 
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                     <label asp-for="School" class="control-label">School</label>
-                    <select asp-for="School" class="form-control">
+                    <select asp-for="newPickedSchoolID" class="form-control">
                         <option value="" selected="selected">Any</option>
                         @foreach (School s in Model.SchoolsByArea)
                         {

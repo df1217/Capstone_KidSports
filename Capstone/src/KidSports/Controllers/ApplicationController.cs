@@ -283,8 +283,10 @@ namespace KidSports.Controllers
                 //Get the coaches current app
                 Application currentApp = appRepo.GetApplicationByID(AppID);
                 CoachInterestViewModel civm = new CoachInterestViewModel();
-                civm.ApplicationID = AppID;
+
+                #region Bind application to view model if pre-exisiting info
                 //If any information exists, bind it to the view model.
+                civm.ApplicationID = AppID;
                 civm.AllSports = sportRepo.GetAllSports();
                 civm.AllAreas = areaRepo.GetAllAreas();
                 if (civm.Area != null)
@@ -292,6 +294,16 @@ namespace KidSports.Controllers
                 else civm.SchoolsByArea = schoolRepo.GetAllSchools();
                 civm.AllGrades = gradeRepo.GetAllGrades();
                 civm.AllExperience = expRepo.GetAllExperiences();
+
+                if (currentApp.AppArea != null) civm.Area = currentApp.AppArea;
+                if (currentApp.IsHeadCoach != false) civm.IsHeadCoach = currentApp.IsHeadCoach;
+                if (currentApp.IsAssistantCoach != false) civm.IsAssistantCoach = currentApp.IsAssistantCoach;
+                if (currentApp.AppSport != null) civm.Sport = currentApp.AppSport;
+                if (currentApp.AppGender != null) civm.Gender = currentApp.AppGender;
+                if (currentApp.AppSchool != null) civm.School = currentApp.AppSchool;
+                if (currentApp.AppGrade != null) civm.GradePreference = currentApp.AppGrade;
+                if (currentApp.NameOfChild != null) civm.ChildTeam = currentApp.NameOfChild;
+
                 if (civm.PreviousExperience != null)
                 {
                     foreach (Experience e in civm.PreviousExperience)
@@ -302,6 +314,7 @@ namespace KidSports.Controllers
                        civm.PreviousExperience.Add(expRepo.GetExperienceByID(ae.ExperienceID));
                 else
                     civm.PreviousExperience = new List<Experience>();
+                #endregion
 
                 //Display the view.
                 return View(civm);
@@ -323,11 +336,13 @@ namespace KidSports.Controllers
             if (user.currentYearApp.ApplicationID == civm.ApplicationID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
             {
                 Application currentApp = appRepo.GetApplicationByID(civm.ApplicationID);
-                if (civm.Area != null) currentApp.AppArea = civm.Area;
+                if (civm.Area != null) currentApp.AppArea = areaRepo.GetAreaByID(civm.newPickedAreaID);
                 if (civm.Gender != null) currentApp.AppGender = civm.Gender;
-                if (civm.GradePreference != null) currentApp.AppGrade = civm.GradePreference.GradeName;
+                if (civm.GradePreference != null) currentApp.AppGrade = civm.GradePreference;
+                if (civm.ChildTeam != null) currentApp.NameOfChild = civm.ChildTeam;
                 currentApp.IsHeadCoach = civm.IsHeadCoach;
-                if (civm.School != null) currentApp.AppSchool = civm.School;
+                currentApp.IsAssistantCoach = civm.IsAssistantCoach;
+                if (civm.School != null) currentApp.AppSchool = schoolRepo.GetSchoolByID(civm.newPickedSchoolID);
                 if (civm.Sport != null) currentApp.AppSport = civm.Sport;
                 currentApp.YearsExperience = civm.YearsExperience;
                 appRepo.Update(currentApp);
@@ -394,10 +409,6 @@ namespace KidSports.Controllers
                 currentApp.PledgeInitials = cpvm.Initials;
                 currentApp.PledgeSubmissionDate = cpvm.PledgeSubmissionDate;
                 
-                
-
-
-
                 //Decide which direction is being taken.
                 if (cpvm.Direction == "previous")
                     return RedirectToAction("CoachInterests", new { AppID = cpvm.ApplicationID });
