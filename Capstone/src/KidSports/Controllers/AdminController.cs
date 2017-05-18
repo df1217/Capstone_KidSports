@@ -10,7 +10,6 @@ namespace KidSports.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: /<controller>/
         public IActionResult UpdateAppContent()
         {
             return View();
