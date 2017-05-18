@@ -265,6 +265,55 @@ namespace KidSports.Repositories
                 context.SaveChanges();
             }
             #endregion
+
+
+            #region Sports
+            if (!context.Sports.Any())
+            {
+                List<Sport> sports = new List<Sport>();
+                sports.Add(new Sport() { SportName = "Basketball" });
+                sports.Add(new Sport() { SportName = "Baseball" });
+                sports.Add(new Sport() { SportName = "Soccer" });
+                sports.Add(new Sport() { SportName = "Football" });
+
+                context.Sports.AddRange(sports);
+                context.SaveChanges();
+            }
+            #endregion
+
+            #region Grades
+            if (!context.Grades.Any())
+            {
+                List<Grade> grades = new List<Grade>();
+                grades.Add(new Grade() { GradeName = "Kindergarten" });
+                grades.Add(new Grade() { GradeName = "1st"  });
+                grades.Add(new Grade() { GradeName = "2nd" });
+                grades.Add(new Grade() { GradeName = "3rd"  });
+                grades.Add(new Grade() { GradeName = "4th" });
+                grades.Add(new Grade() { GradeName = "5th" });
+                grades.Add(new Grade() { GradeName = "6th" });
+                grades.Add(new Grade() { GradeName = "7th" });
+                grades.Add(new Grade() { GradeName = "8th" });
+                grades.Add(new Grade() { GradeName = "9th" });
+
+                context.Grades.AddRange(grades);
+                context.SaveChanges();
+            }
+            #endregion
+
+            #region Experience
+            if (!context.Experiences.Any())
+            {
+                List<Experience> experience = new List<Experience>();
+                experience.Add(new Experience() { ExperienceName = "Elementary School" });
+                experience.Add(new Experience() { ExperienceName = "Middle School" });
+                experience.Add(new Experience() { ExperienceName = "High School" });
+                experience.Add(new Experience() { ExperienceName = "Collegiate" });
+
+                context.Experiences.AddRange(experience);
+                context.SaveChanges();
+            }
+            #endregion
         }
     }
 }

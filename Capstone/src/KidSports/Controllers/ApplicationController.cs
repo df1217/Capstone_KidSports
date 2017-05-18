@@ -20,14 +20,27 @@ namespace KidSports.Controllers
         private IHostingEnvironment _environment;
         private IApplicationRepo appRepo;
         private IUserRepo userRepo;
+        private IStateRepo stateRepo;
+        private ISportRepo sportRepo;
+        private IAreaRepo areaRepo;
+        private ISchoolRepo schoolRepo;
+        private IGradeRepo gradeRepo;
+        private IExpRepo expRepo;
+
         UserManager<User> userManager;
 
-        public ApplicationController(UserManager<User> UM, IHostingEnvironment environment, IApplicationRepo apprepo, IUserRepo userrepo)
+        public ApplicationController(UserManager<User> UM, IHostingEnvironment environment, IApplicationRepo apprepo, IUserRepo userrepo, IStateRepo staterepo, ISportRepo sportrepo, IAreaRepo arearepo, ISchoolRepo schoolrepo, IGradeRepo graderepo, IExpRepo exprepo)
         {
             userManager = UM;
             _environment = environment;
             appRepo = apprepo;
             userRepo = userrepo;
+            stateRepo = staterepo;
+            sportRepo = sportrepo;
+            areaRepo = arearepo;
+            schoolRepo = schoolrepo;
+            gradeRepo = graderepo;
+            expRepo = exprepo;
         }
 
         #region Home Page
@@ -39,11 +52,12 @@ namespace KidSports.Controllers
             if (user != null)
             {
                 user = userRepo.GetDetailedUser(user);
+                ivm.UserFirstName = user.FirstName;
+
                 if (user.currentYearApp != null)
                 {
                     int id = user.currentYearApp.ApplicationID;
                     ivm.ApplicationID = id;
-                    ivm.UserFirstName = user.FirstName;
                     return View(ivm);
                 }
             }
@@ -59,6 +73,19 @@ namespace KidSports.Controllers
             if (user != null)
             {
                 user = userRepo.GetDetailedUser(user);
+            }
+
+            if (ivm.ApplicationID == 0)
+            {
+                Application app = new Application();
+                appRepo.CreateApp(app);
+                ivm.ApplicationID = app.ApplicationID;
+                if (user != null)
+                {
+                    user.currentYearApp = app;
+                    userRepo.Update(user);
+                }
+                return RedirectToAction("CoachInfo", new { AppID = ivm.ApplicationID });
             }
 
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
@@ -83,21 +110,11 @@ namespace KidSports.Controllers
                         return RedirectToAction("Badge", new { AppID = ivm.ApplicationID });
                     return View(ivm);
                 }
-                else
-                {
-                    Application app = new Application();
-                    appRepo.CreateApp(app);
-                    ivm.ApplicationID = app.ApplicationID;
-                    if (user != null)
-                    {
-                        user.currentYearApp = app;
-                        userRepo.Update(user);
-                    }
-                    return RedirectToAction("CoachInfo", new { AppID = ivm.ApplicationID });
-                }
             }
             else
                 return RedirectToAction("AccessDenied", "Account");
+
+            return View(ivm);
         }
 
         #endregion
@@ -152,6 +169,16 @@ namespace KidSports.Controllers
                 CoachInfoViewModel civm = new CoachInfoViewModel();
                 civm.ApplicationID = AppID;
                 //If any information exists, bind it to the view model.
+                civm.AllStates = stateRepo.GetAllStates();
+                if (currentApp.StatesLived != null)
+                {
+                    foreach (AppStateJoin a in currentApp.StatesLived)
+                        civm.PreviousStates.Add(stateRepo.GetStateByID(a.StateID));
+                } else
+                {
+                    civm.PreviousStates = new List<State>();
+                }
+
 
                 //Display the view.
                 return View(civm);
@@ -175,22 +202,29 @@ namespace KidSports.Controllers
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
                 Application currentApp = appRepo.GetApplicationByID(civm.ApplicationID);
-                user.FirstName = civm.FirstName;
-                user.LastName = civm.LastName;
-                user.MiddleName = civm.MiddleName;
-                user.PhoneNumber = civm.CellPhone;
+                #region Bind VM to application
+                if (civm.FirstName != null) user.FirstName = civm.FirstName;
+                if (civm.LastName != null) user.LastName = civm.LastName;
+                if (civm.MiddleName != null) user.MiddleName = civm.MiddleName;
+                if (civm.CellPhone != null) user.PhoneNumber = civm.CellPhone;
                 currentApp.LivedOutsideUSA = civm.HasLivedOutsideUSA;
-                currentApp.State = civm.State;
-                currentApp.StatesLived = civm.PreviousStates;
-                currentApp.Address = civm.Address;
-                currentApp.City = civm.City;
-                currentApp.ZipCode = civm.Zip;
-                currentApp.CurrentEmployer = civm.CurrentEmployer;
-                currentApp.PreviousLastNames.Add(civm.PreviousLastName1);
-                currentApp.PreviousLastNames.Add(civm.PreviousLastName2);
-                currentApp.PreviousLastNames.Add(civm.PreviousLastName3);
-                currentApp.YearsLivedInOregon = civm.YearsLivingInOregon;
+                if (civm.State != null) currentApp.State = civm.State;
+                if (civm.PreviousStates != null)
+                {
+                    foreach (State s in civm.PreviousStates)
+                        currentApp.StatesLived.Add(new AppStateJoin() { ApplicationID = currentApp.ApplicationID, StateID = s.StateID });
+                }
+                
+                if (civm.Address != null) currentApp.Address = civm.Address;
+                if (civm.City != null) currentApp.City = civm.City;
+                if (civm.Zip != null) currentApp.ZipCode = civm.Zip;
+                if (civm.CurrentEmployer != null) currentApp.CurrentEmployer = civm.CurrentEmployer;
+                if (civm.PreviousLastName1 != null) currentApp.PreviousLastNames.Add(civm.PreviousLastName1);
+                if (civm.PreviousLastName2 != null) currentApp.PreviousLastNames.Add(civm.PreviousLastName2);
+                if (civm.PreviousLastName3 != null) currentApp.PreviousLastNames.Add(civm.PreviousLastName3);
+                if (civm.YearsLivingInOregon != -1) currentApp.YearsLivedInOregon = civm.YearsLivingInOregon;
                 appRepo.Update(currentApp);
+                #endregion
                 userRepo.Update(user);
 
                 //Decide which direction is being taken (this page only has next).
@@ -223,6 +257,23 @@ namespace KidSports.Controllers
                 CoachInterestViewModel civm = new CoachInterestViewModel();
                 civm.ApplicationID = AppID;
                 //If any information exists, bind it to the view model.
+                civm.AllSports = sportRepo.GetAllSports();
+                civm.AllAreas = areaRepo.GetAllAreas();
+                if (civm.Area != null)
+                    civm.SchoolsByArea = schoolRepo.GetSchoolsByArea(civm.Area);
+                else civm.SchoolsByArea = schoolRepo.GetAllSchools();
+                civm.AllGrades = gradeRepo.GetAllGrades();
+                civm.AllExperience = expRepo.GetAllExperiences();
+                if (civm.PreviousExperience != null)
+                {
+                    foreach (Experience e in civm.PreviousExperience)
+                        currentApp.PreviousExperience.Add(new AppExpJoin() { ApplicationID = currentApp.ApplicationID, ExperienceID = e.ExperienceID });
+                }
+                else if (civm.PreviousExperience == null & currentApp.PreviousExperience != null)
+                    foreach (AppExpJoin ae in currentApp.PreviousExperience)
+                       civm.PreviousExperience.Add(expRepo.GetExperienceByID(ae.ExperienceID));
+                else
+                    civm.PreviousExperience = new List<Experience>();
 
                 //Display the view.
                 return View(civm);
@@ -244,11 +295,11 @@ namespace KidSports.Controllers
             if (user.currentYearApp.ApplicationID == civm.ApplicationID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
             {
                 Application currentApp = appRepo.GetApplicationByID(civm.ApplicationID);
-                currentApp.AppArea = civm.Area;
-                currentApp.AppGender = civm.Gender;
-                currentApp.AppGrade = civm.GradePreference.GradeName;
-                currentApp.AppSchool = civm.School;
-                currentApp.AppSport = civm.Sport;
+                if (civm.Area != null) currentApp.AppArea = civm.Area;
+                if (civm.Gender != null) currentApp.AppGender = civm.Gender;
+                if (civm.GradePreference != null) currentApp.AppGrade = civm.GradePreference.GradeName;
+                if (civm.School != null) currentApp.AppSchool = civm.School;
+                if (civm.Sport != null) currentApp.AppSport = civm.Sport;
                 currentApp.YearsExperience = civm.YearsExperience;
 
                 //Process all data that is in the view model. If anything is new or changed,
@@ -372,7 +423,6 @@ namespace KidSports.Controllers
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
                 Application currentApp = appRepo.GetApplicationByID(ccvm.ApplicationID);
-                currentApp.
 
                 if (ccvm.File != null)
                 {
@@ -569,7 +619,7 @@ namespace KidSports.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Page7(BadgeViewModel bvm)
+        public async Task<IActionResult> Badge(BadgeViewModel bvm)
         {
             User user = await userManager.FindByNameAsync(User.Identity.Name);
             if (user != null)

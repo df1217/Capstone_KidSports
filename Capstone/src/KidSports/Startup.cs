@@ -44,11 +44,13 @@ namespace KidSports
             services.AddTransient<IStateRepo, StateRepository>();
             services.AddTransient<IAreaRepo, AreaRepository>();
             services.AddTransient<ISchoolRepo, SchoolRepository>();
+            services.AddTransient<ISportRepo, SportRepository>();
+            services.AddTransient<IGradeRepo, GradeRepository>();
+            services.AddTransient<IExpRepo, ExperienceRepository>();
 
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
-            services.AddTransient<IUserRepo, UserRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

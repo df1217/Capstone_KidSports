@@ -16,6 +16,22 @@ namespace KidSports.Migrations
                 .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("KidSports.Models.AppAreaJoin", b =>
+                {
+                    b.Property<int>("AppAreaJoinID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ApplicationID");
+
+                    b.Property<int>("AreaID");
+
+                    b.HasKey("AppAreaJoinID");
+
+                    b.HasIndex("ApplicationID");
+
+                    b.ToTable("AppAreaJoin");
+                });
+
             modelBuilder.Entity("KidSports.Models.Application", b =>
                 {
                     b.Property<int>("ApplicationID")
@@ -89,6 +105,8 @@ namespace KidSports.Migrations
 
                     b.Property<string>("PledgeInitials");
 
+                    b.Property<string>("PledgeName");
+
                     b.Property<DateTime>("PledgeSubmissionDate");
 
                     b.Property<int?>("StateID");
@@ -148,20 +166,48 @@ namespace KidSports.Migrations
                     b.ToTable("ApplicationStatus");
                 });
 
+            modelBuilder.Entity("KidSports.Models.AppStateJoin", b =>
+                {
+                    b.Property<int>("AppStateJoinID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ApplicationID");
+
+                    b.Property<int>("StateID");
+
+                    b.HasKey("AppStateJoinID");
+
+                    b.HasIndex("ApplicationID");
+
+                    b.ToTable("AppStateJoin");
+                });
+
             modelBuilder.Entity("KidSports.Models.Area", b =>
                 {
                     b.Property<int>("AreaID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ApplicationID");
-
                     b.Property<string>("AreaName");
 
                     b.HasKey("AreaID");
 
+                    b.ToTable("Areas");
+                });
+
+            modelBuilder.Entity("KidSports.Models.Country", b =>
+                {
+                    b.Property<int>("CountryID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("ApplicationID");
+
+                    b.Property<string>("CountryName");
+
+                    b.HasKey("CountryID");
+
                     b.HasIndex("ApplicationID");
 
-                    b.ToTable("Areas");
+                    b.ToTable("Country");
                 });
 
             modelBuilder.Entity("KidSports.Models.Experience", b =>
@@ -169,11 +215,15 @@ namespace KidSports.Migrations
                     b.Property<int>("ExperienceID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("ApplicationID");
+
                     b.Property<string>("ExperienceName");
 
                     b.HasKey("ExperienceID");
 
-                    b.ToTable("Experience");
+                    b.HasIndex("ApplicationID");
+
+                    b.ToTable("Experiences");
                 });
 
             modelBuilder.Entity("KidSports.Models.Grade", b =>
@@ -202,6 +252,18 @@ namespace KidSports.Migrations
                     b.HasIndex("ApplicationID");
 
                     b.ToTable("LastName");
+                });
+
+            modelBuilder.Entity("KidSports.Models.PreviousGradesCoached", b =>
+                {
+                    b.Property<int>("PreviousGradesCoachedID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("GradeName");
+
+                    b.HasKey("PreviousGradesCoachedID");
+
+                    b.ToTable("PreviousGradesCoached");
                 });
 
             modelBuilder.Entity("KidSports.Models.School", b =>
@@ -243,13 +305,9 @@ namespace KidSports.Migrations
                     b.Property<int>("StateID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ApplicationID");
-
                     b.Property<string>("StateName");
 
                     b.HasKey("StateID");
-
-                    b.HasIndex("ApplicationID");
 
                     b.ToTable("States");
                 });
@@ -420,6 +478,14 @@ namespace KidSports.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("KidSports.Models.AppAreaJoin", b =>
+                {
+                    b.HasOne("KidSports.Models.Application")
+                        .WithMany("Areas")
+                        .HasForeignKey("ApplicationID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("KidSports.Models.Application", b =>
                 {
                     b.HasOne("KidSports.Models.Area", "AppArea")
@@ -443,10 +509,25 @@ namespace KidSports.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("KidSports.Models.Area", b =>
+            modelBuilder.Entity("KidSports.Models.AppStateJoin", b =>
                 {
                     b.HasOne("KidSports.Models.Application")
-                        .WithMany("Region")
+                        .WithMany("StatesLived")
+                        .HasForeignKey("ApplicationID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("KidSports.Models.Country", b =>
+                {
+                    b.HasOne("KidSports.Models.Application")
+                        .WithMany("CountriesLived")
+                        .HasForeignKey("ApplicationID");
+                });
+
+            modelBuilder.Entity("KidSports.Models.Experience", b =>
+                {
+                    b.HasOne("KidSports.Models.Application")
+                        .WithMany("PreviousExperience")
                         .HasForeignKey("ApplicationID");
                 });
 
@@ -462,13 +543,6 @@ namespace KidSports.Migrations
                     b.HasOne("KidSports.Models.Area")
                         .WithMany("AreaSchools")
                         .HasForeignKey("AreaID");
-                });
-
-            modelBuilder.Entity("KidSports.Models.State", b =>
-                {
-                    b.HasOne("KidSports.Models.Application")
-                        .WithMany("StatesLived")
-                        .HasForeignKey("ApplicationID");
                 });
 
             modelBuilder.Entity("KidSports.Models.User", b =>
