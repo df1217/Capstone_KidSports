@@ -158,7 +158,7 @@ namespace Kidsports.Tests
             return applications;
         }
 
-        public IQueryable<Application> GetFilteredApplications(ApplicantSearchModel searchModel)
+        public IQueryable<Application> GetFilteredApplications(ApplicationSearchModel searchModel)
         {
             //set up using applications to test
             var result = applications.AsQueryable();

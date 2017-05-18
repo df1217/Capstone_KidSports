@@ -9,7 +9,7 @@ namespace KidSports.Repositories
     public interface IApplicationRepo
     {
         List<Application> GetAllApplications();
-        IQueryable<Application> GetFilteredApplications(ApplicantSearchModel searchModel);
+        IQueryable<Application> GetFilteredApplications(ApplicationSearchModel searchModel);
         Application GetApplicationByID(int id);
         int Update(Application app);
         Application CreateApp(Application app);

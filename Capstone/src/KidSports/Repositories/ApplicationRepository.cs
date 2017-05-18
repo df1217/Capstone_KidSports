@@ -26,7 +26,7 @@ namespace KidSports.Repositories
             return context.Applications.Where(x => x.ApplicationID == id).SingleOrDefault();
         }
 
-        public IQueryable<Application> GetFilteredApplications(ApplicantSearchModel searchModel)
+        public IQueryable<Application> GetFilteredApplications(ApplicationSearchModel searchModel)
         {
             var result = context.Applications.AsQueryable();
             if (searchModel != null)

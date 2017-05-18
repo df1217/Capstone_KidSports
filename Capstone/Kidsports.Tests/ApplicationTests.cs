@@ -38,7 +38,7 @@ namespace Kidsports.Tests
         {
             repo = new FakeRepository();
             //Act
-            ApplicantSearchModel asm = new ApplicantSearchModel();
+            ApplicationSearchModel asm = new ApplicationSearchModel();
             asm.Sport = "lacrosse";
             asm.Area = "North Eugene";
 
