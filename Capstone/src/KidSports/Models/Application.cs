@@ -71,7 +71,7 @@ namespace KidSports.Models
         public DateTime PledgeSubmissionDate { get; set; }
         public DateTime PledgeApprovalDate { get; set; }
         public string PledgeInitials { get; set; }
-
+        public string PledgeName { get; set; }
         public List<Area> Region { get; set; }
         public string AppGender { get; set; }
         public string AppGrade { get;  set; }
