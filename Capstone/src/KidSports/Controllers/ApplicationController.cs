@@ -388,6 +388,7 @@ namespace KidSports.Controllers
                 if (currentApp.PledgeName != null) cpvm.Name = currentApp.PledgeName;
                 if (currentApp.PledgeInitials != null) cpvm.Initials = currentApp.PledgeInitials;
                 if (currentApp.pledgeIsInAgreement != false) cpvm.IsInAgreement = currentApp.pledgeIsInAgreement;
+                if (currentApp.PledgeSubmissionDate != new DateTime()) cpvm.PledgeSubmissionDate = currentApp.PledgeSubmissionDate;
 
                 //Display the view.
                 return View(cpvm);
@@ -411,9 +412,12 @@ namespace KidSports.Controllers
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
                 Application currentApp = appRepo.GetApplicationByID(cpvm.ApplicationID);
-                currentApp.PledgeInitials = cpvm.Initials;
-                currentApp.PledgeSubmissionDate = cpvm.PledgeSubmissionDate;
-                
+                if (cpvm.Name != null) currentApp.PledgeName = cpvm.Name;
+                if (cpvm.Initials != null) currentApp.PledgeInitials = cpvm.Initials;
+                if (cpvm.IsInAgreement != false) currentApp.pledgeIsInAgreement = cpvm.IsInAgreement;
+                if (cpvm.PledgeSubmissionDate != new DateTime()) currentApp.PledgeSubmissionDate = cpvm.PledgeSubmissionDate;
+                appRepo.Update(currentApp);
+
                 //Decide which direction is being taken.
                 if (cpvm.Direction == "previous")
                     return RedirectToAction("CoachInterests", new { AppID = cpvm.ApplicationID });
