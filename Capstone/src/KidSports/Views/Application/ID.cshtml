@@ -17,7 +17,10 @@
                     <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
                         <label for="" class="control-label">Upload ID</label>
                         <input type="file" asp-for="File"
-                               class="required borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
+                               class="borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
+                    </div>
+                    <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
+                        <img src="@Model.IDPath" class="img-thumbnail" />
                     </div>
                 </div>
             </div>

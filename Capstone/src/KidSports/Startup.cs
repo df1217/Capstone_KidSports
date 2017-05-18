@@ -47,6 +47,7 @@ namespace KidSports
             services.AddTransient<ISportRepo, SportRepository>();
             services.AddTransient<IGradeRepo, GradeRepository>();
             services.AddTransient<IExpRepo, ExperienceRepository>();
+            services.AddTransient<IAppStatusRepo, AppStatusRepository>();
 
             services.AddMvc();
             services.AddMemoryCache();

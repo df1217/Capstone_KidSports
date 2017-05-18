@@ -8,7 +8,7 @@ namespace KidSports.Models.ViewModels
     {
         public string Direction { get; set; }
         public int ApplicationID { get; set; }
-
+        public string IDPath { get; set; }
         public ApplicationStatus ApplicationStatus { get; set; }
 
         public IFormFile File { get; set; }

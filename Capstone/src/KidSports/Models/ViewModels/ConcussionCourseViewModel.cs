@@ -8,6 +8,7 @@ namespace KidSports.Models.ViewModels
     {
         public string Direction { get; set; }
         public int ApplicationID { get; set; }
+        public string NfhsPath { get; set; }
 
         public ApplicationStatus ApplicationStatus { get; set; }
         public DateTime ConcussionCourseSubmissionDate { get; set; }
