@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using KidSports.Repositories;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace KidSports.Controllers
 {
@@ -26,10 +27,11 @@ namespace KidSports.Controllers
         private ISchoolRepo schoolRepo;
         private IGradeRepo gradeRepo;
         private IExpRepo expRepo;
+        private IAppStatusRepo appStatusRepo;
 
         UserManager<User> userManager;
 
-        public ApplicationController(UserManager<User> UM, IHostingEnvironment environment, IApplicationRepo apprepo, IUserRepo userrepo, IStateRepo staterepo, ISportRepo sportrepo, IAreaRepo arearepo, ISchoolRepo schoolrepo, IGradeRepo graderepo, IExpRepo exprepo)
+        public ApplicationController(UserManager<User> UM, IHostingEnvironment environment, IApplicationRepo apprepo, IUserRepo userrepo, IStateRepo staterepo, ISportRepo sportrepo, IAreaRepo arearepo, ISchoolRepo schoolrepo, IGradeRepo graderepo, IExpRepo exprepo, IAppStatusRepo appstatusrepo)
         {
             userManager = UM;
             _environment = environment;
@@ -41,6 +43,7 @@ namespace KidSports.Controllers
             schoolRepo = schoolrepo;
             gradeRepo = graderepo;
             expRepo = exprepo;
+            appStatusRepo = appstatusrepo;
         }
 
         #region Home Page
@@ -122,8 +125,19 @@ namespace KidSports.Controllers
         #region SportsManager Views
         [HttpGet]
         [Authorize(Roles = "SportsManager")]
-        public IActionResult Applications()
+        public IActionResult Applications(ApplicationSearchModel asm = null)
         {
+            //if (asm == null)
+            //    asm = new ApplicationSearchModel();
+
+            //List<Application> filteredApps = appRepo.GetFilteredApplications(asm).ToList();
+            //foreach (Application a in filteredApps)
+            //{
+            //    User u = userRepo.GetUserByID(a.ApplicationID);
+            //    ApplicationStatus appstatus = appStatusRepo.GetAppStatusByID(a.ApplicationID);
+            //    asm.keyValStatus.Add(new Tuple<int, string, ApplicationStatus>( a.ApplicationID, u.FirstName + " " + u.LastName, appstatus));
+            //}
+
             return View();
         }
 
@@ -478,7 +492,7 @@ namespace KidSports.Controllers
                     //get the image and put it in the view model.
                 }
 
-                if (ccvm.File != null)
+                try
                 {
                     var uploads = Path.Combine(_environment.WebRootPath, "Images", "ConcussionCourse");
                     if (ccvm.File.Length > 0)
@@ -489,8 +503,12 @@ namespace KidSports.Controllers
                             currentApp.NfhsPath = "..\\Images\\ConcussionCourse\\" + currentApp.ApplicationID.ToString() + ".jpg";
                         }
                     }
-                    appRepo.Update(currentApp);
                 }
+                catch (Exception e)
+                {
+                    //Add model state error? validation?
+                }
+                appRepo.Update(currentApp);
 
                 //Decide which direction is being taken.
                 if (ccvm.Direction == "previous")
@@ -555,15 +573,22 @@ namespace KidSports.Controllers
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
                 var uploads = Path.Combine(_environment.WebRootPath, "Images", "PCACourse");
-                if (pcvm.File.Length > 0)
+                try
                 {
-                    using (var fileStream = new FileStream(Path.Combine(uploads, pcvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
+                    if (pcvm.File.Length > 0)
                     {
-                        await pcvm.File.CopyToAsync(fileStream);
-                        currentApp.PcaPath = "..\\Images\\PcaCourse\\" + currentApp.ApplicationID.ToString() + ".jpg";
+                        using (var fileStream = new FileStream(Path.Combine(uploads, pcvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
+                        {
+                            await pcvm.File.CopyToAsync(fileStream);
+                            currentApp.PcaPath = "..\\Images\\PcaCourse\\" + currentApp.ApplicationID.ToString() + ".jpg";
+                        }
                     }
                 }
-                appRepo.Update(currentApp);
+                catch (Exception e)
+                {
+
+                }
+            appRepo.Update(currentApp);
 
                 //Decide which direction is being taken.
                 if (pcvm.Direction == "previous")
@@ -623,13 +648,19 @@ namespace KidSports.Controllers
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
                 var uploads = Path.Combine(_environment.WebRootPath, "Images", "ID");
-                if (idvm.File.Length > 0)
-                {
-                    using (var fileStream = new FileStream(Path.Combine(uploads, idvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
+                try { 
+                    if (idvm.File.Length > 0)
                     {
-                        await idvm.File.CopyToAsync(fileStream);
-                        currentApp.DlPath = "..\\Images\\ID\\" + currentApp.ApplicationID.ToString() + ".jpg";
+                        using (var fileStream = new FileStream(Path.Combine(uploads, idvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
+                        {
+                            await idvm.File.CopyToAsync(fileStream);
+                            currentApp.DlPath = "..\\Images\\ID\\" + currentApp.ApplicationID.ToString() + ".jpg";
+                        }
                     }
+                }
+                catch (Exception e)
+                {
+
                 }
                 appRepo.Update(currentApp);
 
@@ -697,13 +728,19 @@ namespace KidSports.Controllers
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
                 var uploads = Path.Combine(_environment.WebRootPath, "Images", "Badge");
-                if (bvm.File.Length > 0)
+                try
                 {
-                    using (var fileStream = new FileStream(Path.Combine(uploads, bvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
+                    if (bvm.File.Length > 0)
                     {
-                        await bvm.File.CopyToAsync(fileStream);
-                        currentApp.BadgePath = "..\\Images\\Badge\\" + currentApp.ApplicationID.ToString() + ".jpg";
+                        using (var fileStream = new FileStream(Path.Combine(uploads, bvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
+                        {
+                            await bvm.File.CopyToAsync(fileStream);
+                            currentApp.BadgePath = "..\\Images\\Badge\\" + currentApp.ApplicationID.ToString() + ".jpg";
+                        }
                     }
+                } catch(Exception e)
+                {
+
                 }
                 appRepo.Update(currentApp);
 

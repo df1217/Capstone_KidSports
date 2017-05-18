@@ -14,5 +14,6 @@ namespace KidSports.Repositories
         IQueryable<User> GetFilteredUsers(string SearchParam);
         int Update(User user);
         User GetDetailedUser(User user);
+        User GetUserByID(int id);
     }
 }
