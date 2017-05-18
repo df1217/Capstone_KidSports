@@ -54,6 +54,7 @@ namespace KidSports.Models
 
         public string PledgeInitials { get; set; }
         public string PledgeName { get; set; }
+        public bool pledgeIsInAgreement { get; set; }
         public DateTime PledgeSubmissionDate { get; set; }
         public List<AppAreaJoin> Areas { get; set; }
         public string AppGender { get; set; }

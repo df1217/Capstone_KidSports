@@ -382,8 +382,12 @@ namespace KidSports.Controllers
                 //Get the coaches current app
                 Application currentApp = appRepo.GetApplicationByID(AppID);
                 CoachPledgeViewModel cpvm = new CoachPledgeViewModel();
-                cpvm.ApplicationID = AppID;
+
                 //If any information exists, bind it to the view model.
+                cpvm.ApplicationID = AppID;
+                if (currentApp.PledgeName != null) cpvm.Name = currentApp.PledgeName;
+                if (currentApp.PledgeInitials != null) cpvm.Initials = currentApp.PledgeInitials;
+                if (currentApp.pledgeIsInAgreement != false) cpvm.IsInAgreement = currentApp.pledgeIsInAgreement;
 
                 //Display the view.
                 return View(cpvm);
