@@ -174,7 +174,24 @@ namespace KidSports.Controllers
             {
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
-
+                Application currentApp = appRepo.GetApplicationByID(civm.ApplicationID);
+                user.FirstName = civm.FirstName;
+                user.LastName = civm.LastName;
+                user.MiddleName = civm.MiddleName;
+                user.PhoneNumber = civm.CellPhone;
+                currentApp.LivedOutsideUSA = civm.HasLivedOutsideUSA;
+                currentApp.State = civm.State;
+                currentApp.StatesLived = civm.PreviousStates;
+                currentApp.Address = civm.Address;
+                currentApp.City = civm.City;
+                currentApp.ZipCode = civm.Zip;
+                currentApp.CurrentEmployer = civm.CurrentEmployer;
+                currentApp.PreviousLastNames.Add(civm.PreviousLastName1);
+                currentApp.PreviousLastNames.Add(civm.PreviousLastName2);
+                currentApp.PreviousLastNames.Add(civm.PreviousLastName3);
+                currentApp.YearsLivedInOregon = civm.YearsLivingInOregon;
+                appRepo.Update(currentApp);
+                userRepo.Update(user);
 
                 //Decide which direction is being taken (this page only has next).
                 if (civm.Direction == "next")
@@ -226,6 +243,14 @@ namespace KidSports.Controllers
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
             if (user.currentYearApp.ApplicationID == civm.ApplicationID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
             {
+                Application currentApp = appRepo.GetApplicationByID(civm.ApplicationID);
+                currentApp.AppArea = civm.Area;
+                currentApp.AppGender = civm.Gender;
+                currentApp.AppGrade = civm.GradePreference.GradeName;
+                currentApp.AppSchool = civm.School;
+                currentApp.AppSport = civm.Sport;
+                currentApp.YearsExperience = civm.YearsExperience;
+
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
 
@@ -284,6 +309,12 @@ namespace KidSports.Controllers
             {
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
+                Application currentApp = appRepo.GetApplicationByID(cpvm.ApplicationID);
+                currentApp.PledgeInitials = cpvm.Initials;
+                currentApp.PledgeSubmissionDate = cpvm.PledgeSubmissionDate;
+                
+                
+
 
 
                 //Decide which direction is being taken.
@@ -341,6 +372,7 @@ namespace KidSports.Controllers
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
                 Application currentApp = appRepo.GetApplicationByID(ccvm.ApplicationID);
+                currentApp.
 
                 if (ccvm.File != null)
                 {
