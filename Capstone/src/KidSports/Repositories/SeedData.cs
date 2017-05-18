@@ -173,7 +173,7 @@ namespace KidSports.Repositories
                 SouthEugene.Add(new School() { SchoolName = "Edgewood" });
                 SouthEugene.Add(new School() { SchoolName = "Edison" });
                 SouthEugene.Add(new School() { SchoolName = "Far Horizon Montessori" });
-                SouthEugene.Add(new School() { SchoolName = "Ohara Catholic" });
+                SouthEugene.Add(new School() { SchoolName = "O'hara Catholic" });
                 SouthEugene.Add(new School() { SchoolName = "Oak Hill" });
                 SouthEugene.Add(new School() { SchoolName = "Ridgeline Montessori" });
                 SouthEugene.Add(new School() { SchoolName = "Roosevelt" });
