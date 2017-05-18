@@ -32,5 +32,6 @@ namespace KidSports.Models.ViewModels
         public List<Experience> PreviousExperience { get; set; }
         public int newPickedAreaID { get; set; }
         public int newPickedSchoolID { get; set; }
+        public int newPickedSportID { get; set; }
     }
 }
