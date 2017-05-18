@@ -61,7 +61,7 @@ namespace KidSports.Repositories
         public User GetDetailedUser(User user)
         {
             /* TODO we are gonna need to add way more includes here */
-            return context.Users.Where(x => x.Id == user.Id).Include(x => x.currentYearApp).SingleOrDefault();
+            return context.Users.Where(x => x.Id == user.Id).Include(x => x.currentYearApp).ThenInclude(x => x.State).SingleOrDefault();
         }
 
         public User GetUserByEmail(string Email)

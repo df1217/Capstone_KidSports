@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace KidSports.Repositories
 {
-    public interface IAreaRepo
+    public interface ISportRepo
     {
-        List<Area> GetAllAreas();
-        Area GetAreaByID(int id);
+        List<Sport> GetAllSports();
+        Sport GetSportsByName(string name);
+        Sport GetSportsByID(int id);
     }
 }

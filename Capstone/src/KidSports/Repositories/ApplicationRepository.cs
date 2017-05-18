@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KidSports.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace KidSports.Repositories
 {
@@ -17,7 +18,7 @@ namespace KidSports.Repositories
 
         public List<Application> GetAllApplications()
         {
-            return context.Applications.ToList();
+            return context.Applications.Include(a => a.State).Include(a => a.AppArea).Include(a => a.AppSchool).ToList();
         }
 
         public Application GetApplicationByID(int id)
@@ -25,7 +26,7 @@ namespace KidSports.Repositories
             return context.Applications.Where(x => x.ApplicationID == id).SingleOrDefault();
         }
 
-        public IQueryable<Application> GetFilteredApplications(ApplicantSearchModel searchModel)
+        public IQueryable<Application> GetFilteredApplications(ApplicationSearchModel searchModel)
         {
             var result = context.Applications.AsQueryable();
             if (searchModel != null)

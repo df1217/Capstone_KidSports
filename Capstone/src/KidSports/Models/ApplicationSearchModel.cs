@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace KidSports.Models
 {
-    public class ApplicantSearchModel
+    public class ApplicationSearchModel
     {
         public int ApplicationID { get; set; }
-
+        public List<Application> filterableApps { get; set; }
         public bool IsChecked { get; set; }
         public string Area { get; set; }
         public string School { get; set; }

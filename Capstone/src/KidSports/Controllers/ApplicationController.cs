@@ -20,14 +20,27 @@ namespace KidSports.Controllers
         private IHostingEnvironment _environment;
         private IApplicationRepo appRepo;
         private IUserRepo userRepo;
+        private IStateRepo stateRepo;
+        private ISportRepo sportRepo;
+        private IAreaRepo areaRepo;
+        private ISchoolRepo schoolRepo;
+        private IGradeRepo gradeRepo;
+        private IExpRepo expRepo;
+
         UserManager<User> userManager;
 
-        public ApplicationController(UserManager<User> UM, IHostingEnvironment environment, IApplicationRepo apprepo, IUserRepo userrepo)
+        public ApplicationController(UserManager<User> UM, IHostingEnvironment environment, IApplicationRepo apprepo, IUserRepo userrepo, IStateRepo staterepo, ISportRepo sportrepo, IAreaRepo arearepo, ISchoolRepo schoolrepo, IGradeRepo graderepo, IExpRepo exprepo)
         {
             userManager = UM;
             _environment = environment;
             appRepo = apprepo;
             userRepo = userrepo;
+            stateRepo = staterepo;
+            sportRepo = sportrepo;
+            areaRepo = arearepo;
+            schoolRepo = schoolrepo;
+            gradeRepo = graderepo;
+            expRepo = exprepo;
         }
 
         #region Home Page
@@ -39,11 +52,12 @@ namespace KidSports.Controllers
             if (user != null)
             {
                 user = userRepo.GetDetailedUser(user);
+                ivm.UserFirstName = user.FirstName;
+
                 if (user.currentYearApp != null)
                 {
                     int id = user.currentYearApp.ApplicationID;
                     ivm.ApplicationID = id;
-                    ivm.UserFirstName = user.FirstName;
                     return View(ivm);
                 }
             }
@@ -59,6 +73,19 @@ namespace KidSports.Controllers
             if (user != null)
             {
                 user = userRepo.GetDetailedUser(user);
+            }
+
+            if (ivm.ApplicationID == 0)
+            {
+                Application app = new Application();
+                appRepo.CreateApp(app);
+                ivm.ApplicationID = app.ApplicationID;
+                if (user != null)
+                {
+                    user.currentYearApp = app;
+                    userRepo.Update(user);
+                }
+                return RedirectToAction("CoachInfo", new { AppID = ivm.ApplicationID });
             }
 
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
@@ -83,21 +110,11 @@ namespace KidSports.Controllers
                         return RedirectToAction("Badge", new { AppID = ivm.ApplicationID });
                     return View(ivm);
                 }
-                else
-                {
-                    Application app = new Application();
-                    appRepo.CreateApp(app);
-                    ivm.ApplicationID = app.ApplicationID;
-                    if (user != null)
-                    {
-                        user.currentYearApp = app;
-                        userRepo.Update(user);
-                    }
-                    return RedirectToAction("CoachInfo", new { AppID = ivm.ApplicationID });
-                }
             }
             else
                 return RedirectToAction("AccessDenied", "Account");
+
+            return View(ivm);
         }
 
         #endregion
@@ -149,9 +166,47 @@ namespace KidSports.Controllers
             {
                 //Get the coaches current app
                 Application currentApp = appRepo.GetApplicationByID(AppID);
+
+
                 CoachInfoViewModel civm = new CoachInfoViewModel();
-                civm.ApplicationID = AppID;
+
+                #region Bind application to view model if pre-exisiting info
                 //If any information exists, bind it to the view model.
+                civm.ApplicationID = AppID;
+                if (user.FirstName != null) civm.FirstName = user.FirstName;
+                if (user.MiddleName != null) civm.MiddleName = user.MiddleName;
+                if (user.LastName != null) civm.LastName = user.LastName;
+                if (currentApp.PreviousLastNames != null)
+                {
+                    if (currentApp.PreviousLastNames[0] != null) civm.PreviousLastName1 = currentApp.PreviousLastNames[0];
+                    if (currentApp.PreviousLastNames[1] != null) civm.PreviousLastName2 = currentApp.PreviousLastNames[1];
+                    if (currentApp.PreviousLastNames[2] != null) civm.PreviousLastName3 = currentApp.PreviousLastNames[2];
+                }
+                if (user.PreferredName != null) civm.PreferredName = user.PreferredName;
+                if (currentApp.DOB != null) civm.DOB = currentApp.DOB;
+                if (currentApp.YearsLivedInOregon != -1) civm.YearsLivingInOregon = currentApp.YearsLivedInOregon;
+                if (currentApp.Address != null) civm.Address = currentApp.Address;
+                if (currentApp.City != null) civm.City = currentApp.City;
+                if (currentApp.State != null) civm.State = currentApp.State; else civm.State = new State();
+                if (currentApp.ZipCode != null) civm.Zip = currentApp.ZipCode;
+                if (currentApp.LivedOutsideUSA != false) civm.HasLivedOutsideUSA = currentApp.LivedOutsideUSA;
+                if (user.PhoneNumber != null) civm.CellPhone = user.PhoneNumber;
+                if (currentApp.City != null) civm.City = currentApp.City;
+                if (currentApp.State != null) civm.State = currentApp.State;
+                if (currentApp.Address != null) civm.Address = currentApp.Address;
+                if (currentApp.CurrentEmployer != null) civm.CurrentEmployer = currentApp.CurrentEmployer;
+                if (currentApp.JobTitle != null) civm.JobTitle = currentApp.JobTitle;
+
+                civm.AllStates = stateRepo.GetAllStates();
+                if (currentApp.StatesLived != null)
+                {
+                    foreach (AppStateJoin a in currentApp.StatesLived)
+                        civm.PreviousStates.Add(stateRepo.GetStateByID(a.StateID));
+                } else
+                {
+                    civm.PreviousStates = new List<State>();
+                }
+                #endregion
 
                 //Display the view.
                 return View(civm);
@@ -175,22 +230,29 @@ namespace KidSports.Controllers
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
                 Application currentApp = appRepo.GetApplicationByID(civm.ApplicationID);
-                user.FirstName = civm.FirstName;
-                user.LastName = civm.LastName;
-                user.MiddleName = civm.MiddleName;
-                user.PhoneNumber = civm.CellPhone;
+                #region Bind VM to application
+                if (civm.FirstName != null) user.FirstName = civm.FirstName;
+                if (civm.LastName != null) user.LastName = civm.LastName;
+                if (civm.MiddleName != null) user.MiddleName = civm.MiddleName;
+                if (civm.CellPhone != null) user.PhoneNumber = civm.CellPhone;
                 currentApp.LivedOutsideUSA = civm.HasLivedOutsideUSA;
-                currentApp.State = civm.State;
-                currentApp.StatesLived = civm.PreviousStates;
-                currentApp.Address = civm.Address;
-                currentApp.City = civm.City;
-                currentApp.ZipCode = civm.Zip;
-                currentApp.CurrentEmployer = civm.CurrentEmployer;
-                currentApp.PreviousLastNames.Add(civm.PreviousLastName1);
-                currentApp.PreviousLastNames.Add(civm.PreviousLastName2);
-                currentApp.PreviousLastNames.Add(civm.PreviousLastName3);
-                currentApp.YearsLivedInOregon = civm.YearsLivingInOregon;
+                if (civm.newPickedStateID != -1) currentApp.State = stateRepo.GetStateByID(civm.newPickedStateID);
+                if (civm.PreviousStates != null)
+                {
+                    foreach (State s in civm.PreviousStates)
+                        currentApp.StatesLived.Add(new AppStateJoin() { ApplicationID = currentApp.ApplicationID, StateID = s.StateID });
+                }
+                if (civm.DOB != new DateTime()) currentApp.DOB = civm.DOB; 
+                if (civm.Address != null) currentApp.Address = civm.Address;
+                if (civm.City != null) currentApp.City = civm.City;
+                if (civm.Zip != null) currentApp.ZipCode = civm.Zip;
+                if (civm.CurrentEmployer != null) currentApp.CurrentEmployer = civm.CurrentEmployer;
+                if (civm.PreviousLastName1 != null) currentApp.PreviousLastNames.Add(civm.PreviousLastName1);
+                if (civm.PreviousLastName2 != null) currentApp.PreviousLastNames.Add(civm.PreviousLastName2);
+                if (civm.PreviousLastName3 != null) currentApp.PreviousLastNames.Add(civm.PreviousLastName3);
+                if (civm.YearsLivingInOregon != -1) currentApp.YearsLivedInOregon = civm.YearsLivingInOregon;
                 appRepo.Update(currentApp);
+                #endregion
                 userRepo.Update(user);
 
                 //Decide which direction is being taken (this page only has next).
@@ -221,8 +283,39 @@ namespace KidSports.Controllers
                 //Get the coaches current app
                 Application currentApp = appRepo.GetApplicationByID(AppID);
                 CoachInterestViewModel civm = new CoachInterestViewModel();
-                civm.ApplicationID = AppID;
+
+                #region Bind application to view model if pre-exisiting info
                 //If any information exists, bind it to the view model.
+                civm.ApplicationID = AppID;
+                civm.AllSports = sportRepo.GetAllSports();
+                civm.AllAreas = areaRepo.GetAllAreas();
+                if (civm.Area != null)
+                    civm.SchoolsByArea = schoolRepo.GetSchoolsByArea(civm.Area);
+                else civm.SchoolsByArea = schoolRepo.GetAllSchools();
+                civm.AllGrades = gradeRepo.GetAllGrades();
+                civm.AllExperience = expRepo.GetAllExperiences();
+
+                if (currentApp.AppArea != null) civm.Area = currentApp.AppArea; else civm.Area = new Area();
+                if (currentApp.IsHeadCoach != false) civm.IsHeadCoach = currentApp.IsHeadCoach;
+                if (currentApp.IsAssistantCoach != false) civm.IsAssistantCoach = currentApp.IsAssistantCoach;
+                if (currentApp.AppSport != null) civm.Sport = currentApp.AppSport;
+                if (currentApp.AppGender != null) civm.Gender = currentApp.AppGender;
+                if (currentApp.AppSchool != null) civm.School = currentApp.AppSchool; else civm.School = new School();
+                if (currentApp.AppGrade != null) civm.GradePreference = currentApp.AppGrade; 
+                if (currentApp.NameOfChild != null) civm.ChildTeam = currentApp.NameOfChild;
+                if (currentApp.YearsExperience != -1) civm.YearsExperience = currentApp.YearsExperience;
+
+                if (civm.PreviousExperience != null)
+                {
+                    foreach (Experience e in civm.PreviousExperience)
+                        currentApp.PreviousExperience.Add(new AppExpJoin() { ApplicationID = currentApp.ApplicationID, ExperienceID = e.ExperienceID });
+                }
+                else if (civm.PreviousExperience == null & currentApp.PreviousExperience != null)
+                    foreach (AppExpJoin ae in currentApp.PreviousExperience)
+                       civm.PreviousExperience.Add(expRepo.GetExperienceByID(ae.ExperienceID));
+                else
+                    civm.PreviousExperience = new List<Experience>();
+                #endregion
 
                 //Display the view.
                 return View(civm);
@@ -244,12 +337,16 @@ namespace KidSports.Controllers
             if (user.currentYearApp.ApplicationID == civm.ApplicationID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
             {
                 Application currentApp = appRepo.GetApplicationByID(civm.ApplicationID);
-                currentApp.AppArea = civm.Area;
-                currentApp.AppGender = civm.Gender;
-                currentApp.AppGrade = civm.GradePreference.GradeName;
-                currentApp.AppSchool = civm.School;
-                currentApp.AppSport = civm.Sport;
+                if (civm.newPickedAreaID != -1) currentApp.AppArea = areaRepo.GetAreaByID(civm.newPickedAreaID);
+                if (civm.Gender != null) currentApp.AppGender = civm.Gender;
+                if (civm.GradePreference != null) currentApp.AppGrade = civm.GradePreference;
+                if (civm.ChildTeam != null) currentApp.NameOfChild = civm.ChildTeam;
+                currentApp.IsHeadCoach = civm.IsHeadCoach;
+                currentApp.IsAssistantCoach = civm.IsAssistantCoach;
+                if (civm.newPickedSchoolID != -1) currentApp.AppSchool = schoolRepo.GetSchoolByID(civm.newPickedSchoolID);
+                if (civm.newPickedSportID != -1) currentApp.AppSport = sportRepo.GetSportsByID(civm.newPickedSportID);
                 currentApp.YearsExperience = civm.YearsExperience;
+                appRepo.Update(currentApp);
 
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
@@ -285,8 +382,13 @@ namespace KidSports.Controllers
                 //Get the coaches current app
                 Application currentApp = appRepo.GetApplicationByID(AppID);
                 CoachPledgeViewModel cpvm = new CoachPledgeViewModel();
-                cpvm.ApplicationID = AppID;
+
                 //If any information exists, bind it to the view model.
+                cpvm.ApplicationID = AppID;
+                if (currentApp.PledgeName != null) cpvm.Name = currentApp.PledgeName;
+                if (currentApp.PledgeInitials != null) cpvm.Initials = currentApp.PledgeInitials;
+                if (currentApp.pledgeIsInAgreement != false) cpvm.IsInAgreement = currentApp.pledgeIsInAgreement;
+                if (currentApp.PledgeSubmissionDate != new DateTime()) cpvm.PledgeSubmissionDate = currentApp.PledgeSubmissionDate;
 
                 //Display the view.
                 return View(cpvm);
@@ -310,12 +412,11 @@ namespace KidSports.Controllers
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
                 Application currentApp = appRepo.GetApplicationByID(cpvm.ApplicationID);
-                currentApp.PledgeInitials = cpvm.Initials;
-                currentApp.PledgeSubmissionDate = cpvm.PledgeSubmissionDate;
-                
-                
-
-
+                if (cpvm.Name != null) currentApp.PledgeName = cpvm.Name;
+                if (cpvm.Initials != null) currentApp.PledgeInitials = cpvm.Initials;
+                if (cpvm.IsInAgreement != false) currentApp.pledgeIsInAgreement = cpvm.IsInAgreement;
+                if (cpvm.PledgeSubmissionDate != new DateTime()) currentApp.PledgeSubmissionDate = cpvm.PledgeSubmissionDate;
+                appRepo.Update(currentApp);
 
                 //Decide which direction is being taken.
                 if (cpvm.Direction == "previous")
@@ -372,7 +473,9 @@ namespace KidSports.Controllers
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
                 Application currentApp = appRepo.GetApplicationByID(ccvm.ApplicationID);
-                currentApp.
+                if (currentApp.NfhsPath != null) { 
+                    //get the image and put it in the view model.
+                }
 
                 if (ccvm.File != null)
                 {
@@ -445,17 +548,20 @@ namespace KidSports.Controllers
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
             if (user.currentYearApp.ApplicationID == pcvm.ApplicationID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
             {
+                Application currentApp = appRepo.GetApplicationByID(pcvm.ApplicationID);
+
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
-                var uploads = Path.Combine(_environment.WebRootPath);
+                var uploads = Path.Combine(_environment.WebRootPath, "Images", "PCACourse");
                 if (pcvm.File.Length > 0)
                 {
-                    using (var fileStream = new FileStream(Path.Combine(uploads, pcvm.File.FileName), FileMode.Create))
+                    using (var fileStream = new FileStream(Path.Combine(uploads, pcvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
                     {
                         await pcvm.File.CopyToAsync(fileStream);
+                        currentApp.NfhsPath = fileStream.Name.ToString();
                     }
-                    //p5Vm.Application.PcaPath = $"\\{p5Vm.File.FileName}";
                 }
+                appRepo.Update(currentApp);
 
                 //Decide which direction is being taken.
                 if (pcvm.Direction == "previous")
@@ -509,19 +615,21 @@ namespace KidSports.Controllers
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
             if (user.currentYearApp.ApplicationID == idvm.ApplicationID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
             {
-                //Process all data that is in the view model. If anything is new or changed,
-                //update the coaches current application.
                 Application currentApp = appRepo.GetApplicationByID(idvm.ApplicationID);
 
-                var uploads = Path.Combine(_environment.WebRootPath);
+                //Process all data that is in the view model. If anything is new or changed,
+                //update the coaches current application.
+                var uploads = Path.Combine(_environment.WebRootPath, "Images", "ID");
                 if (idvm.File.Length > 0)
                 {
-                    using (var fileStream = new FileStream(Path.Combine(uploads, idvm.File.FileName), FileMode.Create))
+                    using (var fileStream = new FileStream(Path.Combine(uploads, idvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
                     {
                         await idvm.File.CopyToAsync(fileStream);
+                        currentApp.NfhsPath = fileStream.Name.ToString();
                     }
-                    //p6Vm.Application.DlPath = $"\\{p6Vm.File.FileName}";
                 }
+                appRepo.Update(currentApp);
+
 
                 //Decide which direction is being taken.
                 if (idvm.Direction == "previous")
@@ -569,7 +677,7 @@ namespace KidSports.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Page7(BadgeViewModel bvm)
+        public async Task<IActionResult> Badge(BadgeViewModel bvm)
         {
             User user = await userManager.FindByNameAsync(User.Identity.Name);
             if (user != null)
@@ -580,17 +688,21 @@ namespace KidSports.Controllers
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
             if (user.currentYearApp.ApplicationID == bvm.ApplicationID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
             {
+                Application currentApp = appRepo.GetApplicationByID(bvm.ApplicationID);
+
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
-                var uploads = Path.Combine(_environment.WebRootPath);
+                var uploads = Path.Combine(_environment.WebRootPath, "Images", "Badge");
                 if (bvm.File.Length > 0)
                 {
-                    using (var fileStream = new FileStream(Path.Combine(uploads, bvm.File.FileName), FileMode.Create))
+                    using (var fileStream = new FileStream(Path.Combine(uploads, bvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
                     {
                         await bvm.File.CopyToAsync(fileStream);
+                        currentApp.NfhsPath = fileStream.Name.ToString();
                     }
-                    //p7Vm.Application.DlPath = $"\\{p7Vm.File.FileName}";
                 }
+                appRepo.Update(currentApp);
+
 
                 //Decide which direction is being taken.
                 if (bvm.Direction == "previous")

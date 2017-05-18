@@ -29,7 +29,7 @@
                             {
                                 if (Model.Sport == s)
                                 {
-                                    <option value="@s.SportID" checked="checked">@s.SportName</option>
+                                    <option value="@s.SportID" selected="selected">@s.SportName</option>
                                 }
                                 else
                                 {
@@ -43,13 +43,13 @@
                     
                         <label asp-for="Area" class="control-label">Area</label>
              
-                        <select asp-for="Area"  class="form-control">
-                            <option value="Any" selected="selected">Any</option>
+                        <select asp-for="newPickedAreaID"  class="form-control">
+                            <option value="0">Any</option>
                             @foreach (Area a in Model.AllAreas)
                             {
-                                if (Model.Area == a)
+                                if (Model.Area.AreaID == a.AreaID)
                                 {
-                                    <option value="@a.AreaID" checked="checked">@a.AreaName</option>
+                                    <option value="@a.AreaID" selected="selected">@a.AreaName</option>
                                 }
                                 else
                                 {
@@ -62,13 +62,13 @@
 
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                     <label asp-for="School" class="control-label">School</label>
-                    <select asp-for="School" class="form-control">
-                        <option value="" selected="selected">Any</option>
+                    <select asp-for="newPickedSchoolID" class="form-control">
+                        <option value="0">Any</option>
                         @foreach (School s in Model.SchoolsByArea)
                         {
-                            if (Model.School == s)
+                            if (Model.School.SchoolID == s.SchoolID)
                             {
-                                <option value="@s.SchoolID" checked="checked">@s.SchoolName</option>
+                                <option value="@s.SchoolID" selected="selected">@s.SchoolName</option>
                             }
                             else
                             {
@@ -96,10 +96,10 @@
                         <label asp-for="GradePreference" class="control-label">Grade<br /> Preference</label>
                         
                         <select  asp-for="GradePreference" class="form-control">
-                            <option value="" selected="selected">Any</option>
+                            <option value="">Any</option>
                             @foreach (var g in Model.AllGrades)
                             {
-                                <option value="@g.GradeID">@g.GradeName</option>
+                                <option value="@Model.GradePreference">@Model.GradePreference</option>
                             }
 
                         </select>
@@ -115,13 +115,26 @@
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                     <label asp-for="YearsExperience" class="control-label">Years Experience</label>
                     <select class="form-control">
-                        <option value="0" selected="selected">None</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6 or More</option>
+                        @for (int i = 0; i < 6; i++)
+                        {
+                            @if (i == 0)
+                            {
+                                if (Model.YearsExperience == i) { <option selected="selected" value="@i">None</option> }
+                                else { <option value="@i">None</option> }
+                            }
+                            else if (i == 5)
+                            {
+                                if (Model.YearsExperience == i)
+                                { <option selected="selected" value="@i">5+</option> }
+                                else { <option value="@i">5+</option> }
+                            }
+                            else
+                            {
+                                if (Model.YearsExperience == i) { <option selected="selected" value="@i">@i</option> }
+                                else { <option value="@i">@i</option> }
+                            }
+
+                        }
                     </select>
                 </div>
 
@@ -131,12 +144,12 @@
                         </div>
                         <select asp-for="PreviousExperience" multiple class="form-control">
 
-                            <option value="" selected="selected">None</option>
+                            <option value="">None</option>
                             @foreach (Experience e in Model.AllExperience)
                             {
                                 if (Model.PreviousExperience.Contains(e))
                                 {
-                                    <option value="@e.ExperienceID" checked="checked">@e.ExperienceName</option>
+                                    <option value="@e.ExperienceID" selected="selected">@e.ExperienceName</option>
                                 }
                                 else
                                 {

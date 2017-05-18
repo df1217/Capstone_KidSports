@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace KidSports.Repositories
 {
-    public interface IAreaRepo
+    public interface IExpRepo
     {
-        List<Area> GetAllAreas();
-        Area GetAreaByID(int id);
+        List<Experience> GetAllExperiences();
+        Experience GetExperienceByID(int id);
     }
 }

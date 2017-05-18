@@ -9,5 +9,6 @@ namespace KidSports.Repositories
     public interface IStateRepo
     {
         List<State> GetAllStates();
+        State GetStateByID(int ID);
     }
 }

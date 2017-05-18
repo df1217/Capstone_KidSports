@@ -16,13 +16,13 @@ namespace KidSports.Models.ViewModels
         public LastName PreviousLastName2 { get; set; }
         public LastName PreviousLastName3 { get; set; }
         public List<State> AllStates { get; set; }
-        public List<LastName> PreviousLastNames { get; set; }
         public string PreferredName { get; set; }
         public DateTime DOB { get; set; }
         public int YearsLivingInOregon { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public State State { get; set; }
+        public int newPickedStateID { get; set; }
         public string Zip { get; set; }
         public List<State> PreviousStates { get; set; }
         public bool HasLivedOutsideUSA { get; set; }
@@ -30,20 +30,5 @@ namespace KidSports.Models.ViewModels
         public string AlternatePhone { get; set; }
         public string CurrentEmployer { get; set; }
         public string JobTitle { get; set; }
-        public Nullable<bool> IsApproved { get; set; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

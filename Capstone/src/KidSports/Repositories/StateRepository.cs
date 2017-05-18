@@ -19,5 +19,10 @@ namespace KidSports.Repositories
         {
             return context.States.ToList();
         }
+
+        public State GetStateByID(int ID)
+        {
+            return context.States.Where(x => x.StateID == ID).SingleOrDefault();
+        }
     }
 }

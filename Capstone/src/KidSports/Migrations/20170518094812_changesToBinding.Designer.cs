@@ -8,9 +8,10 @@ using KidSports.Repositories;
 namespace KidSports.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170518094812_changesToBinding")]
+    partial class changesToBinding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -69,7 +70,11 @@ namespace KidSports.Migrations
 
                     b.Property<string>("BackgroundResult");
 
+                    b.Property<DateTime>("BadgeApprovalDate");
+
                     b.Property<string>("BadgePath");
+
+                    b.Property<DateTime>("BadgeSubmissionDate");
 
                     b.Property<string>("City");
 
@@ -77,7 +82,11 @@ namespace KidSports.Migrations
 
                     b.Property<DateTime>("DOB");
 
+                    b.Property<DateTime>("DlApprovalDate");
+
                     b.Property<string>("DlPath");
+
+                    b.Property<DateTime>("DlSubmissionDate");
 
                     b.Property<bool>("HasContacted");
 
@@ -91,15 +100,25 @@ namespace KidSports.Migrations
 
                     b.Property<string>("NameOfChild");
 
+                    b.Property<DateTime>("NfhsApprovalDate");
+
                     b.Property<bool>("NfhsIsChecked");
 
                     b.Property<string>("NfhsPath");
+
+                    b.Property<DateTime>("NfhsSubmissionDate");
+
+                    b.Property<DateTime>("PcaApprovalDate");
 
                     b.Property<bool>("PcaIsChecked");
 
                     b.Property<string>("PcaPath");
 
+                    b.Property<DateTime>("PcaSubmissionDate");
+
                     b.Property<string>("PcaVoucherCode");
+
+                    b.Property<DateTime>("PledgeApprovalDate");
 
                     b.Property<string>("PledgeInitials");
 
@@ -116,8 +135,6 @@ namespace KidSports.Migrations
                     b.Property<int>("YearsLivedInOregon");
 
                     b.Property<string>("ZipCode");
-
-                    b.Property<bool>("pledgeIsInAgreement");
 
                     b.HasKey("ApplicationID");
 

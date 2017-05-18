@@ -19,5 +19,10 @@ namespace KidSports.Repositories
         {
             return context.Areas.ToList();
         }
+
+        public Area GetAreaByID(int id)
+        {
+            return context.Areas.Where(x => x.AreaID == id).SingleOrDefault();
+        }
     }
 }

@@ -38,10 +38,11 @@ namespace Kidsports.Tests
 
                 AppSport = new Sport() { SportName = "Soccer", Gender = "Boys", MaxGrade = 7 },
 
-                StatesLived = new List<State>() {
-                   new State() {StateName = "California" },
-                   new State() {StateName = "Oregon" },
-                   new State() {StateName = "Idaho" },
+                StatesLived = new List<AppStateJoin>() { new AppStateJoin
+                {
+                    ApplicationID = 1, StateID = 1
+                }
+                  
                 },
                 CountriesLived = new List<Country> {
                     new Country() {CountryName = "Canada" },
@@ -84,9 +85,11 @@ namespace Kidsports.Tests
 
                 AppSport = new Sport() { SportName = "Basketball", Gender = "Boys" },
 
-                StatesLived = new List<State> {
-                    new State() { StateName = "Texas" }
-                    },
+                StatesLived = new List<AppStateJoin>() { new AppStateJoin
+                {
+                    ApplicationID = 1, StateID = 1
+                }
+                },
                 CountriesLived = new List<Country> {
                     new Country() {CountryName = "Mexico" }
                 },
@@ -127,9 +130,11 @@ namespace Kidsports.Tests
 
                 AppSport = new Sport() { SportName = "lacrosse", Gender = "Girls" },
 
-                StatesLived = new List<State> {
-                    new State() { StateName = "Washington" }
-                    },
+                StatesLived = new List<AppStateJoin>() { new AppStateJoin
+                {
+                    ApplicationID = 1, StateID = 1
+                }
+                },
                 CountriesLived = new List<Country> {
                     new Country() {CountryName = "Canada" }
                 },
@@ -153,7 +158,7 @@ namespace Kidsports.Tests
             return applications;
         }
 
-        public IQueryable<Application> GetFilteredApplications(ApplicantSearchModel searchModel)
+        public IQueryable<Application> GetFilteredApplications(ApplicationSearchModel searchModel)
         {
             //set up using applications to test
             var result = applications.AsQueryable();
