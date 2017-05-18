@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KidSports.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace KidSports.Repositories
 {
@@ -17,7 +18,7 @@ namespace KidSports.Repositories
 
         public List<Application> GetAllApplications()
         {
-            return context.Applications.ToList();
+            return context.Applications.Include(m => m.State).ToList();
         }
 
         public Application GetApplicationByID(int id)

@@ -166,9 +166,37 @@ namespace KidSports.Controllers
             {
                 //Get the coaches current app
                 Application currentApp = appRepo.GetApplicationByID(AppID);
+
+
                 CoachInfoViewModel civm = new CoachInfoViewModel();
-                civm.ApplicationID = AppID;
+
+                #region Bind application to view model if pre-exisiting info
                 //If any information exists, bind it to the view model.
+                civm.ApplicationID = AppID;
+                if (user.FirstName != null) civm.FirstName = user.FirstName;
+                if (user.MiddleName != null) civm.MiddleName = user.MiddleName;
+                if (user.LastName != null) civm.LastName = user.LastName;
+                if (currentApp.PreviousLastNames != null)
+                {
+                    if (currentApp.PreviousLastNames[0] != null) civm.PreviousLastName1 = currentApp.PreviousLastNames[0];
+                    if (currentApp.PreviousLastNames[1] != null) civm.PreviousLastName2 = currentApp.PreviousLastNames[1];
+                    if (currentApp.PreviousLastNames[2] != null) civm.PreviousLastName3 = currentApp.PreviousLastNames[2];
+                }
+                if (user.PreferredName != null) civm.PreferredName = user.PreferredName;
+                if (currentApp.DOB != null) civm.DOB = currentApp.DOB;
+                if (currentApp.YearsLivedInOregon != -1) civm.YearsLivingInOregon = currentApp.YearsLivedInOregon;
+                if (currentApp.Address != null) civm.Address = currentApp.Address;
+                if (currentApp.City != null) civm.City = currentApp.City;
+                if (currentApp.State != null) civm.State = currentApp.State; else civm.State = new State();
+                if (currentApp.ZipCode != null) civm.Zip = currentApp.ZipCode;
+                if (currentApp.LivedOutsideUSA != false) civm.HasLivedOutsideUSA = currentApp.LivedOutsideUSA;
+                if (user.PhoneNumber != null) civm.CellPhone = user.PhoneNumber;
+                if (currentApp.City != null) civm.City = currentApp.City;
+                if (currentApp.State != null) civm.State = currentApp.State;
+                if (currentApp.Address != null) civm.Address = currentApp.Address;
+                if (currentApp.CurrentEmployer != null) civm.CurrentEmployer = currentApp.CurrentEmployer;
+                if (currentApp.JobTitle != null) civm.JobTitle = currentApp.JobTitle;
+
                 civm.AllStates = stateRepo.GetAllStates();
                 if (currentApp.StatesLived != null)
                 {
@@ -178,7 +206,7 @@ namespace KidSports.Controllers
                 {
                     civm.PreviousStates = new List<State>();
                 }
-
+                #endregion
 
                 //Display the view.
                 return View(civm);
@@ -208,13 +236,13 @@ namespace KidSports.Controllers
                 if (civm.MiddleName != null) user.MiddleName = civm.MiddleName;
                 if (civm.CellPhone != null) user.PhoneNumber = civm.CellPhone;
                 currentApp.LivedOutsideUSA = civm.HasLivedOutsideUSA;
-                if (civm.State != null) currentApp.State = civm.State;
+                if (civm.newPickedStateID != -1) currentApp.State = stateRepo.GetStateByID(civm.newPickedStateID);
                 if (civm.PreviousStates != null)
                 {
                     foreach (State s in civm.PreviousStates)
                         currentApp.StatesLived.Add(new AppStateJoin() { ApplicationID = currentApp.ApplicationID, StateID = s.StateID });
                 }
-                
+                if (civm.DOB != new DateTime()) currentApp.DOB = civm.DOB; 
                 if (civm.Address != null) currentApp.Address = civm.Address;
                 if (civm.City != null) currentApp.City = civm.City;
                 if (civm.Zip != null) currentApp.ZipCode = civm.Zip;
