@@ -425,6 +425,9 @@ namespace KidSports.Controllers
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
                 Application currentApp = appRepo.GetApplicationByID(ccvm.ApplicationID);
+                if (currentApp.NfhsPath != null) { 
+                    //get the image and put it in the view model.
+                }
 
                 if (ccvm.File != null)
                 {
@@ -497,17 +500,20 @@ namespace KidSports.Controllers
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
             if (user.currentYearApp.ApplicationID == pcvm.ApplicationID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
             {
+                Application currentApp = appRepo.GetApplicationByID(pcvm.ApplicationID);
+
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
-                var uploads = Path.Combine(_environment.WebRootPath);
+                var uploads = Path.Combine(_environment.WebRootPath, "Images", "PCACourse");
                 if (pcvm.File.Length > 0)
                 {
-                    using (var fileStream = new FileStream(Path.Combine(uploads, pcvm.File.FileName), FileMode.Create))
+                    using (var fileStream = new FileStream(Path.Combine(uploads, pcvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
                     {
                         await pcvm.File.CopyToAsync(fileStream);
+                        currentApp.NfhsPath = fileStream.Name.ToString();
                     }
-                    //p5Vm.Application.PcaPath = $"\\{p5Vm.File.FileName}";
                 }
+                appRepo.Update(currentApp);
 
                 //Decide which direction is being taken.
                 if (pcvm.Direction == "previous")
@@ -561,19 +567,21 @@ namespace KidSports.Controllers
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
             if (user.currentYearApp.ApplicationID == idvm.ApplicationID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
             {
-                //Process all data that is in the view model. If anything is new or changed,
-                //update the coaches current application.
                 Application currentApp = appRepo.GetApplicationByID(idvm.ApplicationID);
 
-                var uploads = Path.Combine(_environment.WebRootPath);
+                //Process all data that is in the view model. If anything is new or changed,
+                //update the coaches current application.
+                var uploads = Path.Combine(_environment.WebRootPath, "Images", "ID");
                 if (idvm.File.Length > 0)
                 {
-                    using (var fileStream = new FileStream(Path.Combine(uploads, idvm.File.FileName), FileMode.Create))
+                    using (var fileStream = new FileStream(Path.Combine(uploads, idvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
                     {
                         await idvm.File.CopyToAsync(fileStream);
+                        currentApp.NfhsPath = fileStream.Name.ToString();
                     }
-                    //p6Vm.Application.DlPath = $"\\{p6Vm.File.FileName}";
                 }
+                appRepo.Update(currentApp);
+
 
                 //Decide which direction is being taken.
                 if (idvm.Direction == "previous")
@@ -632,17 +640,21 @@ namespace KidSports.Controllers
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
             if (user.currentYearApp.ApplicationID == bvm.ApplicationID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
             {
+                Application currentApp = appRepo.GetApplicationByID(bvm.ApplicationID);
+
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
-                var uploads = Path.Combine(_environment.WebRootPath);
+                var uploads = Path.Combine(_environment.WebRootPath, "Images", "Badge");
                 if (bvm.File.Length > 0)
                 {
-                    using (var fileStream = new FileStream(Path.Combine(uploads, bvm.File.FileName), FileMode.Create))
+                    using (var fileStream = new FileStream(Path.Combine(uploads, bvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
                     {
                         await bvm.File.CopyToAsync(fileStream);
+                        currentApp.NfhsPath = fileStream.Name.ToString();
                     }
-                    //p7Vm.Application.DlPath = $"\\{p7Vm.File.FileName}";
                 }
+                appRepo.Update(currentApp);
+
 
                 //Decide which direction is being taken.
                 if (bvm.Direction == "previous")
