@@ -24,6 +24,7 @@ namespace KidSports
             .SetBasePath(env.ContentRootPath)
             .AddJsonFile("appsettings.json")
             //.AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+            //.AddEnvironmentVariables();
             .Build();
         }
 
