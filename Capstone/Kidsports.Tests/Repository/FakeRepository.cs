@@ -59,14 +59,7 @@ namespace Kidsports.Tests
                 YearsExperience = 7
             };
 
-            applications.Add(app1);
-
-
-
-
-
-
-
+            
 
             Application app2 = new Application()
             {
@@ -106,10 +99,6 @@ namespace Kidsports.Tests
                 YearsExperience = 5,
             };
 
-            applications.Add(app2);
-
-
-
             Application app3 = new Application()
             {
                 //ApplicationID = 3,
@@ -146,6 +135,10 @@ namespace Kidsports.Tests
 
                 YearsExperience = 1,
             };
+
+            applications.Add(app1);
+            applications.Add(app2);
+            applications.Add(app3);
 
             //user1.UserApplications.Add(app1);
             //user2.UserApplications.Add(app2);

@@ -101,25 +101,26 @@
 
                 
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
-                    <div class="myToolTip" title="Hold control key and click for multiple select">
+                   
                         <label asp-for="PreviousStates" class="control-label">Previous states lived in:<span style="color:red;">*</span></label>
-                    </div>
-                    <select multiple asp-for="PreviousStates" id="state" class="form-control">
-                        <option value="" selected="selected">Select Multiple States</option>
+                 
+                    <select class="multiselect-ui form-control" multiple="multiple">
+                        @*<select multiple asp-for="PreviousStates" id="state" class="form-control">*@
+                            <option value="" selected="selected">Select Multiple States</option>
 
-                       @foreach (State s in Model.AllStates)
-                       {
-                           if (Model.PreviousStates.Contains(s))
-                           {
-                            <option value="@s.StateID" checked="checked">@s.StateName</option>
-                           }
-                           else
-                           {
-                            <option value="@s.StateID">@s.StateName</option>
-                           }
-                       }
-                    </select>
-                </div>
+                            @foreach (State s in Model.AllStates)
+                            {
+                                if (Model.PreviousStates.Contains(s))
+                                {
+                                    <option value="@s.StateID" checked="checked">@s.StateName</option>
+                                }
+                                else
+                                {
+                                    <option value="@s.StateID">@s.StateName</option>
+                                }
+                            }
+                        </select>
+</div>
             </div>
 
             <div class="row">
