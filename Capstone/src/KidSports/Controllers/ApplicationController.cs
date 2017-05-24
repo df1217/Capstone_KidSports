@@ -187,16 +187,38 @@ namespace KidSports.Controllers
                 #region Bind application to view model if pre-exisiting info
                 //If any information exists, bind it to the view model.
                 civm.ApplicationID = AppID;
-                if (user.FirstName != null) civm.FirstName = user.FirstName;
-                if (user.MiddleName != null) civm.MiddleName = user.MiddleName;
-                if (user.LastName != null) civm.LastName = user.LastName;
-                if (currentApp.PreviousLastNames != null)
-                {
-                    if (currentApp.PreviousLastNames[0] != null) civm.PreviousLastName1 = currentApp.PreviousLastNames[0];
-                    if (currentApp.PreviousLastNames[1] != null) civm.PreviousLastName2 = currentApp.PreviousLastNames[1];
-                    if (currentApp.PreviousLastNames[2] != null) civm.PreviousLastName3 = currentApp.PreviousLastNames[2];
+               if (user.currentYearApp.ApplicationID == AppID)
+
+               {
+
+                    if (user.FirstName != null) civm.FirstName = user.FirstName;
+                    if (user.MiddleName != null) civm.MiddleName = user.MiddleName;
+                    if (user.LastName != null) civm.LastName = user.LastName;
+                    if (user.PreviousLastName1 != null) civm.PreviousLastName1 = user.PreviousLastName1;
+                    if (user.PreviousLastName2 != null) civm.PreviousLastName2 = user.PreviousLastName2;
+                    if (user.PreviousLastName3 != null) civm.PreviousLastName3 = user.PreviousLastName3;
+                    if (user.PhoneNumber != null) civm.CellPhone = user.PhoneNumber;
+                    if (user.AlternatePhone != null) civm.AlternatePhone = user.AlternatePhone;
+                    if (user.PreferredName != null) civm.PreferredName = user.PreferredName;
                 }
-                if (user.PreferredName != null) civm.PreferredName = user.PreferredName;
+               else
+                {
+                    User appuser = userRepo.GetUserByID(AppID);
+                    civm.FirstName = appuser.FirstName;
+                    civm.MiddleName = appuser.MiddleName;
+                    civm.LastName = appuser.LastName;
+                    civm.PreviousLastName1 = appuser.PreviousLastName1;
+                    civm.PreviousLastName2 = appuser.PreviousLastName2;
+                    civm.PreviousLastName3 = appuser.PreviousLastName3;
+                    civm.PreferredName = appuser.PreferredName;
+                    civm.CellPhone = appuser.PhoneNumber;
+                    civm.AlternatePhone = appuser.AlternatePhone;
+
+                }
+
+               
+                
+                
                 if (currentApp.DOB != null) civm.DOB = currentApp.DOB;
                 if (currentApp.YearsLivedInOregon != -1) civm.YearsLivingInOregon = currentApp.YearsLivedInOregon;
                 if (currentApp.Address != null) civm.Address = currentApp.Address;
@@ -204,7 +226,7 @@ namespace KidSports.Controllers
                 if (currentApp.State != null) civm.State = currentApp.State; else civm.State = new State();
                 if (currentApp.ZipCode != null) civm.Zip = currentApp.ZipCode;
                 if (currentApp.LivedOutsideUSA != false) civm.HasLivedOutsideUSA = currentApp.LivedOutsideUSA;
-                if (user.PhoneNumber != null) civm.CellPhone = user.PhoneNumber;
+                
                 if (currentApp.City != null) civm.City = currentApp.City;
                 if (currentApp.State != null) civm.State = currentApp.State;
                 if (currentApp.Address != null) civm.Address = currentApp.Address;
@@ -248,6 +270,10 @@ namespace KidSports.Controllers
                 if (civm.FirstName != null) user.FirstName = civm.FirstName;
                 if (civm.LastName != null) user.LastName = civm.LastName;
                 if (civm.MiddleName != null) user.MiddleName = civm.MiddleName;
+                if (civm.PreviousLastName1 != null) user.PreviousLastName1 = civm.PreviousLastName1;
+                if (civm.PreviousLastName2 != null) user.PreviousLastName2 = civm.PreviousLastName2;
+                if (civm.PreviousLastName3 != null) user.PreviousLastName3 = civm.PreviousLastName3;
+                if (civm.PreferredName != null) user.PreferredName = civm.PreferredName;
                 if (civm.CellPhone != null) user.PhoneNumber = civm.CellPhone;
                 currentApp.LivedOutsideUSA = civm.HasLivedOutsideUSA;
                 if (civm.newPickedStateID != -1) currentApp.State = stateRepo.GetStateByID(civm.newPickedStateID);
@@ -261,14 +287,21 @@ namespace KidSports.Controllers
                 if (civm.City != null) currentApp.City = civm.City;
                 if (civm.Zip != null) currentApp.ZipCode = civm.Zip;
                 if (civm.CurrentEmployer != null) currentApp.CurrentEmployer = civm.CurrentEmployer;
-                if (civm.PreviousLastName1 != null) currentApp.PreviousLastNames.Add(civm.PreviousLastName1);
-                if (civm.PreviousLastName2 != null) currentApp.PreviousLastNames.Add(civm.PreviousLastName2);
-                if (civm.PreviousLastName3 != null) currentApp.PreviousLastNames.Add(civm.PreviousLastName3);
+                
                 if (civm.YearsLivingInOregon != -1) currentApp.YearsLivedInOregon = civm.YearsLivingInOregon;
                 appRepo.Update(currentApp);
+             
                 #endregion
                 userRepo.Update(user);
 
+                if (civm.Direction == "approve")
+                {
+                    return RedirectToAction("CoachInterests", new { AppID = civm.ApplicationID });
+                }
+
+                if (civm.Direction == "deny")
+
+                    return RedirectToAction("ApplicantDetails", new { AppID = civm.ApplicationID });
                 //Decide which direction is being taken (this page only has next).
                 if (civm.Direction == "next")
                     return RedirectToAction("CoachInterests", new { AppID = civm.ApplicationID });

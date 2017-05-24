@@ -8,8 +8,8 @@ using KidSports.Repositories;
 namespace KidSports.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170518073927_changes")]
-    partial class changes
+    [Migration("20170524191812_DeletLastName")]
+    partial class DeletLastName
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,6 +33,22 @@ namespace KidSports.Migrations
                     b.ToTable("AppAreaJoin");
                 });
 
+            modelBuilder.Entity("KidSports.Models.AppExpJoin", b =>
+                {
+                    b.Property<int>("AppExpJoinID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ApplicationID");
+
+                    b.Property<int>("ExperienceID");
+
+                    b.HasKey("AppExpJoinID");
+
+                    b.HasIndex("ApplicationID");
+
+                    b.ToTable("AppExpJoin");
+                });
+
             modelBuilder.Entity("KidSports.Models.Application", b =>
                 {
                     b.Property<int>("ApplicationID")
@@ -54,11 +70,7 @@ namespace KidSports.Migrations
 
                     b.Property<string>("BackgroundResult");
 
-                    b.Property<DateTime>("BadgeApprovalDate");
-
                     b.Property<string>("BadgePath");
-
-                    b.Property<DateTime>("BadgeSubmissionDate");
 
                     b.Property<string>("City");
 
@@ -66,11 +78,7 @@ namespace KidSports.Migrations
 
                     b.Property<DateTime>("DOB");
 
-                    b.Property<DateTime>("DlApprovalDate");
-
                     b.Property<string>("DlPath");
-
-                    b.Property<DateTime>("DlSubmissionDate");
 
                     b.Property<bool>("HasContacted");
 
@@ -84,25 +92,15 @@ namespace KidSports.Migrations
 
                     b.Property<string>("NameOfChild");
 
-                    b.Property<DateTime>("NfhsApprovalDate");
-
                     b.Property<bool>("NfhsIsChecked");
 
                     b.Property<string>("NfhsPath");
-
-                    b.Property<DateTime>("NfhsSubmissionDate");
-
-                    b.Property<DateTime>("PcaApprovalDate");
 
                     b.Property<bool>("PcaIsChecked");
 
                     b.Property<string>("PcaPath");
 
-                    b.Property<DateTime>("PcaSubmissionDate");
-
                     b.Property<string>("PcaVoucherCode");
-
-                    b.Property<DateTime>("PledgeApprovalDate");
 
                     b.Property<string>("PledgeInitials");
 
@@ -119,6 +117,8 @@ namespace KidSports.Migrations
                     b.Property<int>("YearsLivedInOregon");
 
                     b.Property<string>("ZipCode");
+
+                    b.Property<bool>("pledgeIsInAgreement");
 
                     b.HasKey("ApplicationID");
 
@@ -216,13 +216,9 @@ namespace KidSports.Migrations
                     b.Property<int>("ExperienceID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ApplicationID");
-
                     b.Property<string>("ExperienceName");
 
                     b.HasKey("ExperienceID");
-
-                    b.HasIndex("ApplicationID");
 
                     b.ToTable("Experiences");
                 });
@@ -237,22 +233,6 @@ namespace KidSports.Migrations
                     b.HasKey("GradeID");
 
                     b.ToTable("Grades");
-                });
-
-            modelBuilder.Entity("KidSports.Models.LastName", b =>
-                {
-                    b.Property<int>("LastNameID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("ApplicationID");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("LastNameID");
-
-                    b.HasIndex("ApplicationID");
-
-                    b.ToTable("LastName");
                 });
 
             modelBuilder.Entity("KidSports.Models.PreviousGradesCoached", b =>
@@ -319,6 +299,8 @@ namespace KidSports.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<string>("AlternatePhone");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -348,6 +330,14 @@ namespace KidSports.Migrations
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("PreferredName");
+
+                    b.Property<string>("PreviousLastName1");
+
+                    b.Property<string>("PreviousLastName2");
+
+                    b.Property<string>("PreviousLastName3");
 
                     b.Property<string>("SecurityStamp");
 
@@ -487,6 +477,14 @@ namespace KidSports.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("KidSports.Models.AppExpJoin", b =>
+                {
+                    b.HasOne("KidSports.Models.Application")
+                        .WithMany("PreviousExperience")
+                        .HasForeignKey("ApplicationID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("KidSports.Models.Application", b =>
                 {
                     b.HasOne("KidSports.Models.Area", "AppArea")
@@ -522,20 +520,6 @@ namespace KidSports.Migrations
                 {
                     b.HasOne("KidSports.Models.Application")
                         .WithMany("CountriesLived")
-                        .HasForeignKey("ApplicationID");
-                });
-
-            modelBuilder.Entity("KidSports.Models.Experience", b =>
-                {
-                    b.HasOne("KidSports.Models.Application")
-                        .WithMany("PreviousExperience")
-                        .HasForeignKey("ApplicationID");
-                });
-
-            modelBuilder.Entity("KidSports.Models.LastName", b =>
-                {
-                    b.HasOne("KidSports.Models.Application")
-                        .WithMany("PreviousLastNames")
                         .HasForeignKey("ApplicationID");
                 });
 

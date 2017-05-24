@@ -104,7 +104,7 @@
                    
                         <label asp-for="PreviousStates" class="control-label">Previous states lived in:<span style="color:red;">*</span></label>
                  
-                    <select class="multiselect-ui form-control" multiple="multiple">
+                    <select asp-for="PreviousStates"class="multiselect-ui form-control" multiple="multiple">
                         @*<select multiple asp-for="PreviousStates" id="state" class="form-control">*@
                             <option value="" selected="selected">Select Multiple States</option>
 

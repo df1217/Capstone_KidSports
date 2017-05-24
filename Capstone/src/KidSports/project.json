@@ -58,7 +58,7 @@
     }
   },
   "runtimes": {
-    "win10-x64": {}
+    //"win7-x64": {}
   },
   "scripts": {
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]

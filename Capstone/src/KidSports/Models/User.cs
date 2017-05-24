@@ -15,5 +15,9 @@ namespace KidSports.Models
         public List<Application> UserApplications{ get; set; }
         public Application currentYearApp { get; set; }
         public string AlternatePhone { get; set; }
+        public string PreviousLastName1 { get; set; }
+        public string PreviousLastName2 { get; set; }
+        public string PreviousLastName3 { get; set; }
+
     }
 }
