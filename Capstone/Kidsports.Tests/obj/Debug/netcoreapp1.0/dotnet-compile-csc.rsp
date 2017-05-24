@@ -9,6 +9,7 @@
 -nostdlib
 -nologo
 <<<<<<< HEAD
+<<<<<<< HEAD
 "C:\Users\anuch\Desktop\Kidsports\Kidsports051717 - API\Capstone_KidSports\Capstone\Kidsports.Tests\obj\Debug\netcoreapp1.0\dotnet-compile.assemblyinfo.cs"
 -out:"C:\Users\anuch\Desktop\Kidsports\Kidsports051717 - API\Capstone_KidSports\Capstone\Kidsports.Tests\bin\Debug\netcoreapp1.0\Kidsports.Tests.dll"
 -r:"C:\Users\anuch\.nuget\packages\dotnet-test-xunit\2.2.0-preview2-build1029\lib\netcoreapp1.0\dotnet-test-xunit.dll"
@@ -218,6 +219,8 @@
 "C:\Users\anuch\Desktop\Kidsports\Kidsports051717 - API\Capstone_KidSports\Capstone\Kidsports.Tests\Properties\AssemblyInfo.cs"
 "C:\Users\anuch\Desktop\Kidsports\Kidsports051717 - API\Capstone_KidSports\Capstone\Kidsports.Tests\Repository\FakeRepository.cs"
 =======
+=======
+>>>>>>> 224cefa6e8562ffab6c1606169c029c7335d97e1
 "C:\Users\Dell\Desktop\Capstone_KidSports\Capstone\Kidsports.Tests\obj\Debug\netcoreapp1.0\dotnet-compile.assemblyinfo.cs"
 -out:"C:\Users\Dell\Desktop\Capstone_KidSports\Capstone\Kidsports.Tests\bin\Debug\netcoreapp1.0\Kidsports.Tests.dll"
 -r:"C:\Users\Dell\.nuget\packages\dotnet-test-xunit\2.2.0-preview2-build1029\lib\netcoreapp1.0\dotnet-test-xunit.dll"
@@ -426,4 +429,7 @@
 "C:\Users\Dell\Desktop\Capstone_KidSports\Capstone\Kidsports.Tests\UserTests.cs"
 "C:\Users\Dell\Desktop\Capstone_KidSports\Capstone\Kidsports.Tests\Properties\AssemblyInfo.cs"
 "C:\Users\Dell\Desktop\Capstone_KidSports\Capstone\Kidsports.Tests\Repository\FakeRepository.cs"
+<<<<<<< HEAD
+>>>>>>> 224cefa6e8562ffab6c1606169c029c7335d97e1
+=======
 >>>>>>> 224cefa6e8562ffab6c1606169c029c7335d97e1
