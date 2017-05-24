@@ -87,6 +87,12 @@ namespace KidSports.Repositories
             return result;
         }
 
+        public User GetUserByID(int id)
+        {
+
+            return context.Users.Where(a => a.currentYearApp.ApplicationID == id).SingleOrDefault();
+        }
+
         public int Update(User user)
         {
             if (user.Id == "")

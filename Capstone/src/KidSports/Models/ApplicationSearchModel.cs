@@ -9,6 +9,7 @@ namespace KidSports.Models
     {
         public int ApplicationID { get; set; }
         public List<Application> filterableApps { get; set; }
+        //public List<Tuple<int, string, ApplicationStatus>> keyValStatus { get; set; }
         public bool IsChecked { get; set; }
         public string Area { get; set; }
         public string School { get; set; }

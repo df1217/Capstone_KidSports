@@ -1,7 +1,11 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
+<<<<<<< HEAD
       "C:\\Users\\anuch\\.nuget\\packages"
+=======
+      "C:\\Users\\Dell\\.nuget\\packages"
+>>>>>>> 224cefa6e8562ffab6c1606169c029c7335d97e1
     ]
   }
 }

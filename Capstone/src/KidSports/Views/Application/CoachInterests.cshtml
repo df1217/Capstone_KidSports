@@ -100,7 +100,7 @@
                             <option value="">Any</option>
                             @foreach (var g in Model.AllGrades)
                             {
-                                <option value="@Model.GradePreference">@Model.GradePreference</option>
+                                <option value="@g.GradeName">@g.GradeName</option>
                             }
 
                         </select>
