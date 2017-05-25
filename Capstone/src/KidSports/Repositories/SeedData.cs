@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -314,6 +313,27 @@ namespace KidSports.Repositories
                 context.SaveChanges();
             }
             #endregion
+
+            #region UpdateApplink
+            if (!context.Applinks.Any())
+            {
+                UpdateApplink links = new UpdateApplink();
+                links.Address = "2190 Polk St. Eugene, OR 97405";
+                links.BevBlog = "http://www.kidsports.org/blog-1";
+                links.Email = "info@kidsports.org";
+                links.FaceBookCoach = "https://www.facebook.com/kidsportscoachnetwork/";
+                links.FaceBookKidsports = "https://www.facebook.com/www.emeraldkidsports/";
+                links.Instragram = "https://www.instagram.com/kidsports4life/";
+                links.NFHS = "https://nfhslearn.com/courses/61064/concussion-in-sports";
+                links.PCA = "http://shopping.positivecoach.org/Double-Goal-Coach?search=Course";
+                links.Phone = "541 683 2374";
+                links.Fax = "541 302 9430";
+                links.Twitter = "https://twitter.com/kidsports4life";
+                links.Voucher = "EmeraldKidSports16";
+
+                context.Applinks.Add(links);
+                context.SaveChanges();
+            }
         }
     }
 }
