@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using KidSports.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace KidSports.Controllers
 {
@@ -176,6 +177,9 @@ namespace KidSports.Controllers
         {
             if (asm == null)
                asm = new ApplicationSearchModel();
+            asm.filteredApps = new List<Application>();
+            asm.filteredUsers = new List<User>();
+            asm.filteredAppStatus = new List<ApplicationStatus>();
 
             List<Application> filteredApps = appRepo.GetFilteredApplications(asm).ToList();
             List<User> filteredUsers = new List<User>();
@@ -190,9 +194,20 @@ namespace KidSports.Controllers
                 filteredAppStatus.Add(appstatus);
             }
 
-            asm.filteredApps.AddRange(filteredApps);
-            asm.filteredUsers.AddRange(filteredUsers);
-            asm.filteredAppStatus.AddRange(filteredAppStatus);
+            if (filteredApps != null)
+                asm.filteredApps.AddRange(filteredApps);
+            else
+                asm.filteredApps = new List<Application>();
+
+            if (filteredUsers != null)
+                asm.filteredUsers.AddRange(filteredUsers);
+            else
+                asm.filteredUsers = new List<User>();
+
+            if (filteredAppStatus != null)
+                asm.filteredAppStatus.AddRange(filteredAppStatus);
+            else
+                asm.filteredAppStatus = new List<ApplicationStatus>();
             return View(asm);
         }
 
