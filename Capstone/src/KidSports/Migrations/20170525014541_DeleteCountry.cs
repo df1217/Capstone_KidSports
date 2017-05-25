@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace KidSports.Migrations
 {
-    public partial class DeletLastName : Migration
+    public partial class DeleteCountry : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -225,20 +225,6 @@ namespace KidSports.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Country",
-                columns: table => new
-                {
-                    CountryID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ApplicationID = table.Column<int>(nullable: true),
-                    CountryName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Country", x => x.CountryID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
@@ -288,6 +274,7 @@ namespace KidSports.Migrations
                     BackgroundResult = table.Column<string>(nullable: true),
                     BadgePath = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
+                    ConcussionCourseSubmissionDate = table.Column<DateTime>(nullable: false),
                     CurrentEmployer = table.Column<string>(nullable: true),
                     DOB = table.Column<DateTime>(nullable: false),
                     DlPath = table.Column<string>(nullable: true),
@@ -299,6 +286,7 @@ namespace KidSports.Migrations
                     NameOfChild = table.Column<string>(nullable: true),
                     NfhsIsChecked = table.Column<bool>(nullable: false),
                     NfhsPath = table.Column<string>(nullable: true),
+                    PcaCourseSubmissionDate = table.Column<DateTime>(nullable: false),
                     PcaIsChecked = table.Column<bool>(nullable: false),
                     PcaPath = table.Column<string>(nullable: true),
                     PcaVoucherCode = table.Column<string>(nullable: true),
@@ -453,11 +441,6 @@ namespace KidSports.Migrations
                 column: "ApplicationID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Country_ApplicationID",
-                table: "Country",
-                column: "ApplicationID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Schools_AreaID",
                 table: "Schools",
                 column: "AreaID");
@@ -533,14 +516,6 @@ namespace KidSports.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Country_Applications_ApplicationID",
-                table: "Country",
-                column: "ApplicationID",
-                principalTable: "Applications",
-                principalColumn: "ApplicationID",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUsers_Applications_currentYearAppApplicationID",
                 table: "AspNetUsers",
                 column: "currentYearAppApplicationID",
@@ -566,9 +541,6 @@ namespace KidSports.Migrations
 
             migrationBuilder.DropTable(
                 name: "AppStateJoin");
-
-            migrationBuilder.DropTable(
-                name: "Country");
 
             migrationBuilder.DropTable(
                 name: "Experiences");

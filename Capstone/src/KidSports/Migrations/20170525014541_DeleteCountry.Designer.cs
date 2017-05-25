@@ -8,8 +8,8 @@ using KidSports.Repositories;
 namespace KidSports.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170524191812_DeletLastName")]
-    partial class DeletLastName
+    [Migration("20170525014541_DeleteCountry")]
+    partial class DeleteCountry
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -74,6 +74,8 @@ namespace KidSports.Migrations
 
                     b.Property<string>("City");
 
+                    b.Property<DateTime>("ConcussionCourseSubmissionDate");
+
                     b.Property<string>("CurrentEmployer");
 
                     b.Property<DateTime>("DOB");
@@ -95,6 +97,8 @@ namespace KidSports.Migrations
                     b.Property<bool>("NfhsIsChecked");
 
                     b.Property<string>("NfhsPath");
+
+                    b.Property<DateTime>("PcaCourseSubmissionDate");
 
                     b.Property<bool>("PcaIsChecked");
 
@@ -193,22 +197,6 @@ namespace KidSports.Migrations
                     b.HasKey("AreaID");
 
                     b.ToTable("Areas");
-                });
-
-            modelBuilder.Entity("KidSports.Models.Country", b =>
-                {
-                    b.Property<int>("CountryID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("ApplicationID");
-
-                    b.Property<string>("CountryName");
-
-                    b.HasKey("CountryID");
-
-                    b.HasIndex("ApplicationID");
-
-                    b.ToTable("Country");
                 });
 
             modelBuilder.Entity("KidSports.Models.Experience", b =>
@@ -514,13 +502,6 @@ namespace KidSports.Migrations
                         .WithMany("StatesLived")
                         .HasForeignKey("ApplicationID")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("KidSports.Models.Country", b =>
-                {
-                    b.HasOne("KidSports.Models.Application")
-                        .WithMany("CountriesLived")
-                        .HasForeignKey("ApplicationID");
                 });
 
             modelBuilder.Entity("KidSports.Models.School", b =>

@@ -26,9 +26,11 @@ namespace KidSports.Models.ViewModels
         public string Zip { get; set; }
         public List<State> PreviousStates { get; set; }
         public bool HasLivedOutsideUSA { get; set; }
-        public string CellPhone{ get; set; }
         public string AlternatePhone { get; set; }
+        public string CellPhone { get; set; }
         public string CurrentEmployer { get; set; }
         public string JobTitle { get; set; }
+
+
     }
 }
