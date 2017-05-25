@@ -8,8 +8,8 @@ using KidSports.Repositories;
 namespace KidSports.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170525014541_DeleteCountry")]
-    partial class DeleteCountry
+    [Migration("20170525055658_appstatus")]
+    partial class appstatus
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -144,27 +144,27 @@ namespace KidSports.Migrations
                     b.Property<int>("ApplicationStatusID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("AppApprovalDate");
+                    b.Property<DateTime?>("AppApprovalDate");
 
-                    b.Property<DateTime>("AppCompletionDate");
+                    b.Property<DateTime?>("AppCompletionDate");
 
-                    b.Property<DateTime>("AppDenialDate");
+                    b.Property<DateTime?>("AppDenialDate");
 
                     b.Property<DateTime>("AppStartDate");
 
                     b.Property<int>("ApplicationID");
 
-                    b.Property<DateTime>("BcApprovalDate");
+                    b.Property<DateTime?>("BcApprovalDate");
 
-                    b.Property<DateTime>("BcStartDate");
+                    b.Property<DateTime?>("BcStartDate");
 
-                    b.Property<DateTime>("BcSubmissionDate");
+                    b.Property<DateTime?>("BcSubmissionDate");
 
-                    b.Property<DateTime>("PrefApprovalDate");
+                    b.Property<DateTime?>("PrefApprovalDate");
 
-                    b.Property<DateTime>("PrefDenialDate");
+                    b.Property<DateTime?>("PrefDenialDate");
 
-                    b.Property<DateTime>("PrefSubmissionDate");
+                    b.Property<DateTime?>("PrefSubmissionDate");
 
                     b.HasKey("ApplicationStatusID");
 

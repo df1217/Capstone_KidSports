@@ -1,15 +1,9 @@
-﻿
+﻿@model ApplicationSearchModel
 @{
     ViewBag.Title = "Applications";
 }
 
 <h2>Application Status Information:</h2>
-
-<div class="pull-right" style="margin-bottom:10px;">
-    <input type="text" style="height:32px;" />
-    <button class="btn btn-primary">Search</button>
-
-</div>
 
 <table class="table table-responsive">
     <thead>
@@ -21,69 +15,80 @@
     </thead>
 </table>
 
-<table class="table table-responsive table-striped">
-    <tr>
-        <td class=""></td>
-        <td class="col-xs-3">Application Details</td>
-        <td class="col-xs-3">Applicant Name</td>
-        <td class="col-xs-3">Application Start Date</td>
-        <td class="col-xs-3">Application Completion Date</td>
-    </tr>
+    <div class="row" style="margin-bottom:10px;">
+        <div class="col-md-3">
+            <select class="multiselect-ui form-control" multiple="multiple" id="Area" asp-for="Area">
+                <option value="North Eugene">North Eugene</option>
+            </select>
+        </div>
 
-    @*@foreach (Tuple<> t in Model.keyValStatus){
+        <div class="col-md-3">
+            <select class="multiselect-ui form-control" multiple="multiple" id="School" asp-for="test">
+                <option asp-for="test" value="Willamette High School">Willamette High School</option>
+            </select>
+        </div>
 
+        <div class="col-md-3">
+            <select class="multiselect-ui form-control" multiple="multiple" id="Sport" name="Sport">
+                <option value="Football">Football</option>
+            </select>
+        </div>
 
-    }*@
+        <div class="col-md-3">
+            <select class="multiselect-ui form-control" multiple="multiple" id="Grade" name="Grade">
+                <option value="Kindergarten">Kindergarten</option>
+            </select>
+        </div>
+    </div>
 
-    <tr>
-        <th><input type="checkbox" /></th>
-        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-danger">View Details</button></td>
-        <td>Jane Doe</td>
-        <td>3/14/17</td>
-        <td>3/14/17</td>
-    </tr>
+<div class="row">
+    <table class="table table-responsive table-striped">
+        <tr>
+            <td class=""></td>
+            <td class="col-xs-3">Application Details</td>
+            <td class="col-xs-3">Applicant Name</td>
+            <td class="col-xs-3">Start Date</td>
+            <td class="col-xs-3">Completion Date</td>
+        </tr>
 
-    <tr>
-        <th><input type="checkbox" /></th>
-        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-success">View Details</button></td>
-        <td>Bob Doe</td>
-        <td>2/18/17</td>
-        <td>2/19/17</td>
-    </tr>
-
-    <tr>
-        <th><input type="checkbox" /></th>
-        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-success">View Details</button></td>
-        <td>John Doe</td>
-        <td>4/08/17</td>
-        <td>4/12/17</td>
-    </tr>
-
-    <tr>
-        <th><input type="checkbox" checked="checked" /></th>
-        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-danger">View Details</button></td>
-        <td>Blue Ivy</td>
-        <td>8/10/16</td>
-        <td>8/10/16</td>
-    </tr>
-
-    <tr>
-        <th><input type="checkbox" checked="checked" /></th>
-        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-success">View Details</button></td>
-        <td>Danny Smith</td>
-        <td>2/28/17</td>
-        <td>3/1/17</td>
-    </tr>
-
-    <tr>
-        <th><input type="checkbox" /></th>
-        <td><button type="button" onclick="location='/Application/ApplicantDetails'" class="btn btn-warning">View Details</button></td>
-        <td>William Jones</td>
-        <td>5/18/17</td>
-        <td>5/18/17</td>
-    </tr>
-</table>
+        @for (int i = 0; i < Model.filteredApps.Count; i++)
+        {
+            <tr>
+                <th><input asp-for="@Model.filteredApps[i].HasContacted" type="checkbox" /></th>
+                <td>
+                    <a href='@Url.Action("ApplicantDetails", "Application", new { ApplicantID = Model.filteredUsers[i].Id })'>
+                        @if (Model.filteredAppStatus[i].AppApprovalDate != null)
+                        {
+                            <input type="button" class="btn btn-success" value="View Details">
+                        } else if (Model.filteredAppStatus[i].AppCompletionDate != null)
+                        {
+                            <input type="button" class="btn btn-warning" value="View Details">
+                        } else
+                        {
+                            <input type="button" class="btn btn-danger" value="View Details">
+                        }
+                    </a>
+                </td>
+                <td> @Html.DisplayFor(modelItem => Model.filteredUsers[i].FirstName) @Html.DisplayFor(modelItem => Model.filteredUsers[i].LastName)</td>
+                <td> @Html.DisplayFor(modelItem => Model.filteredAppStatus[i].AppStartDate) </td>
+                <td> @Html.DisplayFor(modelItem => Model.filteredAppStatus[i].AppCompletionDate) </td>
+            </tr>
+        }
+    </table>
+</div>
 
 <div class="pull-right" style="margin-top:50px">
     <button type="button" onclick="location = '/Application/CoachInfo'" class="btn btn-primary btn-md-10">Enter Applicant Manually</button>
 </div>	
+
+<script>
+    $(document).ready(function () {
+        $('select').change(function () {
+            $.post("Applications", function () {
+
+            });
+         });
+    });
+
+   
+</script>

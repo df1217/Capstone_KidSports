@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace KidSports.Migrations
 {
-    public partial class DeleteCountry : Migration
+    public partial class appstatus : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,17 +15,17 @@ namespace KidSports.Migrations
                 {
                     ApplicationStatusID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AppApprovalDate = table.Column<DateTime>(nullable: false),
-                    AppCompletionDate = table.Column<DateTime>(nullable: false),
-                    AppDenialDate = table.Column<DateTime>(nullable: false),
+                    AppApprovalDate = table.Column<DateTime>(nullable: true),
+                    AppCompletionDate = table.Column<DateTime>(nullable: true),
+                    AppDenialDate = table.Column<DateTime>(nullable: true),
                     AppStartDate = table.Column<DateTime>(nullable: false),
                     ApplicationID = table.Column<int>(nullable: false),
-                    BcApprovalDate = table.Column<DateTime>(nullable: false),
-                    BcStartDate = table.Column<DateTime>(nullable: false),
-                    BcSubmissionDate = table.Column<DateTime>(nullable: false),
-                    PrefApprovalDate = table.Column<DateTime>(nullable: false),
-                    PrefDenialDate = table.Column<DateTime>(nullable: false),
-                    PrefSubmissionDate = table.Column<DateTime>(nullable: false)
+                    BcApprovalDate = table.Column<DateTime>(nullable: true),
+                    BcStartDate = table.Column<DateTime>(nullable: true),
+                    BcSubmissionDate = table.Column<DateTime>(nullable: true),
+                    PrefApprovalDate = table.Column<DateTime>(nullable: true),
+                    PrefDenialDate = table.Column<DateTime>(nullable: true),
+                    PrefSubmissionDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
