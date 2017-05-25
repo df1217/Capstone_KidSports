@@ -248,7 +248,7 @@ namespace KidSports.Controllers
             }
 
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
-            if (user.currentYearApp.ApplicationID == AppID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
+            if (User.IsInRole("Admin") || User.IsInRole("SportsManager") || user.currentYearApp.ApplicationID == AppID)
             {
                 //Get the coaches current app
                 Application currentApp = appRepo.GetApplicationByID(AppID);
@@ -259,9 +259,11 @@ namespace KidSports.Controllers
                 #region Bind application to view model if pre-exisiting info
                 //If any information exists, bind it to the view model.
                 civm.ApplicationID = AppID;
-               if (user.currentYearApp.ApplicationID == AppID)
 
-               {
+                //if (!User.IsInRole("Admin") && !User.IsInRole("Sports Manager"))
+                //{
+                if (!User.IsInRole("SportsManager") && !User.IsInRole("Admin"))
+                {
 
                     if (user.FirstName != null) civm.FirstName = user.FirstName;
                     if (user.MiddleName != null) civm.MiddleName = user.MiddleName;
@@ -272,8 +274,9 @@ namespace KidSports.Controllers
                     if (user.PhoneNumber != null) civm.CellPhone = user.PhoneNumber;
                     if (user.AlternatePhone != null) civm.AlternatePhone = user.AlternatePhone;
                     if (user.PreferredName != null) civm.PreferredName = user.PreferredName;
+                
                 }
-               else
+                else
                 {
                     User appuser = userRepo.GetUserByID(AppID);
                     civm.FirstName = appuser.FirstName;
@@ -285,13 +288,10 @@ namespace KidSports.Controllers
                     civm.PreferredName = appuser.PreferredName;
                     civm.CellPhone = appuser.PhoneNumber;
                     civm.AlternatePhone = appuser.AlternatePhone;
-
                 }
+           
 
-               
-                
-                
-                if (currentApp.DOB != null) civm.DOB = currentApp.DOB;
+            if (currentApp.DOB != null) civm.DOB = currentApp.DOB;
                 if (currentApp.YearsLivedInOregon != -1) civm.YearsLivingInOregon = currentApp.YearsLivedInOregon;
                 if (currentApp.Address != null) civm.Address = currentApp.Address;
                 if (currentApp.City != null) civm.City = currentApp.City;
@@ -334,7 +334,7 @@ namespace KidSports.Controllers
             }
 
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
-            if (user.currentYearApp.ApplicationID == civm.ApplicationID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
+            if (User.IsInRole("Admin") || User.IsInRole("SportsManager") || user.currentYearApp.ApplicationID == civm.ApplicationID)
             {
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
@@ -375,8 +375,10 @@ namespace KidSports.Controllers
                 }
 
                 if (civm.Direction == "deny")
-
-                    return RedirectToAction("ApplicantDetails", new { AppID = civm.ApplicationID });
+                {
+                    User appuser = userRepo.GetUserByID(civm.ApplicationID);
+                    return RedirectToAction("ApplicantDetails", new { ApplicantID = appuser.Id });
+                }
                 //Decide which direction is being taken (this page only has next).
                 if (civm.Direction == "next")
                     return RedirectToAction("CoachInterests", new { AppID = civm.ApplicationID });
@@ -400,7 +402,7 @@ namespace KidSports.Controllers
             }
 
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
-            if (user.currentYearApp.ApplicationID == AppID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
+            if (User.IsInRole("Admin") || User.IsInRole("SportsManager") || user.currentYearApp.ApplicationID == AppID)
             {
                 //Get the coaches current app
                 Application currentApp = appRepo.GetApplicationByID(AppID);
@@ -456,7 +458,7 @@ namespace KidSports.Controllers
             }
 
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
-            if (user.currentYearApp.ApplicationID == civm.ApplicationID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
+            if (User.IsInRole("Admin") || User.IsInRole("SportsManager") || user.currentYearApp.ApplicationID == civm.ApplicationID)
             {
                 Application currentApp = appRepo.GetApplicationByID(civm.ApplicationID);
                 if (civm.newPickedAreaID != -1) currentApp.AppArea = areaRepo.GetAreaByID(civm.newPickedAreaID);
@@ -481,8 +483,11 @@ namespace KidSports.Controllers
                 }
 
                 if (civm.Direction == "deny")
+                {
+                    User appuser = userRepo.GetUserByID(civm.ApplicationID);
+                    return RedirectToAction("ApplicantDetails", new { ApplicantID = appuser.Id });
+                }
 
-                    return RedirectToAction("ApplicantDetails", new { AppID = civm.ApplicationID });
                 if (civm.Direction == "previous")
                     return RedirectToAction("CoachInfo", new { AppID = civm.ApplicationID });
                 if (civm.Direction == "next")
@@ -507,7 +512,7 @@ namespace KidSports.Controllers
             }
 
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
-            if (user.currentYearApp.ApplicationID == AppID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
+            if (User.IsInRole("Admin") || User.IsInRole("SportsManager") || user.currentYearApp.ApplicationID == AppID)
             {
                 //Get the coaches current app
                 Application currentApp = appRepo.GetApplicationByID(AppID);
@@ -537,7 +542,7 @@ namespace KidSports.Controllers
             }
 
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
-            if (user.currentYearApp.ApplicationID == cpvm.ApplicationID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
+            if (User.IsInRole("Admin") || User.IsInRole("SportsManager") || user.currentYearApp.ApplicationID == cpvm.ApplicationID)
             {
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
@@ -555,8 +560,10 @@ namespace KidSports.Controllers
                 }
 
                 if (cpvm.Direction == "deny")
-
-                    return RedirectToAction("ApplicantDetails", new { AppID = cpvm.ApplicationID });
+                {
+                    User appuser = userRepo.GetUserByID(cpvm.ApplicationID);
+                    return RedirectToAction("ApplicantDetails", new { ApplicantID = appuser.Id });
+                }
                 if (cpvm.Direction == "previous")
                     return RedirectToAction("CoachInterests", new { AppID = cpvm.ApplicationID });
                 if (cpvm.Direction == "next")
@@ -581,7 +588,7 @@ namespace KidSports.Controllers
             }
 
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
-            if (user.currentYearApp.ApplicationID == AppID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
+            if (User.IsInRole("Admin") || User.IsInRole("SportsManager") || user.currentYearApp.ApplicationID == AppID)
             {
                 //Get the coaches current app
                 Application currentApp = appRepo.GetApplicationByID(AppID);
@@ -609,7 +616,7 @@ namespace KidSports.Controllers
             }
 
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
-            if (user.currentYearApp.ApplicationID == ccvm.ApplicationID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
+            if (User.IsInRole("Admin") || User.IsInRole("SportsManager") || user.currentYearApp.ApplicationID == ccvm.ApplicationID)
             {
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
@@ -647,8 +654,10 @@ namespace KidSports.Controllers
                 }
 
                 if (ccvm.Direction == "deny")
-
-                    return RedirectToAction("ApplicantDetails", new { AppID = ccvm.ApplicationID });
+                {
+                    User appuser = userRepo.GetUserByID(ccvm.ApplicationID);
+                    return RedirectToAction("ApplicantDetails", new { ApplicantID = appuser.Id });
+                }
                 if (ccvm.Direction == "previous")
                     return RedirectToAction("CoachPledge", new { AppID = ccvm.ApplicationID });
                 if (ccvm.Direction == "next")
@@ -678,7 +687,7 @@ namespace KidSports.Controllers
             }
 
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
-            if (user.currentYearApp.ApplicationID == AppID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
+            if (User.IsInRole("Admin") || User.IsInRole("SportsManager") || user.currentYearApp.ApplicationID == AppID)
             {
                 //Get the coaches current app
                 Application currentApp = appRepo.GetApplicationByID(AppID);
@@ -704,7 +713,7 @@ namespace KidSports.Controllers
             }
 
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
-            if (user.currentYearApp.ApplicationID == pcvm.ApplicationID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
+            if (User.IsInRole("Admin") || User.IsInRole("SportsManager") || user.currentYearApp.ApplicationID == pcvm.ApplicationID)
             {
                 Application currentApp = appRepo.GetApplicationByID(pcvm.ApplicationID);
 
@@ -735,8 +744,10 @@ namespace KidSports.Controllers
                 }
 
                 if (pcvm.Direction == "deny")
-
-                    return RedirectToAction("ApplicantDetails", new { AppID = pcvm.ApplicationID });
+                {
+                    User appuser = userRepo.GetUserByID(pcvm.ApplicationID);
+                    return RedirectToAction("ApplicantDetails", new { ApplicantID = appuser.Id });
+                }
                 if (pcvm.Direction == "previous")
                     return RedirectToAction("CoachPledge", new { AppID = pcvm.ApplicationID });
                 if (pcvm.Direction == "next")
@@ -761,7 +772,7 @@ namespace KidSports.Controllers
             }
 
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
-            if (user.currentYearApp.ApplicationID == AppID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
+            if (User.IsInRole("Admin") || User.IsInRole("SportsManager") || user.currentYearApp.ApplicationID == AppID)
             {
                 //Get the coaches current app
                 Application currentApp = appRepo.GetApplicationByID(AppID);
@@ -787,7 +798,7 @@ namespace KidSports.Controllers
             }
 
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
-            if (user.currentYearApp.ApplicationID == idvm.ApplicationID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
+            if (User.IsInRole("Admin") || User.IsInRole("SportsManager") || user.currentYearApp.ApplicationID == idvm.ApplicationID)
             {
                 Application currentApp = appRepo.GetApplicationByID(idvm.ApplicationID);
 
@@ -818,8 +829,10 @@ namespace KidSports.Controllers
                 }
 
                 if (idvm.Direction == "deny")
-
-                    return RedirectToAction("ApplicantDetails", new { AppID = idvm.ApplicationID });
+                {
+                    User appuser = userRepo.GetUserByID(idvm.ApplicationID);
+                    return RedirectToAction("ApplicantDetails", new { ApplicantID = appuser.Id });
+                }
                 if (idvm.Direction == "previous")
                 {
                     if (currentApp.IsHeadCoach == true)
@@ -849,7 +862,7 @@ namespace KidSports.Controllers
             }
 
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
-            if (user.currentYearApp.ApplicationID == AppID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
+            if (User.IsInRole("Admin") || User.IsInRole("SportsManager") || user.currentYearApp.ApplicationID == AppID)
             {
                 //Get the coaches current app
                 Application currentApp = appRepo.GetApplicationByID(AppID);
@@ -875,7 +888,7 @@ namespace KidSports.Controllers
             }
 
             //This will probably need to include all of your past application id's as well. so users can view their own past apps.
-            if (user.currentYearApp.ApplicationID == bvm.ApplicationID || User.IsInRole("Admin") || User.IsInRole("SportsManager"))
+            if (User.IsInRole("Admin") || User.IsInRole("SportsManager") || user.currentYearApp.ApplicationID == bvm.ApplicationID)
             {
                 Application currentApp = appRepo.GetApplicationByID(bvm.ApplicationID);
 
@@ -902,17 +915,27 @@ namespace KidSports.Controllers
                 //Decide which direction is being taken.
                 if (bvm.Direction == "approve")
                 {
-                    return RedirectToAction("ApplicantDetails", new { AppID = bvm.ApplicationID });
+                    User appuser = userRepo.GetUserByID(bvm.ApplicationID);
+                    return RedirectToAction("ApplicantDetails", new { ApplicantID = appuser.Id });
                 }
 
                 if (bvm.Direction == "deny")
-
-                    return RedirectToAction("ApplicantDetails", new { AppID = bvm.ApplicationID });
+                {
+                    User appuser = userRepo.GetUserByID(bvm.ApplicationID);
+                    return RedirectToAction("ApplicantDetails", new { ApplicantID = appuser.Id });
+                }
                 if (bvm.Direction == "previous")
                     return RedirectToAction("ID", new { AppID = bvm.ApplicationID });
                 //This is going to need to check if the user is an admin/sportsmanager since they have a different "index"
                 if (bvm.Direction == "next")
+                {
+                    if (User.IsInRole("SportsManager") || User.IsInRole("Admin"))
+                    {
+                        User appuser = userRepo.GetUserByID(bvm.ApplicationID);
+                        return RedirectToAction("ApplicantDetails", new { ApplicantID = appuser.Id });
+                    }
                     return RedirectToAction("Index");
+                }
 
                 //if all else fails, post back to the same page.
                 return View(bvm);
