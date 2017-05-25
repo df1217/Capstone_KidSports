@@ -214,10 +214,17 @@ namespace KidSports.Controllers
 
         [HttpGet]
         [Authorize(Roles = "SportsManager")]
-        public IActionResult ApplicantDetails(int ApplicantID)
+        public IActionResult ApplicantDetails(string ApplicantID)
         {
             //Do security stuff
-            return View();
+            User appuser = userRepo.GetUserByIdentityID(ApplicantID);
+            userRepo.GetDetailedUser(appuser);
+            Application currentApp = appuser.currentYearApp;
+            ApplicationStatus appstatus = appStatusRepo.GetAppStatusByID(currentApp.ApplicationID);
+            ApplicantDetailsViewModel advm = new ApplicantDetailsViewModel();
+            advm.applicant = appuser;
+            advm.appstatus = appstatus;
+            return View(advm);
         }
         #endregion
 
@@ -465,6 +472,8 @@ namespace KidSports.Controllers
                 if (civm.Gender != null) currentApp.AppGender = civm.Gender;
                 if (civm.GradePreference != null) currentApp.AppGrade = civm.GradePreference;
                 if (civm.ChildTeam != null) currentApp.NameOfChild = civm.ChildTeam;
+                if (civm.Sport != null) currentApp.AppSport = civm.Sport;
+                if (civm.YearsExperience != -1) currentApp.YearsExperience = civm.YearsExperience;
                 currentApp.IsHeadCoach = civm.IsHeadCoach;
                 currentApp.IsAssistantCoach = civm.IsAssistantCoach;
                 if (civm.newPickedSchoolID != -1) currentApp.AppSchool = schoolRepo.GetSchoolByID(civm.newPickedSchoolID);
