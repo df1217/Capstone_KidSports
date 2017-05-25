@@ -82,6 +82,12 @@ namespace KidSports.Controllers
             {
                 Application app = new Application();
                 appRepo.CreateApp(app);
+
+                ApplicationStatus appstatus = new ApplicationStatus();
+                appstatus.AppStartDate = DateTime.Now;
+                appstatus.ApplicationID = app.ApplicationID;
+                appStatusRepo.Create(appstatus);
+
                 ivm.ApplicationID = app.ApplicationID;
                 if (user != null)
                 {
@@ -125,26 +131,77 @@ namespace KidSports.Controllers
         #region SportsManager Views
         [HttpGet]
         [Authorize(Roles = "SportsManager")]
+        public IActionResult Applications()
+        {
+            //Get the sports manager and put their area in the search model by default.
+            ApplicationSearchModel asm = new ApplicationSearchModel();
+            asm.filteredApps = new List<Application>();
+            asm.filteredUsers = new List<User>();
+            asm.filteredAppStatus = new List<ApplicationStatus>();
+
+            List<Application> filteredApps = appRepo.GetFilteredApplications(asm).ToList();
+            List<User> filteredUsers = new List<User>();
+            List<ApplicationStatus> filteredAppStatus = new List<ApplicationStatus>();
+
+            foreach (Application a in filteredApps)
+            {
+                User u = userRepo.GetUserByID(a.ApplicationID);
+                ApplicationStatus appstatus = appStatusRepo.GetAppStatusByID(a.ApplicationID);
+
+                filteredUsers.Add(u);
+                filteredAppStatus.Add(appstatus);
+            }
+
+            if (filteredApps != null)
+                asm.filteredApps.AddRange(filteredApps);
+            else
+                asm.filteredApps = new List<Application>();
+
+            if (filteredUsers != null)
+                asm.filteredUsers.AddRange(filteredUsers);
+            else
+                asm.filteredUsers = new List<User>();
+
+            if (filteredAppStatus != null)
+                asm.filteredAppStatus.AddRange(filteredAppStatus);
+            else
+                asm.filteredAppStatus = new List<ApplicationStatus>();
+
+            return View(asm);
+        }
+        
+        [HttpPost]
+        [Authorize(Roles = "SportsManager")]
         public IActionResult Applications(ApplicationSearchModel asm = null)
         {
-            //if (asm == null)
-            //    asm = new ApplicationSearchModel();
+            if (asm == null)
+               asm = new ApplicationSearchModel();
 
-            //List<Application> filteredApps = appRepo.GetFilteredApplications(asm).ToList();
-            //foreach (Application a in filteredApps)
-            //{
-            //    User u = userRepo.GetUserByID(a.ApplicationID);
-            //    ApplicationStatus appstatus = appStatusRepo.GetAppStatusByID(a.ApplicationID);
-            //    asm.keyValStatus.Add(new Tuple<int, string, ApplicationStatus>( a.ApplicationID, u.FirstName + " " + u.LastName, appstatus));
-            //}
+            List<Application> filteredApps = appRepo.GetFilteredApplications(asm).ToList();
+            List<User> filteredUsers = new List<User>();
+            List<ApplicationStatus> filteredAppStatus = new List<ApplicationStatus>();
 
-            return View();
+            foreach (Application a in filteredApps)
+            {
+                User u = userRepo.GetUserByID(a.ApplicationID);
+                ApplicationStatus appstatus = appStatusRepo.GetAppStatusByID(a.ApplicationID);
+
+                filteredUsers.Add(u);
+                filteredAppStatus.Add(appstatus);
+            }
+
+            asm.filteredApps.AddRange(filteredApps);
+            asm.filteredUsers.AddRange(filteredUsers);
+            asm.filteredAppStatus.AddRange(filteredAppStatus);
+            return View(asm);
         }
+
 
         [HttpGet]
         [Authorize(Roles = "SportsManager")]
-        public IActionResult ApplicantDetails()
+        public IActionResult ApplicantDetails(int ApplicantID)
         {
+            //Do security stuff
             return View();
         }
         #endregion
