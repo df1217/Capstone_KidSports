@@ -232,6 +232,7 @@ namespace KidSports.Controllers
                 if (currentApp.Address != null) civm.Address = currentApp.Address;
                 if (currentApp.CurrentEmployer != null) civm.CurrentEmployer = currentApp.CurrentEmployer;
                 if (currentApp.JobTitle != null) civm.JobTitle = currentApp.JobTitle;
+                civm.YearsLivingInOregon = currentApp.YearsLivedInOregon;
 
                 civm.AllStates = stateRepo.GetAllStates();
                 if (currentApp.StatesLived != null)
@@ -275,6 +276,7 @@ namespace KidSports.Controllers
                 if (civm.PreviousLastName3 != null) user.PreviousLastName3 = civm.PreviousLastName3;
                 if (civm.PreferredName != null) user.PreferredName = civm.PreferredName;
                 if (civm.CellPhone != null) user.PhoneNumber = civm.CellPhone;
+                if (civm.AlternatePhone != null) user.AlternatePhone = civm.AlternatePhone;
                 currentApp.LivedOutsideUSA = civm.HasLivedOutsideUSA;
                 if (civm.newPickedStateID != -1) currentApp.State = stateRepo.GetStateByID(civm.newPickedStateID);
                 if (civm.PreviousStates != null)
@@ -287,6 +289,7 @@ namespace KidSports.Controllers
                 if (civm.City != null) currentApp.City = civm.City;
                 if (civm.Zip != null) currentApp.ZipCode = civm.Zip;
                 if (civm.CurrentEmployer != null) currentApp.CurrentEmployer = civm.CurrentEmployer;
+                if (civm.JobTitle != null) currentApp.JobTitle = civm.JobTitle;
                 
                 if (civm.YearsLivingInOregon != -1) currentApp.YearsLivedInOregon = civm.YearsLivingInOregon;
                 appRepo.Update(currentApp);
@@ -400,6 +403,14 @@ namespace KidSports.Controllers
 
 
                 //Decide which direction is being taken.
+                if (civm.Direction == "approve")
+                {
+                    return RedirectToAction("CoachPledge", new { AppID = civm.ApplicationID });
+                }
+
+                if (civm.Direction == "deny")
+
+                    return RedirectToAction("ApplicantDetails", new { AppID = civm.ApplicationID });
                 if (civm.Direction == "previous")
                     return RedirectToAction("CoachInfo", new { AppID = civm.ApplicationID });
                 if (civm.Direction == "next")
@@ -466,6 +477,14 @@ namespace KidSports.Controllers
                 appRepo.Update(currentApp);
 
                 //Decide which direction is being taken.
+                if (cpvm.Direction == "approve")
+                {
+                    return RedirectToAction("ConcussionCourse", new { AppID = cpvm.ApplicationID });
+                }
+
+                if (cpvm.Direction == "deny")
+
+                    return RedirectToAction("ApplicantDetails", new { AppID = cpvm.ApplicationID });
                 if (cpvm.Direction == "previous")
                     return RedirectToAction("CoachInterests", new { AppID = cpvm.ApplicationID });
                 if (cpvm.Direction == "next")
@@ -497,7 +516,9 @@ namespace KidSports.Controllers
                 ConcussionCourseViewModel ccvm = new ConcussionCourseViewModel();
                 ccvm.ApplicationID = AppID;
                 //If any information exists, bind it to the view model.
+               // if (currentApp.ConcussionCourseSubmissionDate != new DateTime()) ccvm.ConcussionCourseSubmissionDate = currentApp.ConcussionCourseSubmissionDate;
                 if (currentApp.NfhsPath != null) ccvm.NfhsPath = currentApp.NfhsPath; else ccvm.NfhsPath = "";
+                if (currentApp.ConcussionCourseSubmissionDate != new DateTime()) ccvm.ConcussionCourseSubmissionDate = currentApp.ConcussionCourseSubmissionDate;
 
                 //Display the view.
                 return View(ccvm);
@@ -521,6 +542,7 @@ namespace KidSports.Controllers
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
                 Application currentApp = appRepo.GetApplicationByID(ccvm.ApplicationID);
+                if (ccvm.ConcussionCourseSubmissionDate != new DateTime()) currentApp.ConcussionCourseSubmissionDate = ccvm.ConcussionCourseSubmissionDate;
                 if (currentApp.NfhsPath != null) { 
                     //get the image and put it in the view model.
                 }
@@ -544,6 +566,17 @@ namespace KidSports.Controllers
                 appRepo.Update(currentApp);
 
                 //Decide which direction is being taken.
+                if (ccvm.Direction == "approve")
+                {
+                    if (currentApp.IsHeadCoach == true)
+                        return RedirectToAction("PcaCourse", new { AppID = ccvm.ApplicationID });
+                    else
+                        return RedirectToAction("ID", new { AppID = ccvm.ApplicationID });
+                }
+
+                if (ccvm.Direction == "deny")
+
+                    return RedirectToAction("ApplicantDetails", new { AppID = ccvm.ApplicationID });
                 if (ccvm.Direction == "previous")
                     return RedirectToAction("CoachPledge", new { AppID = ccvm.ApplicationID });
                 if (ccvm.Direction == "next")
@@ -624,6 +657,14 @@ namespace KidSports.Controllers
             appRepo.Update(currentApp);
 
                 //Decide which direction is being taken.
+                if (pcvm.Direction == "approve")
+                {
+                    return RedirectToAction("ID", new { AppID = pcvm.ApplicationID });
+                }
+
+                if (pcvm.Direction == "deny")
+
+                    return RedirectToAction("ApplicantDetails", new { AppID = pcvm.ApplicationID });
                 if (pcvm.Direction == "previous")
                     return RedirectToAction("CoachPledge", new { AppID = pcvm.ApplicationID });
                 if (pcvm.Direction == "next")
@@ -699,6 +740,14 @@ namespace KidSports.Controllers
 
 
                 //Decide which direction is being taken.
+                if (idvm.Direction == "approve")
+                {
+                    return RedirectToAction("Badge", new { AppID = idvm.ApplicationID });
+                }
+
+                if (idvm.Direction == "deny")
+
+                    return RedirectToAction("ApplicantDetails", new { AppID = idvm.ApplicationID });
                 if (idvm.Direction == "previous")
                 {
                     if (currentApp.IsHeadCoach == true)
@@ -779,6 +828,14 @@ namespace KidSports.Controllers
 
 
                 //Decide which direction is being taken.
+                if (bvm.Direction == "approve")
+                {
+                    return RedirectToAction("ApplicantDetails", new { AppID = bvm.ApplicationID });
+                }
+
+                if (bvm.Direction == "deny")
+
+                    return RedirectToAction("ApplicantDetails", new { AppID = bvm.ApplicationID });
                 if (bvm.Direction == "previous")
                     return RedirectToAction("ID", new { AppID = bvm.ApplicationID });
                 //This is going to need to check if the user is an admin/sportsmanager since they have a different "index"
