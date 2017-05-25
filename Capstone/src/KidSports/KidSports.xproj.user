@@ -3,6 +3,7 @@
   <PropertyGroup>
     <ActiveDebugProfile>KidSports</ActiveDebugProfile>
     <NameOfLastUsedPublishProfile>KidSports - Web Deploy %282%29</NameOfLastUsedPublishProfile>
+    <ShowAllFiles>true</ShowAllFiles>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>

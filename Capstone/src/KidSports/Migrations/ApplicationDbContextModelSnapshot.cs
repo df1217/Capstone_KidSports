@@ -234,22 +234,6 @@ namespace KidSports.Migrations
                     b.ToTable("Grades");
                 });
 
-            modelBuilder.Entity("KidSports.Models.LastName", b =>
-                {
-                    b.Property<int>("LastNameID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("ApplicationID");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("LastNameID");
-
-                    b.HasIndex("ApplicationID");
-
-                    b.ToTable("LastName");
-                });
-
             modelBuilder.Entity("KidSports.Models.PreviousGradesCoached", b =>
                 {
                     b.Property<int>("PreviousGradesCoachedID")
@@ -347,6 +331,12 @@ namespace KidSports.Migrations
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("PreferredName");
+
+                    b.Property<string>("PreviousLastName1");
+
+                    b.Property<string>("PreviousLastName2");
+
+                    b.Property<string>("PreviousLastName3");
 
                     b.Property<string>("SecurityStamp");
 
@@ -529,13 +519,6 @@ namespace KidSports.Migrations
                 {
                     b.HasOne("KidSports.Models.Application")
                         .WithMany("CountriesLived")
-                        .HasForeignKey("ApplicationID");
-                });
-
-            modelBuilder.Entity("KidSports.Models.LastName", b =>
-                {
-                    b.HasOne("KidSports.Models.Application")
-                        .WithMany("PreviousLastNames")
                         .HasForeignKey("ApplicationID");
                 });
 

@@ -64,8 +64,7 @@ namespace Kidsports.Tests
             Application app2 = new Application()
             {
                 //ApplicationID = 2,
-                PreviousLastNames = new List<LastName>{
-                    new LastName() { Name = "Law" }
+              
                 },
                 DOB = new DateTime(1975 / 1 / 10),
                 Address = "1123 W. 10th St.",
