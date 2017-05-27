@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,7 +18,8 @@ namespace KidSports.Models.ViewModels
         public string PreviousLastName3 { get; set; }
         public List<State> AllStates { get; set; }
         public string PreferredName { get; set; }
-        public DateTime DOB { get; set; }
+        [DataType(DataType.Date)]
+        public Nullable<DateTime> DOB { get; set; }
         public int YearsLivingInOregon { get; set; }
         public string Address { get; set; }
         public string City { get; set; }

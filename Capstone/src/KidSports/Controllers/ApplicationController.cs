@@ -296,9 +296,9 @@ namespace KidSports.Controllers
                     civm.CellPhone = appuser.PhoneNumber;
                     civm.AlternatePhone = appuser.AlternatePhone;
                 }
-           
 
-            if (currentApp.DOB != null) civm.DOB = currentApp.DOB;
+                if (currentApp.DOB != null && currentApp.DOB != new DateTime()) civm.DOB = currentApp.DOB; else civm.DOB = DateTime.Now;
+
                 if (currentApp.YearsLivedInOregon != -1) civm.YearsLivingInOregon = currentApp.YearsLivedInOregon;
                 if (currentApp.Address != null) civm.Address = currentApp.Address;
                 if (currentApp.City != null) civm.City = currentApp.City;
@@ -357,13 +357,14 @@ namespace KidSports.Controllers
                 if (civm.CellPhone != null) user.PhoneNumber = civm.CellPhone;
                 if (civm.AlternatePhone != null) user.AlternatePhone = civm.AlternatePhone;
                 currentApp.LivedOutsideUSA = civm.HasLivedOutsideUSA;
+               
                 if (civm.newPickedStateID != -1) currentApp.State = stateRepo.GetStateByID(civm.newPickedStateID);
                 if (civm.PreviousStates != null)
                 {
                     foreach (State s in civm.PreviousStates)
                         currentApp.StatesLived.Add(new AppStateJoin() { ApplicationID = currentApp.ApplicationID, StateID = s.StateID });
                 }
-                if (civm.DOB != new DateTime()) currentApp.DOB = civm.DOB; 
+                if (civm.DOB != null && civm.DOB != DateTime.Now) currentApp.DOB = (DateTime)civm.DOB; 
                 if (civm.Address != null) currentApp.Address = civm.Address;
                 if (civm.City != null) currentApp.City = civm.City;
                 if (civm.Zip != null) currentApp.ZipCode = civm.Zip;
@@ -559,7 +560,7 @@ namespace KidSports.Controllers
                 if (cpvm.Name != null) currentApp.PledgeName = cpvm.Name;
                 if (cpvm.Initials != null) currentApp.PledgeInitials = cpvm.Initials;
                 if (cpvm.IsInAgreement != false) currentApp.pledgeIsInAgreement = cpvm.IsInAgreement;
-                if (cpvm.PledgeSubmissionDate != new DateTime()) currentApp.PledgeSubmissionDate = cpvm.PledgeSubmissionDate;
+                if (cpvm.PledgeSubmissionDate != null) currentApp.PledgeSubmissionDate = (DateTime)cpvm.PledgeSubmissionDate;
                 appRepo.Update(currentApp);
 
                 //Decide which direction is being taken.
@@ -630,7 +631,7 @@ namespace KidSports.Controllers
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
                 Application currentApp = appRepo.GetApplicationByID(ccvm.ApplicationID);
-                if (ccvm.ConcussionCourseSubmissionDate != new DateTime()) currentApp.ConcussionCourseSubmissionDate = ccvm.ConcussionCourseSubmissionDate;
+                if (ccvm.ConcussionCourseSubmissionDate != null) currentApp.ConcussionCourseSubmissionDate = (DateTime)ccvm.ConcussionCourseSubmissionDate;
                 if (currentApp.NfhsPath != null) { 
                     //get the image and put it in the view model.
                 }

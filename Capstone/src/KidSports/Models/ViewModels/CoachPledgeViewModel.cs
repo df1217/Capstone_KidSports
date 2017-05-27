@@ -15,7 +15,7 @@ namespace KidSports.Models.ViewModels
         public ApplicationStatus ApplicationStatus { get; set; }
         public string Name { get; set; }
         public string  Initials { get; set; }
-        public  DateTime PledgeSubmissionDate { get; set; }
+        public  Nullable<DateTime> PledgeSubmissionDate { get; set; }
         public Nullable<bool> IsApproved { get; set; }
 
     }
