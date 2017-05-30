@@ -8,6 +8,7 @@
     <h1 class="text-center">Driver's License / Government ID</h1>
     <form asp-controller="Application" asp-action="ID" method="post" enctype="multipart/form-data">
         <input type="hidden" asp-for="@Model.ApplicationID" value="@Model.ApplicationID" />
+        <input asp-for="IDPath" type="hidden" />
         <div class="well">
             <p>
                 Please upload a photo of a current government-issued ID.

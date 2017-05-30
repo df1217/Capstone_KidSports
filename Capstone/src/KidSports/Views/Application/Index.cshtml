@@ -125,6 +125,8 @@
 
 
         @* PCA Course *@
+        if (Model.Application.IsHeadCoach == true)
+        {
         <div class="row">
             <div class="text-left col-xs-5 col-sm-3 col-md-2">
                 <div class="bowl text-left" style="float:left;">
@@ -145,6 +147,7 @@
                 <input type="submit" style="margin-left: -20px; color:black; font-size: 25px; font-weight:bold; border: 0; background: none; box-shadow:none; border-radius: 0px;" name="PageName" value="PCA Course" />
             </div>
         </div>
+        }
 
 
         @* ID *@
