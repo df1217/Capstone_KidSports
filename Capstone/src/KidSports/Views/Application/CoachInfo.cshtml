@@ -21,64 +21,79 @@
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                     <label asp-for="FirstName" class="control-label">First Name<span style="color:red;">*</span></label>
                     <input asp-for="FirstName" class="form-control">
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
-
+               
+        
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
 
                     <label asp-for="MiddleName" class="control-label">Middle Name<span style="color:red;">*</span></label>
                     <input asp-for="MiddleName" class="form-control">
+                    <span asp-validation-for="MiddleName" class="text-danger"></span>
                 </div>
+                
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
 
                     <label asp-for="LastName" class="control-label">Last Name<span style="color:red;">*</span></label>
                     <input asp-for="LastName" class="form-control">
+                    <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
+
             </div>
 
             <div class="row">
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                     <label asp-for="PreviousLastName1" class="control-label">Previous Last Name #1</label>
                     <input asp-for="PreviousLastName1" class="form-control">
+                    <span asp-validation-for="PreviousLastName1" class="text-danger"></span>
                 </div>
-
+                
+                
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                     <label asp-for="PreviousLastName2" class="control-label">Previous Last Name #2</label>
                     <input asp-for="PreviousLastName2" class="form-control">
+                    <span asp-validation-for="PreviousLastName2" class="text-danger"></span>
                 </div>
-
+                
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                     <label asp-for="PreviousLastName3" class="control-label">Previous Last Name #3</label>
                     <input asp-for="PreviousLastName3" class="form-control">
+                    <span asp-validation-for="PreviousLastName3" class="text-danger"></span>
                 </div>
-
+                
             </div>
 
             <div class="row">
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                     <label asp-for="PreferredName" class="control-label">Preferred Name</label>
                     <input asp-for="PreferredName" class="form-control">
+                    <span asp-validation-for="PreferredName" class="text-danger"></span>
                 </div>
-
+                
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                     <label asp-for="DOB" class="control-label">Date of Birth<span style="color:red;">*</span></label>
                     <input type="date" asp-for="DOB" class="form-control" placeholder="Date">
+                    <span asp-validation-for"DOB" class="text-danger"></span>
                 </div>
 
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                     <label asp-for="YearsLivingInOregon" class="control-label">Years Living in Oregon<span style="color:red;">*</span></label>
-                    <input type="number" class="form-control" asp-for="YearsLivingInOregon" placeholder="year" />
+                    <input type="number" min="0" max="99"class="form-control" asp-for="YearsLivingInOregon" placeholder="year" />
                 </div>
+                
             </div>
 
             <div class="row">
                 <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-8">
                     <label asp-for="Address" class="control-label">Address<span style="color:red;">*</span></label>
                     <input asp-for="Address" class="form-control" id="address" placeholder="">
+                    <span asp-validation-for="Address" class="text-danger"></span>
                 </div>
 
                 <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
                     <label asp-for="City" class="control-label">City<span style="color:red;">*</span></label>
                     <input asp-for="City" class="form-control" id="city" placeholder="">
+                    <span asp-validation-for="City" class="text-danger"></span>
                 </div>
             </div>
 
@@ -127,11 +142,13 @@
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                     <label asp-for="CellPhone" class="control-label">Cell Phone<span style="color:red;">*</span></label>
                     <input type="tel" asp-for="CellPhone" class="form-control" />
+                    <span asp-validation-for="CellPhone" class="text-danger"></span>
                 </div>
 
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                     <label asp-for="AlternatePhone" class="control-label">Alternate Phone</label>
                     <input type="tel" asp-for="AlternatePhone" class="form-control" />
+                    <span asp-validation-for="AlternatePhone" class="text-danger"></span>
                 </div>
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                     <div class="checkbox">
@@ -145,10 +162,12 @@
                 <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-8">
                     <label asp-for="CurrentEmployer" class="control-label">Current Employer<span style="color:red;">*</span></label>
                     <input asp-for="CurrentEmployer" class="form-control" id="curEmployer" placeholder="">
+                    <span asp-validation-for="CurrentEmployer" class="text-danger"></span>
                 </div>
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                     <label asp-for="JobTitle" class="control-label">Job Title</label>
                     <input asp-for="JobTitle" class="form-control" />
+                    <span asp-validation-for="JobTitle" class="text-danger"></span>
                 </div>
             </div>
         </div>
