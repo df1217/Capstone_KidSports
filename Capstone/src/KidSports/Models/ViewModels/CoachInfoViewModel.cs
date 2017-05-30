@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -26,13 +27,11 @@ namespace KidSports.Models.ViewModels
         public State State { get; set; }
         public int newPickedStateID { get; set; }
         public string Zip { get; set; }
-        public List<State> PreviousStates { get; set; }
+        public List<int> PreviousStates { get; set; }
         public bool HasLivedOutsideUSA { get; set; }
         public string AlternatePhone { get; set; }
         public string CellPhone { get; set; }
         public string CurrentEmployer { get; set; }
         public string JobTitle { get; set; }
-
-
     }
 }

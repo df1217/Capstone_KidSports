@@ -8,9 +8,10 @@ using KidSports.Repositories;
 namespace KidSports.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170529221226_sortStates")]
+    partial class sortStates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -153,47 +154,17 @@ namespace KidSports.Migrations
 
                     b.Property<int>("ApplicationID");
 
-                    b.Property<DateTime?>("BadgeApprovalDate");
+                    b.Property<DateTime?>("BcApprovalDate");
 
-                    b.Property<DateTime?>("BadgeDenialDate");
+                    b.Property<DateTime?>("BcStartDate");
 
-                    b.Property<DateTime?>("BadgeSubmissionDate");
+                    b.Property<DateTime?>("BcSubmissionDate");
 
-                    b.Property<DateTime?>("CoachInfoApprovalDate");
+                    b.Property<DateTime?>("PrefApprovalDate");
 
-                    b.Property<DateTime?>("CoachInfoDenialDate");
+                    b.Property<DateTime?>("PrefDenialDate");
 
-                    b.Property<DateTime?>("CoachInfoSubmissionDate");
-
-                    b.Property<DateTime?>("CoachInterestApprovalDate");
-
-                    b.Property<DateTime?>("CoachInterestDenialDate");
-
-                    b.Property<DateTime?>("CoachInterestSubmissionDate");
-
-                    b.Property<DateTime?>("IdApprovalDate");
-
-                    b.Property<DateTime?>("IdDenialDate");
-
-                    b.Property<DateTime?>("IdSubmissionDate");
-
-                    b.Property<DateTime?>("NFHSApprovalDate");
-
-                    b.Property<DateTime?>("NFHSDenialDate");
-
-                    b.Property<DateTime?>("NFHSSubmissionDate");
-
-                    b.Property<DateTime?>("PcaApprovalDate");
-
-                    b.Property<DateTime?>("PcaDenialDate");
-
-                    b.Property<DateTime?>("PcaSubmissionDate");
-
-                    b.Property<DateTime?>("PledgeApprovalDate");
-
-                    b.Property<DateTime?>("PledgeDenialDate");
-
-                    b.Property<DateTime?>("PledgeSubmissionDate");
+                    b.Property<DateTime?>("PrefSubmissionDate");
 
                     b.HasKey("ApplicationStatusID");
 

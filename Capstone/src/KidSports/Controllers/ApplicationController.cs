@@ -62,11 +62,14 @@ namespace KidSports.Controllers
                 {
                     int id = user.currentYearApp.ApplicationID;
                     ivm.ApplicationID = id;
+
+                    ivm.ApplicationStatus = appStatusRepo.GetAppStatusByID(id);
                     return View(ivm);
                 }
             }
 
             ivm.ApplicationID = 0;
+            ivm.ApplicationStatus = new ApplicationStatus();
             return View(ivm);
         }
 
@@ -103,16 +106,19 @@ namespace KidSports.Controllers
             {
                 if (ivm.ApplicationID != 0)
                 {
+                    ivm.ApplicationStatus = appStatusRepo.GetAppStatusByID(ivm.ApplicationID);
+
+
                     /* Use app id to do stuff */
-                    if (ivm.PageName == "CoachInfo")
+                    if (ivm.PageName == "Information")
                         return RedirectToAction("CoachInfo", new { AppID = ivm.ApplicationID });
-                    if (ivm.PageName == "CoachInterests")
+                    if (ivm.PageName == "Interests")
                         return RedirectToAction("CoachInterests", new { AppID = ivm.ApplicationID });
-                    if (ivm.PageName == "CoachPledge")
+                    if (ivm.PageName == "Pledge")
                         return RedirectToAction("CoachPledge", new { AppID = ivm.ApplicationID });
-                    if (ivm.PageName == "ConcussionCourse")
+                    if (ivm.PageName == "NFHS Course")
                         return RedirectToAction("ConcussionCourse", new { AppID = ivm.ApplicationID });
-                    if (ivm.PageName == "PcaCourse")
+                    if (ivm.PageName == "PCA Course")
                         return RedirectToAction("PcaCourse", new { AppID = ivm.ApplicationID });
                     if (ivm.PageName == "ID")
                         return RedirectToAction("ID", new { AppID = ivm.ApplicationID });
@@ -317,10 +323,11 @@ namespace KidSports.Controllers
                 if (currentApp.StatesLived != null)
                 {
                     foreach (AppStateJoin a in currentApp.StatesLived)
-                        civm.PreviousStates.Add(stateRepo.GetStateByID(a.StateID));
-                } else
+                        civm.PreviousStates.Add(a.StateID);
+                }
+                else
                 {
-                    civm.PreviousStates = new List<State>();
+                    civm.PreviousStates = new List<int>();
                 }
                 #endregion
 
@@ -359,10 +366,11 @@ namespace KidSports.Controllers
                 currentApp.LivedOutsideUSA = civm.HasLivedOutsideUSA;
                
                 if (civm.newPickedStateID != -1) currentApp.State = stateRepo.GetStateByID(civm.newPickedStateID);
-                if (civm.PreviousStates != null)
+                if (civm.PreviousStates != null && civm.PreviousStates.Count != 0)
                 {
-                    foreach (State s in civm.PreviousStates)
-                        currentApp.StatesLived.Add(new AppStateJoin() { ApplicationID = currentApp.ApplicationID, StateID = s.StateID });
+                    if (currentApp.StatesLived == null) currentApp.StatesLived = new List<AppStateJoin>();
+                    foreach (int sid in civm.PreviousStates)
+                        currentApp.StatesLived.Add(new AppStateJoin() { ApplicationID = currentApp.ApplicationID, StateID = sid });
                 }
                 if (civm.DOB != null && civm.DOB != DateTime.Now) currentApp.DOB = (DateTime)civm.DOB; 
                 if (civm.Address != null) currentApp.Address = civm.Address;
@@ -375,7 +383,28 @@ namespace KidSports.Controllers
                 appRepo.Update(currentApp);
              
                 #endregion
+
                 userRepo.Update(user);
+                ApplicationStatus appStatus = appStatusRepo.GetAppStatusByID(currentApp.ApplicationID);
+
+                if (appStatus.CoachInfoSubmissionDate == null || 
+                    appStatus.CoachInfoSubmissionDate == new DateTime() && 
+                    civm.Address != "" &&
+                    civm.CellPhone != "" &&
+                    civm.City != "" &&
+                    civm.CurrentEmployer != "" &&
+                    civm.DOB != new DateTime() &&
+                    civm.FirstName != "" &&
+                    civm.MiddleName != "" &&
+                    civm.LastName != "" &&
+                    civm.newPickedStateID != -1 &&
+                    civm.JobTitle != "" &&
+                    civm.YearsLivingInOregon != -1 &&
+                    civm.Zip != "")
+                {
+                    appStatus.CoachInfoSubmissionDate = DateTime.Now;
+                    appStatusRepo.Update(appStatus);
+                }
 
                 if (civm.Direction == "approve")
                 {
