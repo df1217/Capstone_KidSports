@@ -385,6 +385,8 @@ namespace KidSports.Controllers
                 #endregion
 
                 userRepo.Update(user);
+
+                #region App Status
                 ApplicationStatus appStatus = appStatusRepo.GetAppStatusByID(currentApp.ApplicationID);
 
                 if (appStatus.CoachInfoSubmissionDate == null || 
@@ -405,9 +407,19 @@ namespace KidSports.Controllers
                     appStatus.CoachInfoSubmissionDate = DateTime.Now;
                     appStatusRepo.Update(appStatus);
                 }
+                #endregion
 
                 if (civm.Direction == "approve")
                 {
+                    if (appStatus.CoachInfoApprovalDate == null || appStatus.CoachInfoApprovalDate == new DateTime())
+                    {
+                        appStatus.CoachInfoApprovalDate = DateTime.Now;
+                        if (appStatus.CoachInfoDenialDate != null && appStatus.CoachInfoDenialDate != new DateTime())
+                            appStatus.CoachInfoDenialDate = null;
+
+                        appStatusRepo.Update(appStatus);
+                    }
+
                     return RedirectToAction("CoachInterests", new { AppID = civm.ApplicationID });
                 }
 
@@ -511,13 +523,33 @@ namespace KidSports.Controllers
                 currentApp.YearsExperience = civm.YearsExperience;
                 appRepo.Update(currentApp);
 
-                //Process all data that is in the view model. If anything is new or changed,
-                //update the coaches current application.
+                #region App Status
+                ApplicationStatus appStatus = appStatusRepo.GetAppStatusByID(currentApp.ApplicationID);
+
+                if (appStatus.CoachInfoSubmissionDate == null ||
+                    appStatus.CoachInfoSubmissionDate == new DateTime() &&
+                    civm.Area != null &&
+                    civm.Gender != "" &&
+                    civm.GradePreference != "" &&
+                    civm.Sport != null &&
+                    civm.School != null &&
+                    civm.YearsExperience != -1)
+                {
+                    appStatus.CoachInterestSubmissionDate = DateTime.Now;
+                    appStatusRepo.Update(appStatus);
+                }
+                #endregion
 
 
                 //Decide which direction is being taken.
                 if (civm.Direction == "approve")
                 {
+                    if (appStatus.CoachInterestApprovalDate == null || appStatus.CoachInterestApprovalDate == new DateTime())
+                    {
+                        appStatus.CoachInterestApprovalDate = DateTime.Now;
+                        appStatusRepo.Update(appStatus);
+                    }
+
                     return RedirectToAction("CoachPledge", new { AppID = civm.ApplicationID });
                 }
 
@@ -592,9 +624,31 @@ namespace KidSports.Controllers
                 if (cpvm.PledgeSubmissionDate != null) currentApp.PledgeSubmissionDate = (DateTime)cpvm.PledgeSubmissionDate;
                 appRepo.Update(currentApp);
 
+                #region App Status
+                ApplicationStatus appStatus = appStatusRepo.GetAppStatusByID(currentApp.ApplicationID);
+
+                if (appStatus.PledgeSubmissionDate == null ||
+                    appStatus.PledgeSubmissionDate == new DateTime() &&
+                    //TODO check if name is correct
+                    cpvm.Name != "" &&
+                    cpvm.IsInAgreement == true &&
+                    //TODO check if initials are correct
+                    cpvm.Initials != "" &&
+                    cpvm.PledgeSubmissionDate != null)
+                {
+                    appStatus.PledgeSubmissionDate = DateTime.Now;
+                    appStatusRepo.Update(appStatus);
+                }
+                #endregion
+
                 //Decide which direction is being taken.
                 if (cpvm.Direction == "approve")
                 {
+                    if (appStatus.PledgeApprovalDate == null || appStatus.PledgeApprovalDate == new DateTime())
+                        appStatus.PledgeApprovalDate = DateTime.Now;
+                        if (appStatus.PledgeDenialDate != null || appStatus.PledgeDenialDate != new DateTime())
+                            appStatus.PledgeDenialDate = null;
+
                     return RedirectToAction("ConcussionCourse", new { AppID = cpvm.ApplicationID });
                 }
 
@@ -683,9 +737,27 @@ namespace KidSports.Controllers
                 }
                 appRepo.Update(currentApp);
 
+                #region App Status
+                ApplicationStatus appStatus = appStatusRepo.GetAppStatusByID(currentApp.ApplicationID);
+
+                if (appStatus.NFHSSubmissionDate == null ||
+                    appStatus.NFHSSubmissionDate == new DateTime() &&
+                    ccvm.NfhsPath != "" &&
+                    ccvm.ConcussionCourseSubmissionDate != null)
+                {
+                    appStatus.NFHSSubmissionDate = DateTime.Now;
+                    appStatusRepo.Update(appStatus);
+                }
+                #endregion
+
                 //Decide which direction is being taken.
                 if (ccvm.Direction == "approve")
                 {
+                    if (appStatus.NFHSApprovalDate == null && appStatus.NFHSApprovalDate == new DateTime())
+                        appStatus.NFHSApprovalDate = DateTime.Now;
+                        if (appStatus.NFHSDenialDate != null || appStatus.NFHSDenialDate != new DateTime())
+                            appStatus.NFHSDenialDate = null;
+
                     if (currentApp.IsHeadCoach == true)
                         return RedirectToAction("PcaCourse", new { AppID = ccvm.ApplicationID });
                     else
@@ -776,9 +848,27 @@ namespace KidSports.Controllers
                 }
             appRepo.Update(currentApp);
 
+                #region App Status
+                ApplicationStatus appStatus = appStatusRepo.GetAppStatusByID(currentApp.ApplicationID);
+
+                if (appStatus.PcaSubmissionDate == null ||
+                    appStatus.PcaSubmissionDate == new DateTime() &&
+                    pcvm.PcaPath != "" &&
+                    pcvm.PcaCourseSubmissionDate != null)
+                {
+                    appStatus.PcaSubmissionDate = DateTime.Now;
+                    appStatusRepo.Update(appStatus);
+                }
+                #endregion
+
                 //Decide which direction is being taken.
                 if (pcvm.Direction == "approve")
                 {
+                    if (appStatus.PcaApprovalDate == null && appStatus.PcaApprovalDate == new DateTime())
+                        appStatus.PcaApprovalDate = DateTime.Now;
+                        if (appStatus.PcaDenialDate != null || appStatus.PcaDenialDate != new DateTime())
+                            appStatus.PcaDenialDate = null;
+
                     return RedirectToAction("ID", new { AppID = pcvm.ApplicationID });
                 }
 
@@ -860,10 +950,26 @@ namespace KidSports.Controllers
                 }
                 appRepo.Update(currentApp);
 
+                #region App Status
+                ApplicationStatus appStatus = appStatusRepo.GetAppStatusByID(currentApp.ApplicationID);
+
+                if (appStatus.IdSubmissionDate == null ||
+                    appStatus.IdSubmissionDate == new DateTime() &&
+                    idvm.IDPath != "")
+                {
+                    appStatus.IdSubmissionDate = DateTime.Now;
+                    appStatusRepo.Update(appStatus);
+                }
+                #endregion
 
                 //Decide which direction is being taken.
                 if (idvm.Direction == "approve")
                 {
+                    if (appStatus.IdApprovalDate == null && appStatus.IdApprovalDate == new DateTime())
+                        appStatus.IdApprovalDate = DateTime.Now;
+                        if (appStatus.IdDenialDate != null || appStatus.IdDenialDate != new DateTime())
+                            appStatus.IdDenialDate = null;
+
                     return RedirectToAction("Badge", new { AppID = idvm.ApplicationID });
                 }
 
@@ -950,10 +1056,25 @@ namespace KidSports.Controllers
                 }
                 appRepo.Update(currentApp);
 
+                #region App Status
+                ApplicationStatus appStatus = appStatusRepo.GetAppStatusByID(currentApp.ApplicationID);
+
+                if (appStatus.BadgeSubmissionDate == null || appStatus.BadgeSubmissionDate == new DateTime() && 
+                    bvm.BadgePath != null)
+                {
+                    appStatus.BadgeSubmissionDate = DateTime.Now;
+                    appStatusRepo.Update(appStatus);
+                }
+                #endregion
 
                 //Decide which direction is being taken.
                 if (bvm.Direction == "approve")
                 {
+                    if (appStatus.BadgeApprovalDate == null && appStatus.BadgeApprovalDate == new DateTime())
+                        appStatus.BadgeApprovalDate = DateTime.Now;
+                        if (appStatus.BadgeDenialDate != null || appStatus.BadgeDenialDate != new DateTime())
+                            appStatus.BadgeDenialDate = null;
+
                     User appuser = userRepo.GetUserByID(bvm.ApplicationID);
                     return RedirectToAction("ApplicantDetails", new { ApplicantID = appuser.Id });
                 }
