@@ -46,6 +46,14 @@
             </div>
             <div><span asp-validation-for="Password" class="text-danger"></span></div>
             <br />
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Password">
+            </div>
+            <div><span asp-validation-for="ConfirmPassword" class="text-danger"></span></div>
+            <br />
+
+
 
             <button class="btn btn-success btn-lg btn-block" type="submit">Register</button>
         </form>
