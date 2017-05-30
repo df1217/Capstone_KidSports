@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,6 +32,10 @@ namespace KidSports.Controllers
 
         UserManager<User> userManager;
 
+        //public ApplicationController()
+        //{
+
+        //}
         public ApplicationController(UserManager<User> UM, IHostingEnvironment environment, IApplicationRepo apprepo, IUserRepo userrepo, IStateRepo staterepo, ISportRepo sportrepo, IAreaRepo arearepo, ISchoolRepo schoolrepo, IGradeRepo graderepo, IExpRepo exprepo, IAppStatusRepo appstatusrepo)
         {
             userManager = UM;

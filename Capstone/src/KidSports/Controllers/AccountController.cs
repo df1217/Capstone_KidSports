@@ -15,6 +15,8 @@ namespace KidSports.Controllers
         private SignInManager<User> signInManager;
         private IUserRepo userRepo;
 
+        
+
         public AccountController(UserManager<User> userMgr, SignInManager<User> signInMgr, IUserRepo uRepo)
         {
             userManager = userMgr;

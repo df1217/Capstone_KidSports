@@ -13,22 +13,24 @@ namespace Kidsports.Tests
     {
         FakeRepository repo;
         List<Application> applications = new List<Application>();
+        ApplicationController controller;
 
 
         public ApplicationTests()
         {
-
+            repo = new FakeRepository();
+            //controller = new ApplicationController();
         }
 
         [Fact]
         public void DoesGetAllApplications()
         {
-            repo = new FakeRepository();
+            
             //Assert.Equal(3, applications.Count());
 
             Assert.Equal("Springfield", repo.GetAllApplications()[0].City);
-            //Assert.Equal(repo.GetAllApplications()[0].Address, "Springfield");
-
+            Assert.Equal("Cashier", repo.GetAllApplications()[1].JobTitle);
+            Assert.Equal("97401", repo.GetAllApplications()[2].ZipCode);
 
 
         }
@@ -52,14 +54,11 @@ namespace Kidsports.Tests
         [Fact]
         public void IsDoubleFilterQuerable()
         {
-            repo = new FakeRepository();
+           
             //Act
             ApplicationSearchModel asm = new ApplicationSearchModel();
             asm.Sport = "lacrosse";
             asm.Area = "North Eugene";
-
-            //asm.Sport = "Basketball";
-            //asm.Area = "Churchill";
 
             List<Application> applications = repo.GetFilteredApplications(asm).ToList();
 
@@ -72,7 +71,7 @@ namespace Kidsports.Tests
         [Fact]
         public void IsTripleFilterQuerable()
         {
-            repo = new FakeRepository();
+            
 
             //Act
             ApplicationSearchModel asm = new ApplicationSearchModel();
@@ -83,9 +82,36 @@ namespace Kidsports.Tests
             asm.Sport = "Basketball";
             asm.Area = "Churchill";
             asm.School = "Cesar Chavez";
+            List<Application> applications = repo.GetFilteredApplications(asm).ToList();
 
             //Assert
             Assert.Equal(1, applications.Count);
         }
+
+        [Fact]
+        public void IsQuadFilterQuerable()
+        {
+
+
+            //Act
+            ApplicationSearchModel asm = new ApplicationSearchModel();
+
+            //asm.Sport = "lacrosse";
+            //asm.Area = "North Eugene";
+            //asm.School = "Madison";
+            //asm.Gender= "Girls";
+
+            asm.Sport = "Soccer";
+            asm.Area = "Springfield";
+            asm.School = "Pleasant Hill";
+            asm.Gender = "Boys";
+            List<Application> applications = repo.GetFilteredApplications(asm).ToList();
+
+            //Assert
+            Assert.Equal(1, applications.Count);
+        }
+
+       
+
     }
 }
