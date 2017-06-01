@@ -640,10 +640,14 @@ namespace KidSports.Controllers
                     var uploads = Path.Combine(_environment.WebRootPath, "Images", "ConcussionCourse");
                     if (ccvm.File.Length > 0)
                     {
-                        using (var fileStream = new FileStream(Path.Combine(uploads, ccvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
+                        var pathName = ccvm.File.FileName;
+                        var parts = pathName.Split('.');
+                        int partsCount = parts.Count();
+                        var extension = parts[partsCount - 1];
+                        using (var fileStream = new FileStream(Path.Combine(uploads, ccvm.ApplicationID.ToString() + "." + extension), FileMode.Create))
                         {
                             await ccvm.File.CopyToAsync(fileStream);
-                            currentApp.NfhsPath = "..\\Images\\ConcussionCourse\\" + currentApp.ApplicationID.ToString() + ".jpg";
+                            currentApp.NfhsPath = "..\\Images\\ConcussionCourse\\" + currentApp.ApplicationID.ToString()+ "." + extension;
                         }
                     }
                 }
