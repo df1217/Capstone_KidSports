@@ -5,11 +5,12 @@
 }
 
 <div class="col-md-offset-2 col-md-8">
+    <img src="~/Images/logo.png" class="animated bounceInDown img-responsive" />
     <div class="row">
         <div class="col-xs-12 col-md-12 text-center">
-            <h3>Login or <a asp-action="Register" asp-controller="Account">Register</a></h3>
+            <h3 class="animated bounce">Login or <a asp-action="Register" asp-controller="Account">Register</a></h3>
         </div>
-     </div>
+    </div>
 
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div style="background-image:none;" class="text-danger" asp-validation-summary="All"></div>
@@ -20,7 +21,7 @@
             </div>
             <div><span asp-validation-for="Email" class="text-danger"></span></div>
 
-            
+
 
             <div class="input-group" style="margin-top:15px;">
                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
@@ -28,10 +29,10 @@
             </div>
             <div><span asp-validation-for="Password" class="text-danger"></span></div>
 
-            
+
 
             <button class="btn btn-success btn-lg btn-block" type="submit" style="margin-top:15px;">Login</button>
         </form>
-     </div>
+    </div>
 
 </div>
