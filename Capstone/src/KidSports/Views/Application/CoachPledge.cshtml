@@ -8,6 +8,7 @@
 
 <form asp-controller="Application" asp-action="CoachPledge" method="post">
     <input type="hidden" asp-for="@Model.ApplicationID" value="@Model.ApplicationID" />
+    <input type="hidden" asp-for="@Model.HasClicked" id="HasClickedPledge"value="false" />
     <div class="well">
         <div class="row">
             <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-12">
@@ -21,7 +22,9 @@
         </div>
 
         <div>
-            <a href="~/CoachEthicContract.pdf">View terms of the coaches pledge here.</a>
+            
+<a href="~/CoachEthicContract.pdf" id="CoachPledge" target="_blank">View terms of the coaches pledge here.</a>
+            <span asp-validation-for="HasClicked" class="text-danger"></span>
         </div>
 
 
@@ -76,7 +79,25 @@
     }
 </form>
 
+<script>
+    $(function () {
+        $("#CoachPledge").click(function () {
+            alert("Link was clicked");
+            var clickVal = $("#HasClickedPledge").val()
+            var changeVal = 'true'
+            if (clickVal == 'false')
+            {
+                $("#HasClickedPledge").val(changeVal);
+                var changedVal = $("#HasClickedPledge").val()
+                alert("The value changed" + " " + $("#HasClickedPledge").val());
+            }
+               
+           
+        });
 
+
+    });
+</script>
 
 
 
