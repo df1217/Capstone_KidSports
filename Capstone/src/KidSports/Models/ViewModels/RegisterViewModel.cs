@@ -23,7 +23,7 @@ namespace KidSports.Models.ViewModels
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
-        [RegularExpression("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$",
+        [RegularExpression("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&.])[A-Za-z\\d$@$!%*#?&.]{8,}$",
         ErrorMessage = "Password must be at least 8 characters and contain an uppercase, lowercase, digit, and special character")]
      
         public string Password { get; set; }
