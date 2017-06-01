@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,6 +18,7 @@ namespace KidSports.Models.ViewModels
 
         public string Gender { get; set; }
         public string GradePreference{ get; set; }
+        [RegularExpression("^([A-Z]{1}[a-zA-Z ]*$)", ErrorMessage = "Name must be capitalized and not contain any digits or special characters")]
         public string ChildTeam { get; set; }
 
         public List<Grade> AllGrades { get; set; }
