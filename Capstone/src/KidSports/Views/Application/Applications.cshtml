@@ -17,27 +17,29 @@
 
     <div class="row" style="margin-bottom:10px;">
         <div class="col-md-3">
-            <select class="multiselect-ui form-control" multiple="multiple" id="Area" asp-for="Area">
-                <option value="North Eugene">North Eugene</option>
+            <label name="Area" class="control-label">Area:</label>
+            <select asp-for="Area"
+                    asp-items="@(new SelectList(Model.allAreas, "AreaID", "AreaName"))" class="selectpicker form-control" data-size="5" multiple="multiple">
+
             </select>
         </div>
 
         <div class="col-md-3">
-            <select class="multiselect-ui form-control" multiple="multiple" id="School" asp-for="School">
-                <option asp-for="School" value="Willamette High School">Willamette High School</option>
-            </select>
+            <label name="School" class="control-label">School:</label>
+            <select asp-for="School"
+                    asp-items="@(new SelectList(Model.allSchools, "SchoolID", "SchoolName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
         </div>
 
         <div class="col-md-3">
-            <select class="multiselect-ui form-control" multiple="multiple" id="Sport" name="Sport">
-                <option value="Football">Football</option>
-            </select>
+            <label name="Sport" class="control-label">Sport:</label>
+            <select asp-for="Area"
+                    asp-items="@(new SelectList(Model.allSports, "SportID", "SportName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
         </div>
 
         <div class="col-md-3">
-            <select class="multiselect-ui form-control" multiple="multiple" id="Grade" name="Grade">
-                <option value="Kindergarten">Kindergarten</option>
-            </select>
+            <label name="Grade" class="control-label">Grade:</label>
+            <select asp-for="Area"
+                    asp-items="@(new SelectList(Model.allGrades, "GradeID", "GradeName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
         </div>
     </div>
 

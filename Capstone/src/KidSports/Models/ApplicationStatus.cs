@@ -9,18 +9,39 @@ namespace KidSports.Models
     {
         public int ApplicationStatusID { get; set; }
         public int ApplicationID { get; set; }
-        public DateTime AppStartDate { get; set; }
 
+        public DateTime AppStartDate { get; set; }
         public DateTime? AppApprovalDate { get; set; }
         public DateTime? AppCompletionDate { get; set; }
-
         public DateTime? AppDenialDate { get; set; }
-        public DateTime? BcStartDate { get; set; }
-        public DateTime? BcSubmissionDate { get; set; }
-        public DateTime? BcApprovalDate { get; set; }
-        public DateTime? PrefSubmissionDate { get; set; }
-        public DateTime? PrefApprovalDate { get; set; }
-        public DateTime? PrefDenialDate { get; set; }
+
+        public DateTime? CoachInfoSubmissionDate { get; set; }
+        public DateTime? CoachInfoApprovalDate { get; set; }
+        public DateTime? CoachInfoDenialDate { get; set; }
+
+        public DateTime? CoachInterestSubmissionDate { get; set; }
+        public DateTime? CoachInterestApprovalDate { get; set; }
+        public DateTime? CoachInterestDenialDate { get; set; }
+
+        public DateTime? PledgeSubmissionDate { get; set; }
+        public DateTime? PledgeApprovalDate { get; set; }
+        public DateTime? PledgeDenialDate { get; set; }
+
+        public DateTime? NFHSSubmissionDate { get; set; }
+        public DateTime? NFHSApprovalDate { get; set; }
+        public DateTime? NFHSDenialDate { get; set; }
+
+        public DateTime? PcaSubmissionDate { get; set; }
+        public DateTime? PcaApprovalDate { get; set; }
+        public DateTime? PcaDenialDate { get; set; }
+
+        public DateTime? IdSubmissionDate { get; set; }
+        public DateTime? IdApprovalDate { get; set; }
+        public DateTime? IdDenialDate { get; set; }
+
+        public DateTime? BadgeSubmissionDate { get; set; }
+        public DateTime? BadgeApprovalDate { get; set; }
+        public DateTime? BadgeDenialDate { get; set; }
 
     }
 }

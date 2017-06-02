@@ -10,7 +10,7 @@ namespace KidSports.Models.ViewModels
         public string Direction { get; set; }
         public string PcaPath { get; set; }
         public ApplicationStatus ApplicationStatus { get; set; }
-        public DateTime PcaCourseSubmissionDate { get; set; }
+        public Nullable<DateTime> PcaCourseSubmissionDate { get; set; }
         public IFormFile File { get; set; }
         public Nullable<bool> IsApproved { get; set; }
     }

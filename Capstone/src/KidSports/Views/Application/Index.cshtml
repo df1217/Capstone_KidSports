@@ -11,13 +11,14 @@
         @if (Model.ApplicationID != 0)
         {
             <input type="hidden" asp-for="@Model.ApplicationID" value="@Model.ApplicationID"/>
-            <h3>
+           
+             @*<h3>
                 Your application is pending completion.
                 <br /> Please refer to the chart below for further information and take appropriate action.
-            </h3>
+            </h3>*@
 
 
-            <table class="table table-responsive">
+            @*<table class="table table-responsive">
                 <thead>
                     <tr><td colspan="12" style="font-weight:bold;">Application status is indicated by the colors below.</td></tr>
                     <tr>
@@ -28,22 +29,172 @@
                 </thead>
             </table>
 
-            <div class="table-responsive">
 
-                <table class="table table-bordered">
-                    <tbody>
-                        <tr>
-                            <td class="bg-warning"><input type="submit" style="color:black; font-weight:bold; border: 0; background: none; box-shadow:none; border-radius: 0px;" name="PageName" value="CoachInfo" /></td>
-                            <td class="bg-success"><input type="submit" style="color:black; font-weight:bold; border: 0; background: none; box-shadow:none; border-radius: 0px;" name="PageName" value="CoachInterests" /></td>
-                            <td class="bg-danger"><input type="submit" style="color:black; font-weight:bold; border: 0; background: none; box-shadow:none; border-radius: 0px;" name="PageName" value="CoachPledge" /></td>
-                            <td class="bg-warning"><input type="submit" style="color:black; font-weight:bold; border: 0; background: none; box-shadow:none; border-radius: 0px;" name="PageName" value="ConcussionCourse" /></td>
-                            <td class="bg-success"><input type="submit" style="color:black; font-weight:bold; border: 0; background: none; box-shadow:none; border-radius: 0px;" name="PageName" value="PcaCourse" /></td>
-                            <td class="bg-success"><input type="submit" style="color:black; font-weight:bold; border: 0; background: none; box-shadow:none; border-radius: 0px;" name="PageName" value="ID" /></td>
-                            <td class="bg-warning"><input type="submit" style="color:black; font-weight:bold; border: 0; background: none; box-shadow:none; border-radius: 0px;" name="PageName" value="Badge" /></td>
-                        </tr>
-                    </tbody>
-                </table>
+            </div>*@
+
+        @* Coach Information *@
+        <div class="row">
+            <div class="text-left col-xs-5 col-sm-3 col-md-2">
+                <div class="bowl text-left" style="float:left;">
+                    <div class="inner">
+                        <div class="fill">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="150px" height="150px" viewBox="0 0 150 150" enable-background="new 0 0 300 300" xml:space="preserve">
+                            <path class="@Model.getCoachInfoClass()" d="M300,300V2.5c0,0-0.6-0.1-1.1-0.1c0,0-25.5-2.3-40.5-2.4c-15,0-40.6,2.4-40.6,2.4
+                                    c-12.3,1.1-30.3,1.8-31.9,1.9c-2-0.1-19.7-0.8-32-1.9c0,0-25.8-2.3-40.8-2.4c-15,0-40.8,2.4-40.8,2.4c-12.3,1.1-30.4,1.8-32,1.9
+                                    c-2-0.1-20-0.8-32.2-1.9c0,0-3.1-0.3-8.1-0.7V300H300z" />
+                                </svg>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
+           <div class="col-xs-7 col-sm-9 col-md-10 text-left" style="border-bottom: solid; border-width: 2px; border-color: green; margin-top:55px;">
+                <input type="submit" class="text-left" style="margin-left: -20px; color:black; font-size: 25px; font-weight:bold; border: 0; background: none; box-shadow:none; border-radius: 0px;" name="PageName" value="Information" />
+            </div>
+        </div>
+
+
+        @* Coach Interests *@
+        <div class="row">
+            <div class="text-left col-xs-5 col-sm-3 col-md-2">
+                <div class="bowl text-left" style="float:left;">
+                    <div class="inner">
+                        <div class="fill">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="150px" height="150px" viewBox="0 0 150 150" enable-background="new 0 0 300 300" xml:space="preserve">
+                            <path class="@Model.getCoachInterestClass()" d="M300,300V2.5c0,0-0.6-0.1-1.1-0.1c0,0-25.5-2.3-40.5-2.4c-15,0-40.6,2.4-40.6,2.4
+	                                c-12.3,1.1-30.3,1.8-31.9,1.9c-2-0.1-19.7-0.8-32-1.9c0,0-25.8-2.3-40.8-2.4c-15,0-40.8,2.4-40.8,2.4c-12.3,1.1-30.4,1.8-32,1.9
+	                                c-2-0.1-20-0.8-32.2-1.9c0,0-3.1-0.3-8.1-0.7V300H300z" />
+                                </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xs-7 col-sm-9 col-md-10 text-left" style="border-bottom: solid; border-width: 2px; border-color: green; margin-top:55px;">
+                <input type="submit" style="margin-left: -20px; color:black; font-size: 25px; font-weight:bold; border: 0; background: none; box-shadow:none; border-radius: 0px;" name="PageName" value="Interests" />
+            </div>
+        </div>
+
+
+        @* Coaches Pledge *@
+        <div class="row">
+            <div class="text-left col-xs-5 col-sm-3 col-md-2">
+                <div class="bowl text-left" style="float:left;">
+                    <div class="inner">
+                        <div class="fill">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="150px" height="150px" viewBox="0 0 150 150" enable-background="new 0 0 300 300" xml:space="preserve">
+                            <path class="@Model.getCoachPledgeClass()" d="M300,300V2.5c0,0-0.6-0.1-1.1-0.1c0,0-25.5-2.3-40.5-2.4c-15,0-40.6,2.4-40.6,2.4
+	                                c-12.3,1.1-30.3,1.8-31.9,1.9c-2-0.1-19.7-0.8-32-1.9c0,0-25.8-2.3-40.8-2.4c-15,0-40.8,2.4-40.8,2.4c-12.3,1.1-30.4,1.8-32,1.9
+	                                c-2-0.1-20-0.8-32.2-1.9c0,0-3.1-0.3-8.1-0.7V300H300z" />
+                                </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xs-7 col-sm-9 col-md-10 text-left" style="border-bottom: solid; border-width: 2px; border-color: green; margin-top:55px;">
+                <input type="submit" style="margin-left: -20px; color:black; font-size: 25px; font-weight:bold; border: 0; background: none; box-shadow:none; border-radius: 0px;" name="PageName" value="Pledge" />
+            </div>
+        </div>
+
+
+        @* NFHS Course *@
+        <div class="row">
+            <div class="text-left col-xs-5 col-sm-3 col-md-2">
+                <div class="bowl text-left" style="float:left;">
+                    <div class="inner">
+                        <div class="fill">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="150px" height="150px" viewBox="0 0 150 150" enable-background="new 0 0 300 300" xml:space="preserve">
+                            <path class="@Model.getCoachNFHSClass()" d="M300,300V2.5c0,0-0.6-0.1-1.1-0.1c0,0-25.5-2.3-40.5-2.4c-15,0-40.6,2.4-40.6,2.4
+	                            c-12.3,1.1-30.3,1.8-31.9,1.9c-2-0.1-19.7-0.8-32-1.9c0,0-25.8-2.3-40.8-2.4c-15,0-40.8,2.4-40.8,2.4c-12.3,1.1-30.4,1.8-32,1.9
+	                            c-2-0.1-20-0.8-32.2-1.9c0,0-3.1-0.3-8.1-0.7V300H300z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xs-7 col-sm-9 col-md-10 text-left" style="border-bottom: solid; border-width: 2px; border-color: green; margin-top:55px;">
+                <input type="submit" style="margin-left: -20px; color:black; font-size: 25px; font-weight:bold; border: 0; background: none; box-shadow:none; border-radius: 0px;" name="PageName" value="NFHS Course" />
+            </div>
+        </div>
+
+
+        @* PCA Course *@
+        if (Model.Application.IsHeadCoach == true)
+        {
+        <div class="row">
+            <div class="text-left col-xs-5 col-sm-3 col-md-2">
+                <div class="bowl text-left" style="float:left;">
+                    <div class="inner">
+                        <div class="fill">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="150px" height="150px" viewBox="0 0 150 150" enable-background="new 0 0 300 300" xml:space="preserve">
+                            <path class="@Model.getCoachPcaClass()" d="M300,300V2.5c0,0-0.6-0.1-1.1-0.1c0,0-25.5-2.3-40.5-2.4c-15,0-40.6,2.4-40.6,2.4
+	                            c-12.3,1.1-30.3,1.8-31.9,1.9c-2-0.1-19.7-0.8-32-1.9c0,0-25.8-2.3-40.8-2.4c-15,0-40.8,2.4-40.8,2.4c-12.3,1.1-30.4,1.8-32,1.9
+	                            c-2-0.1-20-0.8-32.2-1.9c0,0-3.1-0.3-8.1-0.7V300H300z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xs-7 col-sm-9 col-md-10 text-left" style="border-bottom: solid; border-width: 2px; border-color: green; margin-top:55px;">
+                <input type="submit" style="margin-left: -20px; color:black; font-size: 25px; font-weight:bold; border: 0; background: none; box-shadow:none; border-radius: 0px;" name="PageName" value="PCA Course" />
+            </div>
+        </div>
+        }
+
+
+        @* ID *@
+        <div class="row">
+            <div class="text-left col-xs-5 col-sm-3 col-md-2">
+                <div class="bowl text-left" style="float:left;">
+                    <div class="inner">
+                        <div class="fill">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="150px" height="150px" viewBox="0 0 150 150" enable-background="new 0 0 300 300" xml:space="preserve">
+                            <path class="@Model.getCoachIDClass()" d="M300,300V2.5c0,0-0.6-0.1-1.1-0.1c0,0-25.5-2.3-40.5-2.4c-15,0-40.6,2.4-40.6,2.4
+	                        c-12.3,1.1-30.3,1.8-31.9,1.9c-2-0.1-19.7-0.8-32-1.9c0,0-25.8-2.3-40.8-2.4c-15,0-40.8,2.4-40.8,2.4c-12.3,1.1-30.4,1.8-32,1.9
+	                        c-2-0.1-20-0.8-32.2-1.9c0,0-3.1-0.3-8.1-0.7V300H300z" />
+                        </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xs-7 col-sm-9 col-md-10 text-left" style="border-bottom: solid; border-width: 2px; border-color: green; margin-top:55px;">
+                <input type="submit" style="margin-left: -20px; color:black; font-size: 25px; font-weight:bold; border: 0; background: none; box-shadow:none; border-radius: 0px;" name="PageName" value="ID" />
+            </div>
+        </div>
+
+
+        @* Badge *@
+        <div class="row">
+            <div class="text-left col-xs-5 col-sm-3 col-md-2">
+                <div class="bowl text-left" style="float:left;">
+                    <div class="inner">
+                        <div class="fill">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="150px" height="150px" viewBox="0 0 150 150" enable-background="new 0 0 300 300" xml:space="preserve">
+                            <path class="@Model.getCoachBadgeClass()" d="M300,300V2.5c0,0-0.6-0.1-1.1-0.1c0,0-25.5-2.3-40.5-2.4c-15,0-40.6,2.4-40.6,2.4
+	                        c-12.3,1.1-30.3,1.8-31.9,1.9c-2-0.1-19.7-0.8-32-1.9c0,0-25.8-2.3-40.8-2.4c-15,0-40.8,2.4-40.8,2.4c-12.3,1.1-30.4,1.8-32,1.9
+	                        c-2-0.1-20-0.8-32.2-1.9c0,0-3.1-0.3-8.1-0.7V300H300z" />
+                        </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xs-7 col-sm-9 col-md-10 text-left" style="border-bottom: solid; border-width: 2px; border-color: green; margin-top:55px;">
+                <input type="submit" style="margin-left: -20px; color:black; font-size: 25px; font-weight:bold; border: 0; background: none; box-shadow:none; border-radius: 0px;" name="PageName" value="Badge" />
+            </div>
+        </div>
+
         }
         else
         {

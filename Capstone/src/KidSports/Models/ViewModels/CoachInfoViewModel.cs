@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -34,8 +35,11 @@ namespace KidSports.Models.ViewModels
         [RegularExpression("^([A-Z]{1}[a-zA-Z ]*$)", ErrorMessage = "Name must be capitalized and not contain any digits or special characters")]
         public string PreferredName { get; set; }
         [DataType(DataType.Date)]
-        public DateTime DOB { get; set; }
-       // [Range(0,99,ErrorMessage ="Year must be in the range of 0 to 99")]
+
+
+        //TODO: Validation?? I deleted a commented out piece of validation during merge, unsure if it was important.
+        public Nullable<DateTime> DOB { get; set; }
+
         public int YearsLivingInOregon { get; set; }
         [StringLength(50, ErrorMessage = "Name must be less than 50 characters")]
         [RegularExpression("[A-za-z0-9 #.-]*$", ErrorMessage ="Invalid Address test")]
@@ -48,7 +52,7 @@ namespace KidSports.Models.ViewModels
         public int newPickedStateID { get; set; }
         [RegularExpression("^[0-9]{5}$", ErrorMessage = "Enter Valid 5 digit zipcode")]
         public string Zip { get; set; }
-        public List<State> PreviousStates { get; set; }
+        public List<int> PreviousStates { get; set; }
         public bool HasLivedOutsideUSA { get; set; }
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Invalid Phone number")]
@@ -63,7 +67,5 @@ namespace KidSports.Models.ViewModels
         [StringLength(50, ErrorMessage = "Name must be less than 50 characters")]
         [RegularExpression("^[A-za-z0-9 #.-]*$", ErrorMessage = "Invalid")]
         public string JobTitle { get; set; }
-
-
     }
 }
