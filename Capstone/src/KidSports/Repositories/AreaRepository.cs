@@ -24,5 +24,20 @@ namespace KidSports.Repositories
         {
             return context.Areas.Where(x => x.AreaID == id).SingleOrDefault();
         }
+
+        public Area DeleteAreaByID(int id)
+        {
+            var Area = context.Areas.SingleOrDefault(s => s.AreaID == id);
+            return context.Areas.Remove(Area);
+
+        }
+
+        public Area AddArea(string name)
+        {
+            Area a = new Area();
+            a.name = name;
+            return context.Area.Add(a);
+
+        }
     }
 }

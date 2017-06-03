@@ -326,6 +326,7 @@ namespace KidSports.Repositories
                 links.Instragram = "https://www.instagram.com/kidsports4life/";
                 links.NFHS = "https://nfhslearn.com/courses/61064/concussion-in-sports";
                 links.PCA = "http://shopping.positivecoach.org/Double-Goal-Coach?search=Course";
+                links.CoachPledge = "http://kidsports.azurewebsites.net/CoachEthicContract.pdf";
                 links.Phone = "541 683 2374";
                 links.Fax = "541 302 9430";
                 links.Twitter = "https://twitter.com/kidsports4life";
@@ -334,6 +335,7 @@ namespace KidSports.Repositories
                 context.Applinks.Add(links);
                 context.SaveChanges();
             }
+            #endregion
         }
     }
 }

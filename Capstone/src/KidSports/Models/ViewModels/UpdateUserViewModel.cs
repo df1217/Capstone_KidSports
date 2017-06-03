@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace KidSports.Models.ViewModels
 {
-    public class UpdateUser
+    public class UpdateUserViewModel
     {
         public string Name { get; set; }
         public string Email { get; set; }

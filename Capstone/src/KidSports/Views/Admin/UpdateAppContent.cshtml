@@ -2,11 +2,11 @@
     ViewBag.Title = "Update Applicaiton Content";
 }
 
-
-
     <h1 class="text-center">Update Application Content</h1><br />
 
-    <form asp-controller="Admin" asp-action="UpdateApp" method="post" enctype="multipart/form-data">
+    <form asp-controller="Admin" asp-action="UACarea" method="post" enctype="multipart/form-data">
+        <input type ="text" asp-for ="addArea"/>
+        <select asp-for ="deleteArea"/>
         <div class="well">
 
             <div class="row">
@@ -17,11 +17,12 @@
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-7">
 
                     <label for="" class="control-label">Enter area</label>
-                    <input type="" value='' class="form-control" id="schoolName" placeholder="">
+                    <input type="text" value='' class="form-control" id="schoolName" placeholder="">
 
                 </div>
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-2" style="padding-top:25px">
                     <button onclick="location = ''" type="button" class="btn btn-primary btn-md btn-block">Add</button>
+
                 </div>
             </div>
 
@@ -31,175 +32,133 @@
                 </div>
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-7">
                     <label for="" class="control-label">Choose area</label>
-                    <select name="" id="" class="form-control">
-                        <option value="" selected="selected"></option>
-                        <option value="Churchill">Churchill</option>
-                        <option value="NorthEugene">North Eugene</option>
-                        <option value="Sheldon">Sheldon</option>
-                        <option value="SouthEugene">South Eugene</option>
-                        <option value="Springfield">Springfield</option>
-                        <option value="Willamette">Willamette</option>
+                    <select asp-for="newPickedAreaID" class="form-control">
+                        <option value=""></option>
+                        @foreach (Area a in Model.AllAreas)
+                        {
+                            if (Model.Area.AreaID == a.AreaID)
+                            {
+                                <option value="@a.AreaID" selected="selected">@a.AreaName</option>
+                            }
+                            else
+                            {
+                                <option value="@a.AreaID">@a.AreaName</option>
+                            }
+                        }
+
                     </select>
+
                 </div>
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-2" style="padding-top:25px">
                     <button onclick="location = ''" type="button" class="btn btn-danger btn-md btn-block">Delete</button>
                 </div>
             </div>
         </div>
+        </form>
 
         <div class="well">
-            <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-3" style="text-align:center">
-                    <h3>School</h3>
+            <form asp-controller="Admin" asp-action="UACschool" method="post" enctype="multipart/form-data">
+                <input type="text" asp-for="addSchool" />
+                <select asp-for="deleteSchool" />
+                <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-3" style="text-align:center">
+                        <h3>School</h3>
+                    </div>
+
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-7">
+
+                        <label for="" class="control-label">Enter school name</label>
+                        <input type="text" value='' class="form-control" id="schoolName" placeholder="">
+
+                    </div>
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-2" style="padding-top:25px">
+                        <button onclick="location = ''" type="button" class="btn btn-primary btn-md btn-block">Add</button>
+                    </div>
                 </div>
 
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-7">
 
-                    <label for="" class="control-label">Enter school name</label>
-                    <input type="" value='' class="form-control" id="schoolName" placeholder="">
+                <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-3" style="text-align:center">
+                    </div>
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-7">
+                        <label for="" class="control-label">Choose school name</label>
+                        <select name="" id="" class="form-control">
+                            <option value=""></option>
+                            @foreach (School s in Model.SchoolsByArea)
+                            {
+                                if (Model.School.SchoolID == s.SchoolID)
+                                {
+                                    <option value="@s.SchoolID" selected="selected">@s.SchoolName</option>
+                                }
+                                else
+                                {
+                                    <option value="@s.SchoolID">@s.SchoolName</option>
+                                }
+                            }
 
+                        </select>
+                    </div>
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-2" style="padding-top:25px">
+                        <button onclick="location = ''" type="button" class="btn btn-danger btn-md btn-block">Delete</button>
+                    </div>
                 </div>
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-2" style="padding-top:25px">
-                    <button onclick="location = ''" type="button" class="btn btn-primary btn-md btn-block">Add</button>
-                </div>
+                </form>
+</div>
+
+<form asp-controller="Admin" asp-action="UACsport" method="post" enctype="multipart/form-data">
+    <input type="text" asp-for="addSport" />
+    <select asp-for="deleteSport" />
+
+    <div class="well">
+        <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-3" style="text-align:center">
+                <h3>Sport</h3>
             </div>
 
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-7">
 
-            <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-3" style="text-align:center">
-                </div>
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-7">
-                    <label for="" class="control-label">Choose school name</label>
-                    <select name="" id="" class="form-control">
-                        <option value=""></option>
-                        <option value="adams">Adams</option>
-                        <option value="agnesStewart">Agnes Stewart</option>
-                        <option value="ataJefferson">ATA/Jefferson</option>
-                        <option value="aubreyPark">Aubrey Park</option>
-                        <option value="berthaHolt">Bertha Holt</option>
-                        <option value="briggs">Briggs</option>
-                        <option value="buenaVista">Buena Vista</option>
-                        <option value="calYoung">Cal Young</option>
-                        <option value="camasRidge">Camas Ridge</option>
-                        <option value="cascade">Cascade</option>
-                        <option value="centinnial">Centinnial</option>
-                        <option value="cesarChavez">Cesar Chavez</option>
-                        <option value="charlamagne">Charlamagne</option>
-                        <option value="clearLake">Clear Lake</option>
-                        <option value="coburgCharter">Coburg Charter</option>
-                        <option value="corridor">Corridor</option>
-                        <option value="danebo ">Danebo</option>
-                        <option value="douglasGardens">Douglas Gardens</option>
-                        <option value="edgewood">Edgewood</option>
-                        <option value="edison">Edison</option>
-                        <option value="eugeneChristian">Eugene Christian</option>
-                        <option value="fairfield">Fairfield</option>
-                        <option value="familySchool">Family School</option>
-                        <option value="farHorizonsMontessori">Far Horizon Montessori</option>
-                        <option value="gilham">Gilham</option>
-                        <option value="guyLee ">Guy Lee</option>
-                        <option value="hamlin">Hamlin</option>
-                        <option value="howard">	Howard</option>
-                        <option value="irving">Irving</option>
-                        <option value="kalapula">Kalapula</option>
-                        <option value="kennedy">Kennedy</option>
-                        <option value="malabon">Malabon</option>
-                        <option value="maple">Maple</option>
-                        <option value="maristChristian">Marist Christian</option>
-                        <option value="mcCornack">McCornack</option>
-                        <option value="meadowView">Meadow View</option>
-                        <option value="monroe">Monroe</option>
-                        <option value="mtVernon">Mt Vernon</option>
-                        <option value="northEugeneElCaminoReal">North Eugene/El Camino Real</option>
-                        <option value="oakhill">Oak Hill</option>
-                        <option value="oharaCatholic">O'Hara Catholic</option>
-                        <option value="page">Page</option>
-                        <option value="pleasantView">Pleasant View</option>
-                        <option value="prairieMtn">Prairie Mtn</option>
-                        <option value="ridgeView">Ridge View</option>
-                        <option value="ridgelineMontessori">Ridgeline Montessori</option>
-                        <option value="riverBend">River Bend</option>
-                        <option value="rooselvlt">Rooselvelt</option>
-                        <option value="shasta">Shasta</option>
-                        <option value="sheldon">Sheldon</option>
-                        <option value="southEugene">South Eugene</option>
-                        <option value="spencerButte">Spencer Butte</option>
-                        <option value="springCreek">Spring Creek</option>
-                        <option value="springfield ">Springfield</option>
-                        <option value="stPaulCatholic">St Paul Catholic</option>
-                        <option value="theVillageSchool">The Village School</option>
-                        <option value="thurston">Thurston</option>
-                        <option value="twinOaks">Twin Oaks</option>
-                        <option value="twoRiversDosRios">Two River/Dos Rios</option>
-                        <option value="walterville">Walterville</option>
-                        <option value="willagillespie">Willagillespie</option>
-                        <option value="willamette">Willamette</option>
-                        <option value="willametteChristian">Willamette Christian</option>
-                        <option value="yolanda">Yolanda</option>
-                        <option value="yujinGakuen">Yujin Gakuen</option>
-                    </select>
-                </div>
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-2" style="padding-top:25px">
-                    <button onclick="location = ''" type="button" class="btn btn-danger btn-md btn-block">Delete</button>
-                </div>
+                <label for="" class="control-label">Enter sport</label>
+                <input type="text" value='' class="form-control" id="schoolName" placeholder="">
+
+            </div>
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-2" style="padding-top:25px">
+                <button onclick="location = ''" type="button" class="btn btn-primary btn-md btn-block">Add</button>
             </div>
         </div>
 
-        <div class="well">
-            <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-3" style="text-align:center">
-                    <h3>Sport</h3>
-                </div>
 
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-7">
-
-                    <label for="" class="control-label">Enter sport</label>
-                    <input type="" value='' class="form-control" id="schoolName" placeholder="">
-
-                </div>
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-2" style="padding-top:25px">
-                    <button onclick="location = ''" type="button" class="btn btn-primary btn-md btn-block">Add</button>
-                </div>
+        <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-3" style="text-align:center">
             </div>
-
-
-            <div class="row">
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-3" style="text-align:center">
-                </div>
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-7">
-                    <label for="" class="control-label">Choose sport</label>
-                    <select name="" id="" class="form-control">
-                        <option value=""></option>
-                        <option value="Basketball">Basketball</option>
-                        <option value="Baseball">Baseball</option>
-                        <option value="Football">Football</option>
-                        <option value="Lacrosse">Lacrosse</option>
-                        <option value="Rugby">Rugby</option>
-                        <option value="Spring Soccer">Soccer-Spring</option>
-                        <option value="Fall Soccer">Soccer-Fall</option>
-                        <option value="Softball">Softball</option>
-                        <option value="Volleyball">Volleyball</option>
-
-                    </select>
-                </div>
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-2" style="padding-top:25px">
-                    <button onclick="location = ''" type="button" class="btn btn-danger btn-md btn-block">Delete</button>
-                </div>
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-7">
+                <label for="" class="control-label">Choose sport</label>
+                <select name="" id="" class="form-control">
+                    <option value=""></option>
+                    @foreach (Sport s in Model.AllSports)
+                    {
+                        if (Model.Sport == s)
+                        {
+                            <option value="@s.SportID" selected="selected">@s.SportName</option>
+                        }
+                        else
+                        {
+                            <option value="@s.SportID">@s.SportName</option>
+                        }
+                    }
+                </select>
             </div>
-
-
+            <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-2" style="padding-top:25px">
+                <button onclick="location = ''" type="button" class="btn btn-danger btn-md btn-block">Delete</button>
+            </div>
         </div>
 
-    </form>
-
-    <div class="row">
-        <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-5">
-        </div>
-        <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
-        </div>
-        <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-sm-3">
-            <button type="button" class="btn btn-primary col-xs-12 pull-right">save</button>
-        </div>
     </div>
+
+</form>
+
+
+
+
+
 
 

@@ -17,7 +17,10 @@ namespace KidSports.Repositories
 
         public List<State> GetAllStates()
         {
-            return context.States.ToList();
+
+            //should work to order states alphabetically.
+            return context.States.OrderBy(s => s.StateName).ToList();
+
         }
 
         public State GetStateByID(int ID)
