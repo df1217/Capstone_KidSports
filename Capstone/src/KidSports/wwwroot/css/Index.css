@@ -1,8 +1,8 @@
 ﻿.bowl {
   position: relative;
   border-radius: 50%;
-  width: 75px;
-  height: 75px;
+  width: 50px;
+  height: 50px;
   box-shadow: inset 0 -5px 0 0 rgba(0, 0, 0, 0.5), inset 0 -20px 5px 0 rgba(0, 0, 0, 0.2), inset -15px 0 5px 0 rgba(0, 0, 0, 0.1), inset 15px 0 5px 0 rgba(0, 0, 0, 0.1);
   background: -moz-radial-gradient(center, ellipse cover, transparent 0%, transparent 76%, rgba(0, 0, 0, 0.65) 100%);
   background: -webkit-radial-gradient(center, ellipse cover, transparent 0%, transparent 76%, rgba(0, 0, 0, 0.65) 100%);
@@ -18,8 +18,8 @@
   background: -webkit-radial-gradient(center, ellipse cover, transparent 0%, transparent 60%, rgba(0, 0, 0, 0.65) 81%, black 100%);
   background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.65) 81%, #000000 100%);
   position: absolute;
-  width: 75px;
-  height: 75px;
+  width: 50px;
+  height: 50px;
   z-index: 2;
 }
 .bowl:after {
@@ -37,8 +37,8 @@
 }
 .bowl .inner {
   border-radius: 50%;
-  width: 75px;
-  height: 75px;
+  width: 50px;
+  height: 50px;
   background: -moz-radial-gradient(center, ellipse cover, transparent 0%, transparent 76%, rgba(0, 0, 0, 0.65) 100%);
   background: -webkit-radial-gradient(center, ellipse cover, transparent 0%, transparent 76%, rgba(0, 0, 0, 0.65) 100%);
   background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 76%, rgba(0, 0, 0, 0.65) 100%);
@@ -72,8 +72,8 @@
 .bowl .fill {
   -webkit-animation-name: fillAction;
   -webkit-animation-iteration-count: 1;
-  -webkit-animation-timing-function: cubic-bezier(0.2, 0.6, 0.8, 0.4);
-  -webkit-animation-duration: 4s;
+  -webkit-animation-timing-function: cubic-bezier(0, 0.6, 0.2, 1);
+  -webkit-animation-duration: 2s;
   -webkit-animation-fill-mode: forwards;
 }
 .bowl .waveShape-Approved {
@@ -81,8 +81,8 @@
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear;
   -webkit-animation-duration: 0.5s;
-  width: 300px;
-  height: 150px;
+  width: 200px;
+  height: 100px;
   fill: #007E33;
 }
 
@@ -91,8 +91,8 @@
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear;
   -webkit-animation-duration: 0.5s;
-  width: 300px;
-  height: 150px;
+  width: 200px;
+  height: 100px;
   fill: #ffbb33;
 }
 
@@ -101,8 +101,8 @@
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear;
   -webkit-animation-duration: 0.5s;
-  width: 300px;
-  height: 150px;
+  width: 200px;
+  height: 100px;
   fill: #CC0000;
 }
 
