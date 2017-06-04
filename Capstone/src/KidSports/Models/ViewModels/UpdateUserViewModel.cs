@@ -13,6 +13,7 @@ namespace KidSports.Models.ViewModels
         public string Role { get; set; }
 
         public string Area { get; set; }
+        public List<User> allUsers { get; set; }
 
     }
 }

@@ -138,7 +138,7 @@ namespace KidSports.Controllers
 
         #region SportsManager Views
         [HttpGet]
-        [Authorize(Roles = "SportsManager")]
+        [Authorize(Roles = "SportsManager, Admin")]
         public IActionResult Applications()
         {
             //Get the sports manager and put their area in the search model by default.
@@ -205,7 +205,7 @@ namespace KidSports.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "SportsManager")]
+        [Authorize(Roles = "SportsManager, Admin")]
         public IActionResult Applications(ApplicationSearchModel asm = null)
         {
             if (asm == null)
@@ -246,7 +246,7 @@ namespace KidSports.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "SportsManager")]
+        [Authorize(Roles = "SportsManager, Admin")]
         public IActionResult ApplicantDetails(string ApplicantID)
         {
             //Do security stuff

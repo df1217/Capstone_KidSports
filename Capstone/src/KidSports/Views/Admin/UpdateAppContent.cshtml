@@ -1,4 +1,5 @@
-﻿@{
+﻿@model UpdateAppContentViewModel
+@{
     ViewBag.Title = "Update Applicaiton Content";
 }
 
@@ -32,20 +33,11 @@
                 </div>
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-7">
                     <label for="" class="control-label">Choose area</label>
-                    <select asp-for="newPickedAreaID" class="form-control">
-                        <option value=""></option>
+                    <select asp-for="addArea" class="form-control">
                         @foreach (Area a in Model.AllAreas)
                         {
-                            if (Model.Area.AreaID == a.AreaID)
-                            {
-                                <option value="@a.AreaID" selected="selected">@a.AreaName</option>
-                            }
-                            else
-                            {
-                                <option value="@a.AreaID">@a.AreaName</option>
-                            }
+                            <option value="@a.AreaID">@a.AreaName</option>
                         }
-
                     </select>
 
                 </div>
@@ -84,16 +76,9 @@
                         <label for="" class="control-label">Choose school name</label>
                         <select name="" id="" class="form-control">
                             <option value=""></option>
-                            @foreach (School s in Model.SchoolsByArea)
+                            @foreach (School s in Model.AllSchools)
                             {
-                                if (Model.School.SchoolID == s.SchoolID)
-                                {
-                                    <option value="@s.SchoolID" selected="selected">@s.SchoolName</option>
-                                }
-                                else
-                                {
-                                    <option value="@s.SchoolID">@s.SchoolName</option>
-                                }
+                                 <option value="@s.SchoolID">@s.SchoolName</option>
                             }
 
                         </select>
@@ -136,14 +121,7 @@
                     <option value=""></option>
                     @foreach (Sport s in Model.AllSports)
                     {
-                        if (Model.Sport == s)
-                        {
-                            <option value="@s.SportID" selected="selected">@s.SportName</option>
-                        }
-                        else
-                        {
-                            <option value="@s.SportID">@s.SportName</option>
-                        }
+                        <option value="@s.SportID">@s.SportName</option>
                     }
                 </select>
             </div>

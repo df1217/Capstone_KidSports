@@ -24,19 +24,20 @@ namespace KidSports.Controllers
         private ISportRepo sportRepo;
         private IAreaRepo areaRepo;
         private ISchoolRepo schoolRepo;
+        private IUserRepo userRepo;
 
-        public AdminController(ISportRepo sportrepo, IAreaRepo arearepo, ISchoolRepo schoolrepo)
+        public AdminController(ISportRepo sportrepo, IAreaRepo arearepo, ISchoolRepo schoolrepo, IUserRepo userrepo)
         {
             schoolRepo = schoolrepo;
             sportRepo = sportrepo;
             areaRepo = arearepo;
-
+            userRepo = userrepo;
         }
+
         #region UpdateAppContent
         [HttpGet]
         //public uacvm UpdateAppContentViewModel { get; private set; }
         public IActionResult UpdateAppContent()
-
         {
             UpdateAppContentViewModel uacvm = new UpdateAppContentViewModel();
             uacvm.AllSchools = schoolRepo.GetAllSchools();
@@ -67,7 +68,10 @@ namespace KidSports.Controllers
 
         public IActionResult UpdateUser()
         {
-            return View();
+            UpdateUserViewModel uuvm = new UpdateUserViewModel();
+            uuvm.allUsers = new List<User>();
+            uuvm.allUsers = userRepo.GetAllUsers().ToList();
+            return View(uuvm);
         }
 
         public IActionResult UpdateProfile()
