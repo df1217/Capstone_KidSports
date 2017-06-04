@@ -13,8 +13,6 @@ namespace KidSports.Repositories
         List<School> GetSchoolBySM(User user);
         School GetSchoolByID(int id);
         School AddSchool(string name);
-        School DeleteSchoolByID(int ID);
-        void DeleteByID(object deleteSport);
-        object GetAllSports();
+        void DeleteSchoolByID(int ID);
     }
 }

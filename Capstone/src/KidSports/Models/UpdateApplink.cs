@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace KidSports.Models.ViewModels
+namespace KidSports.Models
 {
     public class UpdateApplink
     {
+        public int UpdateApplinkID { get; set; }
         public string Address { get; set; }
         public string BevBlog { get; set; }
         public string CoachPledge { get; internal set; }

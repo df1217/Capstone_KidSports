@@ -35,19 +35,18 @@ namespace KidSports.Repositories
             return context.Schools.Where(x => x.SchoolID == id).SingleOrDefault();
         }
 
-        public School DeleteSchoolByID(int id)
+        public void DeleteSchoolByID(int id)
         {
-            var School = context.Schools.SingleOrDefault(s => s.id == id);
-            return context.Schools.Remove(School);
-            
+            var School = context.Schools.SingleOrDefault(s => s.SchoolID == id);
+            context.Schools.Remove(School);
         }
 
         public School AddSchool(string name)
         {
             School s = new School();
-            s.name = name;
-            return context.Schools.Add(s);
-
+            s.SchoolName = name;
+            context.Schools.Add(s);
+            return s;
         }
     }
 }

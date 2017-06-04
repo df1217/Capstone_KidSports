@@ -8,16 +8,16 @@ namespace KidSports.Models.ViewModels
 {
     public class UpdateAppContentViewModel
     {
-        string addSport;
-        int deleteSport;
+        public string addSport { get; set; }
+        public int deleteSport { get; set; }
 
-        string addArea;
-        int deleteArea;
+        public string addArea { get; set; }
+        public int deleteArea { get; set; }
 
-        string addSchool;
-        int deleteSchool;
+        public string addSchool { get; set; }
+        public int deleteSchool { get; set; }
 
-        string action;
+        public string Action { get; set; }
 
         public Area AreaName { get; set; }
         public School SchoolName { get; set; }
@@ -26,7 +26,7 @@ namespace KidSports.Models.ViewModels
         public List<Area> AllAreas { get; set; }
         public List<School> AllByArea { get; set; }
         public List<Sport> AllSports { get; set; }
-
+        public List<School> AllSchools { get; set; }
     }
 
 }

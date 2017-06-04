@@ -21,12 +21,11 @@ namespace KidSports.Controllers
 
     public class AdminController : Controller
     {
-        private IHostingEnvironment _environment;
         private ISportRepo sportRepo;
         private IAreaRepo areaRepo;
         private ISchoolRepo schoolRepo;
 
-        public AdminController(IHostingEnvironment environment, ISportRepo sportrepo, IAreaRepo arearepo, ISchoolRepo schoolrepo)
+        public AdminController(ISportRepo sportrepo, IAreaRepo arearepo, ISchoolRepo schoolrepo)
         {
             schoolRepo = schoolrepo;
             sportRepo = sportrepo;
@@ -39,22 +38,24 @@ namespace KidSports.Controllers
         public IActionResult UpdateAppContent()
 
         {
-            UpdateAppContentViewModel uacvm = new UpdateAppContentViewModel;
+            UpdateAppContentViewModel uacvm = new UpdateAppContentViewModel();
             uacvm.AllSchools = schoolRepo.GetAllSchools();
-            uacvm.AllAreas = areaRepo.GetAllSAreas();
-            uacvm.AllSports = schoolRepo.GetAllSports();
+            uacvm.AllAreas = areaRepo.GetAllAreas();
+            uacvm.AllSports = sportRepo.GetAllSports();
+            return View(uacvm);
         }
+
         [HttpPost]
-        public async Task<IActionResult> UACVMSchools(UpdateAppContentViewModel uacvm)
+        public IActionResult UACVMSchools(UpdateAppContentViewModel uacvm)
         {
             if (uacvm.Action == "delete")
-                schoolRepo.DeleteByID(UpdateAppContentViewModel.deleteSport);
+                schoolRepo.DeleteSchoolByID(uacvm.deleteSchool);
             if (uacvm.Action == "add")
-                schoolRepo.AddSchool(UpdateAppContentViewModel.addSport);
+                schoolRepo.AddSchool(uacvm.addSchool);
 
             uacvm.AllSchools = schoolRepo.GetAllSchools();
-            uacvm.AllAreas = areaRepo.GetAllSAreas();
-            uacvm.AllSports = schoolRepo.GetAllSports();
+            uacvm.AllAreas = areaRepo.GetAllAreas();
+            uacvm.AllSports = sportRepo.GetAllSports();
 
             return View(uacvm);
         }

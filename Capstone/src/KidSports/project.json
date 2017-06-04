@@ -35,6 +35,7 @@
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     "System.ComponentModel.Annotations": "4.3.0",
     "System.Interactive.Async": "3.0.0",
+    "System.Linq": "4.3.0",
   },
 
   "frameworks": {
