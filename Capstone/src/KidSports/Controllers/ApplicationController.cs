@@ -216,35 +216,18 @@ namespace KidSports.Controllers
             asm.allSports = sportRepo.GetAllSports();
             asm.allGrades = gradeRepo.GetAllGrades();
 
-            //asm.Area = new List<int>();
-            //asm.School = new List<int>();
-            //asm.Sport = new List<int>();
-            //asm.Grade = new List<int>();
-
-            //foreach (Area i in asmArea)
-            //    asm.Area.Add(i.AreaID);
-
-            //foreach (School i in asmSchool)
-            //    asm.School.Add(i.SchoolID);
-
-            //foreach (Sport i in asmSport)
-            //    asm.Sport.Add(i.SportID);
-
-            //foreach (Grade i in asmGrade)
-            //    asm.Grade.Add(i.GradeID);
-
             return View(asm);
         }
 
         [HttpPost]
         [Authorize(Roles = "SportsManager, Admin")]
-        public IActionResult Applications(ApplicationSearchModel asm = null)
+        public IActionResult Applications([FromBody] ApplicationSearchModel asm)
         {
-            if (asm == null)
-                asm = new ApplicationSearchModel();
-            asm.filteredApps = new List<Application>();
-            asm.filteredUsers = new List<User>();
-            asm.filteredAppStatus = new List<ApplicationStatus>();
+            //if (asm == null)
+            //    asm = new ApplicationSearchModel();
+            //asm.filteredApps = new List<Application>();
+            //asm.filteredUsers = new List<User>();
+            //asm.filteredAppStatus = new List<ApplicationStatus>();
 
             List<Application> filteredApps = appRepo.GetFilteredApplications(asm).ToList();
             List<User> filteredUsers = new List<User>();
@@ -412,6 +395,11 @@ namespace KidSports.Controllers
                 if (currentApp.ZipCode != null) civm.Zip = currentApp.ZipCode;
                 if (currentApp.LivedOutsideUSA != false) civm.HasLivedOutsideUSA = currentApp.LivedOutsideUSA;
 
+                List<AppStateJoin> PreviousStates = appRepo.GetStatesLivedIn(currentApp.ApplicationID);
+                if (civm.PreviousStates == null) civm.PreviousStates = new List<int>();
+                foreach (var state in PreviousStates)
+                    civm.PreviousStates.Add(state.StateID);
+
                 if (currentApp.City != null) civm.City = currentApp.City;
                 if (currentApp.State != null) civm.State = currentApp.State;
                 if (currentApp.Address != null) civm.Address = currentApp.Address;
@@ -420,6 +408,8 @@ namespace KidSports.Controllers
                 civm.YearsLivingInOregon = currentApp.YearsLivedInOregon;
 
                 civm.AllStates = stateRepo.GetAllStates();
+
+
                 if (currentApp.StatesLived != null)
                 {
                     foreach (AppStateJoin a in currentApp.StatesLived)
@@ -466,12 +456,16 @@ namespace KidSports.Controllers
                 currentApp.LivedOutsideUSA = civm.HasLivedOutsideUSA;
 
                 if (civm.newPickedStateID != -1) currentApp.State = stateRepo.GetStateByID(civm.newPickedStateID);
+
+                appRepo.DeleteStatesLived(currentApp.ApplicationID);
                 if (civm.PreviousStates != null && civm.PreviousStates.Count != 0)
                 {
                     if (currentApp.StatesLived == null) currentApp.StatesLived = new List<AppStateJoin>();
+                    
                     foreach (int sid in civm.PreviousStates)
                         currentApp.StatesLived.Add(new AppStateJoin() { ApplicationID = currentApp.ApplicationID, StateID = sid });
                 }
+
                 if (civm.DOB != null && civm.DOB != DateTime.Now) currentApp.DOB = (DateTime)civm.DOB;
                 if (civm.Address != null) currentApp.Address = civm.Address;
                 if (civm.City != null) currentApp.City = civm.City;
@@ -587,14 +581,20 @@ namespace KidSports.Controllers
                 if (currentApp.NameOfChild != null) civm.ChildTeam = currentApp.NameOfChild;
                 if (currentApp.YearsExperience != -1) civm.YearsExperience = currentApp.YearsExperience;
 
-                if (civm.PreviousExperience == null & currentApp.PreviousExperience != null)
+                List<AppExpJoin> PreviousExp = appRepo.GetPastExperience(currentApp.ApplicationID);
+                if (civm.PreviousExperience == null) civm.PreviousExperience = new List<int>();
+                foreach (var exp in PreviousExp)
+                    civm.PreviousExperience.Add(exp.ExperienceID);
+
+                if (currentApp.PreviousExperience != null)
                 {
-                    civm.PreviousExperience = new List<int>();
-                    foreach (AppExpJoin ae in currentApp.PreviousExperience)
-                        civm.PreviousExperience.Add(ae.ExperienceID);
+                    foreach (AppExpJoin a in currentApp.PreviousExperience)
+                        civm.PreviousExperience.Add(a.ExperienceID);
                 }
                 else
+                {
                     civm.PreviousExperience = new List<int>();
+                }
                 #endregion
 
                 //Display the view.
@@ -628,13 +628,14 @@ namespace KidSports.Controllers
                 if (civm.newPickedSchoolID != -1) currentApp.AppSchool = schoolRepo.GetSchoolByID(civm.newPickedSchoolID);
                 if (civm.newPickedSportID != -1) currentApp.AppSport = sportRepo.GetSportsByID(civm.newPickedSportID);
 
+                appRepo.DeletePastExperiences(currentApp.ApplicationID);
                 if (civm.PreviousExperience != null)
                 {
                     if (currentApp.PreviousExperience == null) currentApp.PreviousExperience = new List<AppExpJoin>();
+
                     foreach (int exp in civm.PreviousExperience)
                         currentApp.PreviousExperience.Add(new AppExpJoin() { ApplicationID = currentApp.ApplicationID, ExperienceID = exp });
                 }
-
 
                 appRepo.Update(currentApp);
 
@@ -1287,7 +1288,5 @@ namespace KidSports.Controllers
                 return RedirectToAction("AccessDenied", "Account");
         }
         #endregion
-
-
     }
 }

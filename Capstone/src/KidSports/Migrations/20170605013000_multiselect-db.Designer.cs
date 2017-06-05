@@ -8,9 +8,10 @@ using KidSports.Repositories;
 namespace KidSports.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170605013000_multiselect-db")]
+    partial class multiselectdb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -45,7 +46,7 @@ namespace KidSports.Migrations
 
                     b.HasIndex("ApplicationID");
 
-                    b.ToTable("PastExperiences");
+                    b.ToTable("AppExpJoin");
                 });
 
             modelBuilder.Entity("KidSports.Models.Application", b =>

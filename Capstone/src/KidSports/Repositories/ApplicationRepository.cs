@@ -26,6 +26,36 @@ namespace KidSports.Repositories
             return context.Applications.Where(x => x.ApplicationID == id).SingleOrDefault();
         }
 
+        public List<AppStateJoin> GetStatesLivedIn(int id)
+        {
+            return context.StatesLived.Where(x => x.ApplicationID == id).ToList();
+        }
+
+        public void DeleteStatesLived(int id)
+        {
+            List<AppStateJoin> PastStates = context.StatesLived.Where(x => x.ApplicationID == id).ToList();
+            foreach (var ps in PastStates)
+            {
+                context.StatesLived.Remove(ps);
+                context.SaveChanges();
+            }
+        }
+
+        public List<AppExpJoin> GetPastExperience(int id)
+        {
+            return context.PastExperiences.Where(x => x.ApplicationID == id).ToList();
+        }
+
+        public void DeletePastExperiences(int id)
+        {
+            List<AppExpJoin> PastExperiences = context.PastExperiences.Where(x => x.ApplicationID == id).ToList();
+            foreach (var pe in PastExperiences)
+            {
+                context.PastExperiences.Remove(pe);
+                context.SaveChanges();
+            }
+        }
+
         public IQueryable<Application> GetFilteredApplications(ApplicationSearchModel searchModel)
         {
             var result = context.Applications.AsQueryable();

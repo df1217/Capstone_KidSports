@@ -5,7 +5,7 @@
 
 <h2>Application Status Information:</h2>
 
-<table class="table table-responsive">
+@*<table class="table table-responsive">
     <thead>
         <tr>
             <td class="bg-success col-xs-3" style="font-weight:bold;">Complete</td>
@@ -13,15 +13,14 @@
             <td class="bg-danger col-xs-3" style="font-weight:bold;">Incomplete Information</td>
         </tr>
     </thead>
-</table>
+</table>*@
 
+<form asp-action="Applications" asp-controller="Application" method="post">
     <div class="row" style="margin-bottom:10px;">
         <div class="col-md-3">
             <label name="Area" class="control-label">Area:</label>
             <select asp-for="Area"
-                    asp-items="@(new SelectList(Model.allAreas, "AreaID", "AreaName"))" class="selectpicker form-control" data-size="5" multiple="multiple">
-
-            </select>
+                    asp-items="@(new SelectList(Model.allAreas, "AreaID", "AreaName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
         </div>
 
         <div class="col-md-3">
@@ -42,6 +41,7 @@
                     asp-items="@(new SelectList(Model.allGrades, "GradeID", "GradeName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
         </div>
     </div>
+</form>
 
 <div class="row">
     <table class="table table-responsive table-striped">
@@ -83,12 +83,13 @@
     <button type="button" onclick="location = '/Admin/UpdateUser'" class="btn btn-primary btn-md-10">Enter Applicant Manually</button>
 </div>	
 
-<script>
+@*<script>
     $(document).ready(function () {
         $('select').change(function () {
-            $.post("Applications", function () {
+            var data = $('form').serialize();
 
-            });
+            //$('form').submit();
+            $.post("Applications", { asm: data });
          });
     });
-</script>
+</script>*@
