@@ -223,12 +223,6 @@ namespace KidSports.Controllers
         [Authorize(Roles = "SportsManager, Admin")]
         public IActionResult Applications([FromBody] ApplicationSearchModel asm)
         {
-            //if (asm == null)
-            //    asm = new ApplicationSearchModel();
-            //asm.filteredApps = new List<Application>();
-            //asm.filteredUsers = new List<User>();
-            //asm.filteredAppStatus = new List<ApplicationStatus>();
-
             List<Application> filteredApps = appRepo.GetFilteredApplications(asm).ToList();
             List<User> filteredUsers = new List<User>();
             List<ApplicationStatus> filteredAppStatus = new List<ApplicationStatus>();
@@ -872,6 +866,7 @@ namespace KidSports.Controllers
                         }
                     }
                 }
+                #pragma warning disable CS0168 // Variable is declared but never used
                 catch (Exception e)
                 {
                     //Add model state error? validation?
