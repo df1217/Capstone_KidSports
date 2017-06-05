@@ -1,21 +1,11 @@
 ﻿@{
     ViewBag.Title = "Update Applicaiton Link";
 }
-
-<div class="container-fluid">
-    <h1 class="text-center">Update Application Link</h1><br />
+    <h1 class="text-center">Update Application Links</h1><br />
 
     <form asp-controller="Admin" asp-action="UpdateAppLink" method="post" enctype="multipart/form-data">
         <div class="well">
             <div style="text-align:right">
-                <div class="row">
-                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
-                        <label for="Address">Address:</label>
-                    </div>
-                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-6">
-                        <input type="text" class="form-control input-sm" id="Address" />
-                    </div>
-                </div>
 
                 <div class="row">
                     <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
@@ -23,33 +13,6 @@
                     </div>
                     <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-6">
                         <input type="text" class="form-control input-sm" id="BevBlog" />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
-                        <label for="Email">Email:</label>
-                    </div>
-                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-6">
-                        <input type="text" class="form-control input-sm" id="Email" />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
-                        <label for="FaceBook">Face Book/Coach:</label>
-                    </div>
-                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-6">
-                        <input type="text" class="form-control input-sm" id="FaceBookCoach" />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
-                        <label for="FaceBook">Face Book/Kidsports:</label>
-                    </div>
-                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-6">
-                        <input type="text" class="form-control input-sm" id="FaceBookKidsports" />
                     </div>
                 </div>
 
@@ -64,7 +27,35 @@
 
                 <div class="row">
                     <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
-                        <label for="NFHS">NFHS:</label>
+                        <label for="Twitter">Twitter:</label>
+                    </div>
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-6">
+                        <input type="text" class="form-control input-sm" id="Twitter" />
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
+                        <label for="FaceBookCoach">Face Book/Coach:</label>
+                    </div>
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-6">
+                        <input type="text" class="form-control input-sm" id="FaceBookCoach" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
+                        <label for="FaceBookKS">Face Book/Kidsports:</label>
+                    </div>
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-6">
+                        <input type="text" class="form-control input-sm" id="FaceBookKidsports" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
+                        <label for="CoachPledge">Coach's Pledge:</label>
                     </div>
                     <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-6">
                         <input type="text" class="form-control input-sm" id="NFHS" />
@@ -73,10 +64,37 @@
 
                 <div class="row">
                     <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
-                        <label for="PCA">PCA:</label>
+                        <label for="ConcussionCourse">Concussion Course:</label>
                     </div>
                     <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-6">
-                        <input type="text" class="form-control input-sm" id="PCA" />
+                        <input type="text" class="form-control input-sm" id="ConcussionCourse" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
+                        <label for="PositiveCoaching">Positive Coaching:</label>
+                    </div>
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-6">
+                        <input type="text" class="form-control input-sm" id="PositiveCoaching" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
+                        <label for="Voucher">Voucher:</label>
+                    </div>
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-6">
+                        <input type="text" class="form-control input-sm" id="Voucher" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
+                        <label for="Email">Email:</label>
+                    </div>
+                    <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-6">
+                        <input type="text" class="form-control input-sm" id="Email" />
                     </div>
                 </div>
 
@@ -91,19 +109,19 @@
 
                 <div class="row">
                     <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
-                        <label for="Twitter">Twitter:</label>
+                        <label for="Fax">Fax:</label>
                     </div>
                     <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-6">
-                        <input type="text" class="form-control input-sm" id="Twitter" />
+                        <input type="text" class="form-control input-sm" id="Phone" />
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
-                        <label for="Voucher">Voucher:</label>
+                        <label for="Address">Address:</label>
                     </div>
                     <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-6">
-                        <input type="text" class="form-control input-sm" id="Voucher" />
+                        <input type="text" class="form-control input-sm" id="Address" />
                     </div>
                 </div>
             </div>
@@ -118,4 +136,4 @@
             <button type="button" class="btn btn-primary col-xs-12 pull-right">save</button>
         </div>
     </div>
-</div>
+@*</div>*@

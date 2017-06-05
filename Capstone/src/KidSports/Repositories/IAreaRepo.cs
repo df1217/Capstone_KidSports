@@ -10,5 +10,7 @@ namespace KidSports.Repositories
     {
         List<Area> GetAllAreas();
         Area GetAreaByID(int id);
+        Area AddArea(string name);
+        void DeleteAreaByID(int ID);
     }
 }

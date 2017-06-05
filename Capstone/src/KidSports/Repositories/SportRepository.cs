@@ -29,5 +29,19 @@ namespace KidSports.Repositories
         {
             return context.Sports.Where(x => x.SportName == name).SingleOrDefault();
         }
+
+        public void DeleteSportByID(int id)
+        {
+            var Sport = context.Sports.SingleOrDefault(s => s.SportID == id);
+            context.Sports.Remove(Sport);
+        }
+
+        public Sport AddSport(string name)
+        {
+            Sport s = new Sport();
+            s.SportName = name;
+            context.Sports.Add(s);
+            return s;
+        }
     }
 }

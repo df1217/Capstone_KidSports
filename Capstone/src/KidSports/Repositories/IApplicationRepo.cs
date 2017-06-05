@@ -13,5 +13,9 @@ namespace KidSports.Repositories
         Application GetApplicationByID(int id);
         int Update(Application app);
         Application CreateApp(Application app);
+        List<AppStateJoin> GetStatesLivedIn(int id);
+        List<AppExpJoin> GetPastExperience(int id);
+        void DeletePastExperiences(int id);
+        void DeleteStatesLived(int id);
     }
 }

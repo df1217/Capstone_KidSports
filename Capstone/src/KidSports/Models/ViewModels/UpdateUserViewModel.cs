@@ -5,14 +5,15 @@ using System.Threading.Tasks;
 
 namespace KidSports.Models.ViewModels
 {
-    public class UpdateProfile
+    public class UpdateUserViewModel
     {
         public string FirstName { get; set; }
-        public string MiddleName { get; set; }
         public string LastName { get; set; }
-
-        public Area AreaName { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
+        public string Role { get; set; }
+
+        public string Area { get; set; }
+        public List<User> allUsers { get; set; }
+
     }
 }

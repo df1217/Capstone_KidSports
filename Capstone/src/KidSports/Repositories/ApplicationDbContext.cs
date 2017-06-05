@@ -17,7 +17,9 @@ namespace KidSports.Repositories
         public DbSet<ApplicationStatus> ApplicationStatus{ get; set; }
         public DbSet<PreviousGradesCoached> PreviousGradesCoached { get; set; }
         public DbSet<Experience> Experiences { get; set; }
-
+        public DbSet<UpdateApplink> Applinks { get; set; }
+        public DbSet<AppStateJoin> StatesLived { get; set; }
+        public DbSet<AppExpJoin> PastExperiences { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

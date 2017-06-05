@@ -8,8 +8,8 @@ using KidSports.Repositories;
 namespace KidSports.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170529222140_sortState")]
-    partial class sortState
+    [Migration("20170605041223_azure")]
+    partial class azure
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,7 +46,7 @@ namespace KidSports.Migrations
 
                     b.HasIndex("ApplicationID");
 
-                    b.ToTable("AppExpJoin");
+                    b.ToTable("PastExperiences");
                 });
 
             modelBuilder.Entity("KidSports.Models.Application", b =>
@@ -154,17 +154,47 @@ namespace KidSports.Migrations
 
                     b.Property<int>("ApplicationID");
 
-                    b.Property<DateTime?>("BcApprovalDate");
+                    b.Property<DateTime?>("BadgeApprovalDate");
 
-                    b.Property<DateTime?>("BcStartDate");
+                    b.Property<DateTime?>("BadgeDenialDate");
 
-                    b.Property<DateTime?>("BcSubmissionDate");
+                    b.Property<DateTime?>("BadgeSubmissionDate");
 
-                    b.Property<DateTime?>("PrefApprovalDate");
+                    b.Property<DateTime?>("CoachInfoApprovalDate");
 
-                    b.Property<DateTime?>("PrefDenialDate");
+                    b.Property<DateTime?>("CoachInfoDenialDate");
 
-                    b.Property<DateTime?>("PrefSubmissionDate");
+                    b.Property<DateTime?>("CoachInfoSubmissionDate");
+
+                    b.Property<DateTime?>("CoachInterestApprovalDate");
+
+                    b.Property<DateTime?>("CoachInterestDenialDate");
+
+                    b.Property<DateTime?>("CoachInterestSubmissionDate");
+
+                    b.Property<DateTime?>("IdApprovalDate");
+
+                    b.Property<DateTime?>("IdDenialDate");
+
+                    b.Property<DateTime?>("IdSubmissionDate");
+
+                    b.Property<DateTime?>("NFHSApprovalDate");
+
+                    b.Property<DateTime?>("NFHSDenialDate");
+
+                    b.Property<DateTime?>("NFHSSubmissionDate");
+
+                    b.Property<DateTime?>("PcaApprovalDate");
+
+                    b.Property<DateTime?>("PcaDenialDate");
+
+                    b.Property<DateTime?>("PcaSubmissionDate");
+
+                    b.Property<DateTime?>("PledgeApprovalDate");
+
+                    b.Property<DateTime?>("PledgeDenialDate");
+
+                    b.Property<DateTime?>("PledgeSubmissionDate");
 
                     b.HasKey("ApplicationStatusID");
 
@@ -184,7 +214,7 @@ namespace KidSports.Migrations
 
                     b.HasIndex("ApplicationID");
 
-                    b.ToTable("AppStateJoin");
+                    b.ToTable("StatesLived");
                 });
 
             modelBuilder.Entity("KidSports.Models.Area", b =>
@@ -279,6 +309,42 @@ namespace KidSports.Migrations
                     b.HasKey("StateID");
 
                     b.ToTable("States");
+                });
+
+            modelBuilder.Entity("KidSports.Models.UpdateApplink", b =>
+                {
+                    b.Property<int>("UpdateApplinkID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address");
+
+                    b.Property<string>("BevBlog");
+
+                    b.Property<string>("CoachPledge");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FaceBookCoach");
+
+                    b.Property<string>("FaceBookKidsports");
+
+                    b.Property<string>("Fax");
+
+                    b.Property<string>("Instragram");
+
+                    b.Property<string>("NFHS");
+
+                    b.Property<string>("PCA");
+
+                    b.Property<string>("Phone");
+
+                    b.Property<string>("Twitter");
+
+                    b.Property<string>("Voucher");
+
+                    b.HasKey("UpdateApplinkID");
+
+                    b.ToTable("Applinks");
                 });
 
             modelBuilder.Entity("KidSports.Models.User", b =>

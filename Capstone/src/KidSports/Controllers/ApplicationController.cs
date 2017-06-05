@@ -58,20 +58,52 @@ namespace KidSports.Controllers
                 user = userRepo.GetDetailedUser(user);
                 ivm.UserFirstName = user.FirstName;
 
+                ivm.ApplicationID = 0;
+                ivm.ApplicationStatus = new ApplicationStatus();
+                ivm.Application = new Application();
+                ivm.Application.IsHeadCoach = false;
+
                 if (user.currentYearApp != null)
                 {
+                    ApplicationStatus appStatus = appStatusRepo.GetAppStatusByID(user.currentYearApp.ApplicationID);
+                    DateTime renewalDate = new DateTime(DateTime.Now.Year, 6, 1).AddDays(-90);
+                    if (appStatus.AppStartDate < renewalDate)
+                    {
+                        if (user.UserApplications == null)
+                            user.UserApplications = new List<Application>();
+
+                        user.UserApplications.Add(user.currentYearApp);
+
+                        Application renewalApp = new Application();
+                        renewalApp = user.currentYearApp;
+                        renewalApp.AppGender = null;
+                        renewalApp.AppArea = null;
+                        renewalApp.AppGrade = null;
+                        renewalApp.AppSchool = null;
+                        renewalApp.AppSport = null;
+                        renewalApp.NfhsPath = null;
+                        renewalApp.PledgeInitials = null;
+                        renewalApp.PledgeName = null;
+                        renewalApp.pledgeIsInAgreement = false;
+                        renewalApp.PledgeSubmissionDate = DateTime.Now;
+                        renewalApp.YearsLivedInOregon += 1;
+
+                        user.currentYearApp = renewalApp;
+                        userRepo.Update(user);
+
+                    } else
+                    {
+                        ivm.ApplicationStatus = appStatus;
+                    }
+
                     int id = user.currentYearApp.ApplicationID;
                     ivm.ApplicationID = id;
                     ivm.Application = user.currentYearApp;
-                    ivm.ApplicationStatus = appStatusRepo.GetAppStatusByID(id);
+                    
                     return View(ivm);
                 }
             }
 
-            ivm.ApplicationID = 0;
-            ivm.ApplicationStatus = new ApplicationStatus();
-            ivm.Application = new Application();
-            ivm.Application.IsHeadCoach = false;
             return View(ivm);
         }
 
@@ -138,7 +170,7 @@ namespace KidSports.Controllers
 
         #region SportsManager Views
         [HttpGet]
-        [Authorize(Roles = "SportsManager")]
+        [Authorize(Roles = "SportsManager, Admin")]
         public IActionResult Applications()
         {
             //Get the sports manager and put their area in the search model by default.
@@ -184,36 +216,13 @@ namespace KidSports.Controllers
             asm.allSports = sportRepo.GetAllSports();
             asm.allGrades = gradeRepo.GetAllGrades();
 
-            asm.Area = new List<int>();
-            asm.School = new List<int>();
-            asm.Sport = new List<int>();
-            asm.Grade = new List<int>();
-
-            //foreach (Area i in asmArea)
-            //    asm.Area.Add(i.AreaID);
-
-            //foreach (School i in asmSchool)
-            //    asm.School.Add(i.SchoolID);
-
-            //foreach (Sport i in asmSport)
-            //    asm.Sport.Add(i.SportID);
-
-            //foreach (Grade i in asmGrade)
-            //    asm.Grade.Add(i.GradeID);
-
             return View(asm);
         }
 
         [HttpPost]
-        [Authorize(Roles = "SportsManager")]
-        public IActionResult Applications(ApplicationSearchModel asm = null)
+        [Authorize(Roles = "SportsManager, Admin")]
+        public IActionResult Applications([FromBody] ApplicationSearchModel asm)
         {
-            if (asm == null)
-                asm = new ApplicationSearchModel();
-            asm.filteredApps = new List<Application>();
-            asm.filteredUsers = new List<User>();
-            asm.filteredAppStatus = new List<ApplicationStatus>();
-
             List<Application> filteredApps = appRepo.GetFilteredApplications(asm).ToList();
             List<User> filteredUsers = new List<User>();
             List<ApplicationStatus> filteredAppStatus = new List<ApplicationStatus>();
@@ -246,17 +255,58 @@ namespace KidSports.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "SportsManager")]
-        public IActionResult ApplicantDetails(string ApplicantID)
+        [Authorize(Roles = "SportsManager, Admin")]
+        public IActionResult ApplicantDetails(string ApplicantID, int? displayAppID)
         {
-            //Do security stuff
+            ApplicantDetailsViewModel advm = new ApplicantDetailsViewModel();
             User appuser = userRepo.GetUserByIdentityID(ApplicantID);
             userRepo.GetDetailedUser(appuser);
             Application currentApp = appuser.currentYearApp;
-            ApplicationStatus appstatus = appStatusRepo.GetAppStatusByID(currentApp.ApplicationID);
-            ApplicantDetailsViewModel advm = new ApplicantDetailsViewModel();
+
+            if (displayAppID == null)
+                advm.displayApp = currentApp;
+            else
+                advm.displayApp = appRepo.GetApplicationByID((int)displayAppID);
+
+            ApplicationStatus appstatus = appStatusRepo.GetAppStatusByID(advm.displayApp.ApplicationID);
             advm.applicant = appuser;
-            advm.appstatus = appstatus;
+            advm.ApplicationStatus = appstatus;
+
+            advm.allUserApps = new List<ApplicationStatus>();
+
+            if (appuser.UserApplications == null)
+            {
+                appuser.UserApplications = new List<Application>();
+                userRepo.Update(appuser);
+            }
+
+            foreach(Application app in appuser.UserApplications)
+            {
+                advm.allUserApps.Add(appStatusRepo.GetAppStatusByID(app.ApplicationID));
+            }
+            advm.allUserApps.Add(appStatusRepo.GetAppStatusByID(appuser.currentYearApp.ApplicationID));
+
+            return View(advm);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "SportsManager, Admin")]
+        public IActionResult ApplicantDetails(ApplicantDetailsViewModel advm)
+        {
+            if (advm.PageName == "Information")
+                return RedirectToAction("CoachInfo", new { AppID = advm.appID });
+            if (advm.PageName == "Interests")
+                return RedirectToAction("CoachInterests", new { AppID = advm.appID });
+            if (advm.PageName == "Pledge")
+                return RedirectToAction("CoachPledge", new { AppID = advm.appID });
+            if (advm.PageName == "NFHS Course")
+                return RedirectToAction("ConcussionCourse", new { AppID = advm.appID });
+            if (advm.PageName == "PCA Course")
+                return RedirectToAction("PcaCourse", new { AppID = advm.appID });
+            if (advm.PageName == "ID")
+                return RedirectToAction("ID", new { AppID = advm.appID });
+            if (advm.PageName == "Badge")
+                return RedirectToAction("Badge", new { AppID = advm.appID });
             return View(advm);
         }
         #endregion
@@ -339,6 +389,11 @@ namespace KidSports.Controllers
                 if (currentApp.ZipCode != null) civm.Zip = currentApp.ZipCode;
                 if (currentApp.LivedOutsideUSA != false) civm.HasLivedOutsideUSA = currentApp.LivedOutsideUSA;
 
+                List<AppStateJoin> PreviousStates = appRepo.GetStatesLivedIn(currentApp.ApplicationID);
+                if (civm.PreviousStates == null) civm.PreviousStates = new List<int>();
+                foreach (var state in PreviousStates)
+                    civm.PreviousStates.Add(state.StateID);
+
                 if (currentApp.City != null) civm.City = currentApp.City;
                 if (currentApp.State != null) civm.State = currentApp.State;
                 if (currentApp.Address != null) civm.Address = currentApp.Address;
@@ -347,6 +402,8 @@ namespace KidSports.Controllers
                 civm.YearsLivingInOregon = currentApp.YearsLivedInOregon;
 
                 civm.AllStates = stateRepo.GetAllStates();
+
+
                 if (currentApp.StatesLived != null)
                 {
                     foreach (AppStateJoin a in currentApp.StatesLived)
@@ -393,12 +450,16 @@ namespace KidSports.Controllers
                 currentApp.LivedOutsideUSA = civm.HasLivedOutsideUSA;
 
                 if (civm.newPickedStateID != -1) currentApp.State = stateRepo.GetStateByID(civm.newPickedStateID);
+
+                appRepo.DeleteStatesLived(currentApp.ApplicationID);
                 if (civm.PreviousStates != null && civm.PreviousStates.Count != 0)
                 {
                     if (currentApp.StatesLived == null) currentApp.StatesLived = new List<AppStateJoin>();
+                    
                     foreach (int sid in civm.PreviousStates)
                         currentApp.StatesLived.Add(new AppStateJoin() { ApplicationID = currentApp.ApplicationID, StateID = sid });
                 }
+
                 if (civm.DOB != null && civm.DOB != DateTime.Now) currentApp.DOB = (DateTime)civm.DOB;
                 if (civm.Address != null) currentApp.Address = civm.Address;
                 if (civm.City != null) currentApp.City = civm.City;
@@ -452,6 +513,15 @@ namespace KidSports.Controllers
 
                 if (civm.Direction == "deny")
                 {
+                    if (appStatus.CoachInfoDenialDate == null || appStatus.CoachInfoDenialDate == new DateTime())
+                    {
+                        appStatus.CoachInfoDenialDate = DateTime.Now;
+                        if (appStatus.CoachInfoApprovalDate != null && appStatus.CoachInfoApprovalDate != new DateTime())
+                            appStatus.CoachInfoApprovalDate = null;
+
+                        appStatusRepo.Update(appStatus);
+                    }
+
                     User appuser = userRepo.GetUserByID(civm.ApplicationID);
                     return RedirectToAction("ApplicantDetails", new { ApplicantID = appuser.Id });
                 }
@@ -505,14 +575,20 @@ namespace KidSports.Controllers
                 if (currentApp.NameOfChild != null) civm.ChildTeam = currentApp.NameOfChild;
                 if (currentApp.YearsExperience != -1) civm.YearsExperience = currentApp.YearsExperience;
 
-                if (civm.PreviousExperience == null & currentApp.PreviousExperience != null)
+                List<AppExpJoin> PreviousExp = appRepo.GetPastExperience(currentApp.ApplicationID);
+                if (civm.PreviousExperience == null) civm.PreviousExperience = new List<int>();
+                foreach (var exp in PreviousExp)
+                    civm.PreviousExperience.Add(exp.ExperienceID);
+
+                if (currentApp.PreviousExperience != null)
                 {
-                    civm.PreviousExperience = new List<int>();
-                    foreach (AppExpJoin ae in currentApp.PreviousExperience)
-                        civm.PreviousExperience.Add(ae.ExperienceID);
+                    foreach (AppExpJoin a in currentApp.PreviousExperience)
+                        civm.PreviousExperience.Add(a.ExperienceID);
                 }
                 else
+                {
                     civm.PreviousExperience = new List<int>();
+                }
                 #endregion
 
                 //Display the view.
@@ -546,13 +622,14 @@ namespace KidSports.Controllers
                 if (civm.newPickedSchoolID != -1) currentApp.AppSchool = schoolRepo.GetSchoolByID(civm.newPickedSchoolID);
                 if (civm.newPickedSportID != -1) currentApp.AppSport = sportRepo.GetSportsByID(civm.newPickedSportID);
 
+                appRepo.DeletePastExperiences(currentApp.ApplicationID);
                 if (civm.PreviousExperience != null)
                 {
                     if (currentApp.PreviousExperience == null) currentApp.PreviousExperience = new List<AppExpJoin>();
+
                     foreach (int exp in civm.PreviousExperience)
                         currentApp.PreviousExperience.Add(new AppExpJoin() { ApplicationID = currentApp.ApplicationID, ExperienceID = exp });
                 }
-
 
                 appRepo.Update(currentApp);
 
@@ -589,6 +666,15 @@ namespace KidSports.Controllers
 
                 if (civm.Direction == "deny")
                 {
+                    if (appStatus.CoachInterestDenialDate == null || appStatus.CoachInterestDenialDate == new DateTime())
+                    {
+                        appStatus.CoachInterestDenialDate = DateTime.Now;
+                        if (appStatus.CoachInterestApprovalDate != null && appStatus.CoachInterestApprovalDate != new DateTime())
+                            appStatus.CoachInterestApprovalDate = null;
+
+                        appStatusRepo.Update(appStatus);
+                    }
+
                     User appuser = userRepo.GetUserByID(civm.ApplicationID);
                     return RedirectToAction("ApplicantDetails", new { ApplicantID = appuser.Id });
                 }
@@ -689,6 +775,15 @@ namespace KidSports.Controllers
 
                 if (cpvm.Direction == "deny")
                 {
+                    if (appStatus.PledgeDenialDate == null || appStatus.PledgeDenialDate == new DateTime())
+                    {
+                        appStatus. PledgeDenialDate = DateTime.Now;
+                        if (appStatus.PledgeApprovalDate != null && appStatus.PledgeApprovalDate != new DateTime())
+                            appStatus.PledgeApprovalDate = null;
+
+                        appStatusRepo.Update(appStatus);
+                    }
+
                     User appuser = userRepo.GetUserByID(cpvm.ApplicationID);
                     return RedirectToAction("ApplicantDetails", new { ApplicantID = appuser.Id });
                 }
@@ -771,6 +866,7 @@ namespace KidSports.Controllers
                         }
                     }
                 }
+                #pragma warning disable CS0168 // Variable is declared but never used
                 catch (Exception e)
                 {
                     //Add model state error? validation?
@@ -807,6 +903,15 @@ namespace KidSports.Controllers
 
                 if (ccvm.Direction == "deny")
                 {
+                    if (appStatus.NFHSDenialDate == null || appStatus.NFHSDenialDate == new DateTime())
+                    {
+                        appStatus.NFHSDenialDate = DateTime.Now;
+                        if (appStatus.NFHSApprovalDate != null && appStatus.NFHSApprovalDate != new DateTime())
+                            appStatus.NFHSApprovalDate = null;
+
+                        appStatusRepo.Update(appStatus);
+                    }
+
                     User appuser = userRepo.GetUserByID(ccvm.ApplicationID);
                     return RedirectToAction("ApplicantDetails", new { ApplicantID = appuser.Id });
                 }
@@ -916,6 +1021,15 @@ namespace KidSports.Controllers
 
                 if (pcvm.Direction == "deny")
                 {
+                    if (appStatus.PcaDenialDate == null || appStatus.PcaDenialDate == new DateTime())
+                    {
+                        appStatus.PcaDenialDate = DateTime.Now;
+                        if (appStatus.PcaApprovalDate != null && appStatus.PcaApprovalDate != new DateTime())
+                            appStatus.PcaApprovalDate = null;
+
+                        appStatusRepo.Update(appStatus);
+                    }
+
                     User appuser = userRepo.GetUserByID(pcvm.ApplicationID);
                     return RedirectToAction("ApplicantDetails", new { ApplicantID = appuser.Id });
                 }
@@ -1019,6 +1133,15 @@ namespace KidSports.Controllers
 
                 if (idvm.Direction == "deny")
                 {
+                    if (appStatus.IdDenialDate == null || appStatus.IdDenialDate == new DateTime())
+                    {
+                        appStatus.IdDenialDate = DateTime.Now;
+                        if (appStatus.IdApprovalDate != null && appStatus.IdApprovalDate != new DateTime())
+                            appStatus.IdApprovalDate = null;
+
+                        appStatusRepo.Update(appStatus);
+                    }
+
                     User appuser = userRepo.GetUserByID(idvm.ApplicationID);
                     return RedirectToAction("ApplicantDetails", new { ApplicantID = appuser.Id });
                 }
@@ -1128,6 +1251,15 @@ namespace KidSports.Controllers
 
                 if (bvm.Direction == "deny")
                 {
+                    if (appStatus.BadgeDenialDate == null || appStatus.BadgeDenialDate == new DateTime())
+                    {
+                        appStatus.BadgeDenialDate = DateTime.Now;
+                        if (appStatus.BadgeApprovalDate != null && appStatus.BadgeApprovalDate != new DateTime())
+                            appStatus.BadgeApprovalDate = null;
+
+                        appStatusRepo.Update(appStatus);
+                    }
+
                     User appuser = userRepo.GetUserByID(bvm.ApplicationID);
                     return RedirectToAction("ApplicantDetails", new { ApplicantID = appuser.Id });
                 }
@@ -1151,7 +1283,5 @@ namespace KidSports.Controllers
                 return RedirectToAction("AccessDenied", "Account");
         }
         #endregion
-
-
     }
 }

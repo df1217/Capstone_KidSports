@@ -45,7 +45,7 @@ namespace KidSports.Migrations
 
                     b.HasIndex("ApplicationID");
 
-                    b.ToTable("AppExpJoin");
+                    b.ToTable("PastExperiences");
                 });
 
             modelBuilder.Entity("KidSports.Models.Application", b =>
@@ -213,7 +213,7 @@ namespace KidSports.Migrations
 
                     b.HasIndex("ApplicationID");
 
-                    b.ToTable("AppStateJoin");
+                    b.ToTable("StatesLived");
                 });
 
             modelBuilder.Entity("KidSports.Models.Area", b =>
@@ -308,6 +308,42 @@ namespace KidSports.Migrations
                     b.HasKey("StateID");
 
                     b.ToTable("States");
+                });
+
+            modelBuilder.Entity("KidSports.Models.UpdateApplink", b =>
+                {
+                    b.Property<int>("UpdateApplinkID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address");
+
+                    b.Property<string>("BevBlog");
+
+                    b.Property<string>("CoachPledge");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FaceBookCoach");
+
+                    b.Property<string>("FaceBookKidsports");
+
+                    b.Property<string>("Fax");
+
+                    b.Property<string>("Instragram");
+
+                    b.Property<string>("NFHS");
+
+                    b.Property<string>("PCA");
+
+                    b.Property<string>("Phone");
+
+                    b.Property<string>("Twitter");
+
+                    b.Property<string>("Voucher");
+
+                    b.HasKey("UpdateApplinkID");
+
+                    b.ToTable("Applinks");
                 });
 
             modelBuilder.Entity("KidSports.Models.User", b =>

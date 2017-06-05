@@ -116,7 +116,7 @@
                    
                     <label name="PreviousStates" class="control-label">Previous states lived in:<span style="color:red;">*</span></label>
 
-                    <select asp-for="PreviousStates"
+                    <select id="PreviousStates" asp-for="PreviousStates"
                             asp-items="@(new SelectList(Model.AllStates, "StateID", "StateName"))" class="selectpicker form-control" data-size="5" multiple="multiple">
                     </select>
 
@@ -178,5 +178,4 @@
                 <button type="submit" name="Direction" value="next" class="btn btn-primary col-xs-12 pull-right">Next <i class="fa fa-arrow-right" aria-hidden='true'></i>  </button>
             </div>
         }
-
-        </form>
+</form>

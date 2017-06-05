@@ -11,5 +11,7 @@ namespace KidSports.Repositories
         List<Sport> GetAllSports();
         Sport GetSportsByName(string name);
         Sport GetSportsByID(int id);
+        Sport AddSport(string name);
+        void DeleteSportByID(int ID);
     }
 }
