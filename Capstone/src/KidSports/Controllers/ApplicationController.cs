@@ -279,17 +279,36 @@ namespace KidSports.Controllers
 
         [HttpGet]
         [Authorize(Roles = "SportsManager, Admin")]
-        public IActionResult ApplicantDetails(string ApplicantID)
+        public IActionResult ApplicantDetails(string ApplicantID, int? displayAppID)
         {
-            //Do security stuff
+            ApplicantDetailsViewModel advm = new ApplicantDetailsViewModel();
             User appuser = userRepo.GetUserByIdentityID(ApplicantID);
             userRepo.GetDetailedUser(appuser);
             Application currentApp = appuser.currentYearApp;
-            ApplicationStatus appstatus = appStatusRepo.GetAppStatusByID(currentApp.ApplicationID);
-            ApplicantDetailsViewModel advm = new ApplicantDetailsViewModel();
+
+            if (displayAppID == null)
+                advm.displayApp = currentApp;
+            else
+                advm.displayApp = appRepo.GetApplicationByID((int)displayAppID);
+
+            ApplicationStatus appstatus = appStatusRepo.GetAppStatusByID(advm.displayApp.ApplicationID);
             advm.applicant = appuser;
             advm.ApplicationStatus = appstatus;
-            
+
+            advm.allUserApps = new List<ApplicationStatus>();
+
+            if (appuser.UserApplications == null)
+            {
+                appuser.UserApplications = new List<Application>();
+                userRepo.Update(appuser);
+            }
+
+            foreach(Application app in appuser.UserApplications)
+            {
+                advm.allUserApps.Add(appStatusRepo.GetAppStatusByID(app.ApplicationID));
+            }
+            advm.allUserApps.Add(appStatusRepo.GetAppStatusByID(appuser.currentYearApp.ApplicationID));
+
             return View(advm);
         }
 

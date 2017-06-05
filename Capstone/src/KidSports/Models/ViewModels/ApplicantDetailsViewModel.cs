@@ -11,6 +11,9 @@ namespace KidSports.Models.ViewModels
         public ApplicationStatus ApplicationStatus { get; set; }
         public int appID { get; set; }
         public string PageName { get; set; }
+        public Application displayApp { get; set; }
+        public List<ApplicationStatus> allUserApps { get; set; }
+        public int applicantID { get; set; }
 
 
         public string getCoachInfoClass()
