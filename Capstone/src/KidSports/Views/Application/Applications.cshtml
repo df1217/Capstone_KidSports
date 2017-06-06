@@ -5,7 +5,7 @@
 
 <h2>Application Status Information:</h2>
 
-<table class="table table-responsive">
+@*<table class="table table-responsive">
     <thead>
         <tr>
             <td class="bg-success col-xs-3" style="font-weight:bold;">Complete</td>
@@ -13,33 +13,35 @@
             <td class="bg-danger col-xs-3" style="font-weight:bold;">Incomplete Information</td>
         </tr>
     </thead>
-</table>
+</table>*@
 
+<form asp-action="Applications" asp-controller="Application" method="post">
     <div class="row" style="margin-bottom:10px;">
         <div class="col-md-3">
-            <select class="multiselect-ui form-control" multiple="multiple" id="Area" asp-for="Area">
-                <option value="North Eugene">North Eugene</option>
-            </select>
+            <label name="Area" class="control-label">Area:</label>
+            <select asp-for="Area"
+                    asp-items="@(new SelectList(Model.allAreas, "AreaID", "AreaName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
         </div>
 
         <div class="col-md-3">
-            <select class="multiselect-ui form-control" multiple="multiple" id="School" asp-for="School">
-                <option asp-for="School" value="Willamette High School">Willamette High School</option>
-            </select>
+            <label name="School" class="control-label">School:</label>
+            <select asp-for="School"
+                    asp-items="@(new SelectList(Model.allSchools, "SchoolID", "SchoolName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
         </div>
 
         <div class="col-md-3">
-            <select class="multiselect-ui form-control" multiple="multiple" id="Sport" name="Sport">
-                <option value="Football">Football</option>
-            </select>
+            <label name="Sport" class="control-label">Sport:</label>
+            <select asp-for="Area"
+                    asp-items="@(new SelectList(Model.allSports, "SportID", "SportName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
         </div>
 
         <div class="col-md-3">
-            <select class="multiselect-ui form-control" multiple="multiple" id="Grade" name="Grade">
-                <option value="Kindergarten">Kindergarten</option>
-            </select>
+            <label name="Grade" class="control-label">Grade:</label>
+            <select asp-for="Area"
+                    asp-items="@(new SelectList(Model.allGrades, "GradeID", "GradeName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
         </div>
     </div>
+</form>
 
 <div class="row">
     <table class="table table-responsive table-striped">
@@ -81,14 +83,13 @@
     <button type="button" onclick="location = '/Admin/UpdateUser'" class="btn btn-primary btn-md-10">Enter Applicant Manually</button>
 </div>	
 
-<script>
+@*<script>
     $(document).ready(function () {
         $('select').change(function () {
-            $.post("Applications", function () {
+            var data = $('form').serialize();
 
-            });
+            //$('form').submit();
+            $.post("Applications", { asm: data });
          });
     });
-
-   
-</script>
+</script>*@

@@ -8,6 +8,7 @@
     <h1 class="text-center">Coach ID Badge</h1>
     <form asp-controller="Application" asp-action="Badge" method="post" enctype="multipart/form-data">
         <input type="hidden" asp-for="@Model.ApplicationID" value="@Model.ApplicationID" />
+        <input asp-for="BadgePath" type="hidden" />
         <div class="well">
             <div class="row">
                 <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-12">

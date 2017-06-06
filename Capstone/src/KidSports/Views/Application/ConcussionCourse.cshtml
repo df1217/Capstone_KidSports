@@ -10,7 +10,7 @@
         <input type="hidden" asp-for="@Model.ApplicationID" value="@Model.ApplicationID" />
         <div class="well">
 
-            <a href="https://nfhslearn.com/courses/61064/concussion-in-sports">Take the NFHS Concussion Course</a>
+            <a target="_blank" href="https://nfhslearn.com/courses/61064/concussion-in-sports">Take the NFHS Concussion Course</a>
            
                 <div class="row" style="margin: 20px 0px 20px 0px">
                     
@@ -18,6 +18,7 @@
                     <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
                         <label asp-for="ConcussionCourseSubmissionDate" class="control-label">Date of Completion:</label>
                         <input asp-for="ConcussionCourseSubmissionDate" type="date" @*asp-format="{0:MM/dd/yyyy}"*@ class="form-control" />
+                        <input asp-for="NfhsPath" type="hidden" />
                     </div>
 
                 </div>
@@ -31,7 +32,15 @@
 
                     </div>
                     <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
+                        @if (Model.NfhsPath != null && Model.NfhsPath.Contains(".pdf"))
+                        {
+                            <embed src="@Model.NfhsPath" data-type="pdf" class="img-thumbnail"/>
+
+                        }
+                        else
+                        {
                         <img src="@Model.NfhsPath" class="img-thumbnail"/>
+                        }
                     </div>
 
                 </div>

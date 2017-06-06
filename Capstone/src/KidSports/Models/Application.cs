@@ -11,9 +11,6 @@ namespace KidSports.Models
         public List<AppStateJoin> StatesLived { get; set; }
         public bool LivedOutsideUSA { get; set; }
         
-       
-
-
         public string BackgroundRequest { get; set; }
         // string xml 
         public string BackgroundResult { get; set; }

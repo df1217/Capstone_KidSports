@@ -1,0 +1,157 @@
+﻿.bowl {
+  position: relative;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  box-shadow: inset 0 -5px 0 0 rgba(0, 0, 0, 0.5), inset 0 -20px 5px 0 rgba(0, 0, 0, 0.2), inset -15px 0 5px 0 rgba(0, 0, 0, 0.1), inset 15px 0 5px 0 rgba(0, 0, 0, 0.1);
+  background: -moz-radial-gradient(center, ellipse cover, transparent 0%, transparent 76%, rgba(0, 0, 0, 0.65) 100%);
+  background: -webkit-radial-gradient(center, ellipse cover, transparent 0%, transparent 76%, rgba(0, 0, 0, 0.65) 100%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 76%, rgba(0, 0, 0, 0.65) 100%);
+  margin: 20px;
+}
+.bowl:before {
+  overflow: hidden;
+  border-radius: 50%;
+  content: "";
+  box-shadow: inset 0 -5px 0 0 rgba(0, 0, 0, 0.5), inset 0 -20px 5px 0 rgba(0, 0, 0, 0.2), inset -15px 0 5px 0 rgba(0, 0, 0, 0.1), inset 15px 0 5px 0 rgba(0, 0, 0, 0.1);
+  background: -moz-radial-gradient(center, ellipse cover, transparent 0%, transparent 60%, rgba(0, 0, 0, 0.65) 81%, black 100%);
+  background: -webkit-radial-gradient(center, ellipse cover, transparent 0%, transparent 60%, rgba(0, 0, 0, 0.65) 81%, black 100%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.65) 81%, #000000 100%);
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  z-index: 2;
+}
+.bowl:after {
+  content: "";
+  width: 60px;
+  border-radius: 50%;
+  height: 5px;
+  background: black;
+  box-shadow: inset 0 0 10px 0 #000;
+  position: absolute;
+  left: 50%;
+  margin-left: -30px;
+  bottom: 0;
+  z-index: 2;
+}
+.bowl .inner {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: -moz-radial-gradient(center, ellipse cover, transparent 0%, transparent 76%, rgba(0, 0, 0, 0.65) 100%);
+  background: -webkit-radial-gradient(center, ellipse cover, transparent 0%, transparent 76%, rgba(0, 0, 0, 0.65) 100%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 76%, rgba(0, 0, 0, 0.65) 100%);
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+.bowl .inner:before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  position: absolute;
+  right: 40%;
+  top: 60%;
+  z-index: 2;
+}
+.bowl .inner:after {
+  content: "";
+  width: 20px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  position: absolute;
+  right: 30%;
+  top: 15%;
+  transform: rotate(-20deg);
+  z-index: 2;
+}
+.bowl .fill {
+  -webkit-animation-name: fillAction;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: cubic-bezier(0, 0.6, 0.2, 1);
+  -webkit-animation-duration: 2s;
+  -webkit-animation-fill-mode: forwards;
+}
+.bowl .waveShape-Approved {
+  -webkit-animation-name: waveAction;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-duration: 0.5s;
+  width: 200px;
+  height: 100px;
+  fill: #007E33;
+}
+
+.bowl .waveShape-Complete {
+  -webkit-animation-name: waveAction;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-duration: 0.5s;
+  width: 200px;
+  height: 100px;
+  fill: #ffbb33;
+}
+
+.bowl .waveShape-Incomplete {
+  -webkit-animation-name: waveAction;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-duration: 0.5s;
+  width: 200px;
+  height: 100px;
+  fill: #CC0000;
+}
+
+@-webkit-keyframes fillAction {
+  0% {
+    -webkit-transform: translate(0, 150px);
+  }
+  100% {
+    -webkit-transform: translate(0, 10px);
+  }
+}
+@-webkit-keyframes waveAction {
+  0% {
+    -webkit-transform: translate(-150px, 0);
+  }
+  100% {
+    -webkit-transform: translate(0, 0);
+  }
+}
+/* For aesthetics only ------------------------------------------*/
+body {
+  margin: 0;
+  font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+}
+
+h6 {
+  font: 200 1.2em "Segoe UI Light", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+  font-weight: 200;
+  color: #fff;
+  background: #039be4;
+  padding: 20px;
+  margin: 0;
+  border-bottom: 10px solid #ccc;
+}
+h6 strong {
+  font-family: "Segoe UI Black";
+  font-weight: normal;
+}
+
+.explanation {
+  padding: 20px 40px;
+  float: right;
+  background: #e64a19;
+  -webkit-box-shadow: inset 0 30px 3px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+  border-bottom: 10px solid #ccc;
+  max-width: 300px;
+}
+.explanation p {
+  color: #fff;
+  font-size: 0.8rem;
+}

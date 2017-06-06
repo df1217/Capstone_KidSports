@@ -26,25 +26,52 @@ namespace KidSports.Repositories
             return context.Applications.Where(x => x.ApplicationID == id).SingleOrDefault();
         }
 
+        public List<AppStateJoin> GetStatesLivedIn(int id)
+        {
+            return context.StatesLived.Where(x => x.ApplicationID == id).ToList();
+        }
+
+        public void DeleteStatesLived(int id)
+        {
+            List<AppStateJoin> PastStates = context.StatesLived.Where(x => x.ApplicationID == id).ToList();
+            foreach (var ps in PastStates)
+            {
+                context.StatesLived.Remove(ps);
+                context.SaveChanges();
+            }
+        }
+
+        public List<AppExpJoin> GetPastExperience(int id)
+        {
+            return context.PastExperiences.Where(x => x.ApplicationID == id).ToList();
+        }
+
+        public void DeletePastExperiences(int id)
+        {
+            List<AppExpJoin> PastExperiences = context.PastExperiences.Where(x => x.ApplicationID == id).ToList();
+            foreach (var pe in PastExperiences)
+            {
+                context.PastExperiences.Remove(pe);
+                context.SaveChanges();
+            }
+        }
+
         public IQueryable<Application> GetFilteredApplications(ApplicationSearchModel searchModel)
         {
             var result = context.Applications.AsQueryable();
             if (searchModel != null)
             {
-                if (!string.IsNullOrEmpty(searchModel.Area))
-                    result = result.Where(x => x.AppArea.AreaName == searchModel.Area);
+                if (searchModel.Area.Count > 0)
+                    result = result.Where(x => searchModel.Area.Exists(y => x.AppArea.AreaID == y));
 
-                if (!string.IsNullOrEmpty(searchModel.School))
-                    result = result.Where(x => x.AppSchool.SchoolName == searchModel.School);
+                if (searchModel.School.Count > 0)
+                    result = result.Where(x => searchModel.School.Exists(y => x.AppSchool.SchoolID == y));
 
-                if (!string.IsNullOrEmpty(searchModel.Sport))
-                    result = result.Where(x => x.AppSport.SportName == searchModel.Sport);
+                if (searchModel.Sport.Count > 0)
+                    result = result.Where(x => searchModel.Sport.Exists(y => x.AppSport.SportID == y));
 
-                if (!string.IsNullOrEmpty(searchModel.Gender))
-                    result = result.Where(x => x.AppGender == searchModel.Gender);
-
-                if (!string.IsNullOrEmpty(searchModel.Grade))
-                    result = result.Where(x => x.AppGrade == searchModel.Grade);
+                //if (searchModel.Grade.Count > 0)
+                //    result = result.Where(x => searchModel.Grade.Exists(y => x.AppArea == y)); 
             }
             return result;
         }

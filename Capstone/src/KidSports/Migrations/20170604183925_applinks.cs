@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace KidSports.Migrations
 {
-    public partial class appstatus : Migration
+    public partial class applinks : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,12 +20,27 @@ namespace KidSports.Migrations
                     AppDenialDate = table.Column<DateTime>(nullable: true),
                     AppStartDate = table.Column<DateTime>(nullable: false),
                     ApplicationID = table.Column<int>(nullable: false),
-                    BcApprovalDate = table.Column<DateTime>(nullable: true),
-                    BcStartDate = table.Column<DateTime>(nullable: true),
-                    BcSubmissionDate = table.Column<DateTime>(nullable: true),
-                    PrefApprovalDate = table.Column<DateTime>(nullable: true),
-                    PrefDenialDate = table.Column<DateTime>(nullable: true),
-                    PrefSubmissionDate = table.Column<DateTime>(nullable: true)
+                    BadgeApprovalDate = table.Column<DateTime>(nullable: true),
+                    BadgeDenialDate = table.Column<DateTime>(nullable: true),
+                    BadgeSubmissionDate = table.Column<DateTime>(nullable: true),
+                    CoachInfoApprovalDate = table.Column<DateTime>(nullable: true),
+                    CoachInfoDenialDate = table.Column<DateTime>(nullable: true),
+                    CoachInfoSubmissionDate = table.Column<DateTime>(nullable: true),
+                    CoachInterestApprovalDate = table.Column<DateTime>(nullable: true),
+                    CoachInterestDenialDate = table.Column<DateTime>(nullable: true),
+                    CoachInterestSubmissionDate = table.Column<DateTime>(nullable: true),
+                    IdApprovalDate = table.Column<DateTime>(nullable: true),
+                    IdDenialDate = table.Column<DateTime>(nullable: true),
+                    IdSubmissionDate = table.Column<DateTime>(nullable: true),
+                    NFHSApprovalDate = table.Column<DateTime>(nullable: true),
+                    NFHSDenialDate = table.Column<DateTime>(nullable: true),
+                    NFHSSubmissionDate = table.Column<DateTime>(nullable: true),
+                    PcaApprovalDate = table.Column<DateTime>(nullable: true),
+                    PcaDenialDate = table.Column<DateTime>(nullable: true),
+                    PcaSubmissionDate = table.Column<DateTime>(nullable: true),
+                    PledgeApprovalDate = table.Column<DateTime>(nullable: true),
+                    PledgeDenialDate = table.Column<DateTime>(nullable: true),
+                    PledgeSubmissionDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -111,6 +126,31 @@ namespace KidSports.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_States", x => x.StateID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Applinks",
+                columns: table => new
+                {
+                    UpdateApplinkID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Address = table.Column<string>(nullable: true),
+                    BevBlog = table.Column<string>(nullable: true),
+                    CoachPledge = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    FaceBookCoach = table.Column<string>(nullable: true),
+                    FaceBookKidsports = table.Column<string>(nullable: true),
+                    Fax = table.Column<string>(nullable: true),
+                    Instragram = table.Column<string>(nullable: true),
+                    NFHS = table.Column<string>(nullable: true),
+                    PCA = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
+                    Twitter = table.Column<string>(nullable: true),
+                    Voucher = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Applinks", x => x.UpdateApplinkID);
                 });
 
             migrationBuilder.CreateTable(
@@ -550,6 +590,9 @@ namespace KidSports.Migrations
 
             migrationBuilder.DropTable(
                 name: "PreviousGradesCoached");
+
+            migrationBuilder.DropTable(
+                name: "Applinks");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");

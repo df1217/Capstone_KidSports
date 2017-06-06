@@ -6,6 +6,10 @@
     <h1 class="text-center">Coaching Interests</h1><br />
     <form asp-controller="Application" asp-action="CoachInterests" method="post">
         <input type="hidden" asp-for="@Model.ApplicationID" value="@Model.ApplicationID" />
+        <input type="hidden" asp-for="@Model.newPickedAreaID" />
+        <input type="hidden" asp-for="@Model.newPickedSchoolID"/>
+        <input type="hidden" asp-for="@Model.newPickedSportID" />
+
         <div class="well">
             <div class="row">
                 <div class="col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
@@ -22,11 +26,11 @@
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                    
                         <label asp-for="Sport" class="control-label">Sport</label>
-                        <select asp-for="Sport" class="form-control">
+                        <select asp-for="newPickedSportID" class="form-control">
                             <option value="0">Any</option>
                                 @foreach (Sport s in Model.AllSports)
                                 {
-                                    if (Model.Sport == s)
+                                    if (Model.Sport.SportID == s.SportID)
                                     {
                                         <option value="@s.SportID" selected="selected">@s.SportName</option>
                                     }
@@ -36,7 +40,7 @@
                                     }
                                 }
                             </select>
-</div>
+                </div>
                     
 
 
@@ -109,58 +113,21 @@
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                     <label asp-for="ChildTeam" class="control-label">If coaching child's team, please note his/her name</label>
                     <input asp-for="ChildTeam" class="form-control" id="childTeam" placeholder="">
+                    <span asp-validation-for="ChildTeam" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row" style="margin-top:40px">
                 <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
-                    <label asp-for="YearsExperience" class="control-label">Years Experience</label>
-                    <select class="form-control">
-                        @for (int i = 0; i < 6; i++)
-                        {
-                            @if (i == 0)
-                            {
-                                if (Model.YearsExperience == i) { <option selected="selected" value="@i">None</option> }
-                                else { <option value="@i">None</option> }
-                            }
-                            else if (i == 5)
-                            {
-                                if (Model.YearsExperience == i)
-                                { <option selected="selected" value="@i">5+</option> }
-                                else { <option value="@i">5+</option> }
-                            }
-                            else
-                            {
-                                if (Model.YearsExperience == i) { <option selected="selected" value="@i">@i</option> }
-                                else { <option value="@i">@i</option> }
-                            }
-
-                        }
-                    </select>
-                </div>
-
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
                 
                         <label asp-for="PreviousExperience" class="control-label">Previous Grades Coached</label>
                         
-                        @*<select asp-for="PreviousExperience" multiple class="form-control">*@
-                            <select class="multiselect-ui form-control" multiple="multiple">
-                                <option value="">None</option>
-                                @foreach (Experience e in Model.AllExperience)
-                                {
-                                    if (Model.PreviousExperience.Contains(e))
-                                    {
-                                        <option value="@e.ExperienceID" selected="selected">@e.ExperienceName</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@e.ExperienceID">@e.ExperienceName</option>
-                                    }
-                                }
-                            </select>
+                        <select asp-for="PreviousExperience"
+                                asp-items="@(new SelectList(Model.AllExperience, "ExperienceID", "ExperienceName"))" class="selectpicker form-control" data-size="5" multiple="multiple">
+                        </select>
                     </div>
 
-                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
+                <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-8">
                     
                 </div>
             </div>

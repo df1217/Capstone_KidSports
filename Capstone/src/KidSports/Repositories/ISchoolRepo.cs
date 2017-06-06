@@ -12,5 +12,7 @@ namespace KidSports.Repositories
         List<School> GetSchoolsByArea(Area area);
         List<School> GetSchoolBySM(User user);
         School GetSchoolByID(int id);
+        School AddSchool(string name);
+        void DeleteSchoolByID(int ID);
     }
 }
