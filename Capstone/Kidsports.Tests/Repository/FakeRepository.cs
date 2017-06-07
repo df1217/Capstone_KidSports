@@ -44,9 +44,9 @@ namespace Kidsports.Tests
                 }
                   
                 },
-                CountriesLived = new List<Country> {
-                    new Country() {CountryName = "Canada" },
-                },
+                //CountriesLived = new List<Country> {
+                //    new Country() {CountryName = "Canada" },
+                //},
                 CurrentEmployer = "Best Buy",
                 JobTitle = "Stocker",
 
@@ -103,9 +103,9 @@ namespace Kidsports.Tests
                 //ApplicationID = 3,
 
 
-                PreviousLastNames = new List<LastName>{
-                    new LastName() { Name = "Law" }
-                },
+                //PreviousLastNames = new List<LastName>{
+                //    new LastName() { Name = "Law" }
+                //},
                 DOB = new DateTime(1979 / 16 / 5),
                 //DOB = DateTime.Parse("1/1/1950"),
                 Address = "333 Sussex St.",
@@ -138,12 +138,56 @@ namespace Kidsports.Tests
             applications.Add(app1);
             applications.Add(app2);
             applications.Add(app3);
-
-            //user1.UserApplications.Add(app1);
-            //user2.UserApplications.Add(app2);
-            //user3.UserApplications.Add(app3);
-
+public List<Application> GetAllApplications()
+        {
+            throw new NotImplementedException();
         }
+
+        public IQueryable<Application> GetFilteredApplications(ApplicationSearchModel searchModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Application GetApplicationByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Update(Application app)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Application CreateApp(Application app)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<AppStateJoin> GetStatesLivedIn(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<AppExpJoin> GetPastExperience(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeletePastExperiences(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteStatesLived(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        //user1.UserApplications.Add(app1);
+        //user2.UserApplications.Add(app2);
+        //user3.UserApplications.Add(app3);
+
+    }
 
         public List<Application> GetAllApplications()
         {
