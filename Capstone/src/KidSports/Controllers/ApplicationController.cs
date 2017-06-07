@@ -862,11 +862,11 @@ namespace KidSports.Controllers
                         using (var fileStream = new FileStream(Path.Combine(uploads, ccvm.ApplicationID.ToString() + "." + extension), FileMode.Create))
                         {
                             await ccvm.File.CopyToAsync(fileStream);
-                            currentApp.NfhsPath = "..\\Images\\ConcussionCourse\\" + currentApp.ApplicationID.ToString()+ "." + extension;
+                            currentApp.NfhsPath = "..\\Images\\ConcussionCourse\\" + currentApp.ApplicationID.ToString() + "." + extension;
                         }
                     }
                 }
-                #pragma warning disable CS0168 // Variable is declared but never used
+#pragma warning disable CS0168 // Variable is declared but never used
                 catch (Exception e)
                 {
                     //Add model state error? validation?
@@ -976,15 +976,20 @@ namespace KidSports.Controllers
 
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
-                var uploads = Path.Combine(_environment.WebRootPath, "Images", "PCACourse");
+
                 try
                 {
+                    var uploads = Path.Combine(_environment.WebRootPath, "Images", "PcaCourse");
                     if (pcvm.File.Length > 0)
                     {
-                        using (var fileStream = new FileStream(Path.Combine(uploads, pcvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
+                        var pathName = pcvm.File.FileName;
+                        var parts = pathName.Split('.');
+                        int partsCount = parts.Count();
+                        var extension = parts[partsCount - 1];
+                        using (var fileStream = new FileStream(Path.Combine(uploads, pcvm.ApplicationID.ToString() + "." + extension), FileMode.Create))
                         {
                             await pcvm.File.CopyToAsync(fileStream);
-                            currentApp.PcaPath = "..\\Images\\PcaCourse\\" + currentApp.ApplicationID.ToString() + ".jpg";
+                            currentApp.PcaPath = "..\\Images\\PcaCourse\\" + currentApp.ApplicationID.ToString() + "." + extension;
                         }
                     }
                 }
@@ -1089,15 +1094,19 @@ namespace KidSports.Controllers
 
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
-                var uploads = Path.Combine(_environment.WebRootPath, "Images", "ID");
                 try
                 {
+                    var uploads = Path.Combine(_environment.WebRootPath, "Images", "ID");
                     if (idvm.File.Length > 0)
                     {
-                        using (var fileStream = new FileStream(Path.Combine(uploads, idvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
+                        var pathName = idvm.File.FileName;
+                        var parts = pathName.Split('.');
+                        int partsCount = parts.Count();
+                        var extension = parts[partsCount - 1];
+                        using (var fileStream = new FileStream(Path.Combine(uploads, idvm.ApplicationID.ToString() + "." + extension), FileMode.Create))
                         {
                             await idvm.File.CopyToAsync(fileStream);
-                            currentApp.DlPath = "..\\Images\\ID\\" + currentApp.ApplicationID.ToString() + ".jpg";
+                            currentApp.DlPath = "..\\Images\\ID\\" + currentApp.ApplicationID.ToString() + "." + extension;
                         }
                     }
                 }
@@ -1206,15 +1215,19 @@ namespace KidSports.Controllers
 
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
-                var uploads = Path.Combine(_environment.WebRootPath, "Images", "Badge");
                 try
                 {
+                    var uploads = Path.Combine(_environment.WebRootPath, "Images", "Badge");
                     if (bvm.File.Length > 0)
                     {
-                        using (var fileStream = new FileStream(Path.Combine(uploads, bvm.ApplicationID.ToString() + ".jpg"), FileMode.Create))
+                        var pathName = bvm.File.FileName;
+                        var parts = pathName.Split('.');
+                        int partsCount = parts.Count();
+                        var extension = parts[partsCount - 1];
+                        using (var fileStream = new FileStream(Path.Combine(uploads, bvm.ApplicationID.ToString() + "." + extension), FileMode.Create))
                         {
                             await bvm.File.CopyToAsync(fileStream);
-                            currentApp.BadgePath = "..\\Images\\Badge\\" + currentApp.ApplicationID.ToString() + ".jpg";
+                            currentApp.BadgePath = "..\\Images\\Badge\\" + currentApp.ApplicationID.ToString() + "." + extension;
                         }
                     }
                 }

@@ -21,28 +21,29 @@
                                class="borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
                     </div>
                     <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
-                        <img src="@Model.IDPath" class="img-thumbnail" />
-                    </div>
-                </div>
-            </div>
+                        @if (Model.IDPath != null && Model.IDPath.Contains(".pdf"))
+                        {
+                            <embed src="@Model.IDPath" data-type="pdf" class="img-thumbnail" />
 
-            @*<div class="row" style="margin-top:30px">
-            <div class="form-group col-xs-offset-1 col-xs-10 col-md-5">
-                <div action="imageUpload.php" method="post" enctype="multipart/form-data" target="upload_target" onsubmit="jupload();" id="form1">
-                    <div style="visibility:visible;" class="imageholder">
-                        <!-- a gif image to show that the process wasn't finished -->
+                        }
+                        else
+                        {
+                            <img src="@Model.IDPath" class="img-thumbnail" />
+                        }
                     </div>
-                    <div class="row">
-                        <div class="form-group col-xs-offset-1 col-xs-10 col-md-6">
-                            <input type="file" name="imgfile" />
-                            </div>
-                            <div class="form-group col-xs-offset-1 col-xs-10 col-md-3">
-                                <input type="submit" name="uploadButton" class="upbtn" value="Upload" />
-                            </div>
-                        </div>
+
                 </div>
-               </div>
-            </div>*@
+                @if (Model.IDPath != null && User.IsInRole("SportsManager") || User.IsInRole("Admin"))
+            {
+                    <div class="row">
+                        <div class="form-group col-xs-offset-1 col-md-offset-4 col-xs-10 col-md-4">
+                            <a href="@Model.IDPath" type="button" class="btn btn-default" download>Download</a>
+                        </div>
+
+                    </div>
+                }
+
+            </div>
         </div>
 
        @if (User.IsInRole("SportsManager") || User.IsInRole("Admin"))

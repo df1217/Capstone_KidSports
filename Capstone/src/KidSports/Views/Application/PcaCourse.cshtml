@@ -20,24 +20,41 @@
 
 
                 <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
-                    <label asp-for="PcaCourseSubmissionDate"class="control-label">Completion Date</label>
-                    <input asp-for="PcaCourseSubmissionDate" @*asp-format="{0:MM/dd/yyyy}"*@ type="date" class="form-control" />
-                    <input asp-for="PcaPath" type="hidden"/>
+                    <label asp-for="PcaCourseSubmissionDate" class="control-label">Completion Date</label>
+                    <input asp-for="PcaCourseSubmissionDate" @*asp-format="{0:MM/dd/yyyy}" *@ type="date" class="form-control" />
+                    <input asp-for="PcaPath" type="hidden" />
                 </div>
             </div>
 
-            <div class="row" style="margin-top:30px">
-                <div class="row">
-                    <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
-                        <label  class="control-label">Upload Certificate</label>
-                        <input type="file" asp-for="File"
-                               class="borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
-                    </div>
-                    <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
-                        <img src="@Model.PcaPath" class="img-thumbnail" />
-                    </div>
+            <div class="row">
+                <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
+                    <label class="control-label">Upload Certificate</label>
+                    <input type="file" asp-for="File"
+                           class="borrowerImageFile" data-errormsg="PhotoUploadErrorMsg">
+
                 </div>
+                <div class="form-group col-xs-offset-1 col-md-offset-0 col-xs-10 col-md-4">
+                    @if (Model.PcaPath != null && Model.PcaPath.Contains(".pdf"))
+                    {
+                        <embed src="@Model.PcaPath" data-type="pdf" class="img-thumbnail" />
+
+                    }
+                    else
+                    {
+                        <img src="@Model.PcaPath" class="img-thumbnail" />
+                    }
+                </div>
+
             </div>
+            @if (Model.PcaPath != "" && User.IsInRole("SportsManager") || User.IsInRole("Admin"))
+            {
+                <div class="row">
+                    <div class="form-group col-xs-offset-1 col-md-offset-4 col-xs-10 col-md-4">
+                        <a href="@Model.PcaPath" type="button" class="btn btn-default" download>Download</a>
+                    </div>
+
+                </div>
+            }
 
         </div>
 
