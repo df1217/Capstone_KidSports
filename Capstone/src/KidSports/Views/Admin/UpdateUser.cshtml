@@ -18,25 +18,26 @@
                         </div>
                         <div class="modal-body" style="vertical-align:top">
 
-                            <table class="table table-striped" id="tblGrid">
-                                <tr>
-                                <thead>
-                                    <tr>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Email</th>
-                                        <th>Role</th>
-                                    </tr>
-                                </thead>
-                                <tbody style="text-align:left">
-                                    <tr>
-                                        <td><input class"form-control" placeholder="FirstName" /></td>
-                                        <td><input class"form-control" placeholder="LastName" /></td>
-                                        <td><input class"form-control" placeholder="Email" /></td>
-                                        <td><input class"form-control" placeholder="Role" /></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="form-group">
+                                <input type="text" asp-for="FirstName" placeholder="First Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" asp-for="MiddleName" placeholder="Middle Name">
+                            </div>
+                            <div class="form-group">
+
+                                <input type="text" asp-for="LastName" placeholder="Last Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" asp-for="Email" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" asp-forr="Role" placeholder="Role">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" asp-for="Area" placeholder="Area">
+                            </div>
+
                         </div>
                         <div class="clearfix"></div>
 
@@ -64,6 +65,7 @@
             <thead>
                 <tr>
                     <th>First Name</th>
+                    <th>Middle Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Role</th>
@@ -77,6 +79,7 @@
                     {*@
                 <tr style="text-align:left">
                     <td>Josh</td>
+                    <td>M</td>
                     <td>Masterson</td>
                     <td>joshm@kidsports.org</td>
                     <td>Admin</td>
@@ -89,6 +92,7 @@
                {
                    <tr style="text-align:left">
                         <td>@u.FirstName</td>
+                        <td>@u.MiddleName</td>
                         <td>@u.LastName</td>
                         <td>@u.Email</td>
                         <td>@foreach (var i in u.Roles) { if (i.UserId == u.Id) { i.RoleId.ToString(); } }  </td>
@@ -113,6 +117,10 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <input class="form-control " type="text" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+
+                        <input class="form-control " type="text" placeholder="Middle Name">
                     </div>
                     <div class="form-group">
 
