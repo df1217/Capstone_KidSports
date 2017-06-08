@@ -53,13 +53,13 @@
         </div>
         <div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-0 col-md-4">
 
-            <input type="text" class="form-control glyphicon glyphicon-search" placeholder="Search...">
+            <input type="text" id="system-search"class="form-control glyphicon glyphicon-search" placeholder="Search...">
         </div>
     </div>
 
     <h2 style="text-align:center"><strong>List of Users</strong></h2><br />
-
-    <div class="table-responsive">
+    
+    <div class="table-responsive table-list-search">
 
         <table id="mytable" class="table table-bordred table-striped">
             <thead>
@@ -74,7 +74,6 @@
                 </tr>
             </thead>
             <tbody>
-<<<<<<< HEAD
                 @*foreach (var m in Model)
                     {*@
                 <tr style="text-align:left">
@@ -87,7 +86,6 @@
                     <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button type="button" class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button></p></td>
                 </tr>
                 @*}*@
-=======
                @foreach (User u in Model.allUsers)
                {
                    <tr style="text-align:left">
@@ -100,7 +98,7 @@
                         <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button type="button" class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button></p></td>
                    </tr>
                 }
->>>>>>> ce6dbea2946e6634d3617161c08b33f7c2a3dc17
+
 
             </tbody>
 
@@ -169,5 +167,49 @@
         <!-- /.modal-dialog -->
     </div>
 </form>
+<script>
+$(document).ready(function() {
+    var activeSystemClass = $('.list-group-item.active');
 
+    //something is entered in search form
+    $('#system-search').keyup( function() {
+       var that = this;
+        // affect all table rows on in systems table
+        var tableBody = $('.table-list-search tbody');
+        var tableRowsClass = $('.table-list-search tbody tr');
+        $('.search-sf').remove();
+        tableRowsClass.each( function(i, val) {
 
+            //Lower text for case insensitive
+            var rowText = $(val).text().toLowerCase();
+            var inputText = $(that).val().toLowerCase();
+            if(inputText != '')
+            {
+                $('.search-query-sf').remove();
+                tableBody.prepend('<tr class="search-query-sf"><td colspan="6"><strong> Searching for: "'+ $(that).val()+ '"</strong></td></tr>');
+            }
+            else
+            {
+                $('.search-query-sf').remove();
+            }
+
+            if( rowText.indexOf( inputText ) == -1 )
+            {
+                //hide rows
+                tableRowsClass.eq(i).hide();
+
+            }
+            else
+            {
+                $('.search-sf').remove();
+                tableRowsClass.eq(i).show();
+            }
+        });
+        //all tr elements are hidden
+        if(tableRowsClass.children(':visible').length == 0)
+        {
+            tableBody.append('<tr class="search-sf"><td class="text-muted" colspan="6">No entries found.</td></tr>');
+        }
+    });
+});
+</script>
