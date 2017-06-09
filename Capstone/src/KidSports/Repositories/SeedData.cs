@@ -315,24 +315,29 @@ namespace KidSports.Repositories
             #endregion
 
             #region UpdateApplink
-            if (!context.Applinks.Any())
+            if (!context.AppLinks.Any())
             {
-                UpdateApplink links = new UpdateApplink();
-                links.Address = "2190 Polk St. Eugene, OR 97405";
-                links.BevBlog = "http://www.kidsports.org/blog-1";
-                links.Email = "info@kidsports.org";
-                links.FaceBookCoach = "https://www.facebook.com/kidsportscoachnetwork/";
-                links.FaceBookKidsports = "https://www.facebook.com/www.emeraldkidsports/";
-                links.Instragram = "https://www.instagram.com/kidsports4life/";
-                links.NFHS = "https://nfhslearn.com/courses/61064/concussion-in-sports";
-                links.PCA = "http://shopping.positivecoach.org/Double-Goal-Coach?search=Course";
-                links.CoachPledge = "http://kidsports.azurewebsites.net/CoachEthicContract.pdf";
-                links.Phone = "541 683 2374";
-                links.Fax = "541 302 9430";
-                links.Twitter = "https://twitter.com/kidsports4life";
-                links.Voucher = "EmeraldKidSports16";
+                AppLink nfhs = new AppLink();
+                AppLink pca = new AppLink();
+                AppLink pledge = new AppLink();
+                AppLink voucher = new AppLink();
 
-                context.Applinks.Add(links);
+                nfhs.Key = "NFHS";
+                nfhs.Link = "https://nfhslearn.com/courses/61064/concussion-in-sports";
+
+                pca.Key = "PCA";
+                pca.Link = "http://shopping.positivecoach.org/Double-Goal-Coach?search=Course";
+
+                pledge.Key = "Pledge";
+                pledge.Link = "http://kidsports.azurewebsites.net/CoachEthicContract.pdf";
+
+                voucher.Key = "Voucher";
+                voucher.Link = "EmeraldKidSports16";
+
+                context.AppLinks.Add(nfhs);
+                context.AppLinks.Add(pca);
+                context.AppLinks.Add(pledge);
+                context.AppLinks.Add(voucher);
                 context.SaveChanges();
             }
             #endregion

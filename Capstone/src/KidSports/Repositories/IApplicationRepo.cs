@@ -17,5 +17,7 @@ namespace KidSports.Repositories
         List<AppExpJoin> GetPastExperience(int id);
         void DeletePastExperiences(int id);
         void DeleteStatesLived(int id);
+        AppLink getAppLink(string Key);
+        void UpdateAppLink(AppLink applink);
     }
 }

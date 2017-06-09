@@ -13,5 +13,7 @@ namespace KidSports.Models.ViewModels
         public Nullable<DateTime> PcaCourseSubmissionDate { get; set; }
         public IFormFile File { get; set; }
         public Nullable<bool> IsApproved { get; set; }
+        public AppLink pcalink { get; set; }
+        public AppLink voucher { get; set; }
     }
 }

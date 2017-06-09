@@ -4,6 +4,7 @@ using System.Linq;
 using KidSports.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace KidSports.Repositories
 {
@@ -107,6 +108,19 @@ namespace KidSports.Repositories
                 context.Users.Update(user);
 
             return context.SaveChanges();
+        }
+
+        public string GetRoleNameByIdentityID(string id)
+        {
+            var roles = "";
+            IQueryable<IdentityUserRole<string>> userRole = context.UserRoles.Where(ur => ur.UserId == id);
+
+            foreach (var r in userRole) {
+                IQueryable<IdentityRole<string>> rName = context.Roles.Where(role => role.Id == r.RoleId);
+                roles += rName.First().Name + " ";
+            }
+
+            return roles;
         }
     }
 }

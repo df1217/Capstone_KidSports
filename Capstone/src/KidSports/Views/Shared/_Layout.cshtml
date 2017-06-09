@@ -59,7 +59,6 @@
                         <!-- Links for admins -->
                         @if (User.IsInRole("Admin"))
                         {
-                            <li><a onclick="location='/Admin/UpdateAppContent'">Add App Options</a></li>
                             <li><a onclick="location='/Admin/UpdateAppLink'">Change Site Links</a></li>
                             <li><a onclick="location='/Admin/UpdateUser'">Update Users</a></li>
                         }
@@ -68,8 +67,6 @@
                         @if (User.IsInRole("SportsManager") || User.IsInRole("Admin"))
                         {
                             <li><a onclick="location='/Application/Applications'">View Applications</a></li>
-                            @*<li><a>test</a></li>
-                            <li><a>test2</a></li>*@
                         }
 
                         <li><a onclick="location='/Account/Logout'">Logout</a></li>

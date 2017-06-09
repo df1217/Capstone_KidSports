@@ -311,22 +311,6 @@ namespace KidSports.Controllers
         }
         #endregion
 
-        #region Background Check
-        [HttpGet]
-        //List all background checks that have been processed by the CRIS API and are awaiting approval.
-        public IActionResult BackgroundCheckResults()
-        {
-            return View();
-        }
-
-        //Display the result incidents of the specific background check.
-        [HttpGet]
-        public IActionResult BGCResultsDescription()
-        {
-            return View();
-        }
-        #endregion
-
         #region Application Coach Information
         [HttpGet]
         public async Task<IActionResult> CoachInfo(int AppID)
@@ -437,6 +421,10 @@ namespace KidSports.Controllers
                 //Process all data that is in the view model. If anything is new or changed,
                 //update the coaches current application.
                 Application currentApp = appRepo.GetApplicationByID(civm.ApplicationID);
+
+                if (User.IsInRole("Admin") || User.IsInRole("SportsManager"))
+                   user = userRepo.GetUserByID(civm.ApplicationID);
+
                 #region Bind VM to application
                 if (civm.FirstName != null) user.FirstName = civm.FirstName;
                 if (civm.LastName != null) user.LastName = civm.LastName;
@@ -710,6 +698,7 @@ namespace KidSports.Controllers
                 CoachPledgeViewModel cpvm = new CoachPledgeViewModel();
 
                 //If any information exists, bind it to the view model.
+                cpvm.pledgeLink = appRepo.getAppLink("Pledge");
                 cpvm.ApplicationID = AppID;
                 if (currentApp.PledgeName != null) cpvm.Name = currentApp.PledgeName;
                 if (currentApp.PledgeInitials != null) cpvm.Initials = currentApp.PledgeInitials;
@@ -816,6 +805,7 @@ namespace KidSports.Controllers
                 //Get the coaches current app
                 Application currentApp = appRepo.GetApplicationByID(AppID);
                 ConcussionCourseViewModel ccvm = new ConcussionCourseViewModel();
+                ccvm.nfhslink = appRepo.getAppLink("NFHS");
                 ccvm.ApplicationID = AppID;
                 //If any information exists, bind it to the view model.
                 // if (currentApp.ConcussionCourseSubmissionDate != new DateTime()) ccvm.ConcussionCourseSubmissionDate = currentApp.ConcussionCourseSubmissionDate;
@@ -949,6 +939,8 @@ namespace KidSports.Controllers
                 //Get the coaches current app
                 Application currentApp = appRepo.GetApplicationByID(AppID);
                 PcaCourseViewModel pcvm = new PcaCourseViewModel();
+                pcvm.pcalink = appRepo.getAppLink("PCA");
+                pcvm.voucher = appRepo.getAppLink("Voucher");
                 pcvm.ApplicationID = AppID;
                 //If any information exists, bind it to the view model.
                 if (currentApp.PcaPath != null) pcvm.PcaPath = currentApp.PcaPath; else pcvm.PcaPath = "";

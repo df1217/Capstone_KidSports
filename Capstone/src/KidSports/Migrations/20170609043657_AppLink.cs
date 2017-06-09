@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace KidSports.Migrations
 {
-    public partial class applinks : Migration
+    public partial class AppLink : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,6 +45,20 @@ namespace KidSports.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ApplicationStatus", x => x.ApplicationStatusID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppLinks",
+                columns: table => new
+                {
+                    AppLinkID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Key = table.Column<string>(nullable: true),
+                    Link = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppLinks", x => x.AppLinkID);
                 });
 
             migrationBuilder.CreateTable(
@@ -126,31 +140,6 @@ namespace KidSports.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_States", x => x.StateID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Applinks",
-                columns: table => new
-                {
-                    UpdateApplinkID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Address = table.Column<string>(nullable: true),
-                    BevBlog = table.Column<string>(nullable: true),
-                    CoachPledge = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    FaceBookCoach = table.Column<string>(nullable: true),
-                    FaceBookKidsports = table.Column<string>(nullable: true),
-                    Fax = table.Column<string>(nullable: true),
-                    Instragram = table.Column<string>(nullable: true),
-                    NFHS = table.Column<string>(nullable: true),
-                    PCA = table.Column<string>(nullable: true),
-                    Phone = table.Column<string>(nullable: true),
-                    Twitter = table.Column<string>(nullable: true),
-                    Voucher = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Applinks", x => x.UpdateApplinkID);
                 });
 
             migrationBuilder.CreateTable(
@@ -237,7 +226,7 @@ namespace KidSports.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppExpJoin",
+                name: "PastExperiences",
                 columns: table => new
                 {
                     AppExpJoinID = table.Column<int>(nullable: false)
@@ -247,11 +236,11 @@ namespace KidSports.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppExpJoin", x => x.AppExpJoinID);
+                    table.PrimaryKey("PK_PastExperiences", x => x.AppExpJoinID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppStateJoin",
+                name: "StatesLived",
                 columns: table => new
                 {
                     AppStateJoinID = table.Column<int>(nullable: false)
@@ -261,7 +250,7 @@ namespace KidSports.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppStateJoin", x => x.AppStateJoinID);
+                    table.PrimaryKey("PK_StatesLived", x => x.AppStateJoinID);
                 });
 
             migrationBuilder.CreateTable(
@@ -446,8 +435,8 @@ namespace KidSports.Migrations
                 column: "ApplicationID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AppExpJoin_ApplicationID",
-                table: "AppExpJoin",
+                name: "IX_PastExperiences_ApplicationID",
+                table: "PastExperiences",
                 column: "ApplicationID");
 
             migrationBuilder.CreateIndex(
@@ -476,8 +465,8 @@ namespace KidSports.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AppStateJoin_ApplicationID",
-                table: "AppStateJoin",
+                name: "IX_StatesLived_ApplicationID",
+                table: "StatesLived",
                 column: "ApplicationID");
 
             migrationBuilder.CreateIndex(
@@ -540,16 +529,16 @@ namespace KidSports.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_AppExpJoin_Applications_ApplicationID",
-                table: "AppExpJoin",
+                name: "FK_PastExperiences_Applications_ApplicationID",
+                table: "PastExperiences",
                 column: "ApplicationID",
                 principalTable: "Applications",
                 principalColumn: "ApplicationID",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_AppStateJoin_Applications_ApplicationID",
-                table: "AppStateJoin",
+                name: "FK_StatesLived_Applications_ApplicationID",
+                table: "StatesLived",
                 column: "ApplicationID",
                 principalTable: "Applications",
                 principalColumn: "ApplicationID",
@@ -574,13 +563,16 @@ namespace KidSports.Migrations
                 name: "AppAreaJoin");
 
             migrationBuilder.DropTable(
-                name: "AppExpJoin");
+                name: "PastExperiences");
 
             migrationBuilder.DropTable(
                 name: "ApplicationStatus");
 
             migrationBuilder.DropTable(
-                name: "AppStateJoin");
+                name: "AppLinks");
+
+            migrationBuilder.DropTable(
+                name: "StatesLived");
 
             migrationBuilder.DropTable(
                 name: "Experiences");
@@ -590,9 +582,6 @@ namespace KidSports.Migrations
 
             migrationBuilder.DropTable(
                 name: "PreviousGradesCoached");
-
-            migrationBuilder.DropTable(
-                name: "Applinks");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
