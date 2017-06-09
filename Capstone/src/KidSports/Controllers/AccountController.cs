@@ -91,7 +91,7 @@ namespace KidSports.Controllers
                         var isSportsManager = await userManager.IsInRoleAsync(identityUser, "SportsManager");
 
                         if (isAdmin)
-                            return RedirectToAction("BackgroundcheckResults", "Application");
+                            return RedirectToAction("Applications", "Application");
                         else if (isSportsManager)
                             return RedirectToAction("Applications", "Application");
                         else

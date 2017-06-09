@@ -16,5 +16,6 @@ namespace KidSports.Repositories
         User GetDetailedUser(User user);
         User GetUserByID(int id);
         User GetUserByIdentityID(string applicantID);
+        string GetRoleNameByIdentityID(string id);
     }
 }

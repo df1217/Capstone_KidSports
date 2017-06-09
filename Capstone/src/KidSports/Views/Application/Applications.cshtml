@@ -19,32 +19,36 @@
     <div class="row" style="margin-bottom:10px;">
         <div class="col-md-3">
             <label name="Area" class="control-label">Area:</label>
-            <select asp-for="Area"
-                    asp-items="@(new SelectList(Model.allAreas, "AreaID", "AreaName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
+            <select id="AreaFilter" asp-for="Area"
+                    asp-items="@(new SelectList(Model.allAreas, "AreaName", "AreaName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
         </div>
 
         <div class="col-md-3">
             <label name="School" class="control-label">School:</label>
-            <select asp-for="School"
-                    asp-items="@(new SelectList(Model.allSchools, "SchoolID", "SchoolName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
+            <select id="schoolFilter" asp-for="School"
+                    asp-items="@(new SelectList(Model.allSchools, "SchoolName", "SchoolName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
         </div>
 
         <div class="col-md-3">
             <label name="Sport" class="control-label">Sport:</label>
-            <select asp-for="Area"
-                    asp-items="@(new SelectList(Model.allSports, "SportID", "SportName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
+            <select id="sportFilter" asp-for="Sport"
+                    asp-items="@(new SelectList(Model.allSports, "SportName", "SportName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
         </div>
 
         <div class="col-md-3">
             <label name="Grade" class="control-label">Grade:</label>
-            <select asp-for="Area"
-                    asp-items="@(new SelectList(Model.allGrades, "GradeID", "GradeName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
+            <select id="gradeFilter" asp-for="Area"
+                    asp-items="@(new SelectList(Model.allGrades, "GradeName", "GradeName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
         </div>
     </div>
 </form>
 
+<div class="form-group col-xs-offset-1 col-xs-10 col-md-offset-8 col-md-4">
+    <input type="hidden" id="system-search" class="form-control glyphicon glyphicon-search" placeholder="Search...">
+</div>
+
 <div class="row">
-    <table class="table table-responsive table-striped">
+    <table id="myTable" class="table table-responsive table-striped table-list-search">
         <tr>
             <td class=""></td>
             <td class="col-xs-3">Application Details</td>
@@ -74,6 +78,10 @@
                 <td> @Html.DisplayFor(modelItem => Model.filteredUsers[i].FirstName) @Html.DisplayFor(modelItem => Model.filteredUsers[i].LastName)</td>
                 <td> @Html.DisplayFor(modelItem => Model.filteredAppStatus[i].AppStartDate) </td>
                 <td> @Html.DisplayFor(modelItem => Model.filteredAppStatus[i].AppCompletionDate) </td>
+                <td style="visibility:hidden; display:none;"> @Html.DisplayFor(modelItem => Model.filteredApps[i].AppSport)</td>
+                <td style="visibility:hidden; display:none;"> @Html.DisplayFor(modelItem => Model.filteredApps[i].AppGrade)</td>
+                <td style="visibility:hidden; display:none;"> @Html.DisplayFor(modelItem => Model.filteredApps[i].AppSchool)</td>
+                <td style="visibility:hidden; display:none;"> @Html.DisplayFor(modelItem => Model.filteredApps[i].AppArea)</td>
             </tr>
         }
     </table>
@@ -83,13 +91,81 @@
     <button type="button" onclick="location = '/Admin/UpdateUser'" class="btn btn-primary btn-md-10">Enter Applicant Manually</button>
 </div>	
 
-@*<script>
-    $(document).ready(function () {
-        $('select').change(function () {
-            var data = $('form').serialize();
 
-            //$('form').submit();
-            $.post("Applications", { asm: data });
-         });
-    });
-</script>*@
+
+<script>
+    $(document).ready(function () {
+
+        $("select").change(function () {
+            $("#system-search").val($(this).val());
+        
+            //for (var val in $('select').val()) {
+            //    $("#system-search").val($("#system-search").val() + "," + val);
+            //}
+
+            //if ($("#areaFilter").length != 0) {
+            //    for (var val in $("#areaFilter")) {
+            //        $("#system-search").val($('#system-search').val() + ',' + val);
+            //    }
+            //}
+
+            //if ($("#schoolFilter").length != 0) {
+            //    for (var val in $("#schoolFilter")) {
+            //        $("#system-search").val($('#system-search').val() + ',' + val);
+            //    }
+            //}
+
+            //if ($("#sportFilter").length != 0) {
+            //    for (var val in $("#sportFilter")) {
+            //        $("#system-search").val($('#system-search').val() + ',' + val);
+            //    }
+            //}
+
+            //if ($("#gradeFilter").length != 0) {
+            //    for (var val in $("#gradeFilter")) {
+            //        $("#system-search").val($('#system-search').val() + ',' + val);
+            //    }
+            //}
+
+    var activeSystemClass = $('.list-group-item.active');
+
+       var that = $("#system-search");
+        // affect all table rows on in systems table
+        var tableBody = $('.table-list-search tbody');
+        var tableRowsClass = $('.table-list-search tbody tr');
+        $('.search-sf').remove();
+        tableRowsClass.each( function(i, val) {
+
+            //Lower text for case insensitive
+            var rowText = $(val).text().toLowerCase();
+            var inputText = $(that).val().toLowerCase();
+            if(inputText != '')
+            {
+                $('.search-query-sf').remove();
+                tableBody.prepend('<tr class="search-query-sf"><td colspan="6"><strong> Searching for: "'+ $(that).val()+ '"</strong></td></tr>');
+            }
+            else
+            {
+                $('.search-query-sf').remove();
+            }
+
+            if( rowText.indexOf( inputText ) == -1 )
+            {
+                //hide rows
+                tableRowsClass.eq(i).hide();
+
+            }
+            else
+            {
+                $('.search-sf').remove();
+                tableRowsClass.eq(i).show();
+            }
+        });
+        //all tr elements are hidden
+        if(tableRowsClass.children(':visible').length == 0)
+        {
+            tableBody.append('<tr class="search-sf"><td class="text-muted" colspan="6">No entries found.</td></tr>');
+        }
+   }).change();
+});
+</script>

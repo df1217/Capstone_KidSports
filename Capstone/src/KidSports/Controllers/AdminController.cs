@@ -14,72 +14,70 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-
-
 namespace KidSports.Controllers
 {
-
     public class AdminController : Controller
     {
-        private ISportRepo sportRepo;
-        private IAreaRepo areaRepo;
-        private ISchoolRepo schoolRepo;
         private IUserRepo userRepo;
+        private IApplicationRepo appRepo;
 
-        public AdminController(ISportRepo sportrepo, IAreaRepo arearepo, ISchoolRepo schoolrepo, IUserRepo userrepo)
+        public AdminController(IUserRepo userrepo, IApplicationRepo apprepo)
         {
-            schoolRepo = schoolrepo;
-            sportRepo = sportrepo;
-            areaRepo = arearepo;
             userRepo = userrepo;
+            appRepo = apprepo;
         }
 
-        #region UpdateAppContent
         [HttpGet]
-        //public uacvm UpdateAppContentViewModel { get; private set; }
-        public IActionResult UpdateAppContent()
+        public IActionResult UpdateAppLink()
         {
-            UpdateAppContentViewModel uacvm = new UpdateAppContentViewModel();
-            uacvm.AllSchools = schoolRepo.GetAllSchools();
-            uacvm.AllAreas = areaRepo.GetAllAreas();
-            uacvm.AllSports = sportRepo.GetAllSports();
-            return View(uacvm);
+            UpdateAppLinkViewModel applinks = new UpdateAppLinkViewModel();
+
+            applinks.pledge = appRepo.getAppLink("Pledge").Link;
+            applinks.nfhs = appRepo.getAppLink("NFHS").Link;
+            applinks.pca = appRepo.getAppLink("PCA").Link;
+            applinks.voucher = appRepo.getAppLink("Voucher").Link;
+
+            return View(applinks);
         }
 
         [HttpPost]
-        public IActionResult UACVMSchools(UpdateAppContentViewModel uacvm)
+        public IActionResult UpdateAppLink(UpdateAppLinkViewModel applinks)
         {
-            if (uacvm.Action == "delete")
-                schoolRepo.DeleteSchoolByID(uacvm.deleteSchool);
-            if (uacvm.Action == "add")
-                schoolRepo.AddSchool(uacvm.addSchool);
+            AppLink pledge = new AppLink();
+            pledge = appRepo.getAppLink("Pledge");
+            pledge.Link = applinks.pledge;
+            appRepo.UpdateAppLink(pledge);
 
-            uacvm.AllSchools = schoolRepo.GetAllSchools();
-            uacvm.AllAreas = areaRepo.GetAllAreas();
-            uacvm.AllSports = sportRepo.GetAllSports();
+            AppLink nfhs = new AppLink();
+            nfhs = appRepo.getAppLink("NFHS");
+            nfhs.Link = applinks.nfhs;
+            appRepo.UpdateAppLink(nfhs);
 
-            return View(uacvm);
+            AppLink pca = new AppLink();
+            pca = appRepo.getAppLink("PCA");
+            pca.Link = applinks.pca;
+            appRepo.UpdateAppLink(pca);
+
+            AppLink voucher = new AppLink();
+            voucher = appRepo.getAppLink("Voucher");
+            voucher.Link = applinks.voucher;
+            appRepo.UpdateAppLink(voucher);
+
+            return View(applinks);
         }
 
-        public IActionResult UpdateAppLink()
-        {
-            return View();
-        }
-
+        [HttpGet]
         public IActionResult UpdateUser()
         {
             UpdateUserViewModel uuvm = new UpdateUserViewModel();
             uuvm.allUsers = new List<User>();
+            uuvm.allRoles = new List<string>();
             uuvm.allUsers = userRepo.GetAllUsers().ToList();
-            return View(uuvm);
-        }
 
-        public IActionResult UpdateProfile()
-        {
-            return View();
+            foreach (User u in uuvm.allUsers)
+                uuvm.allRoles.Add(userRepo.GetRoleNameByIdentityID(u.Id));
+
+            return View(uuvm);
         }
     }
 }
-
-
-#endregion

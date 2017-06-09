@@ -6,9 +6,6 @@
     <h1 class="text-center">Coaching Interests</h1><br />
     <form asp-controller="Application" asp-action="CoachInterests" method="post">
         <input type="hidden" asp-for="@Model.ApplicationID" value="@Model.ApplicationID" />
-        <input type="hidden" asp-for="@Model.newPickedAreaID" />
-        <input type="hidden" asp-for="@Model.newPickedSchoolID"/>
-        <input type="hidden" asp-for="@Model.newPickedSportID" />
 
         <div class="well">
             <div class="row">

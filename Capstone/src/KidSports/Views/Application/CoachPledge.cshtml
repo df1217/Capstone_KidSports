@@ -22,7 +22,7 @@
         </div>
 
         <div>
-            <a href="~/CoachEthicContract.pdf" id="CoachPledge" target="_blank">View terms of the coaches pledge here.</a>
+            <a href="@Model.pledgeLink.Link" id="CoachPledge" target="_blank">View terms of the coaches pledge here.</a>
             <span asp-validation-for="IsInAgreement" class="text-danger"></span>
         </div>
 

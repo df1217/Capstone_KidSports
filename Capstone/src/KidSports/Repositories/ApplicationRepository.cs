@@ -94,5 +94,15 @@ namespace KidSports.Repositories
 
             return context.SaveChanges();
         }
+
+        public AppLink getAppLink(string Key)
+        {
+            return context.AppLinks.Where(al => al.Key == Key).SingleOrDefault();
+        }
+
+        public void UpdateAppLink(AppLink applink)
+        {
+            context.AppLinks.Update(applink);
+        }
     }
 }
