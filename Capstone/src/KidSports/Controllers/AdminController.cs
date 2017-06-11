@@ -20,11 +20,13 @@ namespace KidSports.Controllers
     {
         private IUserRepo userRepo;
         private IApplicationRepo appRepo;
+        private UserManager<User> uM;
 
-        public AdminController(IUserRepo userrepo, IApplicationRepo apprepo)
+        public AdminController(IUserRepo userrepo, IApplicationRepo apprepo, UserManager<User> um)
         {
             userRepo = userrepo;
             appRepo = apprepo;
+            uM = um;
         }
 
         [HttpGet]
@@ -78,6 +80,89 @@ namespace KidSports.Controllers
                 uuvm.allRoles.Add(userRepo.GetRoleNameByIdentityID(u.Id));
 
             return View(uuvm);
+        }
+
+
+        [HttpPost]
+        public IActionResult UpdateUser(UpdateUserViewModel uuvm)
+        {
+            IEnumerable<string> roles = new List<string>() { "Applicant", "SportsManager", "Admin"};
+            
+            User u = userRepo.GetUserByIdentityID(uuvm.userToUpdate);
+
+            if (uuvm.FirstName != null && uuvm.FirstName != "" && uuvm.FirstName != u.FirstName)
+                u.FirstName = uuvm.FirstName;
+
+            if (uuvm.MiddleName != null && uuvm.MiddleName != "" && uuvm.MiddleName != u.MiddleName)
+                u.MiddleName = uuvm.MiddleName;
+
+            if (uuvm.LastName != null && uuvm.LastName != "" && uuvm.LastName != u.LastName)
+                u.LastName = uuvm.LastName;
+
+            if (uuvm.Email != null && uuvm.Email != "" && uuvm.Email != u.Email)
+                u.Email = uuvm.Email;
+
+            if (uuvm.Role != null && uuvm.Role != "")
+            {
+                userRepo.DeleteUserRoles(u.Id);
+                var asyncTaskResult = uM.AddToRoleAsync(u, uuvm.Role);
+                asyncTaskResult.Wait();
+            }
+
+            uuvm.allUsers = new List<User>();
+            uuvm.allRoles = new List<string>();
+            uuvm.allUsers = userRepo.GetAllUsers().ToList();
+
+            foreach (User user in uuvm.allUsers)
+                uuvm.allRoles.Add(userRepo.GetRoleNameByIdentityID(user.Id));
+
+            return View(uuvm);
+        }
+
+        [HttpPost]
+        public IActionResult AddUser(UpdateUserViewModel uuvm)
+        {
+            IdentityResult result;
+            var role = UserRole.Applicant;
+
+            if (uuvm.Role == "Admin")
+                role = UserRole.Admin;
+            else if (uuvm.Role == "SportsManager")
+                role = UserRole.SportsManager;
+
+            if (uuvm.FirstName != null && uuvm.MiddleName != null && uuvm.LastName != null && uuvm.Email != null)
+                userRepo.AdminCreateUser(uuvm.FirstName, uuvm.MiddleName, uuvm.LastName, uuvm.Email, role, out result);
+
+            uuvm.allUsers = new List<User>();
+            uuvm.allRoles = new List<string>();
+            uuvm.allUsers = userRepo.GetAllUsers().ToList();
+
+            foreach (User u in uuvm.allUsers)
+                uuvm.allRoles.Add(userRepo.GetRoleNameByIdentityID(u.Id));
+
+            uuvm.FirstName = "";
+            uuvm.MiddleName = "";
+            uuvm.LastName = "";
+            uuvm.Email = "";
+            uuvm.Role = "";
+
+            return View("UpdateUser", uuvm);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteUser(UpdateUserViewModel uuvm)
+        {
+            if (uuvm.userToDelete != null)
+                userRepo.DeleteUserByID(uuvm.userToDelete);
+
+            uuvm.allUsers = new List<User>();
+            uuvm.allRoles = new List<string>();
+            uuvm.allUsers = userRepo.GetAllUsers().ToList();
+
+            foreach (User u in uuvm.allUsers)
+                uuvm.allRoles.Add(userRepo.GetRoleNameByIdentityID(u.Id));
+
+            return View("UpdateUser", uuvm);
         }
     }
 }

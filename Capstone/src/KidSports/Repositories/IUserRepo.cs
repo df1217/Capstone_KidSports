@@ -9,6 +9,7 @@ namespace KidSports.Repositories
     public interface IUserRepo
     {
         User CreateUser(string firstName, string middleName, string lastName, string eMail, string password, UserRole role, out IdentityResult identityResult);
+        User AdminCreateUser(string firstName, string middleName, string lastName, string eMail, UserRole role, out IdentityResult result);
         User GetUserByEmail(string eMail);
         IEnumerable<User> GetAllUsers();
         IQueryable<User> GetFilteredUsers(string SearchParam);
@@ -17,5 +18,7 @@ namespace KidSports.Repositories
         User GetUserByID(int id);
         User GetUserByIdentityID(string applicantID);
         string GetRoleNameByIdentityID(string id);
+        void DeleteUserByID(string id);
+        void DeleteUserRoles(string id);
     }
 }
