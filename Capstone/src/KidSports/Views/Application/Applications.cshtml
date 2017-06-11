@@ -78,10 +78,10 @@
                 <td> @Html.DisplayFor(modelItem => Model.filteredUsers[i].FirstName) @Html.DisplayFor(modelItem => Model.filteredUsers[i].LastName)</td>
                 <td> @Html.DisplayFor(modelItem => Model.filteredAppStatus[i].AppStartDate) </td>
                 <td> @Html.DisplayFor(modelItem => Model.filteredAppStatus[i].AppCompletionDate) </td>
-                <td style="visibility:hidden; display:none;"> @Html.DisplayFor(modelItem => Model.filteredApps[i].AppSport)</td>
-                <td style="visibility:hidden; display:none;"> @Html.DisplayFor(modelItem => Model.filteredApps[i].AppGrade)</td>
-                <td style="visibility:hidden; display:none;"> @Html.DisplayFor(modelItem => Model.filteredApps[i].AppSchool)</td>
-                <td style="visibility:hidden; display:none;"> @Html.DisplayFor(modelItem => Model.filteredApps[i].AppArea)</td>
+                <td style="visibility:hidden; display:none;"> @if (Model.filteredApps[i].AppSport != null) { Html.DisplayFor(modelItem => Model.filteredApps[i].AppSport); }</td>
+                <td style="visibility:hidden; display:none;"> @if (Model.filteredApps[i].AppGrade != null) { Html.DisplayFor(modelItem => Model.filteredApps[i].AppGrade); }</td>
+                <td style="visibility:hidden; display:none;"> @if (Model.filteredApps[i].AppSchool != null) { Html.DisplayFor(modelItem => Model.filteredApps[i].AppSchool); }</td>
+                <td style="visibility:hidden; display:none;"> if (Model.filteredApps[i].AppArea != null) { @Html.DisplayFor(modelItem => Model.filteredApps[i].AppArea); }</td>
             </tr>
         }
     </table>
@@ -149,17 +149,24 @@
                 $('.search-query-sf').remove();
             }
 
-            if( rowText.indexOf( inputText ) == -1 )
-            {
-                //hide rows
-                tableRowsClass.eq(i).hide();
+           
+            var multipleInputs = inputText.split(",");
 
-            }
-            else
+            for (var filter = 0; filter < multipleInputs.length; filter++)
             {
-                $('.search-sf').remove();
-                tableRowsClass.eq(i).show();
+                if( rowText.indexOf( multipleInputs[filter] ) == -1 )
+                {
+                    console.log(multipleInputs);
+                    tableRowsClass.eq(i).hide();
+                } 
+                else
+                {
+                    $('.search-sf').remove();
+                    tableRowsClass.eq(i).show();
+                    break;
+                }
             }
+           
         });
         //all tr elements are hidden
         if(tableRowsClass.children(':visible').length == 0)
