@@ -33,7 +33,7 @@
                     </div>
 
                 </div>
-                @if (Model.IDPath != null && User.IsInRole("SportsManager") || User.IsInRole("Admin"))
+                @if ((Model.IDPath != null && Model.IDPath != "") && (User.IsInRole("SportsManager") || User.IsInRole("Admin")))
             {
                     <div class="row">
                         <div class="form-group col-xs-offset-1 col-md-offset-4 col-xs-10 col-md-4">
