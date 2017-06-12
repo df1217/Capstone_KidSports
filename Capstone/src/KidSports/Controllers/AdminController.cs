@@ -20,13 +20,19 @@ namespace KidSports.Controllers
     {
         private IUserRepo userRepo;
         private IApplicationRepo appRepo;
+        private ISportRepo sportRepo;
+        private IAreaRepo areaRepo;
+        private ISchoolRepo schoolRepo;
         private UserManager<User> uM;
 
-        public AdminController(IUserRepo userrepo, IApplicationRepo apprepo, UserManager<User> um)
+        public AdminController(IUserRepo userrepo, IApplicationRepo apprepo, UserManager<User> um, ISportRepo sportrepo, IAreaRepo arearepo, ISchoolRepo schoolrepo)
         {
             userRepo = userrepo;
             appRepo = apprepo;
             uM = um;
+            sportRepo = sportrepo;
+            areaRepo = arearepo;
+            schoolRepo = schoolrepo;
         }
 
         [HttpGet]
@@ -66,6 +72,124 @@ namespace KidSports.Controllers
             appRepo.UpdateAppLink(voucher);
 
             return View(applinks);
+        }
+
+        [HttpGet]
+        public IActionResult UpdateAppContent()
+        {
+            UpdateAppContentViewModel appcontent = new UpdateAppContentViewModel();
+            appcontent.allAreas = new List<Area>();
+            appcontent.allSchools = new List<School>();
+            appcontent.allSports = new List<Sport>();
+
+            appcontent.allAreas = areaRepo.GetAllAreas();
+            appcontent.allSchools = schoolRepo.GetAllSchools();
+            appcontent.allSports = sportRepo.GetAllSports();
+
+            return View(appcontent);
+        }
+
+        [HttpPost]
+        public IActionResult addArea(UpdateAppContentViewModel uacvm)
+        {
+            uacvm.allAreas = new List<Area>();
+            uacvm.allSchools = new List<School>();
+            uacvm.allSports = new List<Sport>();
+
+            areaRepo.AddArea(uacvm.area);
+            uacvm.area = "";
+
+            uacvm.allAreas = areaRepo.GetAllAreas();
+            uacvm.allSchools = schoolRepo.GetAllSchools();
+            uacvm.allSports = sportRepo.GetAllSports();
+
+            return View("UpdateAppContent", uacvm);
+        }
+
+        [HttpPost]
+        public IActionResult deleteArea(UpdateAppContentViewModel uacvm)
+        {
+            uacvm.allAreas = new List<Area>();
+            uacvm.allSchools = new List<School>();
+            uacvm.allSports = new List<Sport>();
+
+            areaRepo.DeleteAreaByID(uacvm.deletearea);
+            uacvm.deletearea = -1;
+
+            uacvm.allAreas = areaRepo.GetAllAreas();
+            uacvm.allSchools = schoolRepo.GetAllSchools();
+            uacvm.allSports = sportRepo.GetAllSports();
+
+            return View("UpdateAppContent", uacvm);
+        }
+
+
+        [HttpPost]
+        public IActionResult addSchool(UpdateAppContentViewModel uacvm)
+        {
+            uacvm.allAreas = new List<Area>();
+            uacvm.allSchools = new List<School>();
+            uacvm.allSports = new List<Sport>();
+
+            schoolRepo.AddSchool(uacvm.school);
+            uacvm.school = "";
+
+            uacvm.allAreas = areaRepo.GetAllAreas();
+            uacvm.allSchools = schoolRepo.GetAllSchools();
+            uacvm.allSports = sportRepo.GetAllSports();
+
+            return View("UpdateAppContent", uacvm);
+        }
+
+        [HttpPost]
+        public IActionResult deleteSchool(UpdateAppContentViewModel uacvm)
+        {
+            uacvm.allAreas = new List<Area>();
+            uacvm.allSchools = new List<School>();
+            uacvm.allSports = new List<Sport>();
+
+            schoolRepo.DeleteSchoolByID(uacvm.deleteschool);
+            uacvm.deleteschool = -1;
+
+            uacvm.allAreas = areaRepo.GetAllAreas();
+            uacvm.allSchools = schoolRepo.GetAllSchools();
+            uacvm.allSports = sportRepo.GetAllSports();
+
+            return View("UpdateAppContent", uacvm);
+        }
+
+        [HttpPost]
+        public IActionResult addSport(UpdateAppContentViewModel uacvm)
+        {
+            uacvm.allAreas = new List<Area>();
+            uacvm.allSchools = new List<School>();
+            uacvm.allSports = new List<Sport>();
+
+            sportRepo.AddSport(uacvm.sport);
+            uacvm.sport = "";
+
+            uacvm.allAreas = areaRepo.GetAllAreas();
+            uacvm.allSchools = schoolRepo.GetAllSchools();
+            uacvm.allSports = sportRepo.GetAllSports();
+
+            return View("UpdateAppContent", uacvm);
+        }
+
+        [HttpPost]
+        public IActionResult deleteSport(UpdateAppContentViewModel uacvm)
+        {
+            uacvm.allAreas = new List<Area>();
+            uacvm.allSchools = new List<School>();
+            uacvm.allSports = new List<Sport>();
+
+            sportRepo.DeleteSportByID(uacvm.deletesport);
+            uacvm.deletesport = -1;
+
+            uacvm.allAreas = areaRepo.GetAllAreas();
+            uacvm.allSchools = schoolRepo.GetAllSchools();
+            uacvm.allSports = sportRepo.GetAllSports();
+
+            return View("UpdateAppContent", uacvm);
         }
 
         [HttpGet]

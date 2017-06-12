@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace KidSports.Migrations
 {
-    public partial class AppLink : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -59,6 +59,20 @@ namespace KidSports.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppLinks", x => x.AppLinkID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppSports",
+                columns: table => new
+                {
+                    AppSportJoinID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ApplicationID = table.Column<int>(nullable: false),
+                    SportID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppSports", x => x.AppSportJoinID);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,7 +226,7 @@ namespace KidSports.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppAreaJoin",
+                name: "AppAreas",
                 columns: table => new
                 {
                     AppAreaJoinID = table.Column<int>(nullable: false)
@@ -222,7 +236,7 @@ namespace KidSports.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppAreaJoin", x => x.AppAreaJoinID);
+                    table.PrimaryKey("PK_AppAreas", x => x.AppAreaJoinID);
                 });
 
             migrationBuilder.CreateTable(
@@ -430,8 +444,8 @@ namespace KidSports.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AppAreaJoin_ApplicationID",
-                table: "AppAreaJoin",
+                name: "IX_AppAreas_ApplicationID",
+                table: "AppAreas",
                 column: "ApplicationID");
 
             migrationBuilder.CreateIndex(
@@ -521,8 +535,8 @@ namespace KidSports.Migrations
                 column: "UserId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_AppAreaJoin_Applications_ApplicationID",
-                table: "AppAreaJoin",
+                name: "FK_AppAreas_Applications_ApplicationID",
+                table: "AppAreas",
                 column: "ApplicationID",
                 principalTable: "Applications",
                 principalColumn: "ApplicationID",
@@ -560,7 +574,7 @@ namespace KidSports.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "AppAreaJoin");
+                name: "AppAreas");
 
             migrationBuilder.DropTable(
                 name: "PastExperiences");
@@ -570,6 +584,9 @@ namespace KidSports.Migrations
 
             migrationBuilder.DropTable(
                 name: "AppLinks");
+
+            migrationBuilder.DropTable(
+                name: "AppSports");
 
             migrationBuilder.DropTable(
                 name: "StatesLived");
