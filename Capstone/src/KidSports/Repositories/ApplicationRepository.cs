@@ -18,7 +18,7 @@ namespace KidSports.Repositories
 
         public List<Application> GetAllApplications()
         {
-            return context.Applications.Include(a => a.State).Include(a => a.AppArea).Include(a => a.AppSchool).ToList();
+            return context.Applications.Include(a => a.State).Include(a => a.AppArea).Include(a => a.AppSchool).Include(a => a.AppSport).ToList();
         }
 
         public Application GetApplicationByID(int id)

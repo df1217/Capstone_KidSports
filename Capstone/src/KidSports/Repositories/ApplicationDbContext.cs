@@ -18,8 +18,12 @@ namespace KidSports.Repositories
         public DbSet<PreviousGradesCoached> PreviousGradesCoached { get; set; }
         public DbSet<Experience> Experiences { get; set; }
         public DbSet<AppLink> AppLinks { get; set; }
+        public DbSet<AppAreaJoin> AppAreas { get; set; }
+        public DbSet<AppSportJoin> AppSports { get; set; }
         public DbSet<AppStateJoin> StatesLived { get; set; }
         public DbSet<AppExpJoin> PastExperiences { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -8,8 +8,8 @@ using KidSports.Repositories;
 namespace KidSports.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170609043657_AppLink")]
-    partial class AppLink
+    [Migration("20170612061753_azure")]
+    partial class azure
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,7 +30,7 @@ namespace KidSports.Migrations
 
                     b.HasIndex("ApplicationID");
 
-                    b.ToTable("AppAreaJoin");
+                    b.ToTable("AppAreas");
                 });
 
             modelBuilder.Entity("KidSports.Models.AppExpJoin", b =>
@@ -213,6 +213,20 @@ namespace KidSports.Migrations
                     b.HasKey("AppLinkID");
 
                     b.ToTable("AppLinks");
+                });
+
+            modelBuilder.Entity("KidSports.Models.AppSportJoin", b =>
+                {
+                    b.Property<int>("AppSportJoinID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ApplicationID");
+
+                    b.Property<int>("SportID");
+
+                    b.HasKey("AppSportJoinID");
+
+                    b.ToTable("AppSports");
                 });
 
             modelBuilder.Entity("KidSports.Models.AppStateJoin", b =>

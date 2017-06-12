@@ -19,7 +19,7 @@
     <div class="row" style="margin-bottom:10px;">
         <div class="col-md-3">
             <label name="Area" class="control-label">Area:</label>
-            <select id="AreaFilter" asp-for="Area"
+            <select id="areaFilter" asp-for="Area"
                     asp-items="@(new SelectList(Model.allAreas, "AreaName", "AreaName"))" class="selectpicker form-control" data-size="5" multiple="multiple"></select>
         </div>
 
@@ -78,10 +78,10 @@
                 <td> @Html.DisplayFor(modelItem => Model.filteredUsers[i].FirstName) @Html.DisplayFor(modelItem => Model.filteredUsers[i].LastName)</td>
                 <td> @Html.DisplayFor(modelItem => Model.filteredAppStatus[i].AppStartDate) </td>
                 <td> @Html.DisplayFor(modelItem => Model.filteredAppStatus[i].AppCompletionDate) </td>
-                <td style="visibility:hidden; display:none;"> @if (Model.filteredApps[i].AppSport != null) { Html.DisplayFor(modelItem => Model.filteredApps[i].AppSport); }</td>
-                <td style="visibility:hidden; display:none;"> @if (Model.filteredApps[i].AppGrade != null) { Html.DisplayFor(modelItem => Model.filteredApps[i].AppGrade); }</td>
-                <td style="visibility:hidden; display:none;"> @if (Model.filteredApps[i].AppSchool != null) { Html.DisplayFor(modelItem => Model.filteredApps[i].AppSchool); }</td>
-                <td style="visibility:hidden; display:none;"> if (Model.filteredApps[i].AppArea != null) { @Html.DisplayFor(modelItem => Model.filteredApps[i].AppArea); }</td>
+                <td style="visibility:hidden; display:none;"> @if (Model.filteredApps[i].AppArea != null) { @Html.DisplayFor(modelItem => Model.filteredApps[i].AppArea.AreaName); }</td>
+                <td style="visibility:hidden; display:none;"> @if (Model.filteredApps[i].AppSchool != null) { @Html.DisplayFor(modelItem => Model.filteredApps[i].AppSchool.SchoolName); }</td>
+                <td style="visibility:hidden; display:none;"> @if (Model.filteredApps[i].AppSport != null) { @Html.DisplayFor(modelItem => Model.filteredApps[i].AppSport.SportName); }</td>
+                <td style="visibility:hidden; display:none;"> @if (Model.filteredApps[i].AppGrade != null) { @Html.DisplayFor(modelItem => Model.filteredApps[i].AppGrade); }</td>
             </tr>
         }
     </table>
@@ -98,34 +98,39 @@
 
         $("select").change(function () {
             $("#system-search").val($(this).val());
-        
-            //for (var val in $('select').val()) {
-            //    $("#system-search").val($("#system-search").val() + "," + val);
-            //}
 
-            //if ($("#areaFilter").length != 0) {
-            //    for (var val in $("#areaFilter")) {
-            //        $("#system-search").val($('#system-search').val() + ',' + val);
-            //    }
-            //}
+            var filterArea = "";
+            if ($("#areaFilter").val() != null)
+                filterArea = $("#areaFilter").val();
 
-            //if ($("#schoolFilter").length != 0) {
-            //    for (var val in $("#schoolFilter")) {
-            //        $("#system-search").val($('#system-search').val() + ',' + val);
-            //    }
-            //}
+            var filterSchool = "";
+            if ($("#schoolFilter").val() != null)
+                filterSchool = $("#schoolFilter").val();
 
-            //if ($("#sportFilter").length != 0) {
-            //    for (var val in $("#sportFilter")) {
-            //        $("#system-search").val($('#system-search').val() + ',' + val);
-            //    }
-            //}
+            var filterSport = "";
+            if ($("#sportFilter").val() != null)
+                filterSport = $("#sportFilter").val();
 
-            //if ($("#gradeFilter").length != 0) {
-            //    for (var val in $("#gradeFilter")) {
-            //        $("#system-search").val($('#system-search').val() + ',' + val);
-            //    }
-            //}
+            var filterGrade = "";
+            if ($("#gradeFilter").val() != null)
+                filterGrade = $("#gradeFilter").val();
+
+            var filter = "";
+
+            if (filterArea != "")
+                filter == "" ? filter = filterArea : filter = filter + "," + filterArea;
+
+            if (filterSchool != "")
+                filter == "" ? filter = filterSchool : filter = filter + "," + filterSchool;
+
+            if (filterSport != "")
+                filter == "" ? filter = filterSport : filter = filter + "," + filterSport;
+
+            if (filterGrade != "")
+            filter == "" ? filter = filterGrade : filter = filter + "," + filterGrade;
+
+            $("#system-search").val(filter.toString().toLowerCase());
+
 
     var activeSystemClass = $('.list-group-item.active');
 
@@ -151,20 +156,27 @@
 
            
             var multipleInputs = inputText.split(",");
+            var display = false;
 
+            //console.log(multipleInputs);
             for (var filter = 0; filter < multipleInputs.length; filter++)
             {
-                if( rowText.indexOf( multipleInputs[filter] ) == -1 )
-                {
-                    console.log(multipleInputs);
-                    tableRowsClass.eq(i).hide();
-                } 
-                else
-                {
-                    $('.search-sf').remove();
-                    tableRowsClass.eq(i).show();
-                    break;
-                }
+                console.log(rowText.indexOf(multipleInputs[filter]));
+                console.log(multipleInputs[filter]);
+                if (rowText.indexOf(multipleInputs[filter]) != -1 && (multipleInputs[filter] != "" || multipleInputs[filter] != null || multipleInputs[filter] != " "))
+                    display = true; 
+            }
+          
+            //console.log(display);
+            //console.log(tableRowsClass.eq(i));
+            if(display == false && filter != "")
+            {
+                tableRowsClass.eq(i).hide();
+            } 
+            else
+            {
+                $('.search-sf').remove();
+                tableRowsClass.eq(i).show();
             }
            
         });

@@ -34,6 +34,7 @@ namespace KidSports.Repositories
         {
             var Sport = context.Sports.SingleOrDefault(s => s.SportID == id);
             context.Sports.Remove(Sport);
+            context.SaveChanges();
         }
 
         public Sport AddSport(string name)
@@ -41,6 +42,7 @@ namespace KidSports.Repositories
             Sport s = new Sport();
             s.SportName = name;
             context.Sports.Add(s);
+            context.SaveChanges();
             return s;
         }
     }
