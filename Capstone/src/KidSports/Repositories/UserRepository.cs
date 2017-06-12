@@ -59,6 +59,47 @@ namespace KidSports.Repositories
             return user;
         }
 
+        // Create an User object and a User object that points to the User
+        public User AdminCreateUser(string firstName, string middleName, string lastName, string eMail, UserRole role, out IdentityResult result)
+        {
+            result = null;
+
+            // Check to see if this User already exists
+            var asyncTask = userManager.FindByEmailAsync(eMail);
+            asyncTask.Wait();
+
+            var user = asyncTask.Result;
+            if (user == null)
+            {
+                // Create a new User
+                user = new User
+                {
+                    FirstName = firstName,
+                    MiddleName = middleName,
+                    LastName = lastName,
+                    UserName = eMail,
+                    Email = eMail
+                };
+
+                var asyncResultTask = userManager.CreateAsync(user, "KidSports123.");
+                asyncResultTask.Wait();
+                result = asyncResultTask.Result;
+                if (result.Succeeded)
+                {
+                    // Add a role to the User
+                    asyncResultTask = userManager.AddToRoleAsync(user, role.ToString());
+                    asyncResultTask.Wait();
+                    result = asyncResultTask.Result;
+                }
+                else
+                {
+                    result = null;  // The User already exists
+                }
+            }
+            return user;
+        }
+
+
         public User GetDetailedUser(User user)
         {
             return context.Users.Where(x => x.Id == user.Id).Include(x => x.currentYearApp).ThenInclude(x => x.State).SingleOrDefault();
@@ -89,8 +130,14 @@ namespace KidSports.Repositories
 
         public User GetUserByID(int id)
         {
-
             return context.Users.Where(a => a.currentYearApp.ApplicationID == id).SingleOrDefault();
+        }
+
+        public void DeleteUserByID(string id)
+        {
+            User delete = context.Users.Where(a => a.Id == id).SingleOrDefault();
+            context.Users.Remove(delete);
+            context.SaveChanges();
         }
 
         public User GetUserByIdentityID(string id)
@@ -121,6 +168,13 @@ namespace KidSports.Repositories
             }
 
             return roles;
+        }
+
+        public void DeleteUserRoles(string id)
+        {
+            var roles2remove = context.UserRoles.Where(r => r.UserId == id);
+            context.UserRoles.RemoveRange(roles2remove);
+            context.SaveChanges();
         }
     }
 }

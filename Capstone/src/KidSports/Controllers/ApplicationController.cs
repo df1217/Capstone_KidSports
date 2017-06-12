@@ -190,6 +190,13 @@ namespace KidSports.Controllers
             foreach (Application a in filteredApps)
             {
                 User u = userRepo.GetUserByID(a.ApplicationID);
+                if (u == null)
+                {
+                    filteredApps.Remove(a);
+                    if (filteredApps.Count == 0)
+                        break;
+                }
+
                 ApplicationStatus appstatus = appStatusRepo.GetAppStatusByID(a.ApplicationID);
 
                 filteredUsers.Add(u);

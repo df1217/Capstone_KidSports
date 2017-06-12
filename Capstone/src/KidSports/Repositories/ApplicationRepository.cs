@@ -103,6 +103,7 @@ namespace KidSports.Repositories
         public void UpdateAppLink(AppLink applink)
         {
             context.AppLinks.Update(applink);
+            context.SaveChanges();
         }
     }
 }
