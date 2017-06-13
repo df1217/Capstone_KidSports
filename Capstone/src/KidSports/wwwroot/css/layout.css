@@ -19,6 +19,10 @@ body {
   background-color: black;
 }
 
+.well {
+    background-color: rgba(100, 255, 100, .16);
+}
+
 #ksLogo {
     margin-top:-15px;
     width:150px; 

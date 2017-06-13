@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace KidSports.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private IUserRepo userRepo;

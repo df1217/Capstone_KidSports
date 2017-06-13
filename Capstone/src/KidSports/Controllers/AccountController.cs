@@ -31,7 +31,7 @@ namespace KidSports.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Register(RegisterViewModel vm)
+        public async Task<IActionResult> Register(RegisterViewModel vm)
         {
             if (ModelState.IsValid)
             {
@@ -43,21 +43,37 @@ namespace KidSports.Controllers
                 {
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Login", "Account");
-                    }
-                    else
-                    {
-                        foreach (IdentityError error in result.Errors)
+
+                        User identityUser = userRepo.GetUserByEmail(vm.Email);
+                        if (identityUser != null)
                         {
-                            ModelState.AddModelError("", error.Description);
+                            await signInManager.SignOutAsync();
+                            Microsoft.AspNetCore.Identity.SignInResult login =
+                                    await signInManager.PasswordSignInAsync(
+                                        identityUser, vm.Password, false, false);
+
+                            if (login.Succeeded)
+                            {
+                               return RedirectToAction("Index", "Application");
+                            }
                         }
+                       
                     }
+                    return View(vm);
                 }
-                else    // user already exists
+                else
                 {
-                    ModelState.AddModelError("", "This user is already registered");
+                    foreach (IdentityError error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
                 }
             }
+            else    // user already exists
+            {
+                ModelState.AddModelError("", "This user is already registered");
+            }
+        
             // We get here either if the model state is invalid or if create user fails
             return View(vm);
         }

@@ -209,10 +209,23 @@ namespace KidSports.Controllers
 
                 filteredUsers.Add(u);
                 filteredAppStatus.Add(appstatus);
-                asm.filteredAreas.Add(app.AppArea.AreaName);
+
+                if (app.AppArea != null)
+                    asm.filteredAreas.Add(app.AppArea.AreaName);
+                else
+                    asm.filteredAreas.Add("");
+
                 asm.filteredGrades.Add(app.AppGrade);
-                asm.filteredSchools.Add(app.AppSchool.SchoolName);
-                asm.filteredSports.Add(app.AppSport.SportName);
+
+                if (app.AppSchool != null)
+                    asm.filteredSchools.Add(app.AppSchool.SchoolName);
+                else
+                    asm.filteredSchools.Add("");
+
+                if (app.AppSport != null)
+                    asm.filteredSports.Add(app.AppSport.SportName);
+                else
+                    asm.filteredSports.Add("");
             }
 
             if (filteredApps != null)
@@ -722,7 +735,7 @@ namespace KidSports.Controllers
                 if (currentApp.PledgeName != null) cpvm.Name = currentApp.PledgeName;
                 if (currentApp.PledgeInitials != null) cpvm.Initials = currentApp.PledgeInitials;
                 if (currentApp.pledgeIsInAgreement != false) cpvm.IsInAgreement = currentApp.pledgeIsInAgreement;
-                if (currentApp.PledgeSubmissionDate != new DateTime()) cpvm.PledgeSubmissionDate = currentApp.PledgeSubmissionDate;
+                if (currentApp.PledgeSubmissionDate != new DateTime()) cpvm.PledgeSubmissionDate = currentApp.PledgeSubmissionDate; else cpvm.PledgeSubmissionDate = DateTime.Now;
 
                 //Display the view.
                 return View(cpvm);
@@ -829,7 +842,7 @@ namespace KidSports.Controllers
                 //If any information exists, bind it to the view model.
                 // if (currentApp.ConcussionCourseSubmissionDate != new DateTime()) ccvm.ConcussionCourseSubmissionDate = currentApp.ConcussionCourseSubmissionDate;
                 if (currentApp.NfhsPath != null) ccvm.NfhsPath = currentApp.NfhsPath;
-                if (currentApp.ConcussionCourseSubmissionDate != new DateTime()) ccvm.ConcussionCourseSubmissionDate = currentApp.ConcussionCourseSubmissionDate;
+                if (currentApp.ConcussionCourseSubmissionDate != new DateTime()) ccvm.ConcussionCourseSubmissionDate = currentApp.ConcussionCourseSubmissionDate; else ccvm.ConcussionCourseSubmissionDate = DateTime.Now;
 
                 //Display the view.
                 return View(ccvm);
@@ -875,7 +888,6 @@ namespace KidSports.Controllers
                         }
                     }
                 }
-#pragma warning disable CS0168 // Variable is declared but never used
                 catch (Exception e)
                 {
                     //Add model state error? validation?
@@ -963,6 +975,7 @@ namespace KidSports.Controllers
                 pcvm.ApplicationID = AppID;
                 //If any information exists, bind it to the view model.
                 if (currentApp.PcaPath != null) pcvm.PcaPath = currentApp.PcaPath; else pcvm.PcaPath = "";
+                if (currentApp.PcaCourseSubmissionDate != new DateTime()) pcvm.PcaCourseSubmissionDate = currentApp.PcaCourseSubmissionDate; else pcvm.PcaCourseSubmissionDate = DateTime.Now;
 
                 //Display the view.
                 return View(pcvm);
@@ -1015,7 +1028,7 @@ namespace KidSports.Controllers
 
                 if ((appStatus.PcaSubmissionDate == null ||
                     appStatus.PcaSubmissionDate == new DateTime()) &&
-                    pcvm.PcaPath != "" &&
+                    pcvm.PcaPath != "" && pcvm.PcaPath != null &&
                     pcvm.PcaCourseSubmissionDate != null)
                 {
                     appStatus.PcaSubmissionDate = DateTime.Now;

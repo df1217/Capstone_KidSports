@@ -6,23 +6,45 @@
 
 <div>
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12"><strong>Name:</strong> John Doe</div>
+        @if (Model.applicant.FirstName != null)
+        {
+            <div class="col-xs-12 col-sm-12 col-md-12"><strong>Name:</strong>@Model.applicant.FirstName</div>
+        }
     </div>
+
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12"><strong>Email:</strong><email mail-to="johndoe@gmail.com">johndoe@gmail.com</email></div>
+        @if (Model.applicant.Email != null)
+        {
+            <div class="col-xs-12 col-sm-12 col-md-12"><strong>Email:</strong><email mail-to="@Model.applicant.Email">@Model.applicant.Email</email></div>
+        }
     </div>
     
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12"><strong>Phone:</strong>(541)111-2345</div>
+        @if (Model.applicant.PhoneNumber != null)
+        {
+            <div class="col-xs-12 col-sm-12 col-md-12"><strong>Phone:</strong>@Model.applicant.PhoneNumber</div>
+        }
     </div>
+
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12"><strong>Address:</strong>123 ABC Street</div>
+        @if (Model.displayApp.Address != null)
+        {
+            <div class="col-xs-12 col-sm-12 col-md-12"><strong>Address:</strong>@Model.displayApp.Address</div>
+        }
     </div>
+
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12"><strong>Sport:</strong> Basketball</div>
+        @if (Model.displayApp.AppSport != null)
+        {
+            <div class="col-xs-12 col-sm-12 col-md-12"><strong>Sport:</strong>@Model.displayApp.AppSport</div>
+        }
     </div>
+
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12"><strong>Gender:</strong> Male</div>
+        @if (Model.displayApp.AppGender != null)
+        {
+            <div class="col-xs-12 col-sm-12 col-md-12"><strong>Gender:</strong>@Model.displayApp.AppGender</div>
+        }
     </div>
 </div>
 
@@ -34,7 +56,6 @@
         {
             if (a.ApplicationID == Model.displayApp.ApplicationID)
             {
-                <option value="@a.ApplicationID" selected="selected">@a.AppStartDate</option>
                 <option value="@a.ApplicationID" selected="selected">@a.AppStartDate</option>
             }
             else

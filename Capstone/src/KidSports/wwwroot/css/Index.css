@@ -69,13 +69,33 @@
   transform: rotate(-20deg);
   z-index: 2;
 }
-.bowl .fill {
+.bowl .fill-Approved {
   -webkit-animation-name: fillAction;
   -webkit-animation-iteration-count: 1;
   -webkit-animation-timing-function: cubic-bezier(0, 0.6, 0.2, 1);
   -webkit-animation-duration: 2s;
   -webkit-animation-fill-mode: forwards;
+  margin-top: -15px;
 }
+
+.bowl .fill-Complete {
+  -webkit-animation-name: fillAction;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: cubic-bezier(0, 0.6, 0.2, 1);
+  -webkit-animation-duration: 2s;
+  -webkit-animation-fill-mode: forwards;
+  margin-top:6px;
+}
+
+.bowl .fill-Incomplete {
+  -webkit-animation-name: fillAction;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: cubic-bezier(0, 0.6, 0.2, 1);
+  -webkit-animation-duration: 2s;
+  -webkit-animation-fill-mode: forwards;
+  margin-top: 20px;
+}
+
 .bowl .waveShape-Approved {
   -webkit-animation-name: waveAction;
   -webkit-animation-iteration-count: infinite;

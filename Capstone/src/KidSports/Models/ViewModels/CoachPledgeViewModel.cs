@@ -20,7 +20,7 @@ namespace KidSports.Models.ViewModels
         [StringLength(5, ErrorMessage = "Initials must be less than 6 characters ")]
         [RegularExpression("[a-zA-Z]*$", ErrorMessage = "Initials must not contain any spaces digits or special characters")]
         public string Initials { get; set; }
-        public Nullable<DateTime> PledgeSubmissionDate { get; set; }
+        public DateTime? PledgeSubmissionDate { get; set; }
         public Nullable<bool> IsApproved { get; set; }
         public AppLink pledgeLink { get; set; }
 

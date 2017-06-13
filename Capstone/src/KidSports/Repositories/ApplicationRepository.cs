@@ -23,7 +23,7 @@ namespace KidSports.Repositories
 
         public Application GetApplicationByID(int id)
         {
-            return context.Applications.Where(x => x.ApplicationID == id).SingleOrDefault();
+            return context.Applications.Where(x => x.ApplicationID == id).Include(a => a.State).Include(a => a.AppArea).Include(a => a.AppSchool).Include(a => a.AppSport).SingleOrDefault();
         }
 
         public List<AppStateJoin> GetStatesLivedIn(int id)

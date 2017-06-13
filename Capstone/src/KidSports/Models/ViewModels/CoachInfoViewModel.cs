@@ -38,7 +38,7 @@ namespace KidSports.Models.ViewModels
 
 
         //TODO: Validation?? I deleted a commented out piece of validation during merge, unsure if it was important.
-        public Nullable<DateTime> DOB { get; set; }
+        public DateTime? DOB { get; set; }
 
         public int YearsLivingInOregon { get; set; }
         [StringLength(50, ErrorMessage = "Name must be less than 50 characters")]
