@@ -87,5 +87,79 @@ namespace KidSports.Models.ViewModels
             else
                 return "waveShape-Incomplete";
         }
+
+
+        public string getFillCoachInfoClass()
+        {
+            if (this.ApplicationStatus.CoachInfoApprovalDate != null && this.ApplicationStatus.CoachInfoApprovalDate != new DateTime())
+                return "fill-Approved";
+            else if (this.ApplicationStatus.CoachInfoSubmissionDate != null && this.ApplicationStatus.CoachInfoSubmissionDate != new DateTime())
+                return "fill-Complete";
+            else
+                return "fill-Incomplete";
+        }
+
+        public string getFillCoachInterestClass()
+        {
+            if (this.ApplicationStatus.CoachInterestApprovalDate != null && this.ApplicationStatus.CoachInterestApprovalDate != new DateTime())
+                return "fill-Approved";
+            else if (this.ApplicationStatus.CoachInterestSubmissionDate != null && this.ApplicationStatus.CoachInterestSubmissionDate != new DateTime())
+                return "fill-Complete";
+            else
+                return "fill-Incomplete";
+        }
+
+
+        public string getFillCoachPledgeClass()
+        {
+            if (this.ApplicationStatus.PledgeApprovalDate != null && this.ApplicationStatus.PledgeApprovalDate != new DateTime())
+                return "fill-Approved";
+            else if (this.ApplicationStatus.PledgeSubmissionDate != null && this.ApplicationStatus.PledgeSubmissionDate != new DateTime())
+                return "fill-Complete";
+            else
+                return "fill-Incomplete";
+        }
+
+        public string getFillCoachNFHSClass()
+        {
+            if (this.ApplicationStatus.NFHSApprovalDate != null && this.ApplicationStatus.NFHSApprovalDate != new DateTime())
+                return "fill-Approved";
+            else if (this.ApplicationStatus.NFHSSubmissionDate != null && this.ApplicationStatus.NFHSSubmissionDate != new DateTime())
+                return "fill-Complete";
+            else
+                return "fill-Incomplete";
+        }
+
+        public string getFillCoachPcaClass()
+        {
+            if (this.ApplicationStatus.PcaApprovalDate != null && this.ApplicationStatus.PcaApprovalDate != new DateTime())
+                return "fill-Approved";
+            else if (this.ApplicationStatus.PcaSubmissionDate != null && this.ApplicationStatus.PcaSubmissionDate != new DateTime())
+                return "fill-Complete";
+            else
+                return "fill-Incomplete";
+        }
+
+
+        public string getFillCoachIDClass()
+        {
+            if (this.ApplicationStatus.IdApprovalDate != null && this.ApplicationStatus.IdApprovalDate != new DateTime())
+                return "fill-Approved";
+            else if (this.ApplicationStatus.IdSubmissionDate != null && this.ApplicationStatus.IdSubmissionDate != new DateTime())
+                return "fill-Complete";
+            else
+                return "fill-Incomplete";
+        }
+
+        public string getFillCoachBadgeClass()
+        {
+            if (this.ApplicationStatus.BadgeApprovalDate != null && this.ApplicationStatus.BadgeApprovalDate != new DateTime())
+                return "fill-Approved";
+            else if (this.ApplicationStatus.BadgeSubmissionDate != null && this.ApplicationStatus.BadgeSubmissionDate != new DateTime())
+                return "fill-Complete";
+            else
+                return "fill-Incomplete";
+        }
+
     }
 }
