@@ -39,6 +39,7 @@ namespace KidSports.Repositories
         {
             var School = context.Schools.SingleOrDefault(s => s.SchoolID == id);
             context.Schools.Remove(School);
+            context.SaveChanges();
         }
 
         public School AddSchool(string name)
@@ -46,6 +47,7 @@ namespace KidSports.Repositories
             School s = new School();
             s.SchoolName = name;
             context.Schools.Add(s);
+            context.SaveChanges();
             return s;
         }
     }

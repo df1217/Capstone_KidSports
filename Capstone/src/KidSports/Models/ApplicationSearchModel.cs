@@ -11,6 +11,11 @@ namespace KidSports.Models
         public List<Application> filteredApps { get; set; }
         public List<User> filteredUsers { get; set; }
         public List<ApplicationStatus> filteredAppStatus { get; set; }
+        public List<string> filteredGrades { get; set; }
+        public List<string> filteredSports { get; set; }
+        public List<string> filteredSchools { get; set; }
+        public List<string> filteredAreas { get; set; }
+
 
         public bool IsChecked { get; set; }
         public List<int> Area { get; set; }

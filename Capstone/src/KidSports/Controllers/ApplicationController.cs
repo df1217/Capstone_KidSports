@@ -178,29 +178,41 @@ namespace KidSports.Controllers
             asm.filteredApps = new List<Application>();
             asm.filteredUsers = new List<User>();
             asm.filteredAppStatus = new List<ApplicationStatus>();
+            asm.filteredGrades = new List<string>();
+            asm.filteredSchools = new List<string>();
+            asm.filteredSports = new List<string>();
+            asm.filteredAreas = new List<string>();
             asm.Grade = new List<int>();
             asm.Sport = new List<int>();
             asm.Area = new List<int>();
             asm.School = new List<int>();
 
-            List<Application> filteredApps = appRepo.GetFilteredApplications(asm).ToList();
+
+            List<Application> allApps = appRepo.GetAllApplications().ToList();
+            List<Application> filteredApps = new List<Application>();
             List<User> filteredUsers = new List<User>();
             List<ApplicationStatus> filteredAppStatus = new List<ApplicationStatus>();
 
-            foreach (Application a in filteredApps)
+            foreach (Application a in allApps)
             {
                 User u = userRepo.GetUserByID(a.ApplicationID);
-                if (u == null)
+                if (u != null)
                 {
-                    filteredApps.Remove(a);
-                    if (filteredApps.Count == 0)
-                        break;
+                    filteredApps.Add(a);
                 }
+            }
 
-                ApplicationStatus appstatus = appStatusRepo.GetAppStatusByID(a.ApplicationID);
+            foreach (Application app in filteredApps)
+            {
+                User u = userRepo.GetUserByID(app.ApplicationID);
+                ApplicationStatus appstatus = appStatusRepo.GetAppStatusByID(app.ApplicationID);
 
                 filteredUsers.Add(u);
                 filteredAppStatus.Add(appstatus);
+                asm.filteredAreas.Add(app.AppArea.AreaName);
+                asm.filteredGrades.Add(app.AppGrade);
+                asm.filteredSchools.Add(app.AppSchool.SchoolName);
+                asm.filteredSports.Add(app.AppSport.SportName);
             }
 
             if (filteredApps != null)

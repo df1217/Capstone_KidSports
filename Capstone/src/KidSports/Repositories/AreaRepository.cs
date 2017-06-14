@@ -29,6 +29,7 @@ namespace KidSports.Repositories
         {
             var Area = context.Areas.SingleOrDefault(s => s.AreaID == id);
             context.Areas.Remove(Area);
+            context.SaveChanges();
         }
 
         public Area AddArea(string name)
@@ -36,8 +37,8 @@ namespace KidSports.Repositories
             Area a = new Area();
             a.AreaName = name;
             context.Areas.Add(a);
+            context.SaveChanges();
             return a;
-
         }
     }
 }

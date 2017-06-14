@@ -1,0 +1,130 @@
+﻿@model UpdateAppContentViewModel
+@{
+    ViewBag.Title = "Update Applicaiton Content";
+}
+
+    <h1 class="text-center">Update Application Content</h1><br />
+
+    <div class="well">
+        <div class="row">
+            <div class="form-group col-xs-offset-0 col-xs-12 col-md-offset-0 col-md-3" style="text-align:center">
+                <h3>Area</h3>
+            </div>
+
+            <form asp-action="addArea" asp-controller="Admin" method="post">
+                <div class="form-group col-xs-offset-0 col-xs-12 col-md-offset-0 col-md-7">
+                    <label class="control-label">Enter name of area</label>
+                    <input asp-for="area" type="text" class="form-control" placeholder="">
+                </div>
+
+                <div class="form-group col-xs-offset-0 col-xs-12 col-md-offset-0 col-md-2" style="padding-top:25px">
+                    <button type="submit" class="btn btn-primary btn-md btn-block">Add</button>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="row">
+            <form asp-action="deleteArea" asp-controller="Admin" method="post">
+                <div class="form-group col-xs-offset-0 col-xs-12 col-md-offset-3 col-md-7">
+                    <label class="control-label">Select area to delete</label>
+                    <select asp-for="deletearea" class="form-control">
+                        @foreach (Area a in Model.allAreas)
+                        {
+                            <option value="@a.AreaID">@a.AreaName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group col-xs-offset-0 col-xs-12 col-md-offset-0 col-md-2" style="padding-top:25px">
+                    <button type="submit" class="btn btn-danger btn-md btn-block">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <div class="well">
+        <div class="row">
+            <div class="form-group col-xs-offset-0 col-xs-12 col-md-offset-0 col-md-3" style="text-align:center">
+                <h3>School</h3>
+            </div>
+
+            <form asp-action="addSchool" asp-controller="Admin" method="post">
+                <div class="form-group col-xs-offset-0 col-xs-12 col-md-offset-0 col-md-7">
+                    <label class="control-label">Enter name of school</label>
+                    <input asp-for="school" type="text" class="form-control" placeholder="">
+                </div>
+
+                <div class="form-group col-xs-offset-0 col-xs-12 col-md-offset-0 col-md-2" style="padding-top:25px">
+                    <button type="submit" class="btn btn-primary btn-md btn-block">Add</button>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="row">
+            <form asp-action="deleteSchool" asp-controller="Admin" method="post">
+                <div class="form-group col-xs-offset-0 col-xs-12 col-md-offset-3 col-md-7">
+                    <label class="control-label">Select school to delete</label>
+                    <select asp-for="deleteschool" class="form-control">
+                        @foreach (School s in Model.allSchools)
+                        {
+                            <option value="@s.SchoolID">@s.SchoolName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group col-xs-offset-0 col-xs-12 col-md-offset-0 col-md-2" style="padding-top:25px">
+                    <button type="submit" class="btn btn-danger btn-md btn-block">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <div class="well">
+        <div class="row">
+            <div class="form-group col-xs-offset-0 col-xs-12 col-md-offset-0 col-md-3" style="text-align:center">
+                <h3>Sport</h3>
+            </div>
+
+            <form asp-action="addSport" asp-controller="Admin" method="post">
+                <div class="form-group col-xs-offset-0 col-xs-12 col-md-offset-0 col-md-7">
+                    <label class="control-label">Enter name of sport</label>
+                    <input asp-for="sport" type="text" class="form-control" placeholder="">
+                </div>
+
+                <div class="form-group col-xs-offset-0 col-xs-12 col-md-offset-0 col-md-2" style="padding-top:25px">
+                    <button type="submit" class="btn btn-primary btn-md btn-block">Add</button>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="row">
+            <form asp-action="deleteSport" asp-controller="Admin" method="post">
+                <div class="form-group col-xs-offset-0 col-xs-12 col-md-offset-3 col-md-7">
+                    <label class="control-label">Select sport to delete</label>
+                    <select asp-for="deletesport" class="form-control">
+                        @foreach (Sport s in Model.allSports)
+                        {
+                            <option value="@s.SportID">@s.SportName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group col-xs-offset-0 col-xs-12 col-md-offset-0 col-md-2" style="padding-top:25px">
+                    <button type="submit" class="btn btn-danger btn-md btn-block">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+@*<script>
+    $('form').submit(function() {
+        $('input[type=text]').val("");
+    });
+</script>*@
